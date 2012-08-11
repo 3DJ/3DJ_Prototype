@@ -44,6 +44,7 @@ public:
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume (float  volumeLevel) ;
     void drawDepthPointsAndTestHits();
+    float scaleRatioForKinectDepthMap();
 
     //stuff for OpenNI=========================================
     CKinectData m_oniKinect;
@@ -68,11 +69,11 @@ public:
 
     bool m_isRepeat;
     double m_totalTime;
-    int m_scale;
+    float m_scale;
     int m_angle;
     int m_red,m_green, m_blue, m_alpha;
     int m_background_r, m_background_g, m_background_b;
-    int m_boxSize, m_boxCenterX, m_boxCenterY;
+    int m_boxSize, m_boxCenterX, m_boxCenterY, m_boxCenterZ;
     vector<CBoxButton *> m_boxButtons;
 
     CPointView * m_pointView;
@@ -81,6 +82,8 @@ public:
     CSonicOcean *m_sonicOcean;
     
     CNavigationUIController *m_navigationController;
+    
+    float m_WidthScale, m_HeightScale;
     
 };
 

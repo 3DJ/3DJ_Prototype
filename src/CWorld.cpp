@@ -17,6 +17,11 @@ CWorld::CWorld()
 	m_background_r = 100;
     m_background_g = 100;
     m_background_b = 100;
+    
+    //Setup Scale ratio to map Kinect depth image to screen and buttons
+    m_WidthScale = 1.0f;
+    m_HeightScale = 1.0f;
+    m_scale = 2.5f;
 
     //SET UP BUTTONS and add all buttons to world vector============
     //    x, y, z, box size, r, g, b, a, music sample name
@@ -28,41 +33,41 @@ CWorld::CWorld()
     m_boxSize           = 200;
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
+    m_boxCenterZ        = 0;
 
     //Row A
-    m_a1Button = new CBoxButton(375, -250, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
+    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,0,0,m_alpha,"sounds/Melody/GuitarStrummin.wav");
     addBoxButton(m_a1Button);
-    m_a2Button = new CBoxButton(125, -250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
+    m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
     addBoxButton(m_a2Button);
-    m_a3Button = new CBoxButton(-125,-250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
+    m_a3Button = new CBoxButton(-167,-270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
     addBoxButton(m_a3Button);
-    m_a4Button = new CBoxButton(-375, -250, 1000, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
+    m_a4Button = new CBoxButton(-500, -270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
     m_a4Button->m_soundPlayer.setVolume(0.60f);
     addBoxButton(m_a4Button);
-
+    
     //Row B
-    m_b1Button = new CBoxButton(375, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
+    m_b1Button = new CBoxButton(500, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
     addBoxButton(m_b1Button);
-    m_b2Button = new CBoxButton(125, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
+    m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
     addBoxButton(m_b2Button);
-    m_b3Button = new CBoxButton(-125, 0, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
+    m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
     addBoxButton(m_b3Button);
-
-    m_b4Button = new CBoxButton(-375,0,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
+    
+    m_b4Button = new CBoxButton(-500,0,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
     addBoxButton(m_b4Button);
-
+    
     //Row C
-    m_c1Button = new CLoopBoxButton(375, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Vinyl_Scratch_01.wav");
+    m_c1Button = new CLoopBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Vinyl_Scratch_01.wav");
     addBoxButton(m_c1Button);
-    m_c2Button = new CBoxButton(125, 250, 1000,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
+    m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
     addBoxButton(m_c2Button);
-    m_c3Button = new CBoxButton(-125, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
+    m_c3Button = new CBoxButton(-167, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
     addBoxButton(m_c3Button);
-    m_c4Button = new CBoxButton(-375, 250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
+    m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
     addBoxButton(m_c4Button);
 
     setInitialVolume(1.0f);
-    m_scale =3;
 
     m_pointView     = new CPointView();
     m_easyCam       = new ofEasyCam;
@@ -95,20 +100,26 @@ CWorld::~CWorld()
 void CWorld::render()
 {
     m_easyCam->begin();
-    setUpTranslation();             //Set up translation for all drawing
+    //setUpTranslation();             //Set up translation for all drawing
+    
+    ofPushMatrix();
+    ofScale(-1, 1);
+    ofRotateX(180);
     effectBoxbutton();              // render boxbutton and handle the sound.
     if(m_oniKinect.m_isTracking){ drawDepthPointsAndTestHits();}   // Do both here so we only look up the m_oniKinect data once...
     ofPopMatrix();
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
-    ofTranslate(0, -1.5*ofGetHeight(), -5000);
+    //ofTranslate(0, -1.5*ofGetHeight(), -5000);
     m_sonicOcean->drawEQSonicOcean();//EQ OCEAN
     ofPopMatrix();
     m_easyCam->end();
     //m_equalizerView->drawEQRect();
    
     m_navigationController->m_navConButtons->render();
-    
+   
+    string msg = "FPS   : " + ofToString(ofGetFrameRate(),2);
+    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
 }
 
 void CWorld::update(double time_since_last_update)
@@ -126,21 +137,21 @@ void CWorld::drawDepthPointsAndTestHits()
 {
     int w = m_oniKinect.m_recordUser.getWidth();
 	int h = m_oniKinect.m_recordUser.getHeight();
-
+    
 	int step = 5;
 	for(int y = 0; y < h; y += step) {
 		for(int x = 0; x < w; x += step) {
             ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
             if (XYZ.z > 0) {
-            XYZ.x = (XYZ.x - w/2)*1.5;
-            XYZ.y = (XYZ.y - h/2)*1.5;
-
-            handleCollisions(&XYZ); //check for hits for all buttons
-            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+                XYZ.x = (XYZ.x - w/2)*m_scale;
+                XYZ.y = (XYZ.y - h/2)*m_scale;
+                XYZ.z += 1000;
+                handleCollisions(&XYZ); //check for hits for all buttons
+                m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
             }
 		}
 	}
-
+    
     m_pointView->uploadDataToVbo();
     m_pointView->drawParticles();
     m_pointView->clearData();
@@ -180,14 +191,13 @@ void CWorld::setInitialVolume(float volumeLevel)
 
 void CWorld::setUpTranslation()
 {
-    ofPushMatrix();
-    ofScale(-1, 1);
-    ofTranslate((ofGetWidth()/2)-320, (ofGetHeight()/2) -240, -1000); // center the points a bit
-    ofRotateX(180);                   //Rotate around Axis
+    
+    //ofTranslate(0, 0, -500); // center the points a bit
+                      //Rotate around Axis
 
-    // ofTranslate(0,0,1000);            // Move back into Camera View
-    ofTranslate(m_scale ,m_scale, m_scale *-800 + 1000);
-    ofScale(m_scale,m_scale,m_scale);
+    //ofTranslate(0,0,500);            // Move back into Camera View
+    //ofTranslate(m_scale ,m_scale, m_scale *-800 + 1000);
+    //ofScale(m_scale,m_scale,m_scale);
 }
 
 void CWorld::effectBoxbutton()
@@ -208,5 +218,17 @@ void CWorld::effectBoxbutton()
     }
 }
 
-
+float CWorld::scaleRatioForKinectDepthMap()
+{
+    float w = 640.0f;
+    float h = 480.0f;
+    float screenW = float(ofGetScreenWidth());
+    float screenH = float(ofGetScreenHeight());
+    
+    if((w/h) < (screenW/screenH)){
+        return screenW/w;
+    }else {
+        return screenH/h;
+    }
+}
 
