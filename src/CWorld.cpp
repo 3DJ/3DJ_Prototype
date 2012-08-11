@@ -21,7 +21,7 @@ CWorld::CWorld()
     //Setup Scale ratio to map Kinect depth image to screen and buttons
     m_WidthScale = 1.0f;
     m_HeightScale = 1.0f;
-    m_scale = 2.5f;
+    m_scale = scaleRatioForKinectDepthMap();
 
     //SET UP BUTTONS and add all buttons to world vector============
     //    x, y, z, box size, r, g, b, a, music sample name
@@ -118,7 +118,7 @@ void CWorld::render()
    
     m_navigationController->m_navConButtons->render();
    
-    string msg = "FPS   : " + ofToString(ofGetFrameRate(),2);
+    string msg = "Scale : " + ofToString(m_scale,2);
     ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
 }
 
@@ -145,7 +145,7 @@ void CWorld::drawDepthPointsAndTestHits()
             if (XYZ.z > 0) {
                 XYZ.x = (XYZ.x - w/2)*m_scale;
                 XYZ.y = (XYZ.y - h/2)*m_scale;
-                XYZ.z += 1000;
+                XYZ.z -= 1000;
                 handleCollisions(&XYZ); //check for hits for all buttons
                 m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
             }
