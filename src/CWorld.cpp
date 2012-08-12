@@ -24,6 +24,7 @@ CWorld::CWorld()
     m_WidthScale = 1.0f;
     m_HeightScale = 1.0f;
     m_scale = scaleRatioForKinectDepthMap();
+    m_playerDepth = 1000.0f;
 
     //SET UP BUTTONS and add all buttons to world vector============
     //    x, y, z, box size, r, g, b, a, music sample name
@@ -36,7 +37,7 @@ CWorld::CWorld()
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
     m_boxCenterZ        = 0;
-
+    
     //Row A
     m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,0,0,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
     addBoxButton(m_a1Button);
@@ -59,7 +60,7 @@ CWorld::CWorld()
     addBoxButton(m_b4Button);
     
     //Row C
-    m_c1Button = new CLoopBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"");
+    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
     addBoxButton(m_c1Button);
     m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
     addBoxButton(m_c2Button);
@@ -68,6 +69,11 @@ CWorld::CWorld()
     m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Pad_01.wav");
     addBoxButton(m_c4Button);
 
+    //Control Boxes
+    m_controlButton_1 = new CLoopBoxButton(1000, 270, m_playerDepth/2, m_boxSize*2,m_red,m_green,m_blue,m_alpha,"");
+    addBoxButton(m_controlButton_1);
+    
+    
     setInitialVolume(1.0f);
 
     m_pointView     = new CPointView();
@@ -147,7 +153,7 @@ void CWorld::drawDepthPointsAndTestHits()
             if (XYZ.z > 0) {
                 XYZ.x = (XYZ.x - w/2)*m_scale;
                 XYZ.y = (XYZ.y - h/2)*m_scale;
-                XYZ.z -= 1000;
+                XYZ.z -= m_playerDepth;
                 handleCollisions(&XYZ); //check for hits for all buttons
                 m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
             }

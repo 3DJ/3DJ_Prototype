@@ -66,6 +66,9 @@ public:
     CBoxButton *m_c2Button;
     CBoxButton *m_c3Button;
     CBoxButton *m_c4Button;
+    
+    CBoxButton *m_controlButton_1;
+    
 
     bool m_isRepeat;
     double m_totalTime;
@@ -85,6 +88,7 @@ public:
     CNavigationUIController *m_navigationController;
     
     float m_WidthScale, m_HeightScale;
+    float m_playerDepth;
     
 };
 
