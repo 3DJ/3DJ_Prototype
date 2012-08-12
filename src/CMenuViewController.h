@@ -31,7 +31,7 @@ class CMenuViewController : public ofBaseApp
     CMenuView               *m_menu;
     CLoopEditorView         *m_loopEditor;
     CVisualThemesView       *m_visualEditor;
-    CalibrationView            *m_calibrationEditor;
+    CalibrationView         *m_calibrationEditor;
     
     int m_r, m_g, m_b, m_a;
     bool m_exitMenu;

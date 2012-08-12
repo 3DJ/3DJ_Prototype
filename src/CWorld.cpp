@@ -17,6 +17,8 @@ CWorld::CWorld()
 	m_background_r = 100;
     m_background_g = 100;
     m_background_b = 100;
+    m_gradientColorOutside = ofColor(24);
+    m_gradientColorInside = ofColor(64);
     
     //Setup Scale ratio to map Kinect depth image to screen and buttons
     m_WidthScale = 1.0f;
@@ -98,6 +100,7 @@ CWorld::~CWorld()
 
 void CWorld::render()
 {
+    ofBackgroundGradient(m_gradientColorInside,m_gradientColorOutside);
     m_easyCam->begin();
     //setUpTranslation();             //Set up translation for all drawing
     

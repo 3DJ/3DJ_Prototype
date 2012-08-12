@@ -75,6 +75,7 @@ public:
     int m_background_r, m_background_g, m_background_b;
     int m_boxSize, m_boxCenterX, m_boxCenterY, m_boxCenterZ;
     vector<CBoxButton *> m_boxButtons;
+    ofColor m_gradientColorOutside, m_gradientColorInside;
 
     CPointView * m_pointView;
     ofEasyCam *m_easyCam;
