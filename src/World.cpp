@@ -92,11 +92,9 @@ void CWorld::render()
 {
     m_easyCam->begin();
 
-    m_oniKinect.draw(); //draw top Left dot user tracking indicator
-
     setUpTranslation();             //Set up translation for all drawing
     effectBoxbutton();              // render boxbutton and handle the sound.
-    drawDepthPointsAndTestHits();   // Do both here so we only look up the m_oniKinect data once...
+    if(m_oniKinect.m_isTracking){ drawDepthPointsAndTestHits();}   // Do both here so we only look up the m_oniKinect data once...
     ofPopMatrix();
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
@@ -126,13 +124,13 @@ void CWorld::drawDepthPointsAndTestHits()
 	for(int y = 0; y < h; y += step) {
 		for(int x = 0; x < w; x += step) {
             ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
-            //if (XYZ.z > 615 && XYZ.z < 2000) {
+            if (XYZ.z > 0) {
              XYZ.x = XYZ.x - w/2;
              XYZ.y = XYZ.y - h/2;
 
             handleCollisions(&XYZ); //check for hits for all buttons
             m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
-            //}
+            }
 		}
 	}
 

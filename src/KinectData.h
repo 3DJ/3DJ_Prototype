@@ -19,7 +19,7 @@ public:
 	void update();
     void draw();
 
-    bool m_isTracking, m_isCloud, m_isCPBkgnd, m_isMasking, m_isFiltering;
+    bool m_isTracking, m_isCloud, m_isMasking, m_isFiltering;
     
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;

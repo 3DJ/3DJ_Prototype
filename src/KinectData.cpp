@@ -10,10 +10,9 @@
 
 void CKinectData::setup()
 {
-    m_isTracking		= true;
-	m_isFiltering		= false;
-	m_isCloud			= true;
-	m_isCPBkgnd		= true;
+    m_isTracking	= false;
+	m_isFiltering	= false;
+	m_isCloud		= true;
 	m_isMasking		= true;
 
 	m_filterFactor = 0.1f;
@@ -28,20 +27,19 @@ void CKinectData::setup()
     m_recordUser.setUseMaskPixels(m_isMasking);
 
     m_recordUser.setUseCloudPoints(m_isCloud);
-    m_recordUser.setMaxNumberOfUsers(2);	// use this to set dynamic max number of users
+    m_recordUser.setMaxNumberOfUsers(1);	// use this to set dynamic max number of users
 
 }
 
 void CKinectData::update()
 {
-    if (m_isTracking)
-    {
-        m_recordContext.update();
-        m_recordUser.update();
-    }
+    
+    m_recordContext.update();
+    m_isTracking = m_recordUser.getNumberOfTrackedUsers() > 0;
+    m_recordUser.update();
 }
 
 void CKinectData::draw()
 {
-    //m_recordUser.draw(); //Dot in upper left hand corner. Green = tracking User, Red != tracking
+    
 }
