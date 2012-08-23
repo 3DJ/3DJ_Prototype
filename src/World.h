@@ -1,5 +1,5 @@
 //
-//  World.h
+//  CWorld.h
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
@@ -10,7 +10,8 @@
 #define Kinect_3DJ_World_h
 #include "Entity.h"
 #include "BoxButton.h"
-#include "ofxKinect.h"
+#include "ControlBoxButton.h"
+#include "KinectData.h"
 #include "PointView.h"
 #include "EQView.h"
 #include "SonicOcean.h"
@@ -19,57 +20,64 @@
 using namespace std;
 
 //===========================================================
-// Class : World
+// Class : CWorld
 // The entire world in which all entities exist
 //===========================================================
-class World
+class CWorld
 {
 
- public:
-    
-  World();
-  ~World();
-    
-  void render();
-  void update(double time_since_last_update);
-  void addBoxButton(BoxButton * _boxButton);
-  void clearButtons();
-  void handleCollisions(ofPoint * XYZ);
-  void setInitialVolume(float volumeLevel);
-  void drawDepthPointsAndTestHits();
-    
-    
-  ofxKinect kinect;
-    
-  //Stuff For Buttons========================================
-   
-  BoxButton *a1_Button;
-  BoxButton *a2_Button;
-  BoxButton *a3_Button;
-  BoxButton *a4_Button;
-    
-  BoxButton *b1_Button;
-  BoxButton *b2_Button;
-  BoxButton *b3_Button;
-  BoxButton *b4_Button;
-  
-  BoxButton *c1_Button;
-  BoxButton *c2_Button;
-  BoxButton *c3_Button;
-  BoxButton *c4_Button;
-    
-  double m_totalTime;
-  int m_scale;
-  int angle;
-  int red,green, blue, alpha;
-  int boxSize, boxCenterX, boxCenterY;
-  vector<BoxButton *> m_boxButtons;    
+public:
 
-  PointView * pointView;
-  ofEasyCam *easyCam;
-  EQView *equalizerView;
-  SonicOcean *sonicOcean;
-    
+    CWorld();
+    ~CWorld();
+
+    void render();
+
+    void effectBoxbutton();
+
+    void setUpTranslation();
+
+    void update(double time_since_last_update);
+    void addBoxButton(CBoxButton * _boxButton);
+    void clearButtons();
+    void handleCollisions(ofPoint * XYZ);
+    void setInitialVolume(float volumeLevel);
+    void drawDepthPointsAndTestHits();
+
+    //stuff for OpenNI=========================================
+    CKinectData m_oniKinect;
+
+
+    //Stuff For Buttons========================================
+
+    CBoxButton *m_a1Button;
+    CBoxButton *m_a2Button;
+    CBoxButton *m_a3Button;
+    CBoxButton *m_a4Button;
+
+    CBoxButton *m_b1Button;
+    CBoxButton *m_b2Button;
+    CBoxButton *m_b3Button;
+    CBoxButton *m_b4Button;
+
+    CBoxButton *m_c1Button;
+    CBoxButton *m_c2Button;
+    CBoxButton *m_c3Button;
+    CBoxButton *m_c4Button;
+
+    bool m_isRepeat;
+    double m_totalTime;
+    int m_scale;
+    int m_angle;
+    int m_red,m_green, m_blue, m_alpha;
+    int m_boxSize, m_boxCenterX, m_boxCenterY;
+    vector<CBoxButton *> m_boxButtons;
+
+    CPointView * m_pointView;
+    ofEasyCam *m_easyCam;
+    CEQView *m_equalizerView;
+    CSonicOcean *m_sonicOcean;
+
 };
 
 #endif

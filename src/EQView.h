@@ -1,5 +1,5 @@
 //
-//  EQView.h
+//  CEQView.h
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 7/1/12.
@@ -10,17 +10,18 @@
 #define Kinect_3DJ_EQView_h
 #include "ofMain.h"
 
-class EQView : public ofBaseApp
+class CEQView : public ofBaseApp
 {
- public:
-    
-  EQView();
-  ~EQView();
-  void drawEQRect();
-  void soundUpdate();
-    
-  float * fftSmoothed;
-  int nBandsToGet;
+public:
+
+    CEQView();
+    ~CEQView();
+    void drawEQRect();
+    void soundUpdate();
+
+private:
+    float * m_fftSmoothed;
+    int m_nBandsToGet;
 };
 
 

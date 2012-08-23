@@ -1,5 +1,5 @@
 //
-//  BoxButton.h
+//  CBoxButton.h
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
@@ -10,32 +10,42 @@
 #define Kinect_3DJ_BoxButton_h
 #include "Entity.h"
 
-class BoxButton : public BoxEntity
+class CBoxButton : public CBoxEntity
 {
 
- public:
-  BoxButton(float centerX, float centerY, float centerZ, int boxSize, 
-            float redVal, float greenVal, float blueVal, float alphaVal, string soundName);
-  BoxButton();
-  ~BoxButton();
-    
-    
-  void render();
-  void update(double time_since_last_update);
+public:
+    CBoxButton(float centerX, float centerY, float centerZ, int boxSize, 
+        float redVal, float greenVal, float blueVal, float alphaVal, string soundName);
+    CBoxButton();
+    ~CBoxButton();
 
-  float swellAnimation();
-  float percentIncluded();
-  bool isCurrentlyHit();
-  bool isHit();
-  void clear();
-  bool collisionTest(ofPoint point);
-  bool collisionTest(ofPoint *_point);
-    
-  ofSoundPlayer soundPlayer;
-    
- protected:
-  bool hitTest(float x, float y, float z);
-    
+
+    void render();
+
+	void update(double time_since_last_update);
+
+    float swellAnimation();
+    float percentIncluded();
+    bool isCurrentlyHit();
+    bool isHit();
+    void clear();
+    bool collisionTest( ofPoint point)  ;
+    bool collisionTest( ofPoint *pPoint);
+
+    virtual bool isLoopBox();
+
+    ofSoundPlayer m_soundPlayer;
+    bool m_isRepeat;
+    bool m_toBeStop;
+
+protected:
+    bool hitTest(float x, float y, float z);
+
+private:
+
+	void setHitMode();
+
+	void setDefaultMode();
 };
 
 #endif

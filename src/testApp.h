@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxKinect.h"
 #include "World.h"
 
 // uncomment this to read from two kinects simultaneously
@@ -9,9 +8,9 @@
 
 class testApp : public ofBaseApp {
 
-  void cleanUp();
+    void cleanUp();
 
- public:
+public:
 	
 	void setup();
 	void update();
@@ -24,7 +23,7 @@ class testApp : public ofBaseApp {
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
 	
-  World * g_world; // world to hold and test all buttons, etc
+    CWorld * g_world; // world to hold and test all buttons, etc
 	
 	// used for viewing the point cloud
 	ofLight light;

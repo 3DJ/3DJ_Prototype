@@ -127,8 +127,8 @@ void CWorld::drawDepthPointsAndTestHits()
 		for(int x = 0; x < w; x += step) {
             ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
             //if (XYZ.z > 615 && XYZ.z < 2000) {
-             XYZ.x = XYZ.x - w/2;
-             XYZ.y = XYZ.y - h/2;
+//             XYZ.x = XYZ.x - w/2;
+//             XYZ.y = XYZ.y - h/2;  
 
             handleCollisions(&XYZ); //check for hits for all buttons
             m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
@@ -193,7 +193,7 @@ void CWorld::effectBoxbutton()
             m_isRepeat             = true;
         }
         if ( m_isRepeat && !(*eachBox)->isLoopBox() )
-        {// do not repeat the control boxButton. And close the repeat switch when it touched once.
+        {// do not repeat the control boxButton. And close the repeat switch when it touched once. 
             (*eachBox)->m_isRepeat = true;
             m_isRepeat             = false;
         }
