@@ -1,5 +1,5 @@
 //
-//  World.cpp
+//  CWorld.cpXYZ
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
@@ -9,223 +9,196 @@
 #include <iostream>
 #include "World.h"
 
-World::World()
+CWorld::CWorld()
 {
-  //Set up Kinect// Enable ->video image calibration
-  kinect.setRegistration(true);
-	kinect.init();
-	kinect.open();
-	angle = 20; // 20 degree tilt on startup
-	kinect.setCameraTiltAngle(angle);    
-    
-  //SET UP BUTTONS and add all buttons to world vector============
-  //    x, y, z, box size, r, g, b, a, music sample name
-  //==============================================================
-  red = 255;
-  green = 255;
-  blue = 255;
-  alpha = 30;
-  boxSize= 200;
-  boxCenterX = 200;
-  boxCenterY = 200;
-    
-  //Row A
-  a1_Button = new BoxButton(375, -250, 1000, boxSize,red,green,blue,alpha,"sounds/Melody/GuitarStrummin.wav");
-  addBoxButton(a1_Button);
-  a2_Button = new BoxButton(125, -250, 1000,boxSize,red,green,blue,alpha,"sounds/Melody/Piano.wav");
-  addBoxButton(a2_Button);
-  a3_Button = new BoxButton(-125,-250,1000,boxSize,red,green,blue,alpha,"sounds/Melody/GuitarPick.wav");
-  addBoxButton(a3_Button);
-  a4_Button = new BoxButton(-375, -250, 1000, boxSize, red,green,blue,alpha, "sounds/Melody/Blip_Melody_01.wav");
-  a4_Button->soundPlayer.setVolume(0.60f);
-  addBoxButton(a4_Button);
-    
-  //Row B
-  b1_Button = new BoxButton(375, 0, 1000, boxSize,red,green,blue,alpha,"sounds/Effects/Warp_1.wav");
-  addBoxButton(b1_Button);
-  b2_Button = new BoxButton(125, 0, 1000, boxSize,red,green,blue,alpha,"sounds/Effects/Uplifter.wav");
-  addBoxButton(b2_Button);
-  b3_Button = new BoxButton(-125, 0, 1000,boxSize,red,green,blue,alpha,"sounds/Bass/BassSlap.wav");
-  addBoxButton(b3_Button);
-    
-  b4_Button = new BoxButton(-375,0,1000,boxSize,red,green,blue,alpha,"sounds/Bass/NastyBass.wav");
-  addBoxButton(b4_Button);
-       
-  //Row C
-  c1_Button = new BoxButton(375, 250, 1000,boxSize,red,green,blue,alpha,"sounds/Effects/Vinyl_Scratch_01.wav");
-  addBoxButton(c1_Button);
-  c2_Button = new BoxButton(125, 250, 1000,boxSize, red,green,blue,alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
-  addBoxButton(c2_Button);
-  c3_Button = new BoxButton(-125, 250, 1000,boxSize,red,green,blue,alpha,"sounds/Beat/TimbalesMerged_1.wav");
-  addBoxButton(c3_Button);
-  c4_Button = new BoxButton(-375, 250,1000,boxSize,red,green,blue,alpha,"sounds/Beat/Wee_Kick.wav");
-  addBoxButton(c4_Button);
-    
-  setInitialVolume(1.0f);
-  m_scale =3;
-    
-  pointView = new PointView();
-  easyCam = new ofEasyCam;
-  //easyCam->setFov(40);
-  //easyCam->setTarget(ofVec3f(ofGetWidth()/2,ofGetHeight()/2,0));
-    
-  equalizerView = new EQView;
-  sonicOcean = new SonicOcean;
-    
+    //Set up Kinect
+	m_oniKinect.setup();
+
+	m_angle = 20; // 20 degree tilt on startup
+	//m_oniKinect.setCameraTiltAngle(m_angle);
+
+    //SET UP BUTTONS and add all buttons to world vector============
+    //    x, y, z, box size, r, g, b, a, music sample name
+    //==============================================================
+    m_red               = 255;
+    m_green             = 255;
+    m_blue              = 255;
+    m_alpha             = 30;
+    m_boxSize           = 200;
+    m_boxCenterX        = 200;
+    m_boxCenterY        = 200;
+
+    //Row A
+    m_a1Button = new CBoxButton(375, -250, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
+    addBoxButton(m_a1Button);
+    m_a2Button = new CBoxButton(125, -250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
+    addBoxButton(m_a2Button);
+    m_a3Button = new CBoxButton(-125,-250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
+    addBoxButton(m_a3Button);
+    m_a4Button = new CBoxButton(-375, -250, 1000, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
+    m_a4Button->m_soundPlayer.setVolume(0.60f);
+    addBoxButton(m_a4Button);
+
+    //Row B
+    m_b1Button = new CBoxButton(375, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
+    addBoxButton(m_b1Button);
+    m_b2Button = new CBoxButton(125, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
+    addBoxButton(m_b2Button);
+    m_b3Button = new CBoxButton(-125, 0, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
+    addBoxButton(m_b3Button);
+
+    m_b4Button = new CBoxButton(-375,0,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
+    addBoxButton(m_b4Button);
+
+    //Row C
+    m_c1Button = new CLoopBoxButton(375, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Vinyl_Scratch_01.wav");
+    addBoxButton(m_c1Button);
+    m_c2Button = new CBoxButton(125, 250, 1000,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
+    addBoxButton(m_c2Button);
+    m_c3Button = new CBoxButton(-125, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
+    addBoxButton(m_c3Button);
+    m_c4Button = new CBoxButton(-375, 250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
+    addBoxButton(m_c4Button);
+
+    setInitialVolume(1.0f);
+    m_scale =3;
+
+    m_pointView     = new CPointView();
+    m_easyCam       = new ofEasyCam;
+    //m_easyCam->setFov(40);
+    //m_easyCam->setTarget(ofVec3f(ofGetWidth()/2,ofGetHeight()/2,0));
+
+    m_equalizerView = new CEQView;
+    m_sonicOcean    = new CSonicOcean;
+
+    m_isRepeat      = false;
 }
 
-World::~World()
+CWorld::~CWorld()
 {
-  for (int i = 0; i < m_boxButtons.size(); i++)
-    {
-      BoxButton * curr = m_boxButtons.at(i);
-      if(curr) delete curr;
-        
+    for( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
+    {// delete all boxButtons
+        delete (*eachBox);
     }
-    
-  if(pointView) delete pointView;
-    
-  //Delete buttons
-  if (a1_Button) delete a1_Button;
-  if (a2_Button) delete a2_Button;
-  if (a3_Button) delete a3_Button;
-  if (a4_Button) delete a4_Button;
-  if (b1_Button) delete b1_Button;
-  if (b2_Button) delete b2_Button;
-  if (b3_Button) delete b3_Button;
-  if (b4_Button) delete b4_Button;
-  if (c1_Button) delete c1_Button;
-  if (c2_Button) delete c2_Button;
-  if (c3_Button) delete c3_Button;
-  if (c4_Button) delete c4_Button;
-    
-  if(easyCam) delete easyCam;
-  if(equalizerView) delete equalizerView;
-  if(sonicOcean) delete sonicOcean;
+
+    if(m_pointView) delete m_pointView;
+    if(m_easyCam) delete m_easyCam;
+    if(m_equalizerView) delete m_equalizerView;
+    if(m_sonicOcean) delete m_sonicOcean;
 }
 
-void World::render()
-{    
-  easyCam->begin();
-    
-  //================================================================
-  //Set up translation for all drawing
-  //================================================================
-  ofPushMatrix();
-  ofScale(-1, 1);
-  ofTranslate((ofGetWidth()/2)-320, (ofGetHeight()/2) -240, -1000); // center the points a bit
-  ofRotateX(180);                   //Rotate around Axis
-    
-  ofTranslate(0,0,1000);            // Move back into Camera View
-  ofTranslate(m_scale ,m_scale, m_scale *-800);
-  ofScale(m_scale,m_scale,m_scale);
-  //================================================================Translation Start
-    
-  for(int i = 0; i < m_boxButtons.size(); i++){
-    BoxButton * curr = m_boxButtons.at(i);
-        
-    if(!curr) continue;
-    curr->render(); // Draw BoxButtons
-        
-    //Handle Sound
-    if (!curr->isCurrentlyHit()) {
-      curr->soundPlayer.setLoop(false);
-      curr->soundPlayer.stop();
-      curr->soundPlayer.setPosition(0);
-    }else if (!curr->soundPlayer.getIsPlaying()) {
-      curr->soundPlayer.setLoop(true);
-      curr->soundPlayer.play();
-    }
-        
-    curr->clear(); //clear point count
-  }
 
-  drawDepthPointsAndTestHits(); // Do both here so we only look up the kinect data once...
-    
-  ofPopMatrix();
-    
-  ofTranslate(0, -1.5*ofGetHeight(), -5000);
-  sonicOcean->drawEQSonicOcean();//EQ OCEAN
-    
-    
-  //EndTranslation ================================================ Translation End
-    
-  easyCam->end();
-    
-  equalizerView->drawEQRect();
-
-}
-
-void World::update(double time_since_last_update)
+void CWorld::render()
 {
-    
+    m_easyCam->begin();
+
+    m_oniKinect.draw(); //draw top Left dot user tracking indicator
+
+    setUpTranslation();             //Set up translation for all drawing
+    effectBoxbutton();              // render boxbutton and handle the sound.
+    drawDepthPointsAndTestHits();   // Do both here so we only look up the m_oniKinect data once...
+    ofPopMatrix();
+
+    ofPushMatrix();                 // ofPushMatrix before ofTranslate.
+    ofTranslate(0, -1.5*ofGetHeight(), -5000);
+    m_sonicOcean->drawEQSonicOcean();//EQ OCEAN
+    ofPopMatrix();
+    m_easyCam->end();
+    //m_equalizerView->drawEQRect();
+}
+
+void CWorld::update(double time_since_last_update)
+{
 	ofBackground(100, 100, 100);
-  //ofBackgroundGradient(ofColor(0), ofColor(25,22,10));
-    
-  kinect.update();
-  equalizerView->soundUpdate();
-  sonicOcean->soundUpdate();
+    //ofBackgroundGradient(ofColor(0), ofColor(25,22,10));
+
+    m_oniKinect.update();
+    m_equalizerView->soundUpdate();
+    m_sonicOcean->soundUpdate();
 }
 
-void World::drawDepthPointsAndTestHits() 
+void CWorld::drawDepthPointsAndTestHits()
 {
-  int w = 640;
-	int h = 480;
-    
-  ofPoint *XYZ, p;
-    
+    int w = m_oniKinect.m_recordUser.getWidth();
+	int h = m_oniKinect.m_recordUser.getHeight();
+
 	int step = 5;
 	for(int y = 0; y < h; y += step) {
 		for(int x = 0; x < w; x += step) {
-			if(kinect.getDistanceAt(x, y) > 0) {
-				p = kinect.getWorldCoordinateAt(x, y);
-                
-        if (p.z > 615 && p.z < 2000) {
-          XYZ = &p;
-          handleCollisions(XYZ); //check for hits for all buttons
-          pointView->addPoint(p.x, p.y, p.z);
-        }
-			}
+            ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
+            //if (XYZ.z > 615 && XYZ.z < 2000) {
+             XYZ.x = XYZ.x - w/2;
+             XYZ.y = XYZ.y - h/2;
+
+            handleCollisions(&XYZ); //check for hits for all buttons
+            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+            //}
 		}
 	}
-    
-  pointView->uploadDataToVbo();
-  pointView->drawParticles();
-  pointView->clearData();
+
+    m_pointView->uploadDataToVbo();
+    m_pointView->drawParticles();
+    m_pointView->clearData();
 }
 
 
-void World::addBoxButton(BoxButton * _boxButton)
+void CWorld::addBoxButton(CBoxButton * _boxButton)
 {
-  m_boxButtons.push_back(_boxButton);
+    m_boxButtons.push_back(_boxButton);
 }
 
-void World::handleCollisions(ofPoint *XYZ)
+void CWorld::handleCollisions(ofPoint *XYZ)
 {
-  for(int i = 0; i < m_boxButtons.size(); i++){
-    BoxEntity * curr = m_boxButtons.at(i);
-        
-    if(!curr) continue;
-    curr->collisionTest(XYZ); //test Each Box for hits
-  }
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
+    {
+        (*eachBox)->collisionTest(XYZ); //test Each Box for hits
+    }
 }
 
-void World::clearButtons()
+void CWorld::clearButtons()
 {
-  for(int i = 0; i < m_boxButtons.size(); i++){
-    BoxEntity * curr = m_boxButtons.at(i);
-    if(!curr) continue;
-    curr->clear();
-  }
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
+    {
+        (*eachBox)->clear();
+    }
 }
 
-void World::setInitialVolume(float volumeLevel)
+void CWorld::setInitialVolume(float volumeLevel)
 {
-  for(int i = 0; i < m_boxButtons.size(); i++){
-    BoxButton * curr = m_boxButtons.at(i);
-        
-    if(!curr) continue;
-    curr->soundPlayer.setVolume(volumeLevel); 
-  }
-    
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
+    {
+        (*eachBox)->m_soundPlayer.setVolume(volumeLevel);
+    }
+
 }
+
+void CWorld::setUpTranslation()
+{
+    ofPushMatrix();
+    ofScale(-1, 1);
+    ofTranslate((ofGetWidth()/2)-320, (ofGetHeight()/2) -240, -1000); // center the points a bit
+    ofRotateX(180);                   //Rotate around Axis
+
+    // ofTranslate(0,0,1000);            // Move back into Camera View
+    ofTranslate(m_scale ,m_scale, m_scale *-800 + 1000);
+    ofScale(m_scale,m_scale,m_scale);
+}
+
+void CWorld::effectBoxbutton()
+{
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
+    {
+        if ( (*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
+        {// when the current hit boxButton is loop control box, open repeat switch of world.
+            m_isRepeat             = true;
+        }
+        if ( m_isRepeat && !(*eachBox)->isLoopBox() )
+        {// do not repeat the control boxButton. And close the repeat switch when it touched once.
+            (*eachBox)->m_isRepeat = true;
+            m_isRepeat             = false;
+        }
+
+        (*eachBox)->render(); // Draw BoxButtons and Handle Sound.
+    }
+}
+
