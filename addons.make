@@ -1,2 +1,1 @@
-ofxKinect
-ofxOpenCv
+ofxOpenNI
