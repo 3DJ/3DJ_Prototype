@@ -127,8 +127,8 @@ void CWorld::drawDepthPointsAndTestHits()
 		for(int x = 0; x < w; x += step) {
             ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
             //if (XYZ.z > 615 && XYZ.z < 2000) {
-             XYZ.x = XYZ.x - w/2;
-             XYZ.y = XYZ.y - h/2;
+            XYZ.x = (XYZ.x - w/2)*1.5;
+            XYZ.y = (XYZ.y - h/2)*1.5;
 
             handleCollisions(&XYZ); //check for hits for all buttons
             m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
