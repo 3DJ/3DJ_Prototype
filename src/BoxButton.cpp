@@ -41,10 +41,19 @@ CBoxButton::~CBoxButton()
 
 void CBoxButton::render()  //Draw boxes and set color
 {
-    if ( m_isRepeat && isCurrentlyHit() )
+    if ( m_isRepeat && !isCurrentlyHit() )
     {// make it stop on next hit.
         m_toBeStop = true;     
     }
+
+    if ( m_isRepeat && isCurrentlyHit() )
+    {// if check this signal, close repeat option.
+        if ( m_toBeStop == true ){
+            m_isRepeat = false;
+            m_toBeStop = false;
+        }
+    }
+
     if ( isCurrentlyHit() || m_isRepeat) {
 		// set the current hit button to hit mode.
 		setHitMode();
@@ -52,12 +61,6 @@ void CBoxButton::render()  //Draw boxes and set color
         if ( !m_soundPlayer.getIsPlaying()){
             m_soundPlayer.setLoop(true);
             m_soundPlayer.play();
-        }
-
-        // if check this signal, close repeat option.
-        if ( m_toBeStop == true ){
-            m_isRepeat = false;
-            m_toBeStop = false;
         }
     } else{
 		// set the unhit button as default mode.

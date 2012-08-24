@@ -190,7 +190,7 @@ void CWorld::effectBoxbutton()
         {// when the current hit boxButton is loop control box, open repeat switch of world.
             m_isRepeat             = true;
         }
-        if ( m_isRepeat && !(*eachBox)->isLoopBox() )
+        if ( m_isRepeat && !(*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
         {// do not repeat the control boxButton. And close the repeat switch when it touched once.
             (*eachBox)->m_isRepeat = true;
             m_isRepeat             = false;
