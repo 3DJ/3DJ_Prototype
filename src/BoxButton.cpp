@@ -24,9 +24,16 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_toBeStop = false;
     m_pointsInArea = 0;
     m_pointThreshold = 2000;
-    m_threshold = 10;
+    m_threshold = 2;
     m_type = ET_MusicSampleButton;
     m_soundPlayer.loadSound(soundName);
+}
+
+void CBoxButton::setupBoxButton( int threshold,int pointThreshold, EntityType type )
+{    
+    m_pointThreshold = pointThreshold;
+    m_threshold = threshold;
+    m_type = type;   
 }
 
 CBoxButton::CBoxButton()

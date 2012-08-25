@@ -19,7 +19,8 @@ public:
     CBoxButton();
     ~CBoxButton();
 
-
+    // set up the box button's properties.
+    virtual void setupBoxButton( int threshold, int pointThreshold = 2000, EntityType type = ET_MusicSampleButton );
     void render();
 
 	void update(double time_since_last_update);

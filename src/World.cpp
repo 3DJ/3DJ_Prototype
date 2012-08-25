@@ -24,41 +24,15 @@ CWorld::CWorld()
     m_green             = 255;
     m_blue              = 255;
     m_alpha             = 30;
-    m_boxSize           = 200;
+    m_boxSize           = 150;
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
 
-    //Row A
-    m_a1Button = new CBoxButton(375, -250, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
-    addBoxButton(m_a1Button);
-    m_a2Button = new CBoxButton(125, -250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
-    addBoxButton(m_a2Button);
-    m_a3Button = new CBoxButton(-125,-250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
-    addBoxButton(m_a3Button);
-    m_a4Button = new CBoxButton(-375, -250, 1000, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
-    m_a4Button->m_soundPlayer.setVolume(0.60f);
-    addBoxButton(m_a4Button);
-
-    //Row B
-    m_b1Button = new CBoxButton(375, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
-    addBoxButton(m_b1Button);
-    m_b2Button = new CBoxButton(125, 0, 1000, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
-    addBoxButton(m_b2Button);
-    m_b3Button = new CBoxButton(-125, 0, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
-    addBoxButton(m_b3Button);
-
-    m_b4Button = new CBoxButton(-375,0,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
-    addBoxButton(m_b4Button);
-
-    //Row C
-    m_c1Button = new CLoopBoxButton(375, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Vinyl_Scratch_01.wav");
-    addBoxButton(m_c1Button);
-    m_c2Button = new CBoxButton(125, 250, 1000,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
-    addBoxButton(m_c2Button);
-    m_c3Button = new CBoxButton(-125, 250, 1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
-    addBoxButton(m_c3Button);
-    m_c4Button = new CBoxButton(-375, 250,1000,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
-    addBoxButton(m_c4Button);
+    int xDistance     = 300;
+    int yDistance     = 300;
+    int zDistance     = 1000;
+    // initialize the box button.
+    initializeBoxButton(xDistance, yDistance, zDistance);
 
     setInitialVolume(1.0f);
     m_scale =3;
@@ -125,8 +99,8 @@ void CWorld::drawDepthPointsAndTestHits()
 		for(int x = 0; x < w; x += step) {
             ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
             if (XYZ.z > 0) {
-            XYZ.x = (XYZ.x - w/2)*1.5;
-            XYZ.y = (XYZ.y - h/2)*1.5;
+            XYZ.x = (XYZ.x - w/2) * 2;
+            XYZ.y = (XYZ.y - h/2) * 2;
 
             handleCollisions(&XYZ); //check for hits for all buttons
             m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
@@ -198,5 +172,44 @@ void CWorld::effectBoxbutton()
 
         (*eachBox)->render(); // Draw BoxButtons and Handle Sound.
     }
+}
+
+void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
+{
+    //Row A
+    m_a1Button = new CBoxButton(xDistance*3/2, -yDistance, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
+    m_a1Button->setupBoxButton( 1 );
+    addBoxButton(m_a1Button);
+    m_a2Button = new CBoxButton( xDistance/2 , -yDistance, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
+    addBoxButton(m_a2Button);
+    m_a3Button = new CBoxButton( -xDistance/2, -yDistance,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
+    addBoxButton(m_a3Button);
+    m_a4Button = new CBoxButton(-xDistance*3/2, -yDistance, zDistance, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
+    m_a4Button->m_soundPlayer.setVolume(0.60f);
+    m_a4Button->setupBoxButton( 1 );
+    addBoxButton(m_a4Button);
+
+    //Row B
+    m_b1Button = new CBoxButton(xDistance*3/2, 0, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
+    addBoxButton(m_b1Button);
+    m_b2Button = new CBoxButton(xDistance/2, 0, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
+    addBoxButton(m_b2Button);
+    m_b3Button = new CBoxButton(-xDistance/2, 0, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
+    addBoxButton(m_b3Button);
+
+    m_b4Button = new CBoxButton(-xDistance*3/2,0,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
+    addBoxButton(m_b4Button);
+
+    //Row C
+    m_c1Button = new CLoopBoxButton(xDistance*3/2, yDistance, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha, "");
+    m_c1Button->setupBoxButton( 1 );
+    addBoxButton(m_c1Button);
+    m_c2Button = new CBoxButton(xDistance/2, yDistance, zDistance,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
+    addBoxButton(m_c2Button);
+    m_c3Button = new CBoxButton(-xDistance/2, yDistance, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
+    addBoxButton(m_c3Button);
+    m_c4Button = new CBoxButton(-xDistance*3/2, yDistance,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
+    m_c4Button->setupBoxButton( 1 );
+    addBoxButton(m_c4Button);
 }
 

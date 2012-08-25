@@ -29,6 +29,9 @@ class CWorld
 public:
 
     CWorld();
+
+    void initializeBoxButton( int xDistance, int yDistance, int zDistance );
+
     ~CWorld();
 
     void render();
