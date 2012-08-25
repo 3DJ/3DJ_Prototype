@@ -24,7 +24,7 @@ CWorld::CWorld()
     m_green             = 255;
     m_blue              = 255;
     m_alpha             = 30;
-    m_boxSize           = 150;
+    m_boxSize           = 250;
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
 
@@ -201,7 +201,7 @@ void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
     addBoxButton(m_b4Button);
 
     //Row C
-    m_c1Button = new CLoopBoxButton(xDistance*3/2, yDistance, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha, "");
+    m_c1Button = new CLoopBoxButton(xDistance*3/2, yDistance, zDistance, 200, m_red, m_green, m_blue, m_alpha, "");
     m_c1Button->setupBoxButton( 1 );
     addBoxButton(m_c1Button);
     m_c2Button = new CBoxButton(xDistance/2, yDistance, zDistance,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");

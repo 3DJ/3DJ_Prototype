@@ -19,6 +19,8 @@ public:
     {}
 
     bool isLoopBox();
+    bool collisionTest(ofPoint *pPoint);
+    bool collisionTest(ofPoint point);
 };
 
 #endif

@@ -30,8 +30,8 @@ public:
     bool isCurrentlyHit();
     bool isHit();
     void clear();
-    bool collisionTest( ofPoint point)  ;
-    bool collisionTest( ofPoint *pPoint);
+    virtual bool collisionTest( ofPoint point)  ;
+    virtual bool collisionTest( ofPoint *pPoint);
 
     virtual bool isLoopBox();
 
