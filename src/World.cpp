@@ -9,6 +9,7 @@
 #include <iostream>
 #include "World.h"
 
+
 CWorld::CWorld()
 {
     //Set up Kinect
@@ -28,8 +29,8 @@ CWorld::CWorld()
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
 
-    int xDistance     = 300;
-    int yDistance     = 300;
+    int xDistance     = 250;
+    int yDistance     = 250;
     int zDistance     = 1000;
     // initialize the box button.
     initializeBoxButton(xDistance, yDistance, zDistance);
@@ -45,7 +46,9 @@ CWorld::CWorld()
     m_equalizerView = new CEQView;
     m_sonicOcean    = new CSonicOcean;
 
-    m_isRepeat      = false;
+    m_repeatFlag      = false;
+    m_speed       = 1.0f;
+    m_volume      = 1.0f;
 }
 
 CWorld::~CWorld()
@@ -68,7 +71,10 @@ void CWorld::render()
 
     setUpTranslation();             //Set up translation for all drawing
     effectBoxbutton();              // render boxbutton and handle the sound.
-    if(m_oniKinect.m_isTracking){ drawDepthPointsAndTestHits();}   // Do both here so we only look up the m_oniKinect data once...
+    if(m_oniKinect.m_isTracking)
+    {  // Do both here so we only look up the m_oniKinect data once...
+        drawDepthPointsAndTestHits();
+    }
     ofPopMatrix();
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
@@ -103,7 +109,7 @@ void CWorld::drawDepthPointsAndTestHits()
             XYZ.y = (XYZ.y - h/2) * 2;
 
             handleCollisions(&XYZ); //check for hits for all buttons
-            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);            
             }
 		}
 	}
@@ -160,14 +166,11 @@ void CWorld::effectBoxbutton()
 {
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
     {
-        if ( (*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
-        {// when the current hit boxButton is loop control box, open repeat switch of world.
-            m_isRepeat             = true;
+        if ( (*eachBox)->isCurrentlyHit() ){
+            setCurHitControlFlags(eachBox);
         }
-        if ( m_isRepeat && !(*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
-        {// do not repeat the control boxButton. And close the repeat switch when it touched once.
-            (*eachBox)->m_isRepeat = true;
-            m_isRepeat             = false;
+        else{
+            setUnHitControlFlags(eachBox);
         }
 
         (*eachBox)->render(); // Draw BoxButtons and Handle Sound.
@@ -190,7 +193,8 @@ void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
     addBoxButton(m_a4Button);
 
     //Row B
-    m_b1Button = new CBoxButton(xDistance*3/2, 0, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Warp_1.wav");
+    m_b1Button = new CEffectBoxButton(xDistance*3/2, 0, zDistance, 200,m_red,m_green,m_blue,m_alpha,"");
+    m_b1Button->setupBoxButton( 1, 2000, ET_EffectsButton);
     addBoxButton(m_b1Button);
     m_b2Button = new CBoxButton(xDistance/2, 0, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
     addBoxButton(m_b2Button);
@@ -202,7 +206,7 @@ void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
 
     //Row C
     m_c1Button = new CLoopBoxButton(xDistance*3/2, yDistance, zDistance, 200, m_red, m_green, m_blue, m_alpha, "");
-    m_c1Button->setupBoxButton( 1 );
+    m_c1Button->setupBoxButton( 1, 2000, ET_LoopButton );
     addBoxButton(m_c1Button);
     m_c2Button = new CBoxButton(xDistance/2, yDistance, zDistance,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
     addBoxButton(m_c2Button);
@@ -213,3 +217,60 @@ void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
     addBoxButton(m_c4Button);
 }
 
+void CWorld::setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox )
+{
+    switch( (*eachBox)->getBoxType() )
+    {
+    case ET_LoopButton:
+        {
+            m_repeatFlag = true;
+        }
+        break;
+    case ET_EffectsButton:
+        {
+            // set the world's flags.
+            m_speed = (*eachBox)->m_speed;
+            m_volume = (*eachBox)->m_volume;
+            m_pan   = (*eachBox)->m_pan;
+            cout<<"m_speed"<<m_speed<<endl;
+            //cout<<"m_pan"<<m_pan<<endl;
+            //cout<<"m_volume"<<m_volume<<endl;
+        }
+        break;
+    case ET_MusicSampleButton:
+        {
+            if ( m_repeatFlag )
+            {// do not repeat the control boxButton. And close the repeat switch when it touched once.
+                (*eachBox)->m_isRepeat = true;
+                m_repeatFlag             = false;
+            }
+            // set the flags of each boxes.
+            (*eachBox)->m_speed = m_speed;
+            //(*eachBox)->m_pan   = m_pan;
+            //(*eachBox)->m_volume = m_volume;
+        }
+        break;
+    }
+}
+
+
+void CWorld::setUnHitControlFlags( vector<CBoxButton *>::iterator eachBox )
+{  
+    switch( (*eachBox)->getBoxType() )
+    {
+    case ET_EffectsButton:
+        {
+            m_speed = 1;
+            m_volume = 1;
+            m_pan   = 0;
+        }
+        break;
+    case ET_MusicSampleButton:
+        {
+            (*eachBox)->m_speed = m_speed;
+            (*eachBox)->m_volume = m_volume;
+            (*eachBox)->m_pan   = m_pan;
+        }
+        break;
+    }
+}

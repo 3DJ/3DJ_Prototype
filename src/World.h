@@ -38,6 +38,9 @@ public:
 
     void effectBoxbutton();
 
+    void setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox );
+    void setUnHitControlFlags( vector<CBoxButton *>::iterator eachBox );
+
     void setUpTranslation();
 
     void update(double time_since_last_update);
@@ -45,8 +48,7 @@ public:
     void clearButtons();
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume(float volumeLevel);
-    void drawDepthPointsAndTestHits();
-
+    void drawDepthPointsAndTestHits();    
     //stuff for OpenNI=========================================
     CKinectData m_oniKinect;
 
@@ -68,7 +70,10 @@ public:
     CBoxButton *m_c3Button;
     CBoxButton *m_c4Button;
 
-    bool m_isRepeat;
+    bool m_repeatFlag;
+    float  m_pan;
+    float  m_volume;
+    float  m_speed;
     double m_totalTime;
     int m_scale;
     int m_angle;

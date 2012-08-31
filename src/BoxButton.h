@@ -33,11 +33,14 @@ public:
     virtual bool collisionTest( ofPoint point)  ;
     virtual bool collisionTest( ofPoint *pPoint);
 
-    virtual bool isLoopBox();
+    virtual int getBoxType();
 
     ofSoundPlayer m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;
+    float  m_speed;
+    float  m_volume;
+    float  m_pan;
 
 protected:
     bool hitTest(float x, float y, float z);

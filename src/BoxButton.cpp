@@ -20,6 +20,9 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_b = blueVal;
     m_a = alphaVal;
 
+    m_speed    = 1.0f;
+    m_volume   = 1.0f;
+    m_pan      = 0;
     m_isRepeat = false;
     m_toBeStop = false;
     m_pointsInArea = 0;
@@ -64,6 +67,8 @@ void CBoxButton::render()  //Draw boxes and set color
     if ( isCurrentlyHit() || m_isRepeat) {
 		// set the current hit button to hit mode.
 		setHitMode();
+        m_soundPlayer.setSpeed( m_speed );
+        m_soundPlayer.setVolume( m_volume );
         // handle the sound
         if ( !m_soundPlayer.getIsPlaying()){
             m_soundPlayer.setLoop(true);
@@ -171,7 +176,7 @@ void CBoxButton::setHitMode()
 	ofPopMatrix();
 }
 
-bool CBoxButton::isLoopBox()
+int CBoxButton::getBoxType()
 {
-    return false;
+    return m_type;
 }

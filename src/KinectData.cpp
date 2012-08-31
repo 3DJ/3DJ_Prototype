@@ -27,13 +27,12 @@ void CKinectData::setup()
     m_recordUser.setUseMaskPixels(m_isMasking);
 
     m_recordUser.setUseCloudPoints(m_isCloud);
-    m_recordUser.setMaxNumberOfUsers(1);	// use this to set dynamic max number of users
+    m_recordUser.setMaxNumberOfUsers( m_numberOfUsersToTrack );	// use this to set dynamic max number of users
 
 }
 
 void CKinectData::update()
 {
-    
     m_recordContext.update();
     m_isTracking = m_recordUser.getNumberOfTrackedUsers() > 0;
     m_recordUser.update();
@@ -41,5 +40,5 @@ void CKinectData::update()
 
 void CKinectData::draw()
 {
-    
+
 }
