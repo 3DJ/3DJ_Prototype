@@ -232,9 +232,9 @@ void CWorld::setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox )
             m_speed = (*eachBox)->m_speed;
             m_volume = (*eachBox)->m_volume;
             m_pan   = (*eachBox)->m_pan;
-            cout<<"m_speed"<<m_speed<<endl;
+            //cout<<"m_speed"<<m_speed<<endl;
             //cout<<"m_pan"<<m_pan<<endl;
-            //cout<<"m_volume"<<m_volume<<endl;
+            cout<<"m_volume"<<m_volume<<endl;
         }
         break;
     case ET_MusicSampleButton:
@@ -245,9 +245,9 @@ void CWorld::setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox )
                 m_repeatFlag             = false;
             }
             // set the flags of each boxes.
-            (*eachBox)->m_speed = m_speed;
+            //(*eachBox)->m_speed = m_speed;
             //(*eachBox)->m_pan   = m_pan;
-            //(*eachBox)->m_volume = m_volume;
+            (*eachBox)->m_volume = m_volume;
         }
         break;
     }
