@@ -24,7 +24,9 @@ public:
 	void windowResized(int w, int h);
 	
     CWorld * g_world; // world to hold and test all buttons, etc
-	
+#if defined (TARGET_OSX) || defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
+    ofxHardwareDriver	hardware;
+#endif
 	// used for viewing the point cloud
 	ofLight light;
 };

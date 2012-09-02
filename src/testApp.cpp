@@ -84,16 +84,20 @@ void testApp::keyPressed (int key) {
 
 			break;
 
-        case 'u':
+        case 'u':            
             g_world->m_angle++;
 			if(g_world->m_angle>30) g_world->m_angle=30;
-			//g_world->kinect.setCameraTiltAngle(g_world->m_angle);
+#if defined (TARGET_OSX) || defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
+			hardware.setTiltAngle( g_world->m_angle );            
+#endif
 			break;
 
         case 'd':
             g_world->m_angle--;
 			if(g_world->m_angle<-30) g_world->m_angle=-30;
-			//g_world->kinect.setCameraTiltAngle(g_world->m_angle);
+#if defined (TARGET_OSX) || defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
+            hardware.setTiltAngle( g_world->m_angle );            
+#endif
 			break;
 
 		case OF_KEY_UP:
