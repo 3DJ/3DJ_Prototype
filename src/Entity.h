@@ -14,7 +14,9 @@ typedef enum et {
     ET_None = 0,
     ET_MusicSampleButton,
     ET_LoopButton,
-    ET_EffectsButton
+    ET_EffectsButton,
+    ET_SwapButton,
+    ET_ScrollLeftButtons
 }EntityType;
 
 //===========================================================

@@ -49,6 +49,12 @@ CWorld::CWorld()
     m_repeatFlag      = false;
     m_speed       = 1.0f;
     m_volume      = 1.0f;
+    m_setVolume   = 1.0f;
+    m_swapBoxes   = false;
+    m_previousBox = 0;
+    m_scrollLeftBoxes = true;
+    // add listener on events
+    ofAddListener( eventSwapBoxes, this, &CWorld::swapBoxes );
 }
 
 CWorld::~CWorld()
@@ -109,7 +115,7 @@ void CWorld::drawDepthPointsAndTestHits()
             XYZ.y = (XYZ.y - h/2) * 2;
 
             handleCollisions(&XYZ); //check for hits for all buttons
-            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);            
+            m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
             }
 		}
 	}
@@ -166,7 +172,14 @@ void CWorld::effectBoxbutton()
 {
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
     {
+        // set the status by control boxes's flags.
         if ( (*eachBox)->isCurrentlyHit() ){
+
+            if ( m_swapBoxes )
+            {
+                swapDouble(eachBox);
+            }
+
             setCurHitControlFlags(eachBox);
         }
         else{
@@ -174,16 +187,18 @@ void CWorld::effectBoxbutton()
         }
 
         (*eachBox)->render(); // Draw BoxButtons and Handle Sound.
+
     }
 }
 
 void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
 {
     //Row A
-    m_a1Button = new CBoxButton(xDistance*3/2, -yDistance, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
-    m_a1Button->setupBoxButton( 1 );
+    m_a1Button = new CBoxButton(xDistance*3/2, -yDistance, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"");
+    m_a1Button->setupBoxButton( 1, 2000,  ET_SwapButton );
+    m_leftButtons.push_back( m_a1Button );
     addBoxButton(m_a1Button);
-    m_a2Button = new CBoxButton( xDistance/2 , -yDistance, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
+    m_a2Button = new CBoxButton( xDistance/2 , -yDistance, zDistance,200,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
     addBoxButton(m_a2Button);
     m_a3Button = new CBoxButton( -xDistance/2, -yDistance,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
     addBoxButton(m_a3Button);
@@ -195,18 +210,22 @@ void CWorld::initializeBoxButton( int xDistance, int yDistance, int zDistance )
     //Row B
     m_b1Button = new CEffectBoxButton(xDistance*3/2, 0, zDistance, 200,m_red,m_green,m_blue,m_alpha,"");
     m_b1Button->setupBoxButton( 1, 2000, ET_EffectsButton);
+    m_leftButtons.push_back( m_b1Button );
     addBoxButton(m_b1Button);
     m_b2Button = new CBoxButton(xDistance/2, 0, zDistance, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
     addBoxButton(m_b2Button);
     m_b3Button = new CBoxButton(-xDistance/2, 0, zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
     addBoxButton(m_b3Button);
-
-    m_b4Button = new CBoxButton(-xDistance*3/2,0,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
+    m_b4Button = new CBoxButton(-xDistance*3/2 , 0 ,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
     addBoxButton(m_b4Button);
+    m_b5Button = new CBoxButton(-xDistance*3/2-250 ,0,zDistance,m_boxSize,m_red,m_green,m_blue,m_alpha,"");
+    m_b5Button->setupBoxButton( 1, 2000, ET_ScrollLeftButtons);
+    addBoxButton( m_b5Button );
 
     //Row C
     m_c1Button = new CLoopBoxButton(xDistance*3/2, yDistance, zDistance, 200, m_red, m_green, m_blue, m_alpha, "");
     m_c1Button->setupBoxButton( 1, 2000, ET_LoopButton );
+    m_leftButtons.push_back( m_c1Button );
     addBoxButton(m_c1Button);
     m_c2Button = new CBoxButton(xDistance/2, yDistance, zDistance,m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
     addBoxButton(m_c2Button);
@@ -229,12 +248,28 @@ void CWorld::setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox )
     case ET_EffectsButton:
         {
             // set the world's flags.
-            m_speed = (*eachBox)->m_speed;
+            //m_speed = (*eachBox)->m_speed;
             m_volume = (*eachBox)->m_volume;
-            m_pan   = (*eachBox)->m_pan;
+            //m_pan   = (*eachBox)->m_pan;
             //cout<<"m_speed"<<m_speed<<endl;
             //cout<<"m_pan"<<m_pan<<endl;
-            cout<<"m_volume"<<m_volume<<endl;
+            //cout<<"m_volume"<<m_volume<<endl;
+        }
+        break;
+    case ET_SwapButton:
+        {
+            m_swapBoxes = true;
+            m_setVolume = 0;
+        }
+        break;
+    case ET_ScrollLeftButtons:
+        {
+            // to test scroll up.
+            if ( m_scrollLeftBoxes == true )
+            {
+                scrollLeftBoxes( true );
+                m_scrollLeftBoxes = false;
+            }
         }
         break;
     case ET_MusicSampleButton:
@@ -255,13 +290,13 @@ void CWorld::setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox )
 
 
 void CWorld::setUnHitControlFlags( vector<CBoxButton *>::iterator eachBox )
-{  
+{
     switch( (*eachBox)->getBoxType() )
     {
     case ET_EffectsButton:
         {
             m_speed = 1;
-            m_volume = 1;
+            m_volume = m_setVolume;
             m_pan   = 0;
         }
         break;
@@ -272,5 +307,72 @@ void CWorld::setUnHitControlFlags( vector<CBoxButton *>::iterator eachBox )
             (*eachBox)->m_pan   = m_pan;
         }
         break;
+    case ET_SwapButton:
+        {
+            m_swapBoxes = false;
+            m_previousBox = 0;
+            m_setVolume  = 1.0f;
+        }
+        break;
+    case ET_ScrollLeftButtons:
+        {
+            m_scrollLeftBoxes = true;
+        }
+        break;
     }
+}
+
+void CWorld::swapBoxes( SSwapBoxes &boxes )
+{
+    baseSwapBoxes( boxes.box1, boxes.box2 );
+}
+
+void CWorld::swapDouble( vector<CBoxButton *>::iterator eachBox )
+{
+    if ( (*eachBox)->getBoxType() == ET_MusicSampleButton )
+    {
+        // save the previous box
+        if ( m_previousBox == 0)
+        {
+            m_previousBox = *eachBox;
+        }
+        else
+        {
+            baseSwapBoxes( m_previousBox, (*eachBox));
+//             // emit the swap event to swapboxes. but it's not neccessary in here. just call baseSwapBoxes is okay
+//             SSwapBoxes swapBoxes;
+//             swapBoxes.box1 = m_previousBox;
+//             swapBoxes.box2 = (*eachBox);
+//             // for test the event-driven.
+//             ofNotifyEvent( eventSwapBoxes, swapBoxes );
+        }
+    }
+}
+
+void CWorld::scrollLeftBoxes( bool scrollDown)
+{// true for down, false for up
+    if ( scrollDown )
+    {
+        for ( int index = 0 ; index < m_leftButtons.size()-1 ; )
+        {// iterate the left buttons            
+            baseSwapBoxes( m_leftButtons[index], m_leftButtons[index++]);
+        }
+    }
+    else
+    {
+        for ( int index = m_leftButtons.size() - 1 ; index > 0 ; )
+        {// iterate the left buttons
+            baseSwapBoxes( m_leftButtons[index], m_leftButtons[index--]);
+        }
+    }
+}
+
+void CWorld::baseSwapBoxes(CBoxButton *box1, CBoxButton *box2)
+{// swap two box by resetting the position and size
+    float x = box1->getXCoordinate();
+    float y = box1->getYCoordinate();
+    float z = box1->getZCoordinate();
+
+    box1->setXYZ( box2->getXCoordinate(), box2->getYCoordinate(), box2->getZCoordinate() );
+    box2->setXYZ( x, y, z );
 }

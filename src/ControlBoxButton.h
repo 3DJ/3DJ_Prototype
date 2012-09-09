@@ -34,5 +34,4 @@ public:
     bool collisionTest(ofPoint point);
 };
 
-
 #endif

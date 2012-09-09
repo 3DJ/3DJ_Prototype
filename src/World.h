@@ -19,6 +19,11 @@
 
 using namespace std;
 
+typedef struct{
+    CBoxButton *box1;
+    CBoxButton *box2;
+}SSwapBoxes;
+
 //===========================================================
 // Class : CWorld
 // The entire world in which all entities exist
@@ -38,6 +43,8 @@ public:
 
     void effectBoxbutton();
 
+    void swapDouble( vector<CBoxButton *>::iterator eachBox );
+
     void setCurHitControlFlags( vector<CBoxButton *>::iterator eachBox );
     void setUnHitControlFlags( vector<CBoxButton *>::iterator eachBox );
 
@@ -49,9 +56,16 @@ public:
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume(float volumeLevel);
     void drawDepthPointsAndTestHits();    
+    void swapBoxes( SSwapBoxes &boxes );
+
+    void baseSwapBoxes( CBoxButton *box1, CBoxButton *box2);
+
+    void scrollLeftBoxes(bool scrollDown);  // true for down, false for up
     //stuff for OpenNI=========================================
     CKinectData m_oniKinect;
 
+    // events
+    ofEvent<SSwapBoxes> eventSwapBoxes;
 
     //Stuff For Buttons========================================
 
@@ -64,6 +78,7 @@ public:
     CBoxButton *m_b2Button;
     CBoxButton *m_b3Button;
     CBoxButton *m_b4Button;
+    CBoxButton *m_b5Button;
 
     CBoxButton *m_c1Button;
     CBoxButton *m_c2Button;
@@ -73,13 +88,20 @@ public:
     bool m_repeatFlag;
     float  m_pan;
     float  m_volume;
+    float  m_setVolume;
     float  m_speed;
+    bool m_swapBoxes;
+    bool m_scrollLeftBoxes;
+    CBoxButton *m_previousBox;
+
+
     double m_totalTime;
     int m_scale;
     int m_angle;
     int m_red,m_green, m_blue, m_alpha;
     int m_boxSize, m_boxCenterX, m_boxCenterY;
     vector<CBoxButton *> m_boxButtons;
+    vector<CBoxButton *> m_leftButtons;
 
     CPointView * m_pointView;
     ofEasyCam *m_easyCam;

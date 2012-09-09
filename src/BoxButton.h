@@ -34,7 +34,11 @@ public:
     virtual bool collisionTest( ofPoint *pPoint);
 
     virtual int getBoxType();
-
+    float getXCoordinate( );
+    float getYCoordinate( );
+    float getZCoordinate( );
+    int getSize();
+    void setXYZ( float x, float y, float z );
     ofSoundPlayer m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;

@@ -180,3 +180,30 @@ int CBoxButton::getBoxType()
 {
     return m_type;
 }
+
+float CBoxButton::getXCoordinate( )
+{
+    return m_x;
+}
+
+float CBoxButton::getYCoordinate( )
+{
+    return m_y;
+}
+
+float CBoxButton::getZCoordinate( )
+{
+    return m_z;
+}
+
+void CBoxButton::setXYZ(float x, float y, float z )
+{
+    m_x = x;
+    m_y = y;
+    m_z = z;
+}
+
+int CBoxButton::getSize()
+{
+    return m_size;
+}
