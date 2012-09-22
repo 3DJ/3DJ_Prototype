@@ -25,17 +25,17 @@ CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha
 CMenuViewController::~CMenuViewController()
 {
     delete m_menu;
-    delete m_volumeEditor;
     delete m_loopEditor;
     delete m_visualEditor;
+    delete m_calibrationEditor;
 }
 
 void CMenuViewController::initViews()
 {
     m_menu = new CMenuView;
-    m_volumeEditor = new CVolumeControlView();
     m_loopEditor = new CLoopEditorView();
     m_visualEditor = new CVisualThemesView(m_r, m_g, m_b, m_a);
+    m_calibrationEditor = new CalibrationView();
 }
 
 void CMenuViewController::menuEvent(ofxUIEventArgs &e)
@@ -43,46 +43,40 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
     string name = e.widget->getName();
     int kind = e.widget->getKind();
     
-    if(name == "Box Volume"){
-        m_volumeEditor->m_canvas1->setVisible(true);
+//Main Menu
+    if(name == "Calibrate"){
+        m_calibrationEditor->m_canvas1->setVisible(true);
         m_loopEditor->m_canvas1->setVisible(false);
         m_visualEditor->m_canvas1->setVisible(false);
-    }else if(name == "Drawing Style"){
-        m_volumeEditor->m_canvas1->setVisible(false);
-        m_loopEditor->m_canvas1->setVisible(false);
-        m_visualEditor->m_canvas1->setVisible(true);
     }else if(name == "Start Session"){
         m_exitMenu = true;
         hideAllViews();
+    } else if(name == "Styles"){
+        m_loopEditor->m_canvas1->setVisible(false);
+        m_visualEditor->m_canvas1->setVisible(true);
+        m_calibrationEditor->m_canvas1->setVisible(false);
+    }else if(name == "Sets"){
+        m_loopEditor->m_canvas1->setVisible(false);
+        m_visualEditor->m_canvas1->setVisible(false);
+        m_calibrationEditor->m_canvas1->setVisible(false);
+    }else if(name == "Get Songs"){
+        m_loopEditor->m_canvas1->setVisible(false);
+        m_visualEditor->m_canvas1->setVisible(false);
+        m_calibrationEditor->m_canvas1->setVisible(false);
+    }else if(name == "Help"){
+        m_loopEditor->m_canvas1->setVisible(false);
+        m_visualEditor->m_canvas1->setVisible(false);
+        m_calibrationEditor->m_canvas1->setVisible(false);
+
+//Sub views
     }else if(name == "Loop Editor"){
-        m_volumeEditor->m_canvas1->setVisible(false);
         m_loopEditor->m_canvas1->setVisible(true);
         m_visualEditor->m_canvas1->setVisible(false);
-    }else if(name == "Sound Effects"){                  //Add sound effect editor
-        m_volumeEditor->m_canvas1->setVisible(false);
-        m_loopEditor->m_canvas1->setVisible(false);
-        m_visualEditor->m_canvas1->setVisible(false);
-    }else if(name == "Calibrate"){                      //Add calibration editor
-        m_volumeEditor->m_canvas1->setVisible(false);
-        m_loopEditor->m_canvas1->setVisible(false);
-        m_visualEditor->m_canvas1->setVisible(false);
-    }else if(name == "About 3DJ"){                      //Add calibration editor
-        m_volumeEditor->m_canvas1->setVisible(false);
-        m_loopEditor->m_canvas1->setVisible(false);
-        m_visualEditor->m_canvas1->setVisible(false);
+        m_calibrationEditor->m_canvas1->setVisible(false);
     }
 }
 
-void CMenuViewController::volumeEditorEvent(ofxUIEventArgs &e)
-{
-    string name = e.widget->getName();
-    
-    if(name == ""){
 
-    }else if(name == ""){
-        
-    }
-}
 
 void CMenuViewController::loopEditorEvent(ofxUIEventArgs &e)
 {
@@ -109,7 +103,6 @@ void CMenuViewController::visualEditorEvent(ofxUIEventArgs &e)
 void CMenuViewController::setupDelegates()
 {
     ofAddListener(m_menu->m_canvas1->newGUIEvent, this, &CMenuViewController::menuEvent);
-    ofAddListener(m_volumeEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::volumeEditorEvent);
     ofAddListener(m_loopEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::loopEditorEvent);
     ofAddListener(m_visualEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::visualEditorEvent);
    
@@ -129,7 +122,7 @@ void CMenuViewController::hideAllViews()
     m_menu->m_canvas1->setVisible(false);
     m_loopEditor->m_canvas1->setVisible(false);
     m_visualEditor->m_canvas1->setVisible(false);
-    m_volumeEditor->m_canvas1->setVisible(false);
+    m_calibrationEditor->m_canvas1->setVisible(false);
 }
 
 

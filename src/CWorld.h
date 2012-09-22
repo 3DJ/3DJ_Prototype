@@ -15,6 +15,7 @@
 #include "PointView.h"
 #include "EQView.h"
 #include "SonicOcean.h"
+#include "CNavigationUIController.h"
 #include <vector>
 
 using namespace std;
@@ -41,7 +42,7 @@ public:
     void addBoxButton(CBoxButton * _boxButton);
     void clearButtons();
     void handleCollisions(ofPoint * XYZ);
-    void setInitialVolume(float volumeLevel);
+    void setInitialVolume (float  volumeLevel) ;
     void drawDepthPointsAndTestHits();
 
     //stuff for OpenNI=========================================
@@ -78,7 +79,9 @@ public:
     ofEasyCam *m_easyCam;
     CEQView *m_equalizerView;
     CSonicOcean *m_sonicOcean;
-
+    
+    CNavigationUIController *m_navigationController;
+    
 };
 
 #endif

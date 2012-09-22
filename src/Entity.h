@@ -3,7 +3,6 @@
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #ifndef Kinect_3DJ_Entity_h
@@ -13,6 +12,7 @@
 typedef enum et {
     ET_None = 0,
     ET_MusicSampleButton,
+    ET_NavigationButtons,
 }EntityType;
 
 //===========================================================
@@ -70,5 +70,21 @@ public:
 protected:
     virtual bool hitTest(float x, float y, float z) = 0;
 };
+
+//===========================================================
+// Class : CControlButtonsBase class
+//===========================================================
+
+class CControlButtonsBase : public CEntity{
+public:
+    
+    virtual void drawCircleStroke() = 0;
+    virtual bool collisionTest(ofPoint *point) = 0;
+
+    int m_resolution, m_strokeWidth, m_radius;
+    float m_startAngle, m_endAngle;
+    string m_songTitle;
+};
+
 
 #endif

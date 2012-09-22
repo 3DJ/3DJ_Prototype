@@ -73,6 +73,8 @@ CWorld::CWorld()
     m_sonicOcean    = new CSonicOcean;
 
     m_isRepeat      = false;
+    
+    m_navigationController = new CNavigationUIController();
 }
 
 CWorld::~CWorld()
@@ -86,13 +88,13 @@ CWorld::~CWorld()
     if(m_easyCam) delete m_easyCam;
     if(m_equalizerView) delete m_equalizerView;
     if(m_sonicOcean) delete m_sonicOcean;
+    if(m_navigationController) delete m_navigationController;
 }
 
 
 void CWorld::render()
 {
     m_easyCam->begin();
-
     setUpTranslation();             //Set up translation for all drawing
     effectBoxbutton();              // render boxbutton and handle the sound.
     if(m_oniKinect.m_isTracking){ drawDepthPointsAndTestHits();}   // Do both here so we only look up the m_oniKinect data once...
@@ -104,6 +106,9 @@ void CWorld::render()
     ofPopMatrix();
     m_easyCam->end();
     //m_equalizerView->drawEQRect();
+   
+    m_navigationController->m_navConButtons->render();
+    
 }
 
 void CWorld::update(double time_since_last_update)
@@ -114,6 +119,7 @@ void CWorld::update(double time_since_last_update)
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
     m_sonicOcean->soundUpdate();
+    m_navigationController->m_navConButtons->update(time_since_last_update);
 }
 
 void CWorld::drawDepthPointsAndTestHits()
@@ -152,6 +158,7 @@ void CWorld::handleCollisions(ofPoint *XYZ)
     {
         (*eachBox)->collisionTest(XYZ); //test Each Box for hits
     }
+    m_navigationController->m_navConButtons->collisionTest(XYZ);
 }
 
 void CWorld::clearButtons()
@@ -200,4 +207,6 @@ void CWorld::effectBoxbutton()
         (*eachBox)->render(); // Draw BoxButtons and Handle Sound.
     }
 }
+
+
 

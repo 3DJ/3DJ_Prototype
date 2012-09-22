@@ -43,7 +43,8 @@ void CSonicOcean::drawEQSonicOcean()
 {
     ofPushMatrix();
     ofEnableAlphaBlending();
-
+    ofSetLineWidth(1.0f);
+    
     for(int r = 0; r < m_rows*3; r++){
         for (int c = 0; c < m_cols-3; c++) {
             //Change the vertexes based on fft results

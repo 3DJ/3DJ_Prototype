@@ -30,7 +30,4 @@ public:
     
 };
 
-
-
-
 #endif /* defined(__openNI_3DJ__KinectData__) */

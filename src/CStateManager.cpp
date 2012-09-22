@@ -151,7 +151,8 @@ void CStateManager::windowResized(int w, int h)
         w = 800;
     }
     if(h<600) ofSetWindowShape(w, 600);
-
+    if(g_world) g_world->m_navigationController->m_navConButtons->windowSizeChanged();
+        
 }
 
 void CStateManager::updateBackgroundColors()

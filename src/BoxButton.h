@@ -19,11 +19,8 @@ public:
     CBoxButton();
     ~CBoxButton();
 
-
     void render();
-
 	void update(double time_since_last_update);
-
     float swellAnimation();
     float percentIncluded();
     bool isCurrentlyHit();
@@ -44,7 +41,6 @@ protected:
 private:
 
 	void setHitMode();
-
 	void setDefaultMode();
 };
 

@@ -21,6 +21,9 @@
 		22005B1C15A1EFCD00F1F8BE /* libXnVFeatures_1_5_2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22005B0E15A1EFCD00F1F8BE /* libXnVFeatures_1_5_2.dylib */; };
 		22005B1D15A1EFCD00F1F8BE /* libXnVHandGenerator_1_5_2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22005B0F15A1EFCD00F1F8BE /* libXnVHandGenerator_1_5_2.dylib */; };
 		22005B1E15A1EFCD00F1F8BE /* libXnVNite_1_5_2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22005B1015A1EFCD00F1F8BE /* libXnVNite_1_5_2.dylib */; };
+		2244D7E31609A3D300BA3E53 /* CalibrationView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2244D7E11609A3D300BA3E53 /* CalibrationView.cpp */; };
+		226259A6160D7C19004CE862 /* CNavigationUIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226259A4160D7C19004CE862 /* CNavigationUIController.cpp */; };
+		226259AD160D8527004CE862 /* CNavigationControlButtons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226259AB160D8527004CE862 /* CNavigationControlButtons.cpp */; };
 		22C8302A15DBD985008DBC6C /* BoxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8301F15DBD984008DBC6C /* BoxButton.cpp */; };
 		22C8302B15DBD985008DBC6C /* EQView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8302215DBD984008DBC6C /* EQView.cpp */; };
 		22C8302C15DBD985008DBC6C /* PointView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8302415DBD985008DBC6C /* PointView.cpp */; };
@@ -37,7 +40,6 @@
 		46FAAD9A15F47EA70084CA63 /* CMenuView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46FAAD9015F47EA70084CA63 /* CMenuView.cpp */; };
 		46FAAD9B15F47EA70084CA63 /* CMenuViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46FAAD9215F47EA70084CA63 /* CMenuViewController.cpp */; };
 		46FAAD9C15F47EA70084CA63 /* CVisualThemesView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46FAAD9415F47EA70084CA63 /* CVisualThemesView.cpp */; };
-		46FAAD9D15F47EA70084CA63 /* CVolumeControlView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46FAAD9615F47EA70084CA63 /* CVolumeControlView.cpp */; };
 		77781EBF14BA9AE300CD45EF /* ofxDepthGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77781EA714BA9AE300CD45EF /* ofxDepthGenerator.cpp */; };
 		77781EC014BA9AE300CD45EF /* ofxGestureGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77781EA914BA9AE300CD45EF /* ofxGestureGenerator.cpp */; };
 		77781EC114BA9AE300CD45EF /* ofxHandGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77781EAB14BA9AE300CD45EF /* ofxHandGenerator.cpp */; };
@@ -113,6 +115,12 @@
 		22005B0E15A1EFCD00F1F8BE /* libXnVFeatures_1_5_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libXnVFeatures_1_5_2.dylib; sourceTree = "<group>"; };
 		22005B0F15A1EFCD00F1F8BE /* libXnVHandGenerator_1_5_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libXnVHandGenerator_1_5_2.dylib; sourceTree = "<group>"; };
 		22005B1015A1EFCD00F1F8BE /* libXnVNite_1_5_2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libXnVNite_1_5_2.dylib; sourceTree = "<group>"; };
+		2244D7E11609A3D300BA3E53 /* CalibrationView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CalibrationView.cpp; sourceTree = "<group>"; };
+		2244D7E21609A3D300BA3E53 /* CalibrationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalibrationView.h; sourceTree = "<group>"; };
+		226259A4160D7C19004CE862 /* CNavigationUIController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CNavigationUIController.cpp; sourceTree = "<group>"; };
+		226259A5160D7C19004CE862 /* CNavigationUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNavigationUIController.h; sourceTree = "<group>"; };
+		226259AB160D8527004CE862 /* CNavigationControlButtons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CNavigationControlButtons.cpp; sourceTree = "<group>"; };
+		226259AC160D8527004CE862 /* CNavigationControlButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNavigationControlButtons.h; sourceTree = "<group>"; };
 		22C8301F15DBD984008DBC6C /* BoxButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxButton.cpp; sourceTree = "<group>"; };
 		22C8302015DBD984008DBC6C /* BoxButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxButton.h; sourceTree = "<group>"; };
 		22C8302115DBD984008DBC6C /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
@@ -183,8 +191,6 @@
 		46FAAD9315F47EA70084CA63 /* CMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMenuViewController.h; sourceTree = "<group>"; };
 		46FAAD9415F47EA70084CA63 /* CVisualThemesView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CVisualThemesView.cpp; sourceTree = "<group>"; };
 		46FAAD9515F47EA70084CA63 /* CVisualThemesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVisualThemesView.h; sourceTree = "<group>"; };
-		46FAAD9615F47EA70084CA63 /* CVolumeControlView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CVolumeControlView.cpp; sourceTree = "<group>"; };
-		46FAAD9715F47EA70084CA63 /* CVolumeControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVolumeControlView.h; sourceTree = "<group>"; };
 		46FAAD9815F47EA70084CA63 /* CWindow_Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWindow_Base.h; sourceTree = "<group>"; };
 		770F033514B996AE003CCE99 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
 		770F033714B996AE003CCE99 /* XnCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XnCommon.h; sourceTree = "<group>"; };
@@ -420,6 +426,37 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		22842406160D9131002EB250 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				226259A4160D7C19004CE862 /* CNavigationUIController.cpp */,
+				226259A5160D7C19004CE862 /* CNavigationUIController.h */,
+				226259AB160D8527004CE862 /* CNavigationControlButtons.cpp */,
+				226259AC160D8527004CE862 /* CNavigationControlButtons.h */,
+			);
+			name = NavigationController;
+			sourceTree = "<group>";
+		};
+		22842407160D9EE3002EB250 /* EQViews */ = {
+			isa = PBXGroup;
+			children = (
+				22C8302215DBD984008DBC6C /* EQView.cpp */,
+				22C8302315DBD984008DBC6C /* EQView.h */,
+				22C8302615DBD985008DBC6C /* SonicOcean.cpp */,
+				22C8302715DBD985008DBC6C /* SonicOcean.h */,
+			);
+			name = EQViews;
+			sourceTree = "<group>";
+		};
+		22842408160D9EFB002EB250 /* UserDrawingStyles */ = {
+			isa = PBXGroup;
+			children = (
+				22C8302415DBD985008DBC6C /* PointView.cpp */,
+				22C8302515DBD985008DBC6C /* PointView.h */,
+			);
+			name = UserDrawingStyles;
+			sourceTree = "<group>";
+		};
 		4666394415F71A5200362FC5 /* ofxUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,12 +560,12 @@
 			children = (
 				46FAAD9015F47EA70084CA63 /* CMenuView.cpp */,
 				46FAAD9115F47EA70084CA63 /* CMenuView.h */,
+				2244D7E11609A3D300BA3E53 /* CalibrationView.cpp */,
+				2244D7E21609A3D300BA3E53 /* CalibrationView.h */,
 				46FAAD8E15F47EA70084CA63 /* CLoopEditorView.cpp */,
 				46FAAD8F15F47EA70084CA63 /* CLoopEditorView.h */,
 				46FAAD9415F47EA70084CA63 /* CVisualThemesView.cpp */,
 				46FAAD9515F47EA70084CA63 /* CVisualThemesView.h */,
-				46FAAD9615F47EA70084CA63 /* CVolumeControlView.cpp */,
-				46FAAD9715F47EA70084CA63 /* CVolumeControlView.h */,
 			);
 			name = EditorViews;
 			sourceTree = "<group>";
@@ -536,19 +573,16 @@
 		46FAADA015F47F050084CA63 /* WorldState */ = {
 			isa = PBXGroup;
 			children = (
+				22C8302115DBD984008DBC6C /* Entity.h */,
 				22C8302815DBD985008DBC6C /* CWorld.cpp */,
 				22C8302915DBD985008DBC6C /* CWorld.h */,
+				22842406160D9131002EB250 /* NavigationController */,
 				22C8301F15DBD984008DBC6C /* BoxButton.cpp */,
 				22C8302015DBD984008DBC6C /* BoxButton.h */,
 				46D820BA15E64A58007DDE70 /* ControlBoxButton.cpp */,
 				46D820BB15E64A58007DDE70 /* ControlBoxButton.h */,
-				22C8302115DBD984008DBC6C /* Entity.h */,
-				22C8302215DBD984008DBC6C /* EQView.cpp */,
-				22C8302315DBD984008DBC6C /* EQView.h */,
-				22C8302415DBD985008DBC6C /* PointView.cpp */,
-				22C8302515DBD985008DBC6C /* PointView.h */,
-				22C8302615DBD985008DBC6C /* SonicOcean.cpp */,
-				22C8302715DBD985008DBC6C /* SonicOcean.h */,
+				22842407160D9EE3002EB250 /* EQViews */,
+				22842408160D9EFB002EB250 /* UserDrawingStyles */,
 				22C8302F15DBE019008DBC6C /* KinectData.cpp */,
 				22C8303015DBE019008DBC6C /* KinectData.h */,
 			);
@@ -991,11 +1025,13 @@
 				46FAAD9A15F47EA70084CA63 /* CMenuView.cpp in Sources */,
 				46FAAD9B15F47EA70084CA63 /* CMenuViewController.cpp in Sources */,
 				46FAAD9C15F47EA70084CA63 /* CVisualThemesView.cpp in Sources */,
-				46FAAD9D15F47EA70084CA63 /* CVolumeControlView.cpp in Sources */,
 				4666397615F71B0100362FC5 /* tinyxml.cpp in Sources */,
 				4666397715F71B0100362FC5 /* tinyxmlerror.cpp in Sources */,
 				4666397815F71B0100362FC5 /* tinyxmlparser.cpp in Sources */,
 				4666397915F71B0100362FC5 /* ofxXmlSettings.cpp in Sources */,
+				2244D7E31609A3D300BA3E53 /* CalibrationView.cpp in Sources */,
+				226259A6160D7C19004CE862 /* CNavigationUIController.cpp in Sources */,
+				226259AD160D8527004CE862 /* CNavigationControlButtons.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

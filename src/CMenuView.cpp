@@ -36,11 +36,10 @@ void CMenuView::setupGUI()
     //m_canvas1->addWidgetDown(new ofxUIImageButton(0, 0, length, length, false, "icons/3DJ_Logo_Small.png", ""));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Calibrate"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Start Session"));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Box Volume"));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Loop Editor"));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Drawing Style"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Styles"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0,0,buttonLength, false, "Sets"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0,0, buttonLength, false, "Get Songs"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Help"));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "About 3DJ"));
     
 
 }

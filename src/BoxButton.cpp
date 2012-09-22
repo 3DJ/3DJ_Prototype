@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
 #include "BoxButton.h"
 
 CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName)
@@ -41,6 +40,7 @@ CBoxButton::~CBoxButton()
 
 void CBoxButton::render()  //Draw boxes and set color
 {
+    ofSetLineWidth(2); 
     if ( m_isRepeat && !isCurrentlyHit() )
     {// make it stop on next hit.
         m_toBeStop = true;     
