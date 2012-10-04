@@ -48,7 +48,10 @@ void CSonicOcean::drawEQSonicOcean()
         for (int c = 0; c < m_cols-3; c++) {
             //Change the vertexes based on fft results
             int index = c * r + c;
-            alterVertexes(index, r);
+            if ( index + 1 < 7681 )
+            {  
+                alterVertexes(index, r);
+            }
         }
     }
 

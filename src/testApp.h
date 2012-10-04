@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "World.h"
-
+#include "CWorld.h"
+using namespace nsWorld;
 // uncomment this to read from two kinects simultaneously
 //#define USE_TWO_KINECTS
 
@@ -23,7 +23,8 @@ public:
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
 	
-    CWorld * g_world; // world to hold and test all buttons, etc
+    //World * g_world; // world to hold and test all buttons, etc
+    CWorld* g_world;
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
     ofxHardwareDriver	hardware;
 #endif

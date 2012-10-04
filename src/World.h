@@ -1,5 +1,5 @@
 //
-//  CWorld.h
+//  World.h
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
@@ -25,19 +25,19 @@ typedef struct{
 }SSwapBoxes;
 
 //===========================================================
-// Class : CWorld
+// Class : World
 // The entire world in which all entities exist
 //===========================================================
-class CWorld
+class World
 {
 
 public:
 
-    CWorld();
+    World();
 
     void initializeBoxButton( int xDistance, int yDistance, int zDistance );
 
-    ~CWorld();
+    ~World();
 
     void render();
 
@@ -55,7 +55,7 @@ public:
     void clearButtons();
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume(float volumeLevel);
-    void drawDepthPointsAndTestHits();    
+    void drawDepthPointsAndTestHits();
     void swapBoxes( SSwapBoxes &boxes );
 
     void baseSwapBoxes( CBoxButton *box1, CBoxButton *box2);

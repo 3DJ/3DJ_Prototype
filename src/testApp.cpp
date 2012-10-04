@@ -1,5 +1,11 @@
 #include "testApp.h"
-
+#include "Interface.h"
+#include "BoxController.h"
+#include "BoxView.h"
+#include "CWorld.h"
+#include "DataPool.h"
+#include "Log.h"
+using namespace DataPool;
 
 //--------------------------------------------------------------
 void testApp::setup() {
@@ -8,7 +14,16 @@ void testApp::setup() {
     ofEnableAlphaBlending();
     ofEnableSmoothing();
 
-    g_world = new CWorld(); // world controls all buttons and sound
+    //g_world = new World(); // world controls all buttons and sound
+
+    CDataPoolSimple* dataPool = &CDataPoolSimple::getInstance();    
+    
+    // init world
+    g_world = &CWorld::getInstance();
+    IController* iController = new CBoxController( dataPool);
+    IView* iView = new CBoxView( dataPool );
+    g_world->init( iController, iView );
+
 	ofSetFrameRate(60);
     //easyCam.setFov(35.0f);
     //easyCam.setTarget(ofVec3f(0,0,-1000));
@@ -22,8 +37,9 @@ void testApp::setup() {
 //--------------------------------------------------------------
 void testApp::update() {
 
+    g_world->update();
 	ofSoundUpdate();
-    g_world->update(ofGetElapsedTimef());
+    //g_world->update(ofGetElapsedTimef());
 }
 
 //--------------------------------------------------------------
@@ -31,8 +47,12 @@ void testApp::draw() {
 	ofEnableLighting();
 	ofSetColor(255, 255, 255);
 
+
     //easyCam.begin();
-    g_world->render();
+    g_world->draw();
+
+    //g_world->render();
+
     //easyCam.end();
 
 }
@@ -84,11 +104,11 @@ void testApp::keyPressed (int key) {
 
 			break;
 
-        case 'u':            
+        case 'u':
             g_world->m_angle++;
 			if(g_world->m_angle>30) g_world->m_angle=30;
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
-			hardware.setTiltAngle( g_world->m_angle );            
+			hardware.setTiltAngle( g_world->m_angle );
 #endif
 			break;
 
@@ -96,7 +116,7 @@ void testApp::keyPressed (int key) {
             g_world->m_angle--;
 			if(g_world->m_angle<-30) g_world->m_angle=-30;
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
-            hardware.setTiltAngle( g_world->m_angle );            
+            hardware.setTiltAngle( g_world->m_angle );
 #endif
 			break;
 
@@ -141,6 +161,5 @@ void testApp::windowResized(int w, int h)
 void testApp::cleanUp()
 {
     if(g_world) delete g_world;
+    if( fs ) fs.close();
 }
-
-

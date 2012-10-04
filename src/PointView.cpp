@@ -13,7 +13,9 @@ CPointView::CPointView()
 {
     ofDisableArbTex();
     ofLoadImage(m_texture, "dot.png");
+    cout<<"shader start"<<endl;
     m_shader.load("shader");
+    cout<<"shader over"<<endl;
 }
 CPointView::~CPointView()
 {
@@ -39,7 +41,7 @@ void CPointView:: drawParticles()
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 
-    ofPopMatrix();   
+    ofPopMatrix();
 }
 
 void CPointView::addPoint( const float x, const float y, const float z)
