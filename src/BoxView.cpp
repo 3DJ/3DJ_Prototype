@@ -13,62 +13,62 @@ CBoxView::CBoxView(CDataPoolSimple* DataPool): IView(DataPool){
     SBoxInfo boxInfo;
     boxInfo.name = "world_sample_a1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value);
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
+    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
     m_boxInfo.push_back( boxInfo );
 }
 
@@ -82,14 +82,14 @@ bool CBoxView::init( ){
 
 void CBoxView::render( vector<SBoxInfo>::iterator it ){
     string val = it->name;
-    string strCenterX = m_dataPool->getDataPool()[val + "_centerX"];
-    string strCenterY = m_dataPool->getDataPool()[val + "_centerY"];
-    string strCenterZ = m_dataPool->getDataPool()[val + "_centerZ"];
-    string strSize = m_dataPool->getDataPoolAnimation()[val + "_boxSize"];
-    string strRed = m_dataPool->getDataPoolAnimation()[val + "_redVal"];
-    string strGreen = m_dataPool->getDataPoolAnimation()[val + "_greenVal"];
-    string strBlue = m_dataPool->getDataPoolAnimation()[val + "_blueVal"];
-    string strAlpha = m_dataPool->getDataPoolAnimation()[val + "_alphaVal"];
+    string strCenterX = m_dataPool->getDataPool()[val + "_centerX"].value;
+    string strCenterY = m_dataPool->getDataPool()[val + "_centerY"].value;
+    string strCenterZ = m_dataPool->getDataPool()[val + "_centerZ"].value;
+    string strSize = m_dataPool->getDataPool()[val + "_boxSize"].value;
+    string strRed = m_dataPool->getDataPool()[val + "_redVal"].value;
+    string strGreen = m_dataPool->getDataPool()[val + "_greenVal"].value;
+    string strBlue = m_dataPool->getDataPool()[val + "_blueVal"].value;
+    string strAlpha = m_dataPool->getDataPool()[val + "_alphaVal"].value;
 
     float centerX = stringToFloat( strCenterX);
     float centerY = stringToFloat( strCenterY);
@@ -142,13 +142,13 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
         it->soundPlayer->setPosition(0);
     }
 
-    m_dataPool->setDateAnimation( val + "_pointsInArea", "0");
+    m_dataPool->setAnimateValue( val + "_pointsInArea", "0");
 }
 
 bool CBoxView::isCurrentlyHit( string val ){
-//    fs<<"boxView->world_sample_b1_pointsInArea:"<<m_dataPool->getDataPoolAnimation()["world_sample_b1_pointsInArea"]<<endl;
-    string strPointsInArea = m_dataPool->getDataPoolAnimation()[val + "_pointsInArea"];
-    string strThreshold = m_dataPool->getDataPoolAnimation()[val + "_threshold"];
+//    fs<<"boxView->world_sample_b1_pointsInArea:"<<m_dataPool->getDataPool()["world_sample_b1_pointsInArea"]<<endl;
+    string strPointsInArea = m_dataPool->getDataPool()[val + "_pointsInArea"].value;
+    string strThreshold = m_dataPool->getDataPool()[val + "_threshold"].value;
     int pointsInArea = stringToInt( strPointsInArea );
     int threshold = stringToInt( strThreshold );
 //     fs<<val+"points:"<<pointsInArea<<endl;
@@ -159,8 +159,8 @@ bool CBoxView::isCurrentlyHit( string val ){
 }
 
 float CBoxView::percentIncluded( string val ){
-    string strPointsInArea = m_dataPool->getDataPoolAnimation()[val + "_pointsInArea"];
-    string strpointThreshold = m_dataPool->getDataPoolAnimation()[val + "_pointThreshold"];
+    string strPointsInArea = m_dataPool->getDataPool()[val + "_pointsInArea"].value;
+    string strpointThreshold = m_dataPool->getDataPool()[val + "_pointThreshold"].value;
     int pointsInArea = stringToInt( strPointsInArea );
     int pointThreshold = stringToInt( strpointThreshold );
 
@@ -169,7 +169,7 @@ float CBoxView::percentIncluded( string val ){
 
 
 float CBoxView::swellAnimation( string val ){
-    string strBoxSize = m_dataPool->getDataPoolAnimation()[val + "_boxSize"];
+    string strBoxSize = m_dataPool->getDataPool()[val + "_boxSize"].value;
     int boxSize = stringToInt( strBoxSize );
 
     return (boxSize/10) * cos(ofGetElapsedTimef()*15);

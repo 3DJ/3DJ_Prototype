@@ -12,9 +12,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <map>
 using namespace std;
 
 namespace Common{
+
+    // u can add member in the structure.
+    struct SEntity{
+        bool isSaved;
+        string value;        
+    };
+    typedef map<string, SEntity> mapEntity;
 
     float stringToFloat( string val );
 

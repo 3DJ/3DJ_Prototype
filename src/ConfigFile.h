@@ -17,7 +17,6 @@ using namespace std;
 using namespace Common;
 
 class CConfigFile{
-    typedef map<string, string> mapEntity;
 public:
     bool loadFromFile( string filePath, mapEntity& mapDataPool );
     bool saveToFile( string filePath, mapEntity& mapDataPool);

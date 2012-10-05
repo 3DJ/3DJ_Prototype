@@ -29,21 +29,16 @@ CBoxController::CBoxController(CDataPoolSimple* dataPool):IController(dataPool){
 
     for ( vector<string>::iterator it = m_boxName.begin(); it != m_boxName.end(); it++)
     {
-        SBoxInfo boxInfo;
-        int index = m_dataPool->findIndexInVector( (*it) + "_centerX" );
-        boxInfo.m_centerX = &(m_dataPool->getVector()[index]->second);
-
-        index = m_dataPool->findIndexInVector((*it) + "_centerY");
-        boxInfo.m_centerY = &(m_dataPool->getVector()[index]->second);
-
-        index = m_dataPool->findIndexInVector((*it) + "_centerZ");
-        boxInfo.m_centerZ = &(m_dataPool->getVector()[index]->second);
-
-        index = m_dataPool->findIndexInVector((*it) + "_boxSize");
-        boxInfo.m_boxSize = &(m_dataPool->getVector()[index]->second);
-
-        index = m_dataPool->findIndexInVector( (*it) + "_pointsInArea");
-        boxInfo.m_pointsInArea = &(m_dataPool->getVector()[index]->second);
+        SBoxInfo boxInfo;        
+        boxInfo.m_centerX = m_dataPool->findValueRefInVector( (*it) + "_centerX" );
+        
+        boxInfo.m_centerY = m_dataPool->findValueRefInVector( (*it) + "_centerY" );
+        
+        boxInfo.m_centerZ = m_dataPool->findValueRefInVector( (*it) + "_centerZ" );
+        
+        boxInfo.m_boxSize = m_dataPool->findValueRefInVector( (*it) + "_boxSize" );
+        
+        boxInfo.m_pointsInArea = m_dataPool->findValueRefInVector( (*it) + "_pointsInArea" );
 
         m_boxInfo.push_back( boxInfo );
     }
