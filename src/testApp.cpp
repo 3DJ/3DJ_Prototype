@@ -16,8 +16,8 @@ void testApp::setup() {
 
     //g_world = new World(); // world controls all buttons and sound
 
-    CDataPoolSimple* dataPool = &CDataPoolSimple::getInstance();    
-    
+    CDataPoolSimple* dataPool = &CDataPoolSimple::getInstance();
+
     // init world
     g_world = &CWorld::getInstance();
     IController* iController = new CBoxController( dataPool);
@@ -46,7 +46,6 @@ void testApp::update() {
 void testApp::draw() {
 	ofEnableLighting();
 	ofSetColor(255, 255, 255);
-
 
     //easyCam.begin();
     g_world->draw();

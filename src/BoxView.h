@@ -13,8 +13,10 @@
 #include "ofMain.h"
 #include "DataPool.h"
 #include "Interface.h"
+#include "Common.h"
 using namespace DataPool;
 using namespace Interface;
+using namespace Common;
 
 class CBoxView: public IView{
     struct SBoxInfo{
@@ -86,34 +88,6 @@ public:
         m_boxInfo.push_back( boxInfo );
     }
     bool init();
-
-    float stringToFloat( string val )
-    {
-        return atof( val.c_str());
-    }
-
-    string floatToString( float f )
-    {
-        string str;
-        str.resize(100);
-        // to do: use sprintf_s.
-        sprintf( (char *)str.c_str(), "%f", f );
-        return str;
-    }
-
-    int stringToInt( string val)
-    {
-        return atoi( val.c_str());
-    }
-
-    string intToString( int i)
-    {
-        string str;
-        str.resize(100);
-        // to do: use sprintf_s.
-        sprintf( (char *)str.c_str(), "%d", i );
-        return str;
-    }
 
     void render( vector<SBoxInfo>::iterator it );
     bool isCurrentlyHit( string val );

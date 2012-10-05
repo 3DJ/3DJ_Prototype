@@ -52,7 +52,9 @@ namespace nsWorld{
             m_equalizerView->soundUpdate();
             m_sonicOcean->soundUpdate();
 
-            m_controller->init( );
+            if ( !m_controller->init( ) ) {
+                return false;
+            }
 
             return true;
         }

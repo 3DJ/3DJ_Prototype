@@ -7,7 +7,6 @@
 //
 
 #include "BoxView.h"
-
 #include "Log.h"
 
 bool CBoxView::init( )

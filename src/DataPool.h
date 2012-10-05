@@ -15,6 +15,8 @@
 #include <vector>
 using namespace std;
 
+#include "ofxXmlSettings.h"
+
 namespace DataPool{
 
     typedef map<string, string> mapWorld;
@@ -84,17 +86,19 @@ namespace DataPool{
         CDataPoolSimple(){ init(); }
         CDataPoolSimple(const CDataPoolSimple&);
         CDataPoolSimple& operator=(const CDataPoolSimple&);
-        // TODO later
-        // initBy3DJFile();
+        //
+        bool loadFromFile( string filePath );
+        bool saveToFile( string filePath );
         bool initEntities();
         bool initAnimations();
         bool initEntity( string key, string centerX, string centerY,
             string centerZ, string type, string soundName);
         bool initAnimation( string key );
 
-        vector<mapEntity::iterator> vectorAllData;
-        mapEntity mapDataPool;
-        mapEntity mapDataPoolAnimation;
+        ofxXmlSettings m_ofxXmlFile;
+        vector<mapEntity::iterator> m_vectorAllData;
+        mapEntity m_mapDataPool;
+        mapEntity m_mapDataPoolAnimation;
 
     };
 };

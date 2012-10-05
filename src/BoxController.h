@@ -14,8 +14,10 @@
 #include "KinectData.h"
 #include "DataPool.h"
 #include "Interface.h"
+#include "Common.h"
 using namespace DataPool;
 using namespace Interface;
+using namespace Common;
 
 class CBoxController: public IController{
 public:
@@ -62,34 +64,6 @@ public:
 
     virtual ~CBoxController(){
         if(m_pointView) delete m_pointView;
-    }
-
-    float stringToFloat( string val )
-    {
-        return atof( val.c_str());
-    }
-
-    string floatToString( float f )
-    {
-        string str;
-        str.resize(100);
-        // to do: use sprintf_s.
-        sprintf( (char *)str.c_str(), "%f", f );
-        return str;
-    }
-
-    int stringToInt( string val)
-    {
-        return atoi( val.c_str());
-    }
-
-    string intToString( int i)
-    {
-        string str;
-        str.resize(100);        
-        // to do: use sprintf_s.
-        sprintf( (char *)str.c_str(), "%d", i );
-        return str;
     }
 
     struct SBoxInfo{

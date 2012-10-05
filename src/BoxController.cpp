@@ -44,8 +44,6 @@ bool CBoxController::init()
                     XYZ.y = (XYZ.y - h/2) * 2;
                     if (XYZ.z > 0)
                     {
-
-
                         if( ((XYZ.x > centerX - size/2) && (XYZ.y > centerY - size/2) && (XYZ.z > centerZ - size))
                             &&(XYZ.x < centerX + size/2) && (XYZ.y < centerY + size/2) && (XYZ.z < centerZ + size)){
                                 int pointsInArea = stringToInt( *(it->m_pointsInArea) );
