@@ -15,7 +15,8 @@ namespace Interface{
             m_dataPool = dataPool;
         }
         virtual bool init() = 0;
-
+                
+        CDataPoolSimple* m_dataPool;
 //     protected:
 //         bool addFuncToMap( func f, vector<string> params ){
 //             try{
@@ -43,7 +44,6 @@ namespace Interface{
 // 
 //         }
 
-        CDataPoolSimple* m_dataPool;
         // todo: Change it to unordered_multimap(since C++ 11)
 //      multimap< func, vector<string>> mapUpdateFunctions;
     };

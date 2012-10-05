@@ -2,7 +2,7 @@
 //  CBoxButton.cpp
 //  Kinect_3DJ
 //
-//  Created by LJ on 1/10/12.
+//  Created by LJ on 10/1/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 using namespace std;
 
 #include "ofxXmlSettings.h"
+#include "ConfigFile.h"
 
 namespace DataPool{
 
@@ -95,7 +96,7 @@ namespace DataPool{
             string centerZ, string type, string soundName);
         bool initAnimation( string key );
 
-        ofxXmlSettings m_ofxXmlFile;
+        CConfigFile m_configFile;
         vector<mapEntity::iterator> m_vectorAllData;
         mapEntity m_mapDataPool;
         mapEntity m_mapDataPoolAnimation;

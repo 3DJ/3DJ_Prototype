@@ -25,68 +25,8 @@ class CBoxView: public IView{
     };
 
 public:
-    CBoxView(CDataPoolSimple* DataPool): IView(DataPool){
-        SBoxInfo boxInfo;
-        boxInfo.name = "world_sample_a1";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
+    CBoxView(CDataPoolSimple* DataPool);
 
-        boxInfo.name = "world_sample_a2";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_a3";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_a4";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_b1";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_b2";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_b3";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_b4";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_c1";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_c2";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_c3";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-
-        boxInfo.name = "world_sample_c4";
-        boxInfo.soundPlayer = new ofSoundPlayer;
-        boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"] );
-        m_boxInfo.push_back( boxInfo );
-    }
     bool init();
 
     void render( vector<SBoxInfo>::iterator it );

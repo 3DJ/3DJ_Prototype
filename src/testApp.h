@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "CWorld.h"
-using namespace nsWorld;
+using namespace World;
 // uncomment this to read from two kinects simultaneously
 //#define USE_TWO_KINECTS
 

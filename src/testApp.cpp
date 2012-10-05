@@ -159,6 +159,8 @@ void testApp::windowResized(int w, int h)
 //Clean up TestApp
 void testApp::cleanUp()
 {
-    if(g_world) delete g_world;
+    if(g_world) {
+        g_world->unInit();        
+    }
     if( fs ) fs.close();
 }
