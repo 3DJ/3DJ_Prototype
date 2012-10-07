@@ -131,7 +131,7 @@ bool CBoxController::init()
         }
         
         m_pointsInArea = 0;
-        m_pointView->uploadDataToVbo();
+        //m_pointView->uploadDataToVbo();
         m_pointView->drawParticles();
         m_pointView->clearData();
     }

@@ -13,62 +13,62 @@ CBoxView::CBoxView(CDataPoolSimple* DataPool): IView(DataPool){
     SBoxInfo boxInfo;
     boxInfo.name = "world_sample_a1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_a4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_b4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value);
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c1";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c2";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c3";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 
     boxInfo.name = "world_sample_c4";
     boxInfo.soundPlayer = new ofSoundPlayer;
-    boxInfo.soundPlayer->loadSound( m_dataPool->getDataPool()[boxInfo.name + "_soundName"].value );
+    boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
     m_boxInfo.push_back( boxInfo );
 }
 
@@ -92,7 +92,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
     string strAlpha = *m_dataPool->findValueRef(val + "_alphaVal");
     string strComplexor = "0";
     if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
-        strComplexor = *m_dataPool->findValueRef( "world_complexor");
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
     }
 
     float centerX = stringToFloat( strCenterX);
@@ -104,7 +104,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
     float green = stringToFloat( strGreen );
     float blue = stringToFloat( strBlue );
     float alpha = stringToFloat( strAlpha );
-    float complexor = stringToFloat( strComplexor);
+    float complexor = stringToFloat( strComplexor);    
 
     if ( isCurrentlyHit( val )) {
         ofPushMatrix();
@@ -153,7 +153,11 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
 
 bool CBoxView::isCurrentlyHit( string val ){
 //    fs<<"boxView->world_sample_b1_pointsInArea:"<<m_dataPool->getDataPool()["world_sample_b1_pointsInArea"]<<endl;
-    string hitState = m_dataPool->getDataPool()[val + "_isHit"].value;
+    string hitState = "0";
+    if ( m_dataPool->findValueRef( val + "_isHit") != 0 )
+    {
+        hitState = *m_dataPool->findValueRef( val + "_isHit");
+    }    
     int isHit = stringToInt( hitState );
     if ( isHit == 1 ){
         return true;
@@ -164,8 +168,8 @@ bool CBoxView::isCurrentlyHit( string val ){
 }
 
 float CBoxView::percentIncluded( string val ){
-    string strPointsInArea = m_dataPool->getDataPool()[val + "_pointsInArea"].value;
-    string strpointThreshold = m_dataPool->getDataPool()[val + "_pointThreshold"].value;
+    string strPointsInArea = *m_dataPool->findValueRef( val + "_pointsInArea" );
+    string strpointThreshold = *m_dataPool->findValueRef( val + "_pointThreshold" );
     int pointsInArea = stringToInt( strPointsInArea );
     int pointThreshold = stringToInt( strpointThreshold );
 
@@ -174,7 +178,7 @@ float CBoxView::percentIncluded( string val ){
 
 
 float CBoxView::swellAnimation( string val ){
-    string strBoxSize = m_dataPool->getDataPool()[val + "_boxSize"].value;
+    string strBoxSize = *m_dataPool->findValueRef( val + "_boxSize");
     int boxSize = stringToInt( strBoxSize );
 
     return (boxSize/10) * cos(ofGetElapsedTimef()*15);

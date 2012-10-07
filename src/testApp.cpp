@@ -38,6 +38,7 @@ void testApp::setup() {
 void testApp::update() {
 
     g_world->update();
+
 	ofSoundUpdate();
     //g_world->update(ofGetElapsedTimef());
 }
@@ -160,7 +161,7 @@ void testApp::windowResized(int w, int h)
 void testApp::cleanUp()
 {
     if(g_world) {
-        g_world->unInit();        
+        g_world->unInit();
     }
     if( fs ) fs.close();
 }

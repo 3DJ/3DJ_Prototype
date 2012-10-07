@@ -25,7 +25,7 @@ class CBoxView: public IView{
     };
 
 public:
-    CBoxView(CDataPoolSimple* DataPool);
+    CBoxView(CDataPoolSimple* DataPool);    
 
     bool init();
 
