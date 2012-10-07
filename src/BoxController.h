@@ -10,6 +10,8 @@
 #ifndef Kinect_3DJ_BoxController_h
 #define Kinect_3DJ_BoxController_h
 
+#include <math.h>
+
 #include "PointView.h"
 #include "KinectData.h"
 #include "DataPool.h"
@@ -30,16 +32,21 @@ public:
     }
 
     struct SBoxInfo{
-        string* m_centerX;
-        string* m_centerY;
-        string* m_centerZ;
-        string* m_boxSize;
-        string* m_pointsInArea;
+        string name;
+        string* centerX;
+        string* centerY;
+        string* centerZ;
+        string* boxSize;
+        string* threshold;
     };
     vector<string> m_boxName;
     vector<SBoxInfo> m_boxInfo;
     CPointView * m_pointView;
     CKinectData m_oniKinect;
+    int m_pointsInArea;
+    
+    // this is used to compute the complexor which you hand moves to.
+    float m_frontPosition;
 };
 
 #endif

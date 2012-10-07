@@ -29,16 +29,19 @@ CBoxController::CBoxController(CDataPoolSimple* dataPool):IController(dataPool){
 
     for ( vector<string>::iterator it = m_boxName.begin(); it != m_boxName.end(); it++)
     {
-        SBoxInfo boxInfo;        
-        boxInfo.m_centerX = m_dataPool->findValueRefInVector( (*it) + "_centerX" );
+        SBoxInfo boxInfo;   
+
+        boxInfo.name = (*it);
+
+        boxInfo.centerX = m_dataPool->findValueRef( (*it) + "_centerX" );
         
-        boxInfo.m_centerY = m_dataPool->findValueRefInVector( (*it) + "_centerY" );
+        boxInfo.centerY = m_dataPool->findValueRef( (*it) + "_centerY" );
         
-        boxInfo.m_centerZ = m_dataPool->findValueRefInVector( (*it) + "_centerZ" );
+        boxInfo.centerZ = m_dataPool->findValueRef( (*it) + "_centerZ" );
         
-        boxInfo.m_boxSize = m_dataPool->findValueRefInVector( (*it) + "_boxSize" );
+        boxInfo.boxSize = m_dataPool->findValueRef( (*it) + "_boxSize" );
         
-        boxInfo.m_pointsInArea = m_dataPool->findValueRefInVector( (*it) + "_pointsInArea" );
+        boxInfo.threshold = m_dataPool->findValueRef( (*it) + "_threshold" );
 
         m_boxInfo.push_back( boxInfo );
     }
@@ -55,40 +58,79 @@ bool CBoxController::init()
     // ofTranslate(0,0,1000);            // Move back into Camera View
     ofTranslate(3 ,3, 3 *-800 + 1000);
     ofScale(3,3,3);
-
+    
     if(m_oniKinect.m_isTracking)
-    {
+    {        
         int w = m_oniKinect.m_recordUser.getWidth();
-        int h = m_oniKinect.m_recordUser.getHeight();
+        int h = m_oniKinect.m_recordUser.getHeight();                
+
+        int step = 5;
 
         for ( vector<SBoxInfo>::iterator it = m_boxInfo.begin(); it != m_boxInfo.end(); it++ )
-        {
-            int centerX = stringToInt( *(it->m_centerX));
-            int centerY = stringToInt( *(it->m_centerY));
-            int centerZ = stringToInt( *(it->m_centerZ));
-            int size = stringToInt( *(it->m_boxSize));
+        {                        
+            int threshold = stringToInt( *(it->threshold) );
+            int centerX = stringToInt( *(it->centerX));
+            int centerY = stringToInt( *(it->centerY));
+            int centerZ = stringToInt( *(it->centerZ));
+            int size = stringToInt( *(it->boxSize));
+            
+            int startW = (centerX - size/2)/2 + w/2;
+            int endW = (centerX + size/2)/2 + w/2;
+            int startH = (centerY - size/2)/2 + h/2;
+            int endH = (centerY + size/2)/2 + h/2;
 
-            int step = 5;
-            for(int y = 0; y < h; y += step) {
-                for(int x = 0; x < w; x += step) {
-                    ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
-                    m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+            for(int y = startH; y < endH; y += step) {
+                for(int x = startW; x < endW; x += step) {
+                    ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);                    
                     //fs<<"x:"<<XYZ.x<<"y:"<<XYZ.y<<"z:"<<XYZ.z<<endl;
                     XYZ.x = (XYZ.x - w/2) * 2;
-                    XYZ.y = (XYZ.y - h/2) * 2;
-                    if (XYZ.z > 0)
-                    {
+                    XYZ.y = (XYZ.y - h/2) * 2;           
+                    
+
+                    if (XYZ.z > 0 )
+                    {                                     
+                        //cout<<"x:"<<XYZ.x<<"y:"<<XYZ.y<<"z:"<<XYZ.z<<endl;
                         if( ((XYZ.x > centerX - size/2) && (XYZ.y > centerY - size/2) && (XYZ.z > centerZ - size))
-                            &&(XYZ.x < centerX + size/2) && (XYZ.y < centerY + size/2) && (XYZ.z < centerZ + size)){
-                                int pointsInArea = stringToInt( *(it->m_pointsInArea) );
-                                pointsInArea++;
-                                *(it->m_pointsInArea) = intToString( pointsInArea );
+                            &&(XYZ.x < centerX + size/2) && (XYZ.y < centerY + size/2) && (XYZ.z < centerZ + size)){                                
+                                m_pointsInArea++;     
+                                if ( m_pointsInArea > threshold )
+                                {
+                                    m_dataPool->setValue( it->name + "_isHit", "1");
+                                }
                         }
+                        m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
                     }
                 }
             }
         }
 
+        int points = 0;
+        for(int y = 40; y > 0; y -= step) {
+            for(int x = 0; x < w; x += step) {
+                ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
+                if ( XYZ.z > 0)
+                {
+                    points++;
+                    if ( points > 5 && abs(m_frontPosition - XYZ.x) > 50 ){
+                        if ( m_frontPosition == 0)
+                        {
+                            m_frontPosition = XYZ.x;
+                        }
+                        
+                        m_dataPool->setValue( "world_complexor", floatToString( XYZ.x - m_frontPosition ));
+                    }
+                    break;
+                }
+            }
+        }
+
+        if ( points == 0 )
+        {
+            m_frontPosition = 0;
+            m_dataPool->setValue( "world_complexor", "0");
+        }
+        
+        m_pointsInArea = 0;
         m_pointView->uploadDataToVbo();
         m_pointView->drawParticles();
         m_pointView->clearData();

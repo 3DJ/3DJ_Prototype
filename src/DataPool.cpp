@@ -173,6 +173,7 @@ bool CDataPoolSimple::initAnimation( string key )
     SEntity entity;
     entity.isSaved = false;
 
+    string boxSize = "250", redVal = "255",  greenVal = "255",  blueVal = "255",  alphaVal = "30";
     string speed    = "1.0";
     string volume   = "1.0";
     string pan      = "0";
@@ -182,6 +183,17 @@ bool CDataPoolSimple::initAnimation( string key )
     string threshold = "2";
 
     try{
+        entity.value = boxSize;
+        m_mapDataPool[key + "_boxSize"] = entity;
+        entity.value = redVal;
+        m_mapDataPool[key + "_redVal"]  = entity;
+        entity.value = greenVal;
+        m_mapDataPool[key + "_greenVal"]= entity;
+        entity.value = blueVal;
+        m_mapDataPool[key + "_blueVal"] = entity;
+        entity.value = alphaVal;
+        m_mapDataPool[key + "_alphaVal"]= entity;
+
         entity.value = speed;
         m_mapDataPool[key + "_speed"]   = entity;
         entity.value = volume;
@@ -260,10 +272,17 @@ int CDataPoolSimple::findIndexInVector( string val )
     return -1;
 }
 
-string* CDataPoolSimple::findValueRefInVector( string val)
+string* CDataPoolSimple::findValueRef( string val)
 {
-    int index = findIndexInVector( val );
-    return (&(m_vectorRefEntity[index]->second.value));
+    mapEntity::iterator it = m_mapDataPool.find( val );
+
+    if ( it != m_mapDataPool.end() ){      
+        return &(it->second.value);
+    }
+
+    return 0;
+    //     int index = findIndexInVector( val );
+    //     return (&(m_vectorRefEntity[index]->second.value));
 }
 
 SEntity* CDataPoolSimple::findEntityRefInVector( string val )

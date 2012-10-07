@@ -82,23 +82,29 @@ bool CBoxView::init( ){
 
 void CBoxView::render( vector<SBoxInfo>::iterator it ){
     string val = it->name;
-    string strCenterX = m_dataPool->getDataPool()[val + "_centerX"].value;
-    string strCenterY = m_dataPool->getDataPool()[val + "_centerY"].value;
-    string strCenterZ = m_dataPool->getDataPool()[val + "_centerZ"].value;
-    string strSize = m_dataPool->getDataPool()[val + "_boxSize"].value;
-    string strRed = m_dataPool->getDataPool()[val + "_redVal"].value;
-    string strGreen = m_dataPool->getDataPool()[val + "_greenVal"].value;
-    string strBlue = m_dataPool->getDataPool()[val + "_blueVal"].value;
-    string strAlpha = m_dataPool->getDataPool()[val + "_alphaVal"].value;
+    string strCenterX = *m_dataPool->findValueRef(val + "_centerX");
+    string strCenterY = *m_dataPool->findValueRef(val + "_centerY");
+    string strCenterZ = *m_dataPool->findValueRef(val + "_centerZ");
+    string strSize = *m_dataPool->findValueRef(val + "_boxSize");
+    string strRed = *m_dataPool->findValueRef(val + "_redVal");
+    string strGreen = *m_dataPool->findValueRef(val + "_greenVal");
+    string strBlue = *m_dataPool->findValueRef(val + "_blueVal");
+    string strAlpha = *m_dataPool->findValueRef(val + "_alphaVal");
+    string strComplexor = "0";
+    if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");
+    }
 
     float centerX = stringToFloat( strCenterX);
     float centerY = stringToFloat( strCenterY);
     float centerZ = stringToFloat( strCenterZ);
     int boxSize = stringToInt( strSize);
+    boxSize = 200;
     float red = stringToFloat( strRed );
     float green = stringToFloat( strGreen );
     float blue = stringToFloat( strBlue );
     float alpha = stringToFloat( strAlpha );
+    float complexor = stringToFloat( strComplexor);
 
     if ( isCurrentlyHit( val )) {
         ofPushMatrix();
@@ -129,10 +135,10 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
         //ofEnableBlendMode(OF_BLENDMODE_ADD);
         ofSetColor(red, green, blue, alpha);
         ofFill();
-        ofBox(centerX, centerY, centerZ, boxSize);
+        ofBox(centerX + complexor, centerY, centerZ, boxSize);
         ofNoFill();
         ofSetColor(255,255,255);
-        ofBox(centerX, centerY, centerZ, boxSize);
+        ofBox(centerX + complexor, centerY, centerZ, boxSize);
         ofDisableAlphaBlending();
         ofDisableSmoothing();
         ofPopMatrix();
@@ -142,20 +148,19 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
         it->soundPlayer->setPosition(0);
     }
 
-    m_dataPool->setAnimateValue( val + "_pointsInArea", "0");
+    m_dataPool->setAnimateValue( val + "_isHit", "0");
 }
 
 bool CBoxView::isCurrentlyHit( string val ){
 //    fs<<"boxView->world_sample_b1_pointsInArea:"<<m_dataPool->getDataPool()["world_sample_b1_pointsInArea"]<<endl;
-    string strPointsInArea = m_dataPool->getDataPool()[val + "_pointsInArea"].value;
-    string strThreshold = m_dataPool->getDataPool()[val + "_threshold"].value;
-    int pointsInArea = stringToInt( strPointsInArea );
-    int threshold = stringToInt( strThreshold );
-//     fs<<val+"points:"<<pointsInArea<<endl;
-//     fs<<val+"thres:"<<threshold<<endl;
-//     fs<<(pointsInArea > threshold)<<endl;
-
-    return (pointsInArea > threshold);
+    string hitState = m_dataPool->getDataPool()[val + "_isHit"].value;
+    int isHit = stringToInt( hitState );
+    if ( isHit == 1 ){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 float CBoxView::percentIncluded( string val ){

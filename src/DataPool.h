@@ -41,7 +41,7 @@ class CDataPoolSimple{
         bool setAnimateValue( string key, string val );
         bool setValue( string key, string val );
         // recommend 
-        string* findValueRefInVector( string val);
+        string* findValueRef( string val);
         SEntity* findEntityRefInVector( string val );
         // deprecated
         int findIndexInVector( string val );

@@ -70,6 +70,8 @@
 			<Add directory="..\..\..\addons\ofxOpenNI\src" />
 			<Add directory="..\..\..\addons\ofxOpenNI\include\openni" />
 			<Add directory="..\..\..\addons\ofxOpenNI\include\nite" />
+			<Add directory="..\..\..\addons\ofxXmlSettings\libs" />
+			<Add directory="..\..\..\addons\ofxXmlSettings\src" />
 		</Compiler>
 		<Linker>
 			<Add library="..\..\..\libs\FreeImage\lib\win_cb\FreeImage.lib" />
@@ -535,10 +537,40 @@
 		<Unit filename="..\..\..\addons\ofxOpenNI\src\ofxUserGenerator.h">
 			<Option virtualFolder="addons\ofxOpenNI\src\" />
 		</Unit>
-		<Unit filename="src\BoxButton.cpp">
+		<Unit filename="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp" />
+		<Unit filename="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h" />
+		<Unit filename="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
+		<Unit filename="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+		<Unit filename="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+		<Unit filename="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+		<Unit filename="src\BoxController.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\BoxButton.h">
+		<Unit filename="src\BoxController.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\BoxView.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\BoxView.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CWorld.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CWorld.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\Common.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\Common.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\DataPool.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\DataPool.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\EQView.cpp">
@@ -547,7 +579,28 @@
 		<Unit filename="src\EQView.h">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\Entity.h">
+		<Unit filename="src\Interface.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\Interface.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\KinectData.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\KinectData.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\Log.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\Log.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\ConfigFile.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\ConfigFile.h">
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src\PointView.cpp">
@@ -562,18 +615,6 @@
 		<Unit filename="src\SonicOcean.h">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\World.cpp">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\World.h">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\KinectData.cpp">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\KinectData.h">
-			<Option virtualFolder="src" />
-		</Unit>		
 		<Unit filename="src\main.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
@@ -581,12 +622,6 @@
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\testApp.h">
-			<Option virtualFolder="src\" />
-		</Unit>
-		<Unit filename="src\ControlBoxButton.h">
-			<Option virtualFolder="src\" />
-		</Unit>
-		<Unit filename="src\ControlBoxButton.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Extensions>
