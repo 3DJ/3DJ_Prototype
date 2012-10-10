@@ -3,3 +3,4 @@ bin/3DJ_debug
 bin/data/sounds
 bin/libs
 obj
+.DS_Store
