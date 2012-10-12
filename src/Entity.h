@@ -13,6 +13,7 @@ typedef enum et {
     ET_None = 0,
     ET_MusicSampleButton,
     ET_NavigationButtons,
+    ET_Creature,
 }EntityType;
 
 //===========================================================
@@ -86,5 +87,25 @@ public:
     string m_songTitle;
 };
 
+//===========================================================
+// Class : CreatureEntity class
+//===========================================================
+
+class CreatureEntity : public CEntity{
+public:
+    CreatureEntity(){};
+    ~CreatureEntity(){};
+    virtual void applyTransforms() = 0;
+    virtual void move() = 0;
+    virtual void kill() = 0;
+    virtual void preRender() = 0;
+    virtual void postRender() = 0;
+    
+    
+    float m_maxSpeed;
+    float m_birth;
+    float m_energy, m_power;
+    ofPoint m_position, m_projectedPos, m_rotation, m_scale;
+};
 
 #endif
