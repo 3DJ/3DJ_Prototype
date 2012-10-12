@@ -18,6 +18,7 @@ public:
     void setup();
 	void update();
     void draw();
+    void exit();
 
     bool m_isTracking, m_isCloud, m_isMasking, m_isFiltering;
     
@@ -27,6 +28,7 @@ public:
     ofxOpenNIContext	m_recordContext;
 	ofxDepthGenerator	m_recordDepth;
 	ofxUserGenerator	m_recordUser;
+    ofxHardwareDriver   m_hardware;
     
 };
 

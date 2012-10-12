@@ -62,14 +62,12 @@ void CStateManager::draw() {
 //--------------------------------------------------------------
 void CStateManager::exit() {
 	//Make changes to hardware before exiting 3DJ. i.e. re-set Kinect angle, etc
+    g_world->m_oniKinect.exit();
 }
 
 //--------------------------------------------------------------
 void CStateManager::keyPressed (int key) {
 	switch (key) {
-		case ' ':
-            stateSwitch();
-			break;
 
 		case'p':
 
@@ -107,12 +105,6 @@ void CStateManager::keyPressed (int key) {
         case 'f':
             ofToggleFullscreen();
             break;
-        case 'u':
-            if(g_world){
-                g_world->m_angle++;  
-                if(g_world->m_angle>30) g_world->m_angle=30;
-            }
-			break;
 
         case 'd':
             if(g_world){

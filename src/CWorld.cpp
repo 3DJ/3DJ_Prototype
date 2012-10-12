@@ -33,13 +33,13 @@ CWorld::CWorld()
     m_green             = 255;
     m_blue              = 255;
     m_alpha             = 30;
-    m_boxSize           = 200;
+    m_boxSize           = 225;
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
     m_boxCenterZ        = 0;
     
     //Row A
-    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,0,0,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
+    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
     addBoxButton(m_a1Button);
     m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BassFills.wav");
     addBoxButton(m_a2Button);
@@ -91,6 +91,9 @@ CWorld::CWorld()
 
 CWorld::~CWorld()
 {
+    
+    m_oniKinect.exit();
+    
     for( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
     {// delete all boxButtons
         delete (*eachBox);
@@ -115,6 +118,7 @@ void CWorld::render()
     ofRotateX(180);
     effectBoxbutton();              // render boxbutton and handle the sound.
     if(m_oniKinect.m_isTracking){ drawDepthPointsAndTestHits();}   // Do both here so we only look up the m_oniKinect data once...
+   
     ofPopMatrix();
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
@@ -126,8 +130,9 @@ void CWorld::render()
    
     m_navigationController->m_navConButtons->render();
    
-    string msg = "Scale : " + ofToString(m_scale,2);
-    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
+//    string msg = "Scale : " + ofToString(m_scale,2);
+//    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
+//    
 }
 
 void CWorld::update(double time_since_last_update)
@@ -156,6 +161,7 @@ void CWorld::drawDepthPointsAndTestHits()
                 XYZ.z -= m_playerDepth;
                 handleCollisions(&XYZ); //check for hits for all buttons
                 m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+                 
             }
 		}
 	}
@@ -163,6 +169,17 @@ void CWorld::drawDepthPointsAndTestHits()
     m_pointView->uploadDataToVbo();
     m_pointView->drawParticles();
     m_pointView->clearData();
+    
+    ofPushMatrix();
+    ofTranslate(-w/2, -h/2, m_playerDepth);
+    m_oniKinect.m_recordUser.draw();
+    ofPopMatrix();
+    
+//    ofxTrackedUser* tracked = m_oniKinect.m_recordUser.getTrackedUser(1);
+//    if(tracked != NULL && tracked->left_lower_arm.found){
+//     
+//    }
+   
 }
 
 
