@@ -37,6 +37,10 @@ CWorld::CWorld()
     m_boxCenterX        = 200;
     m_boxCenterY        = 200;
     m_boxCenterZ        = 0;
+    m_controlBox_r      = 220; //control box buttons
+    m_controlBox_g      = 50;
+    m_controlBox_b      = 50;
+    m_controlBox_a      = 30;
     
     //Row A
     m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
@@ -50,8 +54,8 @@ CWorld::CWorld()
     addBoxButton(m_a4Button);
     
     //Row B
-    m_b1Button = new CBoxButton(500, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
-    addBoxButton(m_b1Button);
+    m_controlButton_1 = new CLoopBoxButton(500, 0, m_boxCenterZ, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"");
+    addBoxButton(m_controlButton_1);
     m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Long.wav");
     addBoxButton(m_b2Button);
     m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Short.wav");
@@ -68,25 +72,18 @@ CWorld::CWorld()
     addBoxButton(m_c3Button);
     m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Pad_01.wav");
     addBoxButton(m_c4Button);
-
-    //Control Boxes
-    m_controlButton_1 = new CLoopBoxButton(1000, 270, m_playerDepth/2, m_boxSize*2,m_red,m_green,m_blue,m_alpha,"");
-    addBoxButton(m_controlButton_1);
-    
     
     setInitialVolume(1.0f);
 
     m_pointView     = new CPointView();
     m_easyCam       = new ofEasyCam;
-    //m_easyCam->setFov(40);
-    //m_easyCam->setTarget(ofVec3f(ofGetWidth()/2,ofGetHeight()/2,0));
 
     m_equalizerView = new CEQView;
     m_sonicOcean    = new CSonicOcean;
 
     m_isRepeat      = false;
     
-    m_navigationController = new CNavigationUIController();
+    m_snakeFish = new SnakeFish();
 }
 
 CWorld::~CWorld()
@@ -95,7 +92,7 @@ CWorld::~CWorld()
     m_oniKinect.exit();
     
     for( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
-    {// delete all boxButtons
+    {
         delete (*eachBox);
     }
 
@@ -103,7 +100,7 @@ CWorld::~CWorld()
     if(m_easyCam) delete m_easyCam;
     if(m_equalizerView) delete m_equalizerView;
     if(m_sonicOcean) delete m_sonicOcean;
-    if(m_navigationController) delete m_navigationController;
+    if(m_snakeFish) delete m_snakeFish;
 }
 
 
@@ -125,25 +122,30 @@ void CWorld::render()
     ofTranslate(0, -1.5*ofGetHeight(), -5000);
     m_sonicOcean->drawEQSonicOcean();//EQ OCEAN
     ofPopMatrix();
+    
+    m_snakeFish->render();      //Draw Creature
+    m_snakeFish->postRender();
+    
     m_easyCam->end();
     //m_equalizerView->drawEQRect();
-   
-    m_navigationController->m_navConButtons->render();
-   
+    
 //    string msg = "Scale : " + ofToString(m_scale,2);
 //    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
-//    
+    
 }
 
 void CWorld::update(double time_since_last_update)
 {
 	//ofBackground(m_background_r, m_background_g, m_background_b);
     //ofBackgroundGradient(ofColor(0), ofColor(25,22,10));
-
+    
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
     m_sonicOcean->soundUpdate();
-    m_navigationController->m_navConButtons->update(time_since_last_update);
+
+    m_snakeFish->preRender();
+    m_snakeFish->move();
+
 }
 
 void CWorld::drawDepthPointsAndTestHits()
@@ -194,7 +196,6 @@ void CWorld::handleCollisions(ofPoint *XYZ)
     {
         (*eachBox)->collisionTest(XYZ); //test Each Box for hits
     }
-    m_navigationController->m_navConButtons->collisionTest(XYZ);
 }
 
 void CWorld::clearButtons()
@@ -217,12 +218,6 @@ void CWorld::setInitialVolume(float volumeLevel)
 void CWorld::setUpTranslation()
 {
     
-    //ofTranslate(0, 0, -500); // center the points a bit
-                      //Rotate around Axis
-
-    //ofTranslate(0,0,500);            // Move back into Camera View
-    //ofTranslate(m_scale ,m_scale, m_scale *-800 + 1000);
-    //ofScale(m_scale,m_scale,m_scale);
 }
 
 void CWorld::effectBoxbutton()

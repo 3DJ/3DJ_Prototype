@@ -212,7 +212,6 @@ dependencies: \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/EQView.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SonicOcean.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CNavigationUIController.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CNavigationControlButtons.h \
+  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SnakeFish.h \
   ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
   ../../../libs/openFrameworks/app/ofAppBaseWindow.h

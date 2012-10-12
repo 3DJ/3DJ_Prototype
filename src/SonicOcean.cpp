@@ -18,7 +18,6 @@ CSonicOcean::CSonicOcean()
 
 	setRows();
 
-
     m_mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 }
 

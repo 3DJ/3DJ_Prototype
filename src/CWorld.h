@@ -15,8 +15,8 @@
 #include "PointView.h"
 #include "EQView.h"
 #include "SonicOcean.h"
-#include "CNavigationUIController.h"
 #include <vector>
+#include "SnakeFish.h"
 
 using namespace std;
 
@@ -57,7 +57,7 @@ public:
     CBoxButton *m_a3Button;
     CBoxButton *m_a4Button;
 
-    CBoxButton *m_b1Button;
+    CBoxButton *m_controlButton_1;    
     CBoxButton *m_b2Button;
     CBoxButton *m_b3Button;
     CBoxButton *m_b4Button;
@@ -66,15 +66,13 @@ public:
     CBoxButton *m_c2Button;
     CBoxButton *m_c3Button;
     CBoxButton *m_c4Button;
-    
-    CBoxButton *m_controlButton_1;
-    
 
     bool m_isRepeat;
     double m_totalTime;
     float m_scale;
     int m_angle;
     int m_red,m_green, m_blue, m_alpha;
+    int m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a;
     int m_background_r, m_background_g, m_background_b;
     int m_boxSize, m_boxCenterX, m_boxCenterY, m_boxCenterZ;
     vector<CBoxButton *> m_boxButtons;
@@ -85,10 +83,10 @@ public:
     CEQView *m_equalizerView;
     CSonicOcean *m_sonicOcean;
     
-    CNavigationUIController *m_navigationController;
-    
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
+    
+    SnakeFish *m_snakeFish;
     
 };
 

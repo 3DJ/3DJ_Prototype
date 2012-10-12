@@ -23,6 +23,8 @@ public:
     void kill();
     void preRender();
     void postRender();
+    float getEnergy();
+    void setPosition(ofPoint pos);
 
     //member vars
     bool m_active;
@@ -35,12 +37,16 @@ public:
     float m_maxSpeed;
     float m_birth;
     float m_energy, m_power;
-    ofPoint m_position, m_projectedPos, m_rotation, m_scale;
+    ofVec3f m_position, m_projectedPos, m_rotation, m_scale;
+    ofMatrix4x4 m_matrix;
+    ofVec2f m_dim;
+    
     
     float m_sF, m_oS, m_oX, m_oY;
     float m_rYA, m_rXA, m_rXF, m_rYF;
     
-    vector<ofPoint *> m_queue;
+    vector<ofVec3f> m_queue;
+    int m_queueLen;
     
 
 };

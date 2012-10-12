@@ -100,12 +100,13 @@ public:
     virtual void kill() = 0;
     virtual void preRender() = 0;
     virtual void postRender() = 0;
-    
+    virtual float getEnergy() = 0;
+    virtual void setPosition(ofPoint pos) = 0;
     
     float m_maxSpeed;
     float m_birth;
     float m_energy, m_power;
-    ofPoint m_position, m_projectedPos, m_rotation, m_scale;
+    ofVec3f m_position, m_projectedPos, m_rotation, m_scale;
 };
 
 #endif
