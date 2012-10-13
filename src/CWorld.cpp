@@ -84,6 +84,7 @@ CWorld::CWorld()
     m_isRepeat      = false;
     
     m_snakeFish = new SnakeFish();
+    m_particles = new Particles();
 }
 
 CWorld::~CWorld()
@@ -101,6 +102,7 @@ CWorld::~CWorld()
     if(m_equalizerView) delete m_equalizerView;
     if(m_sonicOcean) delete m_sonicOcean;
     if(m_snakeFish) delete m_snakeFish;
+    if(m_particles) delete m_particles;
 }
 
 
@@ -125,6 +127,7 @@ void CWorld::render()
     
     m_snakeFish->render();      //Draw Creature
     m_snakeFish->postRender();
+    m_particles->render();
     
     m_easyCam->end();
     //m_equalizerView->drawEQRect();
@@ -145,6 +148,7 @@ void CWorld::update(double time_since_last_update)
 
     m_snakeFish->preRender();
     m_snakeFish->move();
+    m_particles->update();
 
 }
 
@@ -163,7 +167,6 @@ void CWorld::drawDepthPointsAndTestHits()
                 XYZ.z -= m_playerDepth;
                 handleCollisions(&XYZ); //check for hits for all buttons
                 m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
-                 
             }
 		}
 	}

@@ -24,6 +24,7 @@
 		2244D7E31609A3D300BA3E53 /* CalibrationView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2244D7E11609A3D300BA3E53 /* CalibrationView.cpp */; };
 		226259A6160D7C19004CE862 /* CNavigationUIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226259A4160D7C19004CE862 /* CNavigationUIController.cpp */; };
 		226259AD160D8527004CE862 /* CNavigationControlButtons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 226259AB160D8527004CE862 /* CNavigationControlButtons.cpp */; };
+		228FF4401629251600582729 /* Particles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228FF43E1629251600582729 /* Particles.cpp */; };
 		229CEB2916281422007C83EA /* SnakeFish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229CEB2716281422007C83EA /* SnakeFish.cpp */; };
 		22C8302A15DBD985008DBC6C /* BoxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8301F15DBD984008DBC6C /* BoxButton.cpp */; };
 		22C8302B15DBD985008DBC6C /* EQView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22C8302215DBD984008DBC6C /* EQView.cpp */; };
@@ -122,6 +123,8 @@
 		226259A5160D7C19004CE862 /* CNavigationUIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNavigationUIController.h; sourceTree = "<group>"; };
 		226259AB160D8527004CE862 /* CNavigationControlButtons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CNavigationControlButtons.cpp; sourceTree = "<group>"; };
 		226259AC160D8527004CE862 /* CNavigationControlButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNavigationControlButtons.h; sourceTree = "<group>"; };
+		228FF43E1629251600582729 /* Particles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particles.cpp; sourceTree = "<group>"; };
+		228FF43F1629251600582729 /* Particles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particles.h; sourceTree = "<group>"; };
 		229CEB2716281422007C83EA /* SnakeFish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SnakeFish.cpp; sourceTree = "<group>"; };
 		229CEB2816281422007C83EA /* SnakeFish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnakeFish.h; sourceTree = "<group>"; };
 		22C8301F15DBD984008DBC6C /* BoxButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxButton.cpp; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 				22C8302315DBD984008DBC6C /* EQView.h */,
 				22C8302615DBD985008DBC6C /* SonicOcean.cpp */,
 				22C8302715DBD985008DBC6C /* SonicOcean.h */,
+				228FF43E1629251600582729 /* Particles.cpp */,
+				228FF43F1629251600582729 /* Particles.h */,
 			);
 			name = EQViews;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 				226259A6160D7C19004CE862 /* CNavigationUIController.cpp in Sources */,
 				226259AD160D8527004CE862 /* CNavigationControlButtons.cpp in Sources */,
 				229CEB2916281422007C83EA /* SnakeFish.cpp in Sources */,
+				228FF4401629251600582729 /* Particles.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

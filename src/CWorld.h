@@ -17,6 +17,7 @@
 #include "SonicOcean.h"
 #include <vector>
 #include "SnakeFish.h"
+#include "Particles.h"
 
 using namespace std;
 
@@ -82,11 +83,11 @@ public:
     ofEasyCam *m_easyCam;
     CEQView *m_equalizerView;
     CSonicOcean *m_sonicOcean;
+    SnakeFish *m_snakeFish;
+    Particles *m_particles;
     
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
-    
-    SnakeFish *m_snakeFish;
     
 };
 

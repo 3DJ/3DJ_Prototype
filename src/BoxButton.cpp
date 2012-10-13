@@ -160,7 +160,7 @@ void CBoxButton::setDefaultMode()
 	ofFill();
 	ofBox(m_x, m_y, m_z, m_size);
 	ofNoFill();
-	ofSetColor(255,255,255);
+	ofSetColor(255,255,255,51);
 	ofBox(m_x, m_y, m_z, m_size);
 	ofDisableAlphaBlending();
 	ofDisableSmoothing();
@@ -179,7 +179,7 @@ void CBoxButton::setHitMode()
 	ofFill();
 	ofBox(m_size + swellAnimation());
 	ofNoFill();
-	ofSetColor(255);
+	ofSetColor(255,51);
 	ofBox(m_size + swellAnimation());
 	ofDisableAlphaBlending();
 	ofDisableSmoothing();

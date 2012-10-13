@@ -213,5 +213,6 @@ dependencies: \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/EQView.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SonicOcean.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SnakeFish.h \
+  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Particles.h \
   ../../../libs/openFrameworks/app/ofAppGlutWindow.h \
   ../../../libs/openFrameworks/app/ofAppBaseWindow.h
