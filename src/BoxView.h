@@ -29,12 +29,17 @@ public:
 
     bool init();
 
+    void animation( vector<SBoxInfo>::iterator it );
     void render( vector<SBoxInfo>::iterator it );
+
+    void drawBox( float red, float green, float blue, float alpha, float centerX, float complexor, float centerY, float centerZ, int boxSize );
+
     bool isCurrentlyHit( string val );
     float percentIncluded( string val );
     float swellAnimation( string val );
 
     vector<SBoxInfo> m_boxInfo;
+    int m_complexor;
 };
 
 #endif

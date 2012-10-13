@@ -11,6 +11,7 @@
 
 CBoxView::CBoxView(CDataPoolSimple* DataPool): IView(DataPool){
     SBoxInfo boxInfo;
+    m_complexor = 0;
     boxInfo.name = "world_sample_a1";
     boxInfo.soundPlayer = new ofSoundPlayer;
     boxInfo.soundPlayer->loadSound( *m_dataPool->findValueRef(boxInfo.name + "_soundName"));
@@ -73,11 +74,89 @@ CBoxView::CBoxView(CDataPoolSimple* DataPool): IView(DataPool){
 }
 
 bool CBoxView::init( ){
-    for ( vector<SBoxInfo>::iterator it = m_boxInfo.begin(); it != m_boxInfo.end(); it++ ){
-        render( it );
+
+    string strComplexor = "0";
+    if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
+    }
+    float complexor = stringToFloat( strComplexor);    
+
+    if ( complexor != 0 || m_complexor/50 != 0)
+    {
+            if ( complexor != 0){
+                m_complexor = complexor;
+            }
+            else{
+                if ( m_complexor >= 0 && m_complexor <= 300 )
+                {
+                    m_complexor = m_complexor - 40;
+                }
+                else if( m_complexor < 0 && m_complexor >= -300 )
+                {
+                    m_complexor = m_complexor + 40;
+                }
+                else if ( m_complexor < -300 ){
+                    m_complexor = m_complexor - 80;
+                }
+                else if ( m_complexor > 300 ){
+                    m_complexor = m_complexor + 80;
+                }
+
+            }
+
+            if ( m_complexor > 2000 || m_complexor < -2000)
+            {
+                m_complexor = 0;
+            }
+
+            for ( vector<SBoxInfo>::iterator it = m_boxInfo.begin(); it != m_boxInfo.end(); it++ ){
+                animation ( it );
+            }        
+    }
+    else
+    {
+        for ( vector<SBoxInfo>::iterator it = m_boxInfo.begin(); it != m_boxInfo.end(); it++ ){
+            render( it );
+        }
+
     }
 
     return true;
+}
+
+void CBoxView::animation( vector<SBoxInfo>::iterator it ){
+    string val = it->name;
+    string strCenterX = *m_dataPool->findValueRef(val + "_centerX");
+    string strCenterY = *m_dataPool->findValueRef(val + "_centerY");
+    string strCenterZ = *m_dataPool->findValueRef(val + "_centerZ");
+    string strSize = *m_dataPool->findValueRef(val + "_boxSize");
+    string strRed = *m_dataPool->findValueRef(val + "_redVal");
+    string strGreen = *m_dataPool->findValueRef(val + "_greenVal");
+    string strBlue = *m_dataPool->findValueRef(val + "_blueVal");
+    string strAlpha = *m_dataPool->findValueRef(val + "_alphaVal");
+    string strComplexor = "0";
+    if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
+    }
+
+    float centerX = stringToFloat( strCenterX);
+    float centerY = stringToFloat( strCenterY);
+    float centerZ = stringToFloat( strCenterZ);
+    int boxSize = stringToInt( strSize);
+    boxSize = 200;
+    float red = stringToFloat( strRed );
+    float green = stringToFloat( strGreen );
+    float blue = stringToFloat( strBlue );
+    float alpha = stringToFloat( strAlpha );
+    float complexor = stringToFloat( strComplexor);    
+
+    drawBox(red, green, blue, alpha , centerX, m_complexor, centerY, centerZ, boxSize);    
+    drawBox(red, green, blue, alpha , centerX, m_complexor - 2000 , centerY, centerZ, boxSize);    
+    drawBox(red, green, blue, alpha , centerX, m_complexor + 2000 , centerY, centerZ, boxSize);    
+
+    it->soundPlayer->setLoop(false);
+    it->soundPlayer->stop();
+    it->soundPlayer->setPosition(0);
 }
 
 void CBoxView::render( vector<SBoxInfo>::iterator it ){
@@ -111,7 +190,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
         ofEnableSmoothing();
         ofEnableAlphaBlending();
         ofEnableBlendMode(OF_BLENDMODE_ADD);
-        ofTranslate(centerX, centerY, centerZ);
+        ofTranslate(centerX + complexor, centerY, centerZ);
         ofSetColor(255, 255, 255, 51+ (204 * percentIncluded( val )));
         //ofSetColor(0, 0, 0);
         ofFill();
@@ -128,20 +207,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
             it->soundPlayer->play();
         }
     } else {
-
-        ofPushMatrix();
-        ofEnableSmoothing();
-        ofEnableAlphaBlending();
-        //ofEnableBlendMode(OF_BLENDMODE_ADD);
-        ofSetColor(red, green, blue, alpha);
-        ofFill();
-        ofBox(centerX + complexor, centerY, centerZ, boxSize);
-        ofNoFill();
-        ofSetColor(255,255,255);
-        ofBox(centerX + complexor, centerY, centerZ, boxSize);
-        ofDisableAlphaBlending();
-        ofDisableSmoothing();
-        ofPopMatrix();
+        drawBox(red, green, blue, alpha , centerX, complexor, centerY, centerZ, boxSize);    
 
         it->soundPlayer->setLoop(false);
         it->soundPlayer->stop();
@@ -182,4 +248,21 @@ float CBoxView::swellAnimation( string val ){
     int boxSize = stringToInt( strBoxSize );
 
     return (boxSize/10) * cos(ofGetElapsedTimef()*15);
+}
+
+void CBoxView::drawBox( float red, float green, float blue, float alpha, float centerX, float complexor, float centerY, float centerZ, int boxSize )
+{
+    ofPushMatrix();
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(red, green, blue, alpha);
+    ofFill();
+    ofBox(centerX + complexor, centerY, centerZ, boxSize);
+    ofNoFill();
+    ofSetColor(255,255,255);
+    ofBox(centerX + complexor, centerY, centerZ, boxSize);
+    ofDisableAlphaBlending();
+    ofDisableSmoothing();
+    ofPopMatrix();
 }

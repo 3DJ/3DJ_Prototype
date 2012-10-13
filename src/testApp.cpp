@@ -161,7 +161,7 @@ void testApp::windowResized(int w, int h)
 void testApp::cleanUp()
 {
     if(g_world) {
-        g_world->unInit();
+        g_world->unInit();        
     }
     if( fs ) fs.close();
 }

@@ -105,21 +105,28 @@ bool CBoxController::init()
         }
 
         int points = 0;
+        static float frontPoint;
         for(int y = 40; y > 0; y -= step) {
             for(int x = 0; x < w; x += step) {
                 ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
                 if ( XYZ.z > 0)
                 {
                     points++;
-                    if ( points > 5 && abs(m_frontPosition - XYZ.x) > 50 ){
+                    int distance = abs(m_frontPosition - XYZ.x);
+                    if ( points > 7 && distance > 80){                       
                         if ( m_frontPosition == 0)
-                        {
+                        {                    
+                            frontPoint = XYZ.x;
                             m_frontPosition = XYZ.x;
                         }
                         
-                        m_dataPool->setValue( "world_complexor", floatToString( XYZ.x - m_frontPosition ));
+                        if ( abs( XYZ.x - frontPoint) < 100 )
+                        {
+                            frontPoint = XYZ.x;
+                            m_dataPool->setValue( "world_complexor", floatToString( XYZ.x - m_frontPosition ));                        
+                        }                                        
                     }
-                    break;
+                    
                 }
             }
         }
