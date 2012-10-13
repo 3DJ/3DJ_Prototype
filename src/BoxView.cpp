@@ -87,11 +87,11 @@ bool CBoxView::init( ){
                 m_complexor = complexor;
             }
             else{
-                if ( m_complexor > 0 && m_complexor < 300 )
+                if ( m_complexor >= 0 && m_complexor <= 300 )
                 {
                     m_complexor = m_complexor - 40;
                 }
-                else if( m_complexor < 0 && m_complexor > -300 )
+                else if( m_complexor < 0 && m_complexor >= -300 )
                 {
                     m_complexor = m_complexor + 40;
                 }

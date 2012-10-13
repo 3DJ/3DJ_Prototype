@@ -113,14 +113,14 @@ bool CBoxController::init()
                 {
                     points++;
                     int distance = abs(m_frontPosition - XYZ.x);
-                    if ( points > 3 ){                       
+                    if ( points > 7 && distance > 80){                       
                         if ( m_frontPosition == 0)
                         {                    
                             frontPoint = XYZ.x;
                             m_frontPosition = XYZ.x;
                         }
                         
-                        // if ( abs( XYZ.x - frontPoint) < 10 )
+                        if ( abs( XYZ.x - frontPoint) < 100 )
                         {
                             frontPoint = XYZ.x;
                             m_dataPool->setValue( "world_complexor", floatToString( XYZ.x - m_frontPosition ));                        
