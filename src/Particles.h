@@ -10,7 +10,7 @@
 #define __openNI_3DJ__Particles__
 #include "ofMain.h"
 
-#define NUM_BILLBOARDS 5000
+#define NUM_BILLBOARDS 1000
 
 class Particles : public ofBaseApp {
 
@@ -22,10 +22,10 @@ public:
 
     float billboardSizeTarget[NUM_BILLBOARDS];
     
-    ofShader billboardShader;
-    ofImage texture;
+    ofShader  billboardShader;
+    ofImage   texture;
     ofVboMesh billboards;
-    ofVec3f billboardVels[NUM_BILLBOARDS];
+    ofVec3f   billboardVels[NUM_BILLBOARDS];
 
 };
 

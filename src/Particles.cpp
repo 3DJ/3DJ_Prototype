@@ -30,9 +30,6 @@ Particles::Particles()
     billboards.setUsage( GL_DYNAMIC_DRAW );
     billboards.setMode(OF_PRIMITIVE_POINTS);
     
-    // load the bilboard shader
-    // this is used to change the
-    // size of the particle
     billboardShader.load("Billboard");
     
     // we need to disable ARB textures in order to use normalized texcoords

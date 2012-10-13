@@ -14,7 +14,6 @@
 #include "KinectData.h"
 #include "PointView.h"
 #include "EQView.h"
-#include "SonicOcean.h"
 #include <vector>
 #include "SnakeFish.h"
 #include "Particles.h"
@@ -82,7 +81,6 @@ public:
     CPointView * m_pointView;
     ofEasyCam *m_easyCam;
     CEQView *m_equalizerView;
-    CSonicOcean *m_sonicOcean;
     SnakeFish *m_snakeFish;
     Particles *m_particles;
     

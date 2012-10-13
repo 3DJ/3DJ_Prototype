@@ -79,7 +79,6 @@ CWorld::CWorld()
     m_easyCam       = new ofEasyCam;
 
     m_equalizerView = new CEQView;
-    m_sonicOcean    = new CSonicOcean;
 
     m_isRepeat      = false;
     
@@ -100,7 +99,6 @@ CWorld::~CWorld()
     if(m_pointView) delete m_pointView;
     if(m_easyCam) delete m_easyCam;
     if(m_equalizerView) delete m_equalizerView;
-    if(m_sonicOcean) delete m_sonicOcean;
     if(m_snakeFish) delete m_snakeFish;
     if(m_particles) delete m_particles;
 }
@@ -122,14 +120,17 @@ void CWorld::render()
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
     ofTranslate(0, -1.5*ofGetHeight(), -5000);
-    m_sonicOcean->drawEQSonicOcean();//EQ OCEAN
     ofPopMatrix();
     
     m_snakeFish->render();      //Draw Creature
     m_snakeFish->postRender();
-    m_particles->render();
     
     m_easyCam->end();
+    
+    ofPushMatrix();
+    ofTranslate(ofGetWindowWidth()/2, + ofGetWindowHeight());
+    m_particles->render();
+    ofPopMatrix();
     //m_equalizerView->drawEQRect();
     
 //    string msg = "Scale : " + ofToString(m_scale,2);
@@ -144,7 +145,6 @@ void CWorld::update(double time_since_last_update)
     
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
-    m_sonicOcean->soundUpdate();
 
     m_snakeFish->preRender();
     m_snakeFish->move();
@@ -156,7 +156,7 @@ void CWorld::drawDepthPointsAndTestHits()
 {
     int w = m_oniKinect.m_recordUser.getWidth();
 	int h = m_oniKinect.m_recordUser.getHeight();
-    
+    int index = 0;
 	int step = 5;
 	for(int y = 0; y < h; y += step) {
 		for(int x = 0; x < w; x += step) {
@@ -166,7 +166,8 @@ void CWorld::drawDepthPointsAndTestHits()
                 XYZ.y = (XYZ.y - h/2)*m_scale;
                 XYZ.z -= m_playerDepth;
                 handleCollisions(&XYZ); //check for hits for all buttons
-                m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+                index++;
+                if (index%2) m_pointView->addPoint(XYZ.x + ofRandom(-5,5), XYZ.y + ofRandom(-5,5), XYZ.z + ofRandom(-5,5));
             }
 		}
 	}
@@ -179,12 +180,7 @@ void CWorld::drawDepthPointsAndTestHits()
     ofTranslate(-w/2, -h/2, m_playerDepth);
     //m_oniKinect.m_recordUser.draw(); //Draw 2D Skeletin on screen...
     ofPopMatrix();
-    
-//    ofxTrackedUser* tracked = m_oniKinect.m_recordUser.getTrackedUser(1);
-//    if(tracked != NULL && tracked->left_lower_arm.found){
-//     
-//    }
-   
+       
 }
 
 

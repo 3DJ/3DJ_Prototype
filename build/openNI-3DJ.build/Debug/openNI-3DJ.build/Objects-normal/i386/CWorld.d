@@ -163,6 +163,5 @@ dependencies: \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxOpenNI/include/libusb/libusb.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/EQView.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SonicOcean.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/SnakeFish.h \
   /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Particles.h

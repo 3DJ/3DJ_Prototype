@@ -165,6 +165,7 @@ void CBoxButton::setDefaultMode()
 	ofDisableAlphaBlending();
 	ofDisableSmoothing();
 	ofPopMatrix();
+
 }
 
 void CBoxButton::setHitMode()
