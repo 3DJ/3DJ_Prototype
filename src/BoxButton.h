@@ -42,6 +42,7 @@ private:
 
 	void setHitMode();
 	void setDefaultMode();
+    
 };
 
 #endif

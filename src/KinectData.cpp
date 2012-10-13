@@ -39,8 +39,6 @@ void CKinectData::update()
     m_recordContext.update();
     m_isTracking = m_recordUser.getNumberOfTrackedUsers() > 0;
     m_recordUser.update();
-
-    
 }
 
 void CKinectData::draw()

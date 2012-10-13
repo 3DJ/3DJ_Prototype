@@ -174,7 +174,7 @@ void CWorld::drawDepthPointsAndTestHits()
     
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);
-    m_oniKinect.m_recordUser.draw();
+    //m_oniKinect.m_recordUser.draw(); //Draw 2D Skeletin on screen...
     ofPopMatrix();
     
 //    ofxTrackedUser* tracked = m_oniKinect.m_recordUser.getTrackedUser(1);

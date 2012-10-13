@@ -43,7 +43,29 @@ void CBoxButton::render()  //Draw boxes and set color
     ofSetLineWidth(2); 
     if ( m_isRepeat && !isCurrentlyHit() )
     {// make it stop on next hit.
-        m_toBeStop = true;     
+        m_toBeStop = true;
+        
+        ofPushMatrix();
+        ofTranslate(m_x, m_y,m_z);
+        ofRotateY(ofGetElapsedTimef()* 20);
+        
+        
+        ofPushMatrix(); //Draw inside Box to indicate its looping
+        ofSetColor(0,220,0,200);
+        ofFill();
+        ofSetSphereResolution(2);
+        ofSphere(0,0,0, m_size * 0.25);
+        ofPopMatrix();
+        
+        ofPushMatrix();
+        ofSetColor(20,50,20);
+        ofEnableSmoothing();
+        ofNoFill();
+        ofSetLineWidth(1);
+        ofSphere(0,0,0, m_size * 0.25);
+        ofPopMatrix();
+        
+        ofPopMatrix();
     }
 
     if ( m_isRepeat && isCurrentlyHit() )
