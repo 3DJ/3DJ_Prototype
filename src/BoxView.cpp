@@ -77,9 +77,9 @@ bool CBoxView::init( ){
 
     string strComplexor = "0";
     if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
-        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");
     }
-    float complexor = stringToFloat( strComplexor);    
+    float complexor = stringToFloat( strComplexor);
 
     if ( complexor != 0 || m_complexor/50 != 0)
     {
@@ -87,18 +87,18 @@ bool CBoxView::init( ){
                 m_complexor = complexor;
             }
             else{
-                if ( m_complexor >= 0 && m_complexor <= 300 )
+                if ( m_complexor >= 0 && m_complexor <= 200 )
                 {
                     m_complexor = m_complexor - 40;
                 }
-                else if( m_complexor < 0 && m_complexor >= -300 )
+                else if( m_complexor < 0 && m_complexor >= -200 )
                 {
                     m_complexor = m_complexor + 40;
                 }
-                else if ( m_complexor < -300 ){
+                else if ( m_complexor < -200 ){
                     m_complexor = m_complexor - 80;
                 }
-                else if ( m_complexor > 300 ){
+                else if ( m_complexor > 200 ){
                     m_complexor = m_complexor + 80;
                 }
 
@@ -111,7 +111,7 @@ bool CBoxView::init( ){
 
             for ( vector<SBoxInfo>::iterator it = m_boxInfo.begin(); it != m_boxInfo.end(); it++ ){
                 animation ( it );
-            }        
+            }
     }
     else
     {
@@ -136,7 +136,7 @@ void CBoxView::animation( vector<SBoxInfo>::iterator it ){
     string strAlpha = *m_dataPool->findValueRef(val + "_alphaVal");
     string strComplexor = "0";
     if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
-        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");
     }
 
     float centerX = stringToFloat( strCenterX);
@@ -148,11 +148,11 @@ void CBoxView::animation( vector<SBoxInfo>::iterator it ){
     float green = stringToFloat( strGreen );
     float blue = stringToFloat( strBlue );
     float alpha = stringToFloat( strAlpha );
-    float complexor = stringToFloat( strComplexor);    
+    float complexor = stringToFloat( strComplexor);
 
-    drawBox(red, green, blue, alpha , centerX, m_complexor, centerY, centerZ, boxSize);    
-    drawBox(red, green, blue, alpha , centerX, m_complexor - 2000 , centerY, centerZ, boxSize);    
-    drawBox(red, green, blue, alpha , centerX, m_complexor + 2000 , centerY, centerZ, boxSize);    
+    drawBox(red, green, blue, alpha , centerX, m_complexor, centerY, centerZ, boxSize);
+    drawBox(red, green, blue, alpha , centerX, m_complexor - 2000 , centerY, centerZ, boxSize);
+    drawBox(red, green, blue, alpha , centerX, m_complexor + 2000 , centerY, centerZ, boxSize);
 
     it->soundPlayer->setLoop(false);
     it->soundPlayer->stop();
@@ -171,7 +171,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
     string strAlpha = *m_dataPool->findValueRef(val + "_alphaVal");
     string strComplexor = "0";
     if ( m_dataPool->findValueRef( "world_complexor") != 0 ){
-        strComplexor = *m_dataPool->findValueRef( "world_complexor");        
+        strComplexor = *m_dataPool->findValueRef( "world_complexor");
     }
 
     float centerX = stringToFloat( strCenterX);
@@ -183,7 +183,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
     float green = stringToFloat( strGreen );
     float blue = stringToFloat( strBlue );
     float alpha = stringToFloat( strAlpha );
-    float complexor = stringToFloat( strComplexor);    
+    float complexor = stringToFloat( strComplexor);
 
     if ( isCurrentlyHit( val )) {
         ofPushMatrix();
@@ -207,7 +207,7 @@ void CBoxView::render( vector<SBoxInfo>::iterator it ){
             it->soundPlayer->play();
         }
     } else {
-        drawBox(red, green, blue, alpha , centerX, complexor, centerY, centerZ, boxSize);    
+        drawBox(red, green, blue, alpha , centerX, complexor, centerY, centerZ, boxSize);
 
         it->soundPlayer->setLoop(false);
         it->soundPlayer->stop();
@@ -223,7 +223,7 @@ bool CBoxView::isCurrentlyHit( string val ){
     if ( m_dataPool->findValueRef( val + "_isHit") != 0 )
     {
         hitState = *m_dataPool->findValueRef( val + "_isHit");
-    }    
+    }
     int isHit = stringToInt( hitState );
     if ( isHit == 1 ){
         return true;
