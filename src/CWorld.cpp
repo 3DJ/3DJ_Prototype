@@ -43,34 +43,34 @@ CWorld::CWorld()
     m_controlBox_a      = 30;
     
     //Row A
-    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
+    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarStrummin.wav");
     addBoxButton(m_a1Button);
-    m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BassFills.wav");
+    m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Piano.wav");
     addBoxButton(m_a2Button);
-    m_a3Button = new CBoxButton(-167,-270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Bass_02.wav");
+    m_a3Button = new CBoxButton(-167,-270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/GuitarPick.wav");
     addBoxButton(m_a3Button);
-    m_a4Button = new CBoxButton(-500, -270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/SSP/SSP_Bass_01.wav");
+    m_a4Button = new CBoxButton(-500, -270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/Melody/Blip_Melody_01.wav");
     m_a4Button->m_soundPlayer.setVolume(0.60f);
     addBoxButton(m_a4Button);
     
     //Row B
     m_controlButton_1 = new CLoopBoxButton(500, 0, m_boxCenterZ, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"");
     addBoxButton(m_controlButton_1);
-    m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Long.wav");
+    m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Effects/Uplifter.wav");
     addBoxButton(m_b2Button);
-    m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Short.wav");
+    m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/BassSlap.wav");
     addBoxButton(m_b3Button);
-    m_b4Button = new CBoxButton(-500,0,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Press_The_Superhero.wav");
+    m_b4Button = new CBoxButton(-500,0,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Bass/NastyBass.wav");
     addBoxButton(m_b4Button);
     
     //Row C
-    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Drums.wav");
+    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Melody/Cham_vox.wav");
     addBoxButton(m_c1Button);
-    m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
+    m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/Effects/RemixCrazyScratch_FX_02.wav");
     addBoxButton(m_c2Button);
-    m_c3Button = new CBoxButton(-167, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Lead_N_Pad.wav");
+    m_c3Button = new CBoxButton(-167, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/TimbalesMerged_1.wav");
     addBoxButton(m_c3Button);
-    m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Pad_01.wav");
+    m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/Beat/Wee_Kick.wav");
     addBoxButton(m_c4Button);
     
     setInitialVolume(1.0f);
@@ -82,7 +82,7 @@ CWorld::CWorld()
 
     m_isRepeat      = false;
     
-    m_snakeFish = new SnakeFish();
+    //m_snakeFish = new SnakeFish();
     m_particles = new Particles();
 }
 
@@ -99,7 +99,7 @@ CWorld::~CWorld()
     if(m_pointView) delete m_pointView;
     if(m_easyCam) delete m_easyCam;
     if(m_equalizerView) delete m_equalizerView;
-    if(m_snakeFish) delete m_snakeFish;
+    //if(m_snakeFish) delete m_snakeFish;
     if(m_particles) delete m_particles;
 }
 
@@ -122,8 +122,8 @@ void CWorld::render()
     ofTranslate(0, -1.5*ofGetHeight(), -5000);
     ofPopMatrix();
     
-    m_snakeFish->render();      //Draw Creature
-    m_snakeFish->postRender();
+    //m_snakeFish->render();      //Draw Creature
+    //m_snakeFish->postRender();
     
     m_easyCam->end();
     
@@ -146,8 +146,8 @@ void CWorld::update(double time_since_last_update)
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
 
-    m_snakeFish->preRender();
-    m_snakeFish->move();
+    //m_snakeFish->preRender();
+    //m_snakeFish->move();
     m_particles->update();
 
 }
