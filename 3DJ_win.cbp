@@ -72,6 +72,7 @@
 			<Add directory="..\..\..\addons\ofxOpenNI\include\nite" />
 			<Add directory="..\..\..\addons\ofxXmlSettings\libs" />
 			<Add directory="..\..\..\addons\ofxXmlSettings\src" />
+			<Add directory="..\..\..\addons\ofxUI\src" />
 		</Compiler>
 		<Linker>
 			<Add library="..\..\..\libs\FreeImage\lib\win_cb\FreeImage.lib" />
@@ -543,34 +544,73 @@
 		<Unit filename="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
 		<Unit filename="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
 		<Unit filename="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
-		<Unit filename="src\BoxController.cpp">
+		<Unit filename="src\BoxButton.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\BoxController.h">
+		<Unit filename="src\BoxButton.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CLoopEditorView.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\BoxView.cpp">
+		<Unit filename="src\CLoopEditorView.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CMenuView.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\BoxView.h">
+		<Unit filename="src\CMenuView.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CMenuViewController.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CMenuViewController.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CNavigationControlButtons.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CNavigationControlButtons.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CNavigationUIController.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CNavigationUIController.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CStateManager.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CStateManager.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CVisualThemesView.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CVisualThemesView.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CWindow_Base.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\CWorld.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src\CWorld.h">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CalibrationView.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="src\Common.cpp">
-			<Option virtualFolder="src" />
+		<Unit filename="src\CalibrationView.h">
+			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="src\Common.h">
-			<Option virtualFolder="src" />
+		<Unit filename="src\ControlBoxButton.cpp">
+			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="src\DataPool.cpp">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\DataPool.h">
+		<Unit filename="src\ControlBoxButton.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\EQView.cpp">
@@ -579,28 +619,13 @@
 		<Unit filename="src\EQView.h">
 			<Option virtualFolder="src" />
 		</Unit>
-		<Unit filename="src\Interface.cpp">
+		<Unit filename="src\Entity.h">
 			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\Interface.h">
-			<Option virtualFolder="src\" />
 		</Unit>
 		<Unit filename="src\KinectData.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src\KinectData.h">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\Log.cpp">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\Log.h">
-			<Option virtualFolder="src\" />
-		</Unit>
-		<Unit filename="src\ConfigFile.cpp">
-			<Option virtualFolder="src" />
-		</Unit>
-		<Unit filename="src\ConfigFile.h">
 			<Option virtualFolder="src" />
 		</Unit>
 		<Unit filename="src\PointView.cpp">
@@ -618,10 +643,58 @@
 		<Unit filename="src\main.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="src\testApp.cpp">
+		<Unit filename="src\EQView.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\CNavigationUIButtons.h">
 			<Option virtualFolder="src\" />
 		</Unit>
-		<Unit filename="src\testApp.h">
+		<Unit filename="src\CBoxController.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\CBoxController.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\CBoxView.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\CBoxView.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\DataPool.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\DataPool.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\ConfigFile.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\ConfigFile.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\Interface.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\Interface.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\SnakeFish.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\SnakeFish.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\Particles.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\Particles.h">
+			<Option virtualFolder="src\" />
+		</Unit>
+		<Unit filename="src\Common.cpp">
+			<Option virtualFolder="src\" />
+		</Unit>	
+		<Unit filename="src\Common.h">
 			<Option virtualFolder="src\" />
 		</Unit>
 		<Extensions>
