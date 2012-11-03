@@ -11,49 +11,20 @@ namespace Interface{
 
     class IController{
     public:
-        IController( CDataPoolSimple* dataPool ){
+        IController( CDataPoolSimple* dataPool = 0 ){
             m_dataPool = dataPool;
         }
-        virtual bool init() = 0;
+        virtual bool update() = 0;
                 
         CDataPoolSimple* m_dataPool;
-//     protected:
-//         bool addFuncToMap( func f, vector<string> params ){
-//             try{
-//                 mapUpdateFunctions.insert(make_pair( f, params ));
-//             }
-//             catch(std::exception e){
-//                 cout<<"controller addFuncToMap error->"<<e.what();
-//                 return false;
-//             }
-//             return true;
-//         }
-// 
-//         bool execute(){
-//             try{
-//                 for ( multimap< func, vector<string>>::iterator it = mapUpdateFunctions.begin();
-//                     it != mapUpdateFunctions.end(); it++ ){
-//                         it->first(it->second);
-//                 }
-//             }
-//             catch(std::exception e){
-//                 cout<<"controller execute error->"<<e.what();
-//                 return false;
-//             }
-//             return true;
-// 
-//         }
-
-        // todo: Change it to unordered_multimap(since C++ 11)
-//      multimap< func, vector<string>> mapUpdateFunctions;
     };
 
     class IView{
     public:
-        IView( CDataPoolSimple* dataPool ){
+        IView( CDataPoolSimple* dataPool  = 0 ){
             m_dataPool = dataPool;
         }
-        virtual bool init() = 0;
+        virtual bool draw() = 0;
 
         CDataPoolSimple* m_dataPool;
         // todo: Change it to unordered_multimap(since C++ 11)

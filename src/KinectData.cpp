@@ -11,11 +11,11 @@
 void CKinectData::setup()
 {
     m_isTracking	= false;
-    m_isFiltering	= false;
-    m_isCloud		= true;
-    m_isMasking		= true;
+	m_isFiltering	= false;
+	m_isCloud		= true;
+	m_isMasking		= true;
 
-    m_filterFactor = 0.1f;
+	m_filterFactor = 0.1f;
     m_numberOfUsersToTrack = 1;// only use the depth points of the DJ. i.e. The first peron to be tracked
 
     m_recordContext.setup();
@@ -27,7 +27,10 @@ void CKinectData::setup()
     m_recordUser.setUseMaskPixels(m_isMasking);
 
     m_recordUser.setUseCloudPoints(m_isCloud);
-    m_recordUser.setMaxNumberOfUsers(1);	// use this to set dynamic max number of users
+    m_recordUser.setMaxNumberOfUsers(m_numberOfUsersToTrack);	// use this to set dynamic max number of users
+    
+    //m_hardware.setup();
+    //m_hardware.setTiltAngle(20.0f);
 
 }
 
@@ -35,11 +38,15 @@ void CKinectData::update()
 {
     m_recordContext.update();
     m_isTracking = m_recordUser.getNumberOfTrackedUsers() > 0;
-
-    m_recordUser.update();      
+    m_recordUser.update();
 }
 
 void CKinectData::draw()
 {
+    
+}
 
+void CKinectData::exit()
+{
+    //m_hardware.setTiltAngle(30.0f);
 }

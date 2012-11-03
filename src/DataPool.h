@@ -33,10 +33,15 @@ class CDataPoolSimple{
 
         bool getEntityByName( string key, SEntity& entity);
         bool getValueByName( string key, string& val );
+        bool getPointerByName( string key, void* &val );
         mapEntity getDataPool();        
         vector<mapEntity::iterator> getVector();
 
-        // if the key not exists. create new one.
+        // return value: false not mean U didn't create the entity. u need to check it by findValue
+        bool createEntity( string key, SEntity entity );
+        bool createRef( string key, void* val);
+
+        // return value: false not mean U didn't set the value. u need to check it by findValue
         bool setEntity( string key, SEntity entity);
         bool setAnimateValue( string key, string val );
         bool setValue( string key, string val );

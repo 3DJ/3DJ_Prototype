@@ -3,7 +3,6 @@
 //  Kinect_3DJ
 //
 //  Created by Samuel Ruberti on 6/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #ifndef Kinect_3DJ_Entity_h
@@ -13,10 +12,8 @@
 typedef enum et {
     ET_None = 0,
     ET_MusicSampleButton,
-    ET_LoopButton,
-    ET_EffectsButton,
-    ET_SwapButton,
-    ET_ScrollLeftButtons
+    ET_NavigationButtons,
+    ET_Creature,
 }EntityType;
 
 //===========================================================
@@ -73,6 +70,43 @@ public:
 
 protected:
     virtual bool hitTest(float x, float y, float z) = 0;
+};
+
+//===========================================================
+// Class : CControlButtonsBase class
+//===========================================================
+
+class CControlButtonsBase : public CEntity{
+public:
+    
+    virtual void drawCircleStroke() = 0;
+    virtual bool collisionTest(ofPoint *point) = 0;
+
+    int m_resolution, m_strokeWidth, m_radius;
+    float m_startAngle, m_endAngle;
+    string m_songTitle;
+};
+
+//===========================================================
+// Class : CreatureEntity class
+//===========================================================
+
+class CreatureEntity : public CEntity{
+public:
+    CreatureEntity(){};
+    ~CreatureEntity(){};
+    virtual void applyTransforms() = 0;
+    virtual void move() = 0;
+    virtual void kill() = 0;
+    virtual void preRender() = 0;
+    virtual void postRender() = 0;
+    virtual float getEnergy() = 0;
+    virtual void setPosition(ofPoint pos) = 0;
+    
+    float m_maxSpeed;
+    float m_birth;
+    float m_energy, m_power;
+    ofVec3f m_position, m_projectedPos, m_rotation, m_scale;
 };
 
 #endif

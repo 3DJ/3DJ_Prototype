@@ -14,23 +14,22 @@
 
 class CKinectData {
 public:
-
+    
     void setup();
 	void update();
     void draw();
+    void exit();
 
     bool m_isTracking, m_isCloud, m_isMasking, m_isFiltering;
-
+    
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 
     ofxOpenNIContext	m_recordContext;
 	ofxDepthGenerator	m_recordDepth;
 	ofxUserGenerator	m_recordUser;
-
+    //ofxHardwareDriver   m_hardware;
+    
 };
-
-
-
 
 #endif /* defined(__openNI_3DJ__KinectData__) */

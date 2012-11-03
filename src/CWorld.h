@@ -1,54 +1,57 @@
+//
+//  CWorld.h
+//  Kinect_3DJ
+//
+//  Created by Samuel Ruberti on 6/30/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
 #ifndef Kinect_3DJ_CWorld_h
 #define Kinect_3DJ_CWorld_h
-
-#include <vector>
-using namespace std;
-
-#include "Entity.h"
-#include "KinectData.h"
-#include "PointView.h"
-#include "EQView.h"
-#include "SonicOcean.h"
-
-#include "DataPool.h"
+#include <iostream>
 #include "Interface.h"
 using namespace Interface;
-using namespace DataPool;
+using namespace std;
 
-namespace World{
+//===========================================================
+// Class : CWorld
+// The entire world in which all entities exist
+//===========================================================
 
-    class CWorld{
+typedef enum st {
+    ST_None = 0,
+    ST_MENU_STATE,
+    ST_BOX_STATE,
+}CurrentState;
 
-    public:
-        // singleton this class. becos we just need one world.
-        static CWorld& getInstance(){
-            static CWorld _instance;
-            return _instance;
-        }
+extern CurrentState g_currentState;
+class CWorld
+{
 
-        bool init( IController* controller, IView* view );
+public:
 
-        bool unInit();
+    // singleton this class. becos we just need one world.
+    static CWorld& getInstance(){
+        static CWorld _instance;
+        return _instance;
+    }
 
-        bool update();
+    ~CWorld();
 
-        bool draw();
+    bool init( IController* controller = 0, IView* view = 0);
 
-        ofEasyCam *m_easyCam;
-        CEQView *m_equalizerView;
-        CSonicOcean *m_sonicOcean;
+    void render();   
 
-        int m_scale;
-        int m_angle;
+    void update(double time_since_last_update);
+    
+private:
+    // singleton this class. becos we just need one world.
+    CWorld();
+    CWorld( const CWorld& );
+    CWorld& operator=( const CWorld&);
 
-    private:
-        // singleton this class. becos we just need one world.
-        CWorld() {}
-        CWorld( const CWorld& );
-        CWorld& operator=( const CWorld&);
-
-        IController* m_controller;
-        IView* m_view;
-    };
+    IController* m_controller;
+    IView* m_view;
 };
+
 #endif

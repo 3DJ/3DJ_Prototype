@@ -20,7 +20,8 @@ namespace Common{
     // u can add member in the structure.
     struct SEntity{
         bool isSaved;
-        string value;        
+        string value;     
+        void* pointer;
     };
     typedef map<string, SEntity> mapEntity;
 

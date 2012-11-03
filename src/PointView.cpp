@@ -12,10 +12,8 @@
 CPointView::CPointView()
 {
     ofDisableArbTex();
-    ofLoadImage(m_texture, "dot.png");
-    cout<<"shader start"<<endl;
+    ofLoadImage(m_texture, "dot2.png");
     m_shader.load("shader");
-    cout<<"shader over"<<endl;
 }
 CPointView::~CPointView()
 {
@@ -25,13 +23,12 @@ CPointView::~CPointView()
 void CPointView:: drawParticles()
 {
     ofPushMatrix();
-    ofSetColor(50, 100, 5, 40);
+    ofSetColor(80, 180, 80);
     ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofEnablePointSprites();
 
     m_shader.begin();
-
     m_texture.bind();
     m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
     m_texture.unbind();
@@ -41,7 +38,7 @@ void CPointView:: drawParticles()
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 
-    ofPopMatrix();
+    ofPopMatrix();   
 }
 
 void CPointView::addPoint( const float x, const float y, const float z)
@@ -50,7 +47,7 @@ void CPointView::addPoint( const float x, const float y, const float z)
     m_points.push_back(p);
 
     //Pass the size in as a normal x position
-    float size = ofRandom(25,50);
+    float size = ofRandom(8,35);
     m_sizes.push_back(size);
 }
 

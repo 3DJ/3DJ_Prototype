@@ -18,7 +18,6 @@ CSonicOcean::CSonicOcean()
 
 	setRows();
 
-
     m_mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
 }
 
@@ -43,15 +42,13 @@ void CSonicOcean::drawEQSonicOcean()
 {
     ofPushMatrix();
     ofEnableAlphaBlending();
-
+    ofSetLineWidth(1.0f);
+    
     for(int r = 0; r < m_rows*3; r++){
         for (int c = 0; c < m_cols-3; c++) {
             //Change the vertexes based on fft results
             int index = c * r + c;
-            if ( index + 1 < 7681 )
-            {  
-                alterVertexes(index, r);
-            }
+            alterVertexes(index, r);
         }
     }
 

@@ -18,7 +18,7 @@ bool CDataPoolSimple::init()
         return false; 
     }
     // this is used to test the load file function.       
-    //     if ( !initEntities() ){ return false; }  
+    if ( !initEntities() ){ return false; }  
     // this is used to init the data which isn't save in the file.
     if ( !initAnimations()) { return false;}
     for ( mapEntity::iterator it = m_mapDataPool.begin(); it != m_mapDataPool.end(); it++ )
@@ -54,6 +54,18 @@ bool CDataPoolSimple::getValueByName( string key, string& val )
     return false;
 }
 
+bool CDataPoolSimple::getPointerByName( string key, void* &val )
+{
+    mapEntity::iterator it = m_mapDataPool.find( key );
+    if ( it != m_mapDataPool.end() )
+    {
+        val = it->second.pointer;
+        return true;
+    }
+
+    return false;
+}
+
 mapEntity CDataPoolSimple::getDataPool()
 {
     return m_mapDataPool;
@@ -70,9 +82,7 @@ bool CDataPoolSimple::setEntity( string key, SEntity entity)
 
     try{  
         if ( it == m_mapDataPool.end() ){            
-            m_mapDataPool.insert( it, make_pair( key, entity));
-            // update the vector
-            m_vectorRefEntity.push_back(it);        
+            return false;      
         }  
         else{
             // this will be easy read. but it's inefficient.
@@ -85,8 +95,58 @@ bool CDataPoolSimple::setEntity( string key, SEntity entity)
     }
 
     return true;
+}
+
+bool CDataPoolSimple::createEntity( string key, SEntity entity )
+{
+    mapEntity::iterator it = m_mapDataPool.find( key );
+
+    try{  
+        if ( it == m_mapDataPool.end() ){            
+            m_mapDataPool.insert( it, make_pair( key, entity));
+            // update the vector
+            m_vectorRefEntity.push_back(it);        
+        }  
+        else{
+            // exist this key
+            return false;
+        }
+    }
+    catch(exception e){
+        cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
+        // exception
+        return false;
+    }
+   
+    return true;
 
 }
+
+bool CDataPoolSimple::createRef( string key, void* val)
+{
+    SEntity entity;
+    entity.isSaved = false;
+    mapEntity::iterator it = m_mapDataPool.find( key );
+
+    try{  
+        if ( it == m_mapDataPool.end() ){    
+            entity.pointer = val;       
+            m_mapDataPool.insert( it, make_pair( key, entity));
+            // update the vector
+            //m_vectorRefEntity.push_back(it);        
+        }  
+        else{            
+            return false;
+        }
+    }
+    catch(exception e){
+        cout<<"CDataPoolSimple::setAnimateValue exception:"<<e.what();
+        return false;
+    }
+
+    return true;
+}
+
 bool CDataPoolSimple::setAnimateValue( string key, string val )
 {
     SEntity entity;
@@ -122,9 +182,7 @@ bool CDataPoolSimple::setValue( string key, string val )
     mapEntity::iterator it = m_mapDataPool.find( key );
     try{
         if ( it == m_mapDataPool.end() ){      
-            m_mapDataPool.insert( it, make_pair( key, entity));
-            // update the vector
-            m_vectorRefEntity.push_back(it);        
+            return false;        
         }  
         else{
             // this will be easy read. but it's inefficient.
