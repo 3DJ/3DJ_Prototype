@@ -21,7 +21,7 @@ using namespace std;
 typedef enum st {
     ST_None = 0,
     ST_MENU_STATE,
-    ST_BOX_STATE,
+    ST_BOX_STATE    
 }CurrentState;
 
 extern CurrentState g_currentState;

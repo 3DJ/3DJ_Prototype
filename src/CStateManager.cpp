@@ -13,7 +13,7 @@ void CStateManager::setup() {
     ofSetFrameRate(60);
     
     m_menuVC = new CMenuViewController( m_red, m_green, m_blue, m_alpha);
-    g_currentState = ST_MENU_STATE;
+    g_currentState = ST_MENU_STATE;    
 
     m_world = &CWorld::getInstance(); // world controls all buttons and sound
     
@@ -25,7 +25,7 @@ void CStateManager::setup() {
 void CStateManager::update() {
     
     if (g_currentState == ST_MENU_STATE) {      
-        m_world->init( 0, m_menuVC);
+        m_world->init( 0, m_menuVC);        
     }else if(g_currentState == ST_BOX_STATE) {
         m_world->init( m_boxController, m_boxView );
     }

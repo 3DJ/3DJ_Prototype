@@ -157,7 +157,7 @@ void CBoxView::drawDepthPoints()
     int w = m_oniKinect->m_recordUser.getWidth();
 	int h = m_oniKinect->m_recordUser.getHeight();    
 
-    m_pointView->uploadDataToVbo();
+    //m_pointView->uploadDataToVbo();
     m_pointView->drawParticles();
     m_pointView->clearData();
     

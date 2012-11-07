@@ -59,10 +59,11 @@ void CBoxButton::render()  //Draw boxes and set color
             }
             else if ( m_complexor < -200 ){
                 m_complexor = m_complexor - 80;
-                g_currentState = ST_MENU_STATE;
+                g_currentState = ST_MENU_STATE;                
+                m_complexor = 0;
             }
             else if ( m_complexor > 200 ){
-                m_complexor = m_complexor + 80;
+                complexor = m_complexor + 80;
             }
 
         }
