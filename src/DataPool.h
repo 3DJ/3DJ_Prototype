@@ -51,13 +51,15 @@ class CDataPoolSimple{
         // deprecated
         int findIndexInVector( string val );
 
+        // file operations
+        bool loadFromFile( string filePath );
+        bool saveToFile( string filePath );
+
     private:
         CDataPoolSimple(){ init(); }
         CDataPoolSimple(const CDataPoolSimple&);
         CDataPoolSimple& operator=(const CDataPoolSimple&);
         //
-        bool loadFromFile( string filePath );
-        bool saveToFile( string filePath );
         bool initEntities();
         bool initAnimations();
         bool initEntity( string key, string centerX, string centerY,

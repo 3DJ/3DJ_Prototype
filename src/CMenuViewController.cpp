@@ -75,6 +75,10 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
         m_visualEditor->m_canvas1->setVisible(false);
         m_calibrationEditor->m_canvas1->setVisible(false);
     }
+    else if(name == "Save Core Data"){
+        string saveFileName = "3dj.config_";
+        CDataPoolSimple::getInstance().saveToFile( saveFileName );
+    }
 }
 
 

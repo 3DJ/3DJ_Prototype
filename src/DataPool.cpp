@@ -14,13 +14,13 @@ using namespace DataPoolEx;
 
 bool CDataPoolSimple::init()
 {
-    if ( !m_configFile.loadFromFile( "3dj.config", m_mapDataPool) ) { 
+    if ( !loadFromFile("3dj.config") ) { 
         return false; 
     }
     // this is used to test the load file function.       
-    if ( !initEntities() ){ return false; }  
+    //if ( !initEntities() ){ return false; }  
     // this is used to init the data which isn't save in the file.
-    if ( !initAnimations()) { return false;}
+    //if ( !initAnimations()) { return false;}
     for ( mapEntity::iterator it = m_mapDataPool.begin(); it != m_mapDataPool.end(); it++ )
     {
         m_vectorRefEntity.push_back( it );
@@ -499,4 +499,14 @@ void CDataPoolEx::initGroup(mapGroup& group )
     initEntity( group["c3"], "-125", "250", "1000", "ET_MusicSampleButton","sounds/Beat/TimbalesMerged_1.wav" );
     initEntityAnimation( group["c4"] );
     initEntity( group["c4"], "-375", "250", "1000", "ET_MusicSampleButton","sounds/Beat/Wee_Kick.wav" );
+}
+
+bool CDataPoolSimple::loadFromFile( string filePath )
+{
+    return m_configFile.loadFromFile( filePath.c_str(), m_mapDataPool);
+}
+
+bool CDataPoolSimple::saveToFile( string filePath )
+{
+     return m_configFile.saveToFile( filePath.c_str(), m_mapDataPool);
 }

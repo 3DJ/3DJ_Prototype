@@ -39,7 +39,9 @@ void CMenuView::setupGUI()
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Styles"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0,0,buttonLength, false, "Sets"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0,0, buttonLength, false, "Get Songs"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Save Core Data"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Help"));
+
     
 
 }

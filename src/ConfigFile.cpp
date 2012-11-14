@@ -11,10 +11,10 @@
 bool CConfigFile::loadFromFile( string filePath, mapEntity& mapDataPool )
 {    
     if (m_ofxXmlFile.loadFile( filePath )){
-        cout<<"Load file success" <<endl;
+        cout<<"Load file to " << filePath << " success" <<endl;
     }
     else{
-        cout<<"Load file failed" <<endl;
+        cout<<"Load file to " << filePath << " failed" <<endl;
         return false;
     }
     // clear the pool and then load it from file.
@@ -40,6 +40,10 @@ bool CConfigFile::loadFromFile( string filePath, mapEntity& mapDataPool )
 
 bool CConfigFile::saveToFile( string filePath, mapEntity& mapDataPool)
 {
+//     fstream fs(filePath, fstream::out | fstream::trunc);
+//     fs<<"";
+//     fs.close();
+    
     m_ofxXmlFile.addTag("3-dj");
     m_ofxXmlFile.setAttribute("3-dj", "link", "www.3-dj.com", 0);
     m_ofxXmlFile.pushTag("3-dj");    
@@ -63,10 +67,10 @@ bool CConfigFile::saveToFile( string filePath, mapEntity& mapDataPool)
     m_ofxXmlFile.setValue("number", intToString( number ) );
     m_ofxXmlFile.popTag();
     if (m_ofxXmlFile.saveFile( filePath )){
-        cout<<"Saving file success" << endl;
+        cout<<"Save file to " << filePath << " success" <<endl;
     }
     else{
-        cout<<"Saving file failed" <<endl;
+        cout<<"Save file to " << filePath << " failed" <<endl;
         return false;
     }
 
