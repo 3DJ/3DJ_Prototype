@@ -21,11 +21,15 @@ CLoopEditorView::~CLoopEditorView()
 void CLoopEditorView::setupGUI()
 {
     int dim = 16;
-    int canvas_h = 150;
+    
+    int widthOffset = 200;
+    int canvasOneWidth = ofGetScreenWidth()-widthOffset;
+    int canvasOneHeight = ofGetScreenHeight();
+    
     
     //Track1
-    m_canvas1 = new ofxUICanvas(200,0,ofGetScreenWidth()-200,canvas_h);
-    
+    m_canvas1 = new ofxUICanvas(widthOffset,0,canvasOneWidth,canvasOneHeight);
+
     m_canvas1->addWidgetDown(new ofxUILabel("Loop Editor",OFX_UI_FONT_MEDIUM));
     m_canvas1->addWidgetDown(new ofxUILabel("Box A-1",OFX_UI_FONT_SMALL));
     m_canvas1->addWidgetDown(new ofxUISlider("Track Volume", 0, 100.0, 100, 200, dim));
@@ -34,7 +38,7 @@ void CLoopEditorView::setupGUI()
     m_canvas1->addWidgetRight(new ofxUIImageButton(0, 0, dim*2, dim*2, true, "icons/pause.png", "Pause"));
     m_canvas1->addWidgetRight(new ofxUIImageButton(0, 0, dim*2, dim*2, false, "icons/loadFile.png", "Load"));
     m_canvas1->addWidgetRight(new ofxUIImageButton(0, 0, dim*2, dim*2, false, "icons/saveFile.png", "Save Settings"));
-   
+
 }
 
 void CLoopEditorView::saveSettings()
@@ -51,6 +55,7 @@ void CLoopEditorView::showCanvases(bool show)
 {
     m_canvas1->setVisible(show);
     m_canvasesVisible = show;
+    
 }
 
 void CLoopEditorView::setColorTheme(int theme)
