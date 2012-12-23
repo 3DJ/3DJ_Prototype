@@ -221,6 +221,7 @@
 		2268DC4E1686AADD00C00544 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		2268DC531686ABAA00C00544 /* CBoxView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBoxView.cpp; sourceTree = "<group>"; };
 		2268DC541686ABAA00C00544 /* CBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBoxView.h; sourceTree = "<group>"; };
+		2268DC5D1686B03F00C00544 /* openNI-3DJDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "openNI-3DJDebug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		770F033514B996AE003CCE99 /* libusb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libusb.h; sourceTree = "<group>"; };
 		770F033714B996AE003CCE99 /* XnCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XnCommon.h; sourceTree = "<group>"; };
 		770F033814B996AE003CCE99 /* XnV3DVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XnV3DVector.h; sourceTree = "<group>"; };
@@ -384,7 +385,6 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* openNI-3DJ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "openNI-3DJ.app"; path = "/Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/bin/openNI-3DJ.app"; sourceTree = "<absolute>"; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -444,49 +444,26 @@
 				2268DBAD1686AA6B00C00544 /* BoxButton.h */,
 				2268DC531686ABAA00C00544 /* CBoxView.cpp */,
 				2268DC541686ABAA00C00544 /* CBoxView.h */,
-				2268DBB21686AA6B00C00544 /* CalibrationView.cpp */,
-				2268DBB31686AA6B00C00544 /* CalibrationView.h */,
 				2268DBB41686AA6B00C00544 /* CBoxController.cpp */,
 				2268DBB51686AA6B00C00544 /* CBoxController.h */,
-				2268DBB81686AA6B00C00544 /* CLoopEditorView.cpp */,
-				2268DBB91686AA6B00C00544 /* CLoopEditorView.h */,
-				2268DBBA1686AA6B00C00544 /* CMenuView.cpp */,
-				2268DBBB1686AA6B00C00544 /* CMenuView.h */,
-				2268DBBC1686AA6B00C00544 /* CMenuViewController.cpp */,
-				2268DBBD1686AA6B00C00544 /* CMenuViewController.h */,
-				2268DBBE1686AA6B00C00544 /* CNavigationControlButtons.cpp */,
-				2268DBBF1686AA6B00C00544 /* CNavigationControlButtons.h */,
-				2268DBC01686AA6B00C00544 /* CNavigationUIButtons.h */,
-				2268DBC11686AA6B00C00544 /* CNavigationUIController.cpp */,
-				2268DBC21686AA6B00C00544 /* CNavigationUIController.h */,
 				2268DBC31686AA6B00C00544 /* Common.cpp */,
 				2268DBC41686AA6B00C00544 /* Common.h */,
 				2268DBC51686AA6B00C00544 /* ConfigFile.cpp */,
 				2268DBC61686AA6B00C00544 /* ConfigFile.h */,
 				2268DBC71686AA6B00C00544 /* ControlBoxButton.cpp */,
 				2268DBC81686AA6B00C00544 /* ControlBoxButton.h */,
-				2268DBCB1686AA6B00C00544 /* CVisualThemesView.cpp */,
-				2268DBCC1686AA6B00C00544 /* CVisualThemesView.h */,
-				2268DBCD1686AA6B00C00544 /* CWindow_Base.h */,
 				2268DBD01686AA6B00C00544 /* DataPool.cpp */,
 				2268DBD11686AA6B00C00544 /* DataPool.h */,
 				2268DBD21686AA6B00C00544 /* Entity.h */,
-				2268DBD31686AA6B00C00544 /* EQView.cpp */,
-				2268DBD41686AA6B00C00544 /* EQView.h */,
 				2268DBD51686AA6B00C00544 /* Interface.cpp */,
 				2268DBD61686AA6B00C00544 /* Interface.h */,
 				2268DBD71686AA6B00C00544 /* KinectData.cpp */,
 				2268DBD81686AA6B00C00544 /* KinectData.h */,
 				2268DBD91686AA6B00C00544 /* Log.cpp */,
 				2268DBDA1686AA6B00C00544 /* Log.h */,
-				2268DBDC1686AA6B00C00544 /* Particles.cpp */,
-				2268DBDD1686AA6B00C00544 /* Particles.h */,
-				2268DBDE1686AA6B00C00544 /* PointView.cpp */,
-				2268DBDF1686AA6B00C00544 /* PointView.h */,
-				2268DBE01686AA6B00C00544 /* SnakeFish.cpp */,
-				2268DBE11686AA6B00C00544 /* SnakeFish.h */,
-				2268DBE21686AA6B00C00544 /* SonicOcean.cpp */,
-				2268DBE31686AA6B00C00544 /* SonicOcean.h */,
+				22B795691686B5F700BB4A0E /* Menu */,
+				22B7956A1686B61600BB4A0E /* Visuals */,
+				22B7956B1686B6A500BB4A0E /* Unused */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -599,6 +576,53 @@
 				2268DC4E1686AADD00C00544 /* ofxXmlSettings.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		22B795691686B5F700BB4A0E /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				2268DBBC1686AA6B00C00544 /* CMenuViewController.cpp */,
+				2268DBBD1686AA6B00C00544 /* CMenuViewController.h */,
+				2268DBBA1686AA6B00C00544 /* CMenuView.cpp */,
+				2268DBBB1686AA6B00C00544 /* CMenuView.h */,
+				2268DBCD1686AA6B00C00544 /* CWindow_Base.h */,
+				2268DBB81686AA6B00C00544 /* CLoopEditorView.cpp */,
+				2268DBB91686AA6B00C00544 /* CLoopEditorView.h */,
+				2268DBCB1686AA6B00C00544 /* CVisualThemesView.cpp */,
+				2268DBCC1686AA6B00C00544 /* CVisualThemesView.h */,
+				2268DBB21686AA6B00C00544 /* CalibrationView.cpp */,
+				2268DBB31686AA6B00C00544 /* CalibrationView.h */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		22B7956A1686B61600BB4A0E /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+				2268DBD31686AA6B00C00544 /* EQView.cpp */,
+				2268DBD41686AA6B00C00544 /* EQView.h */,
+				2268DBDC1686AA6B00C00544 /* Particles.cpp */,
+				2268DBDD1686AA6B00C00544 /* Particles.h */,
+				2268DBDE1686AA6B00C00544 /* PointView.cpp */,
+				2268DBDF1686AA6B00C00544 /* PointView.h */,
+				2268DBE01686AA6B00C00544 /* SnakeFish.cpp */,
+				2268DBE11686AA6B00C00544 /* SnakeFish.h */,
+				2268DBE21686AA6B00C00544 /* SonicOcean.cpp */,
+				2268DBE31686AA6B00C00544 /* SonicOcean.h */,
+			);
+			name = Visuals;
+			sourceTree = "<group>";
+		};
+		22B7956B1686B6A500BB4A0E /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				2268DBBE1686AA6B00C00544 /* CNavigationControlButtons.cpp */,
+				2268DBBF1686AA6B00C00544 /* CNavigationControlButtons.h */,
+				2268DBC01686AA6B00C00544 /* CNavigationUIButtons.h */,
+				2268DBC11686AA6B00C00544 /* CNavigationUIController.cpp */,
+				2268DBC21686AA6B00C00544 /* CNavigationUIController.h */,
+			);
+			name = Unused;
 			sourceTree = "<group>";
 		};
 		770F033314B996AE003CCE99 /* include */ = {
@@ -902,6 +926,7 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
+				2268DC5D1686B03F00C00544 /* openNI-3DJDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -935,7 +960,7 @@
 			);
 			name = "openNI-3DJ";
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* openNI-3DJ.app */;
+			productReference = 2268DC5D1686B03F00C00544 /* openNI-3DJDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
