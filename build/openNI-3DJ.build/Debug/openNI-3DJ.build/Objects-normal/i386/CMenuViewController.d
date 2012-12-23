@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuViewController.cpp \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuViewController.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuView.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CWindow_Base.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuViewController.cpp \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuViewController.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CMenuView.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CWindow_Base.h \
   ../../../libs/openFrameworks/ofMain.h \
   ../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../libs/glew/include/GL/glew.h \
@@ -117,47 +117,47 @@ dependencies: \
   ../../../libs/openFrameworks/video/ofQuickTimePlayer.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUI.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRectangle.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWidget.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWidgetWithLabel.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIEventArgs.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabel.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIFPS.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIFPSSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMinimalSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICircleSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIBiLabelSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRangeSlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIToggle.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIButton.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICustomImageButton.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageButton.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageToggle.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRadio.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUI2DPad.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUITextInput.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUINumberDialer.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabelButton.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabelToggle.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIToggleMatrix.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageButton.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageToggle.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRotarySlider.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISpacer.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIDropDownList.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWaveform.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISpectrum.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMovingGraph.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImage.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageSampler.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICanvas.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIScrollableCanvas.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CLoopEditorView.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CVisualThemesView.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CalibrationView.h
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUI.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRectangle.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWidget.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWidgetWithLabel.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIEventArgs.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabel.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIFPS.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIFPSSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMinimalSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICircleSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIBiLabelSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRangeSlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIToggle.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIButton.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICustomImageButton.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageButton.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMultiImageToggle.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRadio.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUI2DPad.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUITextInput.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUINumberDialer.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabelButton.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUILabelToggle.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIToggleMatrix.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageButton.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageToggle.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIRotarySlider.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISpacer.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIDropDownList.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIWaveform.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUISpectrum.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIMovingGraph.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImage.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIImageSampler.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUICanvas.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxUI/src/ofxUIScrollableCanvas.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CLoopEditorView.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CVisualThemesView.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/CalibrationView.h

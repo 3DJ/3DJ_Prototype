@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.cpp \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.cpp \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/PointView.h \
   ../../../libs/openFrameworks/ofMain.h \
   ../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../libs/glew/include/GL/glew.h \
