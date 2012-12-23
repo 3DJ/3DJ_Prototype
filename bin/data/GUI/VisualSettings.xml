@@ -1,0 +1,55 @@
+<Widget>
+    <Kind>4</Kind>
+    <Name>Master Volume</Name>
+    <Value>145.954</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Fullscreen</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>A1</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>A2</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>A3</Name>
+    <Value>75.9868</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>B1</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>B2</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>B3</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>C1</Name>
+    <Value>81.5789</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>C2</Name>
+    <Value>100</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>C3</Name>
+    <Value>100</Value>
+</Widget>

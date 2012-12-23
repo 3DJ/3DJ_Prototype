@@ -2,5 +2,6 @@ bin/3DJ
 bin/3DJ_debug
 bin/data/sounds
 bin/libs
+bin/data/openni
 obj
 .DS_Store
