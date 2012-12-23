@@ -24,6 +24,7 @@ public:
     void setColorTheme(int theme);
     
     ofxUICanvas *m_canvas1;
+    ofxUICanvas *m_canvas2;
     
 };
 

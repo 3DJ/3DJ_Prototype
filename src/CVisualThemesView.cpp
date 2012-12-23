@@ -45,10 +45,6 @@ void CVisualThemesView::setupGUI(int red, int green, int blue, int alpha)
     m_canvas1 = new ofxUICanvas(200, 0, canvas_w, canvas_h);
     
     m_canvas1->addWidgetDown(new ofxUILabel("Drawing Style", OFX_UI_FONT_LARGE));
-    
-    vector<string> windowSize;
-    windowSize.push_back("Fullscreen");
-    m_canvas1->addWidgetDown(new ofxUIToggle(dim,dim,ofGetWindowMode()==OF_FULLSCREEN,"Fullscreen"));
      
     m_canvas1->addSpacer(length, 2);
     

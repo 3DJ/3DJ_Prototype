@@ -19,6 +19,7 @@ CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha
     initViews();
     setupDelegates(); //adds ofAddListener for each ofxUICanvas in views
     hideAllViews(); //hide all views at start
+    m_loopEditor->showCanvases(true); //show loop editor window at start
     showMenuView(true); //Start with menu
 }
 
@@ -36,6 +37,7 @@ void CMenuViewController::initViews()
     m_loopEditor = new CLoopEditorView();
     m_visualEditor = new CVisualThemesView(m_r, m_g, m_b, m_a);
     m_calibrationEditor = new CalibrationView();
+    
 }
 
 void CMenuViewController::menuEvent(ofxUIEventArgs &e)
@@ -46,26 +48,26 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
 //Main Menu
     if(name == "Calibrate"){
         m_calibrationEditor->m_canvas1->setVisible(true);
-        m_loopEditor->m_canvas1->setVisible(false);
+        m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(false);
     }else if(name == "Start Session"){
         m_exitMenu = true;
         hideAllViews();
         g_currentState = ST_BOX_STATE;
     } else if(name == "Styles"){
-        m_loopEditor->m_canvas1->setVisible(false);
+        m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(true);
         m_calibrationEditor->m_canvas1->setVisible(false);
     }else if(name == "Sets"){
-        m_loopEditor->m_canvas1->setVisible(false);
+        m_loopEditor->showCanvases(true);
         m_visualEditor->m_canvas1->setVisible(false);
         m_calibrationEditor->m_canvas1->setVisible(false);
     }else if(name == "Get Songs"){
-        m_loopEditor->m_canvas1->setVisible(false);
+        m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(false);
         m_calibrationEditor->m_canvas1->setVisible(false);
     }else if(name == "Help"){
-        m_loopEditor->m_canvas1->setVisible(false);
+        m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(false);
         m_calibrationEditor->m_canvas1->setVisible(false);
 
@@ -86,11 +88,40 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
 void CMenuViewController::loopEditorEvent(ofxUIEventArgs &e)
 {
     string name = e.widget->getName();
+    int kind = e.widget->getKind();
     
-    if(name == ""){
-
-    }else if(name == ""){
-        
+    //=============================== Radio Buttons  File Load
+    if(name == "A1"){
+        saveRadioButtonInfo(name);
+    }else if(name == "A2"){
+        saveRadioButtonInfo(name);
+    }else if(name == "A3"){
+        saveRadioButtonInfo(name);
+    }else if(name == "A4"){
+      saveRadioButtonInfo(name);
+    }else if(name == "B1"){
+      saveRadioButtonInfo(name);
+    }else if(name == "B2"){
+        saveRadioButtonInfo(name);
+    }else if(name == "B3"){
+        saveRadioButtonInfo(name);
+    }else if(name == "B4"){
+        saveRadioButtonInfo(name);
+    }else if(name == "C1"){
+        saveRadioButtonInfo(name);
+    }else if(name == "C2"){
+        saveRadioButtonInfo(name);
+    }else if(name == "C3"){
+        saveRadioButtonInfo(name);
+    }else if(name == "C4"){
+        saveRadioButtonInfo(name);
+    }
+    //=============================== Matrix Sound Player
+    
+    else if(name == "Matrix A"){
+        ofxUIToggleMatrix *mat = (ofxUIToggleMatrix *) e.widget;
+        //Get toggles() ???
+        //Loop sample
     }
 }
 
@@ -98,8 +129,8 @@ void CMenuViewController::visualEditorEvent(ofxUIEventArgs &e)
 {
     string name = e.widget->getName();
     
-    if(name == "Fullscreen"){
-        ofToggleFullscreen();
+    if(name == "") {
+        
     }else if(name == ""){
         
     }
@@ -107,6 +138,7 @@ void CMenuViewController::visualEditorEvent(ofxUIEventArgs &e)
 
 void CMenuViewController::setupDelegates()
 {
+    ofAddListener(m_loopEditor->m_canvas2->newGUIEvent, this, &CMenuViewController::loopEditorEvent);
     ofAddListener(m_menu->m_canvas1->newGUIEvent, this, &CMenuViewController::menuEvent);
     ofAddListener(m_loopEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::loopEditorEvent);
     ofAddListener(m_visualEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::visualEditorEvent);
@@ -134,5 +166,15 @@ bool CMenuViewController::draw()
 {
     showMenuView(true);
     return true;
+}
+
+void CMenuViewController::saveRadioButtonInfo(string boxID) {
+    
+    //Prompt User to load file
+    //Check file extension, only allow files you want
+    //Get string name from audio file
+    //save string name to Button name in xml through data class
+    //Save file name to matrix player box to show update
+    
 }
 

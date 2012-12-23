@@ -34,6 +34,7 @@ class CMenuViewController : public IView
     void showMenuView(bool _showMenuView);
     void hideAllViews();
     bool draw();
+    void saveRadioButtonInfo(string boxID);
     
     CMenuView               *m_menu;
     CLoopEditorView         *m_loopEditor;
