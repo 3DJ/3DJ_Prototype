@@ -48,7 +48,7 @@ void CPointView::addPoint( const float x, const float y, const float z)
 
     //Pass the size in as a normal x position
     float size = ofRandom(8,35);
-    m_sizes.push_back(size);
+    //m_sizes.push_back(size);
 }
 
 void CPointView::clearData()

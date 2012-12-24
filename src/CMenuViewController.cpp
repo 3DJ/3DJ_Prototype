@@ -219,6 +219,5 @@ void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileRe
 			
 		}
 	}
-	
 }
 
