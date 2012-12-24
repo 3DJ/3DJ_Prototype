@@ -20,12 +20,12 @@ using namespace Interface;
 
 class CMenuViewController : public IView
 {
-  public:
+public:
     
-
-    CMenuViewController(int red, int blue, int green, int alpha, CDataPoolSimple* dataPool = 0); 
+    
+    CMenuViewController(int red, int blue, int green, int alpha, CDataPoolSimple* dataPool = 0);
     ~CMenuViewController();
-
+    
     void initViews();
     void setupDelegates();
     void menuEvent(ofxUIEventArgs &e);
@@ -35,14 +35,18 @@ class CMenuViewController : public IView
     void hideAllViews();
     bool draw();
     void saveRadioButtonInfo(string boxID);
+    void processOpenFileSelection(ofFileDialogResult openFileResult, string boxID);
     
     CMenuView               *m_menu;
     CLoopEditorView         *m_loopEditor;
     CVisualThemesView       *m_visualEditor;
     CalibrationView         *m_calibrationEditor;
+    CDataPoolSimple         *m_datapool;
     
     int m_r, m_g, m_b, m_a;
-    bool m_exitMenu;   
+    bool m_exitMenu;
+    
+    string originalFileExtension;
 };
 
 #endif

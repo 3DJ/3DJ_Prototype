@@ -16,6 +16,7 @@ CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha
     m_a = alpha;
     m_exitMenu = false;
     
+    m_datapool = dataPool;
     initViews();
     setupDelegates(); //adds ofAddListener for each ofxUICanvas in views
     hideAllViews(); //hide all views at start
@@ -29,6 +30,7 @@ CMenuViewController::~CMenuViewController()
     delete m_loopEditor;
     delete m_visualEditor;
     delete m_calibrationEditor;
+    delete m_datapool;
 }
 
 void CMenuViewController::initViews()
@@ -45,7 +47,7 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
     string name = e.widget->getName();
     int kind = e.widget->getKind();
     
-//Main Menu
+    //Main Menu
     if(name == "Calibrate"){
         m_calibrationEditor->m_canvas1->setVisible(true);
         m_loopEditor->showCanvases(false);
@@ -70,8 +72,8 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
         m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(false);
         m_calibrationEditor->m_canvas1->setVisible(false);
-
-//Sub views
+        
+        //Sub views
     }else if(name == "Loop Editor"){
         m_loopEditor->m_canvas1->setVisible(true);
         m_visualEditor->m_canvas1->setVisible(false);
@@ -98,9 +100,9 @@ void CMenuViewController::loopEditorEvent(ofxUIEventArgs &e)
     }else if(name == "A3"){
         saveRadioButtonInfo(name);
     }else if(name == "A4"){
-      saveRadioButtonInfo(name);
+        saveRadioButtonInfo(name);
     }else if(name == "B1"){
-      saveRadioButtonInfo(name);
+        saveRadioButtonInfo(name);
     }else if(name == "B2"){
         saveRadioButtonInfo(name);
     }else if(name == "B3"){
@@ -142,7 +144,7 @@ void CMenuViewController::setupDelegates()
     ofAddListener(m_menu->m_canvas1->newGUIEvent, this, &CMenuViewController::menuEvent);
     ofAddListener(m_loopEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::loopEditorEvent);
     ofAddListener(m_visualEditor->m_canvas1->newGUIEvent, this, &CMenuViewController::visualEditorEvent);
-   
+    
 }
 
 void CMenuViewController::showMenuView(bool _showMenuView)
@@ -170,11 +172,53 @@ bool CMenuViewController::draw()
 
 void CMenuViewController::saveRadioButtonInfo(string boxID) {
     
-    //Prompt User to load file
-    //Check file extension, only allow files you want
-    //Get string name from audio file
-    //save string name to Button name in xml through data class
-    //Save file name to matrix player box to show update
+    //Open the Open File Dialog
+    ofFileDialogResult openFileResult= ofSystemLoadDialog("Select a wav or mp3 audio file");
     
+    //Check if the user opened a file
+    if (openFileResult.bSuccess){
+        
+        ofLogVerbose("User selected a file");
+        
+        //We have a file, check it and process it
+        processOpenFileSelection(openFileResult,boxID);
+        
+    }else {
+        ofLogVerbose("User hit cancel");
+    }
+}
+
+void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileResult, string boxID){
+	
+	ofLogVerbose("getName(): "  + openFileResult.getName());
+	ofLogVerbose("getPath(): "  + openFileResult.getPath());
+	
+	ofFile file (openFileResult.getPath());
+	
+	if (file.exists()){
+		
+		ofLogVerbose("The file exists - now checking the type via file extension");
+		string fileExtension = ofToUpper(file.getExtension());
+		
+		//Only WAV or MP3 Files
+		if (fileExtension == "WAV" || fileExtension == "MP3") {
+            
+            //====================================================================
+            //Load sound files into Datapool XML File
+            //====================================================================
+            //Right now, all sound files must be in data/sounds/ directory
+            string fileName = "sounds/" + file.getFileName() + fileExtension;
+            string key = "world_sample_" + boxID + "_soundName";
+            
+            //NOT WORKING
+            m_datapool->setValue(key, fileName);
+            
+            //Reload soundPlayer in box Here...
+            
+            //====================================================================
+			
+		}
+	}
+	
 }
 
