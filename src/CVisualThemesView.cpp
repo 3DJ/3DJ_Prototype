@@ -21,6 +21,7 @@ CVisualThemesView::CVisualThemesView(int red, int green, int blue, int alpha)
     m_user_a = 200;
     
     setupGUI(m_background_r,m_background_g,m_background_b,m_background_a);
+    
 }
 
 CVisualThemesView::~CVisualThemesView()

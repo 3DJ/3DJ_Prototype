@@ -21,14 +21,16 @@ CLoopEditorView::~CLoopEditorView()
 
 void CLoopEditorView::setupGUI()
 {
+    ofColor paddingColor = ofColor(152,202,86,200);
     int dim = 16;
     int xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     int widthOffset = 200;
+    int heightOffset = 50;
     int canvasOneWidth = (ofGetScreenWidth()-widthOffset) / 2;
     int canvasOneHeight = ofGetScreenHeight();
 
     int canvasTwoWidth = (ofGetScreenWidth()-widthOffset) / 2;
-    int canvasTwoHeight = ofGetScreenHeight();
+    int canvasTwoHeight = ofGetScreenHeight()-heightOffset;
     
     int spacerHeight = 15;
     
@@ -37,7 +39,7 @@ void CLoopEditorView::setupGUI()
     
     
     //Canvas One ------------------
-    m_canvas1 = new ofxUICanvas(widthOffset,0,canvasOneWidth,canvasOneHeight);
+    m_canvas1 = new ofxUICanvas(widthOffset,heightOffset,canvasOneWidth,canvasOneHeight);
 
     m_canvas1->addWidgetDown(new ofxUILabel("Loop Editor",OFX_UI_FONT_LARGE));
     m_canvas1->addWidgetDown(new ofxUILabel("Audio Player",OFX_UI_FONT_MEDIUM));
@@ -45,10 +47,13 @@ void CLoopEditorView::setupGUI()
     
     
     // Canvas Two -----------------
-    m_canvas2 = new ofxUICanvas(widthOffset + canvasOneWidth,0,canvasTwoWidth,canvasTwoHeight);
+    m_canvas2 = new ofxUICanvas(widthOffset + canvasOneWidth,heightOffset,canvasTwoWidth,canvasTwoHeight);
+    m_canvas2->setDrawBack(false);
     
     m_canvas2->addWidgetDown(new ofxUILabel("Audio Loader",OFX_UI_FONT_LARGE));
-
+    
+	ofxUIWidget *w = (ofxUILabel *) m_canvas2->addWidgetDown(new ofxUILabel(canvasTwoWidth - xInit, "Click on Button to Load File", OFX_UI_FONT_LARGE));
+    w->setColorPadded(paddingColor);
     
     //Loop Loader Row A
     vector<string> boxRowA;
@@ -56,8 +61,8 @@ void CLoopEditorView::setupGUI()
 	boxRowA.push_back("A2");
 	boxRowA.push_back("A3");
     boxRowA.push_back("A4");
-    m_canvas2->addRadio("Row A", boxRowA, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
-
+    w = m_canvas2->addRadio("Row A", boxRowA, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
+    w->setColorPadded(paddingColor);
 
     //Loop Loader Row B
     vector<string> boxRowB;
@@ -65,8 +70,8 @@ void CLoopEditorView::setupGUI()
 	boxRowB.push_back("B2");
 	boxRowB.push_back("B3");
     boxRowB.push_back("B4");
-    m_canvas2->addRadio("Row B", boxRowB, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
-
+    w = m_canvas2->addRadio("Row B", boxRowB, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
+    w->setColorPadded(paddingColor);
     
     //Loop Loader Row C
     vector<string> boxRowC;
@@ -74,7 +79,11 @@ void CLoopEditorView::setupGUI()
 	boxRowC.push_back("C2");
 	boxRowC.push_back("C3");
     boxRowC.push_back("C4");
-    m_canvas2->addRadio("Row C", boxRowC, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
+    w = m_canvas2->addRadio("Row C", boxRowC, OFX_UI_ORIENTATION_HORIZONTAL, dim*3, dim*3);
+    w->setColorPadded(paddingColor);
+    
+    m_canvas1->setDrawWidgetPadding(false);
+    m_canvas2->setDrawWidgetPadding(false);
 
 }
 
