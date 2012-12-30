@@ -1,14 +1,3 @@
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxDepthGenerator.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxGestureGenerator.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxHandGenerator.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxHardwareDriver.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxImageGenerator.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxIRGenerator.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxOpenNIContext.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxOpenNIRecorder.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxTrackedHand.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxTrackedUser.o
-/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxUserGenerator.o
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/BoxButton.o
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/CalibrationView.o
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/CBoxController.o
@@ -38,3 +27,5 @@
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/tinyxmlparser.o
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxXmlSettings.o
 /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/CBoxView.o
+/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxOpenNI.o
+/Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/build/openNI-3DJ.build/Debug/openNI-3DJ.build/Objects-normal/i386/ofxOpenNITypes.o

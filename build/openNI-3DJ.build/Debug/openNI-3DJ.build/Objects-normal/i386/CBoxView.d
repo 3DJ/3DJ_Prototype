@@ -127,7 +127,8 @@ dependencies: \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/ControlBoxButton.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/KinectData.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNI.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNIContext.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNITypes.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNIUtils.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOpenNI.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnTypes.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnStatus.h \
@@ -155,19 +156,6 @@ dependencies: \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnLog.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnLogTypes.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnDump.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxImageGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxIRGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxDepthGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxUserGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxTrackedUser.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxHandGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxGestureGenerator.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxTrackedHand.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNIRecorder.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNIMacros.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnPropNames.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxHardwareDriver.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/libusb/libusb.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/PointView.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/EQView.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/SnakeFish.h \

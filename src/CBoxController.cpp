@@ -150,48 +150,63 @@ void CBoxController::update(double time_since_last_update)
 
 void CBoxController::testHits()
 {
-    int w = m_oniKinect.m_recordUser.getWidth();
-	int h = m_oniKinect.m_recordUser.getHeight();
+    int w = m_oniKinect.m_openNIDevice.getWidth();
+	int h = m_oniKinect.m_openNIDevice.getHeight();
     int index = 0;
 	int step = 5;
-	for(int y = 0; y < h; y += step) {
-		for(int x = 0; x < w; x += step) {
-            ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
-            if (XYZ.z > 0) {
-                XYZ.x = (XYZ.x - w/2)*m_scale;
-                XYZ.y = (XYZ.y - h/2)*m_scale;
-                XYZ.z -= m_playerDepth;
-                handleCollisions(&XYZ); //check for hits for all buttons
-                index++;
-                if (index%2) m_pointView->addPoint(XYZ.x + ofRandom(-5,5), XYZ.y + ofRandom(-5,5), XYZ.z + ofRandom(-5,5));
-            }
-		}
-	}
+	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
+    
+    for (int i = 0; i < numUsers; i++) {
+    
+        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+        ofMesh & mesh = user.getPointCloud();
+        vector<ofVec3f> XYZ =  mesh.getVertices();
+        
+      for (vector<ofVec3f>::iterator i = XYZ.begin(); i != XYZ.end(); i++) {
+
+          if (i->z > 0) {
+              i->x = (i->x - w/2)*m_scale;
+              i->y = (i->y - h/2)*m_scale;
+              i->z -= m_playerDepth;
+            
+              ofPoint p = ofPoint(i->x,i->y,i->z);
+              handleCollisions(&p); //check for hits for all buttons
+              index++;
+              if (index%2) m_pointView->addPoint(i->x + ofRandom(-5,5), i->y + ofRandom(-5,5), i->z + ofRandom(-5,5));
+          }
+
+      }
+    }
     
     int points = 0;
     static float frontPoint;
     static float origin;
-    for(int y = 40; y > 0; y -= step) {
-        for(int x = 0; x < w; x += step) {
-            ofPoint XYZ = m_oniKinect.m_recordUser.getWorldCoordinateAt(x, y, m_oniKinect.m_numberOfUsersToTrack);
-            if ( XYZ.z > 0)
+    
+    for (int i = 0; i < numUsers; i++) {
+        
+        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+        ofMesh & mesh = user.getPointCloud();
+        vector<ofVec3f> XYZ =  mesh.getVertices();
+        
+        for (vector<ofVec3f>::iterator i = XYZ.begin(); i != XYZ.end(); i++) {
+            
+            if (i->z > 0)
             {
                 points++;
-                int distance = abs(origin - XYZ.x);
-                if ( points > 7 && distance > 80){                       
+                int distance = abs(origin - i->x);
+                if ( points > 7 && distance > 80){
                     if ( origin == 0)
-                    {                    
-                        frontPoint = XYZ.x;
-                        origin = XYZ.x;
-                    }
-
-                    if ( abs( XYZ.x - frontPoint) < 100 )
                     {
-                        frontPoint = XYZ.x;
-                        complexor = ( XYZ.x - origin );
-                    }                                        
+                        frontPoint = i->x;
+                        origin = i->x;
+                    }
+                    
+                    if ( abs( i->x - frontPoint) < 100 )
+                    {
+                        frontPoint = i->x;
+                        complexor = ( i->x - origin );
+                    }
                 }
-
             }
         }
     }

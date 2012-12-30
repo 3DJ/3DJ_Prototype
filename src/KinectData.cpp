@@ -18,35 +18,37 @@ void CKinectData::setup()
 	m_filterFactor = 0.1f;
     m_numberOfUsersToTrack = 1;// only use the depth points of the DJ. i.e. The first peron to be tracked
 
-    m_recordContext.setup();
-
-    m_recordDepth.setup(&m_recordContext);
-    m_recordUser.setup(&m_recordContext);
-
-    m_recordUser.setSmoothing(m_filterFactor);	// built in openni skeleton smoothing...
-    m_recordUser.setUseMaskPixels(m_isMasking);
-
-    m_recordUser.setUseCloudPoints(m_isCloud);
-    m_recordUser.setMaxNumberOfUsers(m_numberOfUsersToTrack);	// use this to set dynamic max number of users
+    m_openNIDevice.setup();
+    m_openNIDevice.addImageGenerator();
+    m_openNIDevice.addDepthGenerator();
+    m_openNIDevice.setRegister(true);
+    m_openNIDevice.setMirror(false);
+    m_openNIDevice.addUserGenerator();
+    m_openNIDevice.setMaxNumUsers(2);
+    m_openNIDevice.start();
     
-    //m_hardware.setup();
-    //m_hardware.setTiltAngle(20.0f);
+    // set properties for all user masks and point clouds
+    //openNIDevice.setUseMaskPixelsAllUsers(true); // if you just want pixels, use this set to true
+    m_openNIDevice.setUseMaskPixelsAllUsers(true);
+    m_openNIDevice.setUsePointCloudsAllUsers(true);
+    m_openNIDevice.setPointCloudDrawSizeAllUsers(2);
+    m_openNIDevice.setPointCloudResolutionAllUsers(5);
 
 }
 
 void CKinectData::update()
 {
-    m_recordContext.update();
-    m_isTracking = m_recordUser.getNumberOfTrackedUsers() > 0;
-    m_recordUser.update();
+    m_isTracking = true;
+    m_openNIDevice.update();
 }
 
 void CKinectData::draw()
 {
     
+
 }
 
 void CKinectData::exit()
 {
-    //m_hardware.setTiltAngle(30.0f);
+
 }
