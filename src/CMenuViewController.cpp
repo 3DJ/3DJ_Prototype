@@ -160,6 +160,7 @@ void CMenuViewController::hideAllViews()
 {
     m_menu->m_canvas1->setVisible(false);
     m_loopEditor->m_canvas1->setVisible(false);
+    m_loopEditor->m_canvas2->setVisible(false);
     m_visualEditor->m_canvas1->setVisible(false);
     m_calibrationEditor->m_canvas1->setVisible(false);
 }
