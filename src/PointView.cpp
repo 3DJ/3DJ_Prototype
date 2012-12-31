@@ -48,7 +48,9 @@ void CPointView::addPoint( const float x, const float y, const float z)
 
     //Pass the size in as a normal x position
     float size = ofRandom(8,35);
-    //m_sizes.push_back(size);
+    
+    m_sizes.push_back(ofVec3f(size));
+    
 }
 
 void CPointView::clearData()
@@ -62,4 +64,5 @@ void CPointView::uploadDataToVbo()
 {
     m_vbo.setVertexData(&m_points[0], 8, GL_STATIC_DRAW);
     m_vbo.setNormalData(&m_sizes[0],(int)m_sizes.size(), GL_STATIC_DRAW);
+    
 }

@@ -31,7 +31,7 @@ void CWorld::render()
 {
     if ( m_view != 0)
     {
-        m_view->draw(); 
+        m_view->draw();
     }    
 }
 

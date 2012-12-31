@@ -136,8 +136,6 @@ bool CBoxController::update()
 
 void CBoxController::update(double time_since_last_update)
 {
-	//ofBackground(m_background_r, m_background_g, m_background_b);
-    //ofBackgroundGradient(ofColor(0), ofColor(25,22,10));
     
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
@@ -153,26 +151,25 @@ void CBoxController::testHits()
     int w = m_oniKinect.m_openNIDevice.getWidth();
 	int h = m_oniKinect.m_openNIDevice.getHeight();
     int index = 0;
-	int step = 5;
 	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
     
     for (int i = 0; i < numUsers; i++) {
     
         ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
-        ofMesh & mesh = user.getPointCloud();
-        vector<ofVec3f> XYZ =  mesh.getVertices();
+        ofMesh userMesh = user.getPointCloud();
+        vector<ofVec3f> vertices =  userMesh.getVertices();
         
-      for (vector<ofVec3f>::iterator i = XYZ.begin(); i != XYZ.end(); i++) {
+      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
 
-          if (i->z > 0) {
-              i->x = (i->x - w/2)*m_scale;
-              i->y = (i->y - h/2)*m_scale;
-              i->z -= m_playerDepth;
+          if (vertex->z > 0) {
+              vertex->x = (vertex->x - w/2)*m_scale;
+              vertex->y = (vertex->y - h/2)*m_scale;
+              vertex->z -= m_playerDepth;
             
-              ofPoint p = ofPoint(i->x,i->y,i->z);
+              ofPoint p = ofPoint(vertex->x,vertex->y,vertex->z);
               handleCollisions(&p); //check for hits for all buttons
               index++;
-              if (index%2) m_pointView->addPoint(i->x + ofRandom(-5,5), i->y + ofRandom(-5,5), i->z + ofRandom(-5,5));
+              if (index%2) m_pointView->addPoint(vertex->x + ofRandom(-5,5), vertex->y + ofRandom(-5,5), vertex->z + ofRandom(-5,5));
           }
 
       }
@@ -185,26 +182,26 @@ void CBoxController::testHits()
     for (int i = 0; i < numUsers; i++) {
         
         ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
-        ofMesh & mesh = user.getPointCloud();
-        vector<ofVec3f> XYZ =  mesh.getVertices();
+        ofMesh & userMesh = user.getPointCloud();
+        vector<ofVec3f> vertices =  userMesh.getVertices();
         
-        for (vector<ofVec3f>::iterator i = XYZ.begin(); i != XYZ.end(); i++) {
+        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
             
-            if (i->z > 0)
+            if (vertex->z > 0)
             {
                 points++;
-                int distance = abs(origin - i->x);
+                int distance = abs(origin - vertex->x);
                 if ( points > 7 && distance > 80){
                     if ( origin == 0)
                     {
-                        frontPoint = i->x;
-                        origin = i->x;
+                        frontPoint = vertex->x;
+                        origin = vertex->x;
                     }
                     
-                    if ( abs( i->x - frontPoint) < 100 )
+                    if ( abs( vertex->x - frontPoint) < 100 )
                     {
-                        frontPoint = i->x;
-                        complexor = ( i->x - origin );
+                        frontPoint = vertex->x;
+                        complexor = ( vertex->x - origin );
                     }
                 }
             }
@@ -219,11 +216,9 @@ void CBoxController::testHits()
 
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);
-    //m_oniKinect.m_recordUser.draw(); //Draw 2D Skeletin on screen...
     ofPopMatrix();
-       
+    
 }
-
 
 void CBoxController::addBoxButton(CBoxButton * _boxButton)
 {

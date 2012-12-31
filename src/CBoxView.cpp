@@ -143,7 +143,7 @@ void CBoxView::render()
     
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth()/2, + ofGetWindowHeight());
-    m_particles->render();
+    //m_particles->render();
     ofPopMatrix();
     //m_equalizerView->drawEQRect();
     
@@ -163,7 +163,6 @@ void CBoxView::drawDepthPoints()
     
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);
-    //m_oniKinect->m_recordUser.draw(); //Draw 2D Skeletin on screen...
     ofPopMatrix();
        
 }
