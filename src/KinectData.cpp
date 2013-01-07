@@ -25,31 +25,32 @@ void CKinectData::setup()
     m_openNIDevice.setMirror(false);
     m_openNIDevice.addUserGenerator();
     m_openNIDevice.setMaxNumUsers(m_numberOfUsersToTrack);
+    m_openNIDevice.setUsePointCloudsAllUsers(m_isCloud);
     m_openNIDevice.start();
     
-    // set properties for all user masks and point clouds
-    //openNIDevice.setUseMaskPixelsAllUsers(true); // if you just want pixels, use this set to true
-    m_openNIDevice.setUseMaskPixelsAllUsers(true);
-    m_openNIDevice.setUsePointCloudsAllUsers(m_isCloud);
-    m_openNIDevice.setPointCloudDrawSizeAllUsers(2);
-    m_openNIDevice.setPointCloudResolutionAllUsers(5);
-
+    /*Setup Base User Settings */
+    ofxOpenNIUser user;
+    user.setUseMaskTexture(true);
+    user.setUsePointCloud(true);
+    user.setPointCloudDrawSize(2); // this is the size of the glPoint that will be drawn for the point cloud
+    user.setPointCloudResolution(5); // this is the step size between points for the cloud
+    m_openNIDevice.setBaseUserClass(user);
+    
 }
 
 void CKinectData::update()
 {
-    m_isTracking = true;
+    m_isTracking = m_openNIDevice.getNumTrackedUsers() > 0;
     m_openNIDevice.update();
 }
 
 void CKinectData::draw()
 {
-    
 
 
 }
 
 void CKinectData::exit()
 {
-
+    
 }

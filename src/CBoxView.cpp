@@ -136,8 +136,8 @@ void CBoxView::render()
     ofTranslate(0, -1.5*ofGetHeight(), -5000);
     ofPopMatrix();
     
-    m_snakeFish->render();      //Draw Creature
-    m_snakeFish->postRender();
+    //m_snakeFish->render();      //Draw Creature
+    //m_snakeFish->postRender();
     
     m_easyCam->end();
     

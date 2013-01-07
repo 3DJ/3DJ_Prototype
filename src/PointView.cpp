@@ -34,7 +34,12 @@ void CPointView:: drawParticles()
     m_texture.unbind();
     m_shader.end();
 
+    for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p++){
+        ofCircle(p->x, p->y, p->z, 15.0f);
+    }
+    
     ofDisablePointSprites();
+    
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 

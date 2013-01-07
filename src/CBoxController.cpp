@@ -154,24 +154,25 @@ void CBoxController::testHits()
 	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
     
     for (int i = 0; i < numUsers; i++) {
-    
-        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+
+    ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+
         ofMesh userMesh = user.getPointCloud();
         vector<ofVec3f> vertices =  userMesh.getVertices();
-        
-      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
 
-          if (vertex->z > 0) {
-              vertex->x = (vertex->x - w/2)*m_scale;
-              vertex->y = (vertex->y - h/2)*m_scale;
-              vertex->z -= m_playerDepth;
+      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
+        
+          ofPoint p = ofPoint(vertex->x,vertex->y,vertex->z);
+          if (p.z > 0) {
+              p.x = (p.x - w/2)*m_scale;
+              p.y = (p.y - h/2)*m_scale;
+              p.z -= m_playerDepth;
             
-              ofPoint p = ofPoint(vertex->x,vertex->y,vertex->z);
+              
               handleCollisions(&p); //check for hits for all buttons
               index++;
-              if (index%2) m_pointView->addPoint(vertex->x + ofRandom(-5,5), vertex->y + ofRandom(-5,5), vertex->z + ofRandom(-5,5));
+              m_pointView->addPoint(p.x, p.y, p.z);
           }
-
       }
     }
     
@@ -180,11 +181,11 @@ void CBoxController::testHits()
     static float origin;
     
     for (int i = 0; i < numUsers; i++) {
-        
+
         ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
-        ofMesh & userMesh = user.getPointCloud();
+        ofMesh userMesh = user.getPointCloud();
         vector<ofVec3f> vertices =  userMesh.getVertices();
-        
+
         for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
             
             if (vertex->z > 0)
@@ -215,7 +216,7 @@ void CBoxController::testHits()
     }
 
     ofPushMatrix();
-    ofTranslate(-w/2, -h/2, m_playerDepth);
+    //ofTranslate(-w/2, -h/2, m_playerDepth);
     ofPopMatrix();
     
 }
