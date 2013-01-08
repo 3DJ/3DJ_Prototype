@@ -30,12 +30,12 @@ void CPointView:: drawParticles()
 
     m_shader.begin();
     m_texture.bind();
-    m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
+    //m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
     m_texture.unbind();
     m_shader.end();
 
-    for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p++){
-        ofCircle(p->x, p->y, p->z, 15.0f);
+    for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p+=5){
+        ofCircle(p->x, p->y, p->z, 8.0f);
     }
     
     ofDisablePointSprites();

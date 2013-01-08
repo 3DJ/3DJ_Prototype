@@ -19,7 +19,7 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
     if( dataPool->getPointerByName( "equalizerView", temporary)) { m_equalizerView = (CEQView *) temporary; }
     if( dataPool->getPointerByName( "snakeFish", temporary)) { m_snakeFish = (SnakeFish *) temporary; }
     if( dataPool->getPointerByName( "particles", temporary)) { m_particles = (Particles *) temporary; }
-
+    
     if( dataPool->getPointerByName( "a1Button", temporary)) { 
         m_a1Button = (CBoxButton*) temporary; 
         m_boxButtons.push_back( m_a1Button );       
@@ -144,8 +144,8 @@ void CBoxView::render()
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth()/2, + ofGetWindowHeight());
     //m_particles->render();
+    
     ofPopMatrix();
-    //m_equalizerView->drawEQRect();
     
 //    string msg = "Scale : " + ofToString(m_scale,2);
 //    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);

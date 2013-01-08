@@ -139,7 +139,6 @@ void CBoxController::update(double time_since_last_update)
     
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
-
     m_snakeFish->preRender();
     m_snakeFish->move();
     m_particles->update();
@@ -152,6 +151,7 @@ void CBoxController::testHits()
 	int h = m_oniKinect.m_openNIDevice.getHeight();
     int index = 0;
 	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
+    int step = 1;
     
     for (int i = 0; i < numUsers; i++) {
 
@@ -160,63 +160,62 @@ void CBoxController::testHits()
         ofMesh userMesh = user.getPointCloud();
         vector<ofVec3f> vertices =  userMesh.getVertices();
 
-      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
-        
-          ofPoint p = ofPoint(vertex->x,vertex->y,vertex->z);
-          if (p.z > 0) {
-              p.x = (p.x - w/2)*m_scale;
-              p.y = (p.y - h/2)*m_scale;
-              p.z -= m_playerDepth;
+      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
+          
+          ofPoint XYZ = ofPoint(vertex->x,vertex->y,vertex->z);
+          if (XYZ.z > 0) {
+              XYZ.x = (XYZ.x - w/2)*m_scale;
+              XYZ.y = (XYZ.y - h/2)*m_scale;
+              XYZ.z -= m_playerDepth;
             
-              
-              handleCollisions(&p); //check for hits for all buttons
+              handleCollisions(&XYZ); //check for hits for all buttons
               index++;
-              m_pointView->addPoint(p.x, p.y, p.z);
+              m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
           }
       }
     }
     
-    int points = 0;
-    static float frontPoint;
-    static float origin;
-    
-    for (int i = 0; i < numUsers; i++) {
-
-        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
-        ofMesh userMesh = user.getPointCloud();
-        vector<ofVec3f> vertices =  userMesh.getVertices();
-
-        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex++) {
-            
-            if (vertex->z > 0)
-            {
-                points++;
-                int distance = abs(origin - vertex->x);
-                if ( points > 7 && distance > 80){
-                    if ( origin == 0)
-                    {
-                        frontPoint = vertex->x;
-                        origin = vertex->x;
-                    }
-                    
-                    if ( abs( vertex->x - frontPoint) < 100 )
-                    {
-                        frontPoint = vertex->x;
-                        complexor = ( vertex->x - origin );
-                    }
-                }
-            }
-        }
-    }
-
-    if ( points == 0 )
-    {
-        origin = 0;
-        complexor = 0;
-    }
+//    int points = 0;
+//    static float frontPoint;
+//    static float origin;
+//    
+//    for (int i = 0; i < numUsers; i++) {
+//
+//        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+//        ofMesh userMesh = user.getPointCloud();
+//        vector<ofVec3f> vertices =  userMesh.getVertices();
+//
+//        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
+//            
+//            if (vertex->z > 0)
+//            {
+//                points++;
+//                int distance = abs(origin - vertex->x);
+//                if ( points > 7 && distance > 80){
+//                    if ( origin == 0)
+//                    {
+//                        frontPoint = vertex->x;
+//                        origin = vertex->x;
+//                    }
+//                    
+//                    if ( abs( vertex->x - frontPoint) < 100 )
+//                    {
+//                        frontPoint = vertex->x;
+//                        complexor = ( vertex->x - origin );
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    if ( points == 0 )
+//    {
+//        origin = 0;
+//        complexor = 0;
+//    }
 
     ofPushMatrix();
-    //ofTranslate(-w/2, -h/2, m_playerDepth);
+    ofTranslate(-w/2, -h/2, m_playerDepth);
     ofPopMatrix();
     
 }

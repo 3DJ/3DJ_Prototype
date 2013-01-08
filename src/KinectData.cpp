@@ -13,7 +13,7 @@ void CKinectData::setup()
     m_isTracking	= false;
 	m_isFiltering	= false;
 	m_isCloud		= true;
-	m_isMasking		= false;
+	m_isMasking		= true;
 
 	m_filterFactor = 0.1f;
     m_numberOfUsersToTrack = 1;// only use the depth points of the DJ. i.e. The first peron to be tracked
@@ -30,10 +30,8 @@ void CKinectData::setup()
     
     /*Setup Base User Settings */
     ofxOpenNIUser user;
-    user.setUseMaskTexture(true);
+    user.setUseMaskTexture(m_isMasking);
     user.setUsePointCloud(true);
-    user.setPointCloudDrawSize(2); // this is the size of the glPoint that will be drawn for the point cloud
-    user.setPointCloudResolution(5); // this is the step size between points for the cloud
     m_openNIDevice.setBaseUserClass(user);
     
 }

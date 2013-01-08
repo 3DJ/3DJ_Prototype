@@ -81,7 +81,7 @@ public:
     ofColor m_gradientColorOutside, m_gradientColorInside;
 
     CPointView * m_pointView;
-    ofEasyCam *m_easyCam;
+    ofEasyCam * m_easyCam;
     CEQView *m_equalizerView;
     SnakeFish *m_snakeFish;
     Particles *m_particles;
