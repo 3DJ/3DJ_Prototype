@@ -13,6 +13,8 @@ Clone this repository into `openFrameworks/apps/devApps`. Get the [sound files](
 
 * Download ofxOpenNI 2 library and place in addons directory. For Mac users, copy config and lib directories from ofxOpenNI/mac/ into bin/data/
 
+* ofxUI
+
 <b>Another two ways to use 3DJ:</b>
 1. using zigfu. just download binary. nothing more.
 2. just installing Kinect drivers, OpenNI and NITE and downlaod the binary from www.3-dj.com
