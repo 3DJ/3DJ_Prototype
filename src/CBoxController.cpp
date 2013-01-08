@@ -66,7 +66,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     addBoxButton(m_b4Button);
 
     //Row C
-    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
+    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Drums.wav");
     addBoxButton(m_c1Button);
     m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
     addBoxButton(m_c2Button);
@@ -208,6 +208,7 @@ void CBoxController::testHits()
 //        }
 //    }
 //
+//    
 //    if ( points == 0 )
 //    {
 //        origin = 0;

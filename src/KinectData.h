@@ -25,8 +25,6 @@ public:
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 
-	//ofxUserGenerator	  m_recordUser;
-
     ofxOpenNI           m_openNIDevice;
 };
 

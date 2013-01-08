@@ -16,7 +16,7 @@ void CKinectData::setup()
 	m_isMasking		= true;
 
 	m_filterFactor = 0.1f;
-    m_numberOfUsersToTrack = 1;// only use the depth points of the DJ. i.e. The first peron to be tracked
+    m_numberOfUsersToTrack = 1;// only use the depth points of the first pesron to be tracked
 
     m_openNIDevice.setup();
     m_openNIDevice.addImageGenerator();
