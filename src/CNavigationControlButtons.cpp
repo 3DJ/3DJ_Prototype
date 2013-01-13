@@ -96,6 +96,7 @@ void CNavigationControlButtons::drawCircleStroke( ){
 
 bool CNavigationControlButtons::collisionTest(ofPoint *point){
     //test for collisions
+    return false;
 }
 
 void CNavigationControlButtons::windowSizeChanged()

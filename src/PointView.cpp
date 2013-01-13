@@ -30,11 +30,16 @@ void CPointView:: drawParticles()
 
     m_shader.begin();
     m_texture.bind();
-    m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
+    //m_vbo.draw(GL_POINTS, 0, (int)m_points.size());
     m_texture.unbind();
     m_shader.end();
 
+    for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p+=5){
+        ofCircle(p->x, p->y, p->z, 8.0f);
+    }
+    
     ofDisablePointSprites();
+    
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 
@@ -48,7 +53,9 @@ void CPointView::addPoint( const float x, const float y, const float z)
 
     //Pass the size in as a normal x position
     float size = ofRandom(8,35);
-    m_sizes.push_back(size);
+    
+    m_sizes.push_back(ofVec3f(size));
+    
 }
 
 void CPointView::clearData()
@@ -60,6 +67,7 @@ void CPointView::clearData()
 
 void CPointView::uploadDataToVbo()
 {
-    m_vbo.setVertexData(&m_points[0], (int)m_points.size(), GL_STATIC_DRAW);
+    m_vbo.setVertexData(&m_points[0], 8, GL_STATIC_DRAW);
     m_vbo.setNormalData(&m_sizes[0],(int)m_sizes.size(), GL_STATIC_DRAW);
+    
 }

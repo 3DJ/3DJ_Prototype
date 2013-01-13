@@ -1,1 +1,3 @@
 ofxOpenNI
+ofxUI
+ofxXmlSettings

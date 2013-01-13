@@ -25,11 +25,7 @@ public:
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 
-    ofxOpenNIContext	m_recordContext;
-	ofxDepthGenerator	m_recordDepth;
-	ofxUserGenerator	m_recordUser;
-    ofxHardwareDriver   m_hardware;
-    
+    ofxOpenNI           m_openNIDevice;
 };
 
 #endif /* defined(__openNI_3DJ__KinectData__) */

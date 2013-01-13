@@ -12,14 +12,20 @@
 #include "CLoopEditorView.h"
 #include "CVisualThemesView.h"
 #include "CalibrationView.h"
+#include "Interface.h"
+#include "DataPool.h"
 
-class CMenuViewController : public ofBaseApp
+using namespace DataPool;
+using namespace Interface;
+
+class CMenuViewController : public IView
 {
-  public:
+public:
     
-    CMenuViewController(int red, int blue, int green, int alpha);
+    
+    CMenuViewController(int red, int blue, int green, int alpha, CDataPoolSimple* dataPool = 0);
     ~CMenuViewController();
-
+    
     void initViews();
     void setupDelegates();
     void menuEvent(ofxUIEventArgs &e);
@@ -27,15 +33,20 @@ class CMenuViewController : public ofBaseApp
     void visualEditorEvent(ofxUIEventArgs &e);
     void showMenuView(bool _showMenuView);
     void hideAllViews();
+    bool draw();
+    void saveRadioButtonInfo(string boxID);
+    void processOpenFileSelection(ofFileDialogResult openFileResult, string boxID);
     
     CMenuView               *m_menu;
     CLoopEditorView         *m_loopEditor;
     CVisualThemesView       *m_visualEditor;
     CalibrationView         *m_calibrationEditor;
+    CDataPoolSimple         *m_datapool;
     
     int m_r, m_g, m_b, m_a;
     bool m_exitMenu;
     
+    string originalFileExtension;
 };
 
 #endif

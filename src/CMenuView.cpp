@@ -20,13 +20,15 @@ CMenuView::~CMenuView()
 
 void CMenuView::setupGUI()
 {
+    int heightOffset = 50;
     int canvas_w = 200;
-    int canvas_h = ofGetScreenHeight();
+    int canvas_h = ofGetScreenHeight() - heightOffset;
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
     float length = canvas_w-(xInit*2);
-    float buttonLength = length; //(length-xInit)*.5; 
+    float buttonLength = length; //(length-xInit)*.5;
+    
   
-    m_canvas1 = new ofxUICanvas(0,0,canvas_w, canvas_h);
+    m_canvas1 = new ofxUICanvas(0,heightOffset,canvas_w, canvas_h);
   
     ofColor m_3DJ_Green_Light = ofColor(152,202,82);
     ofColor m_3DJ_Green_Dark = ofColor(108,129,108);
@@ -34,12 +36,14 @@ void CMenuView::setupGUI()
     m_canvas1->setPadding(true);
     
     //m_canvas1->addWidgetDown(new ofxUIImageButton(0, 0, length, length, false, "icons/3DJ_Logo_Small.png", ""));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Calibrate"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Start Session"));
-    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Styles"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0,0,buttonLength, false, "Sets"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Styles"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Calibrate"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0,0, buttonLength, false, "Get Songs"));
+    m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Save Core Data"));
     m_canvas1->addWidgetDown(new ofxUILabelButton(0, 0, buttonLength, false, "Help"));
+
     
 
 }

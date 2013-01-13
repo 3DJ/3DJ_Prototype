@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp \
-  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
   ../../../libs/openFrameworks/ofMain.h \
   ../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../libs/glew/include/GL/glew.h \
@@ -65,10 +65,10 @@ dependencies: \
   ../../../libs/openFrameworks/3d/ofMesh.h \
   ../../../libs/openFrameworks/gl/ofGLUtils.h \
   ../../../libs/openFrameworks/graphics/ofPixels.h \
-  ../../../libs/openFrameworks/math/ofVectorMath.h \
-  ../../../libs/openFrameworks/math/ofMatrix3x3.h \
   ../../../libs/openFrameworks/math/ofMatrix4x4.h \
   ../../../libs/openFrameworks/math/ofQuaternion.h \
+  ../../../libs/openFrameworks/math/ofVectorMath.h \
+  ../../../libs/openFrameworks/math/ofMatrix3x3.h \
   ../../../libs/openFrameworks/communication/ofSerial.h \
   ../../../libs/openFrameworks/communication/ofArduino.h \
   ../../../libs/openFrameworks/gl/ofFbo.h \
@@ -115,4 +115,4 @@ dependencies: \
   ../../../libs/openFrameworks/video/ofQuickTimePlayer.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h

@@ -8,6 +8,8 @@
 
 #include "BoxButton.h"
 
+float complexor;
+
 CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName)
 {
     m_x = centerX;
@@ -19,6 +21,7 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_b = blueVal;
     m_a = alphaVal;
 
+    m_complexor = 0;
     m_isRepeat = false;
     m_toBeStop = false;
     m_pointsInArea = 0;
@@ -40,23 +43,66 @@ CBoxButton::~CBoxButton()
 
 void CBoxButton::render()  //Draw boxes and set color
 {
-    ofSetLineWidth(2); 
+    if ( complexor != 0 || m_complexor/50 != 0)
+    {
+        if ( complexor != 0){
+            m_complexor = complexor;
+        }
+        else{
+            if ( m_complexor >= 0 && m_complexor <= 200 )
+            {
+                m_complexor = m_complexor - 40;
+            }
+            else if( m_complexor < 0 && m_complexor >= -200 )
+            {
+                m_complexor = m_complexor + 40;
+            }
+            else if ( m_complexor < -200 ){
+                m_complexor = m_complexor - 80;
+                g_currentState = ST_MENU_STATE;
+                m_complexor = 0;
+            }
+            else if ( m_complexor > 200 ){
+                m_complexor = m_complexor + 80;
+            }
+
+        }
+
+        if ( m_complexor > 2000 || m_complexor < -2000)
+        {
+            m_complexor = 0;
+        }
+
+        {
+
+            drawBox(m_complexor);
+            drawBox(m_complexor - 2000);
+            drawBox(m_complexor + 2000);
+            // shut down the sound.
+            m_soundPlayer.setLoop(false);
+            m_soundPlayer.stop();
+            m_soundPlayer.setPosition(0);
+        }
+    }
+    else
+    {
+    ofSetLineWidth(2);
     if ( m_isRepeat && !isCurrentlyHit() )
     {// make it stop on next hit.
         m_toBeStop = true;
-        
+
         ofPushMatrix();
         ofTranslate(m_x, m_y,m_z);
         ofRotateY(ofGetElapsedTimef()* 20);
-        
-        
+
+
         ofPushMatrix(); //Draw inside Box to indicate its looping
         ofSetColor(0,220,0,200);
         ofFill();
         ofSetSphereResolution(2);
         ofSphere(0,0,0, m_size * 0.25);
         ofPopMatrix();
-        
+
         ofPushMatrix();
         ofSetColor(20,50,20);
         ofEnableSmoothing();
@@ -64,7 +110,7 @@ void CBoxButton::render()  //Draw boxes and set color
         ofSetLineWidth(1);
         ofSphere(0,0,0, m_size * 0.25);
         ofPopMatrix();
-        
+
         ofPopMatrix();
     }
 
@@ -90,9 +136,9 @@ void CBoxButton::render()  //Draw boxes and set color
         // shut down the sound.
         m_soundPlayer.setLoop(false);
         m_soundPlayer.stop();
-        m_soundPlayer.setPosition(0);    
+        m_soundPlayer.setPosition(0);
     }
-
+    }
     clear(); //clear point count
 }
 
@@ -103,7 +149,7 @@ void CBoxButton::update(double timeSinceLastUpdate)
 
 float CBoxButton::swellAnimation()
 {
-    return (m_size/10) * cos(ofGetElapsedTimef()*15);   
+    return (m_size/10) * cos(ofGetElapsedTimef()*15);
 }
 
 float CBoxButton::percentIncluded()
@@ -127,20 +173,19 @@ void CBoxButton::clear()
     m_pointsInArea = 0;
 }
 
-bool CBoxButton::collisionTest( ofPoint point) 
+bool CBoxButton::collisionTest( ofPoint point)
 {
     bool result = false;
 
     if( ((point.x > m_x - m_size/2) && (point.y > m_y - m_size/2) && (point.z > m_z - m_size/2))
        &&(point.x < m_x + m_size/2) && (point.y < m_y + m_size/2) && (point.z < m_z + m_size/2)){
-       
-          result = true;
           m_pointsInArea++;
-    }        
+          result = true;
+    }
     return result;
 }
 
-bool CBoxButton::collisionTest( ofPoint *pPoint) 
+bool CBoxButton::collisionTest( ofPoint *pPoint)
 {
     return collisionTest( *pPoint );        // call the collisionTest( ofPoint point)
 }
@@ -190,4 +235,21 @@ void CBoxButton::setHitMode()
 bool CBoxButton::isLoopBox()
 {
     return false;
+}
+
+void CBoxButton::drawBox( float complexor )
+{
+    ofPushMatrix();
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(m_r, m_g, m_b, m_a);
+    ofFill();
+    ofBox(m_x + complexor, m_y, m_z, m_size);
+    ofNoFill();
+    ofSetColor(255,255,255,51);
+    ofBox(m_x + complexor, m_y, m_z, m_size);
+    ofDisableAlphaBlending();
+    ofDisableSmoothing();
+    ofPopMatrix();
 }

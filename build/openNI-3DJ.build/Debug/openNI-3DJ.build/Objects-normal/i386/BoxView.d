@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/BoxView.cpp \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/BoxView.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/BoxView.cpp \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/BoxView.h \
   ../../../libs/openFrameworks/ofMain.h \
   ../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../libs/glew/include/GL/glew.h \
@@ -115,10 +115,10 @@ dependencies: \
   ../../../libs/openFrameworks/video/ofQuickTimePlayer.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/DataPool.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/ConfigFile.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Common.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Interface.h \
-  /Users/Sam/cppLibraries/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Log.h
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/DataPool.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/../../../addons/ofxXmlSettings/libs/tinyxml.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/ConfigFile.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Common.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Interface.h \
+  /Users/Sam/cpp_projects/of_0071_osx_release/apps/3DJ/3DJ_Prototype/src/Log.h

@@ -9,7 +9,13 @@
 #ifndef Kinect_3DJ_BoxButton_h
 #define Kinect_3DJ_BoxButton_h
 #include "Entity.h"
+#include "DataPool.h"
+#include "CWorld.h"
 
+using namespace DataPool;
+
+
+extern float complexor;
 class CBoxButton : public CBoxEntity
 {
 
@@ -20,7 +26,10 @@ public:
     ~CBoxButton();
 
     void render();
-	void update(double time_since_last_update);
+
+    void drawBox( float complexor );
+
+    void update(double time_since_last_update);
     float swellAnimation();
     float percentIncluded();
     bool isCurrentlyHit();
@@ -34,7 +43,7 @@ public:
     ofSoundPlayer m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;
-
+    int m_complexor;
 protected:
     bool hitTest(float x, float y, float z);
 
@@ -42,6 +51,7 @@ private:
 
 	void setHitMode();
 	void setDefaultMode();
+    CDataPoolSimple* m_datapool;
     
 };
 
