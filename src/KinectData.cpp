@@ -16,7 +16,7 @@ void CKinectData::setup()
 	m_isMasking		= true;
 
 	m_filterFactor = 0.1f;
-    m_numberOfUsersToTrack = 1;// only use the depth points of the first pesron to be tracked
+    m_numberOfUsersToTrack = 2;// only use the depth points of the first pesron to be tracked
 
     m_openNIDevice.setup();
     m_openNIDevice.addImageGenerator();
@@ -27,13 +27,13 @@ void CKinectData::setup()
     m_openNIDevice.setMaxNumUsers(m_numberOfUsersToTrack);
     m_openNIDevice.setUsePointCloudsAllUsers(m_isCloud);
     m_openNIDevice.start();
-    
+
     /*Setup Base User Settings */
     ofxOpenNIUser user;
     user.setUseMaskTexture(m_isMasking);
     user.setUsePointCloud(true);
     m_openNIDevice.setBaseUserClass(user);
-    
+
 }
 
 void CKinectData::update()
@@ -50,5 +50,5 @@ void CKinectData::draw()
 
 void CKinectData::exit()
 {
-    
+
 }

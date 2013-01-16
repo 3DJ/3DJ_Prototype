@@ -10,15 +10,18 @@
 #include "DataPool.h"
 using namespace Common;
 using namespace DataPool;
-using namespace DataPoolEx;
 
 bool CDataPoolSimple::init()
 {
-    if ( !loadFromFile("3dj.config") ) { 
-        return false; 
+    if ( !loadFromFile("config.3dj") ) {
+        return false;
     }
-    // this is used to test the load file function.       
-    //if ( !initEntities() ){ return false; }  
+
+    if ( !saveToFile(( "datapool.3dj"))) {
+        return false;
+    }
+    // this is used to test the load file function.
+    //if ( !initEntities() ){ return false; }
     // this is used to init the data which isn't save in the file.
     //if ( !initAnimations()) { return false;}
     for ( mapEntity::iterator it = m_mapDataPool.begin(); it != m_mapDataPool.end(); it++ )
@@ -32,36 +35,47 @@ bool CDataPoolSimple::init()
 
 bool CDataPoolSimple::getEntityByName( string key, SEntity& entity)
 {
+    lock(); // add lock for thread safe
     mapEntity::iterator iterData = m_mapDataPool.find( key );
     if ( iterData != m_mapDataPool.end() )
     {
         entity = iterData->second;
         return true;
     }
+    unlock();
 
     return false;
 }
 
 bool CDataPoolSimple::getValueByName( string key, string& val )
-{   
+{
+    lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
     if ( it != m_mapDataPool.end() )
     {
         val = it->second.value;
         return true;
     }
+    unlock();
 
     return false;
 }
 
-bool CDataPoolSimple::getPointerByName( string key, void* &val )
+bool CDataPoolSimple::getPointerByName( string key, void* &val)
 {
+    return getRefByName( key, val);
+}
+
+bool CDataPoolSimple::getRefByName( string key, void* &val )
+{
+    lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
     if ( it != m_mapDataPool.end() )
     {
         val = it->second.pointer;
         return true;
     }
+    unlock();
 
     return false;
 }
@@ -78,12 +92,13 @@ vector<mapEntity::iterator> CDataPoolSimple::getVector()
 
 bool CDataPoolSimple::setEntity( string key, SEntity entity)
 {
+    lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
 
-    try{  
-        if ( it == m_mapDataPool.end() ){            
-            return false;      
-        }  
+    try{
+        if ( it == m_mapDataPool.end() ){
+            return false;
+        }
         else{
             // this will be easy read. but it's inefficient.
             m_mapDataPool[key] = entity;
@@ -93,20 +108,22 @@ bool CDataPoolSimple::setEntity( string key, SEntity entity)
         cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
         return false;
     }
+    unlock();
 
     return true;
 }
 
 bool CDataPoolSimple::createEntity( string key, SEntity entity )
 {
+    lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
 
-    try{  
-        if ( it == m_mapDataPool.end() ){            
+    try{
+        if ( it == m_mapDataPool.end() ){
             m_mapDataPool.insert( it, make_pair( key, entity));
             // update the vector
-            m_vectorRefEntity.push_back(it);        
-        }  
+            m_vectorRefEntity.push_back(it);
+        }
         else{
             // exist this key
             return false;
@@ -117,89 +134,114 @@ bool CDataPoolSimple::createEntity( string key, SEntity entity )
         // exception
         return false;
     }
-   
+    unlock();
+
     return true;
 
 }
 
 bool CDataPoolSimple::createRef( string key, void* val)
 {
+    lock(); // add lock for thread safe
     SEntity entity;
     entity.isSaved = false;
     mapEntity::iterator it = m_mapDataPool.find( key );
 
-    try{  
-        if ( it == m_mapDataPool.end() ){    
-            entity.pointer = val;       
+    try{
+        if ( it == m_mapDataPool.end() ){
+            entity.pointer = val;
             m_mapDataPool.insert( it, make_pair( key, entity));
             // update the vector
-            //m_vectorRefEntity.push_back(it);        
-        }  
-        else{            
+            //m_vectorRefEntity.push_back(it);
+        }
+        else{
             return false;
         }
     }
     catch(exception e){
-        cout<<"CDataPoolSimple::setAnimateValue exception:"<<e.what();
+        cout<<"CDataPoolSimple::setRefValue exception:"<<e.what();
         return false;
     }
-
-    return true;
-}
-
-bool CDataPoolSimple::setAnimateValue( string key, string val )
-{
-    SEntity entity;
-    entity.isSaved = true;
-    mapEntity::iterator it = m_mapDataPool.find( key );
-
-    try{  
-        if ( it == m_mapDataPool.end() ){    
-            entity.value = val;       
-            m_mapDataPool.insert( it, make_pair( key, entity));
-            // update the vector
-            m_vectorRefEntity.push_back(it);        
-        }  
-        else{
-            // this will be easy read. but it's inefficient.
-            m_mapDataPool[key] = entity;
-        }
-    }
-    catch(exception e){
-        cout<<"CDataPoolSimple::setAnimateValue exception:"<<e.what();
-        return false;
-    }
+    unlock();
 
     return true;
 }
 
 bool CDataPoolSimple::setValue( string key, string val )
 {
+    lock(); // add lock for thread safe
     SEntity entity;
     entity.isSaved = true;
     entity.value = val;
 
     mapEntity::iterator it = m_mapDataPool.find( key );
     try{
-        if ( it == m_mapDataPool.end() ){      
-            return false;        
-        }  
+        if ( it == m_mapDataPool.end() ){
+            return false;
+        }
         else{
             // this will be easy read. but it's inefficient.
             m_mapDataPool[key] = entity;
-        }        
+        }
     }
     catch(exception e){
         cout<<"CDataPoolSimple::setValue exception:"<<e.what();
         return false;
     }
+    unlock();
 
     return true;
 }
 
+int CDataPoolSimple::findIndexInVector( string val )
+{
+    lock(); // add lock for thread safe
+    for ( int index = 0; index < m_vectorRefEntity.size(); index ++)
+    {
+        if ( m_vectorRefEntity[index]->first == val )
+        {
+            return index;
+        }
+    }
+    unlock();
+
+    return -1;
+}
+
+string* CDataPoolSimple::findValueRef( string val)
+{
+    lock(); // add lock for thread safe
+    mapEntity::iterator it = m_mapDataPool.find( val );
+
+    if ( it != m_mapDataPool.end() ){
+        return &(it->second.value);
+    }
+    unlock();
+
+    return 0;
+}
+
+SEntity* CDataPoolSimple::findEntityRefInVector( string val )
+{
+    lock(); // add lock for thread safe
+    int index = findIndexInVector( val );
+    unlock();
+
+    return (&(m_vectorRefEntity[index]->second));
+}
+
+bool CDataPoolSimple::loadFromFile( string filePath )
+{
+    return m_configFile.loadFromFile( filePath.c_str(), m_mapDataPool);
+}
+
+bool CDataPoolSimple::saveToFile( string filePath )
+{
+    return m_configFile.saveToFile( filePath.c_str(), m_mapDataPool);
+}
 
 bool CDataPoolSimple::initEntity( string key, string centerX, string centerY,
-    string centerZ, string type, string soundName)
+                                  string centerZ, string type, string soundName)
 {
     SEntity entity;
     entity.isSaved = true;
@@ -315,198 +357,4 @@ bool CDataPoolSimple::initAnimations()
     if( !initAnimation( "world_sample_c4" ) ){return false;}
 
     return true;
-}
-
-int CDataPoolSimple::findIndexInVector( string val )
-{
-    for ( int index = 0; index < m_vectorRefEntity.size(); index ++)
-    {
-        if ( m_vectorRefEntity[index]->first == val )
-        {
-            return index;
-        }
-    }
-
-    return -1;
-}
-
-string* CDataPoolSimple::findValueRef( string val)
-{
-    mapEntity::iterator it = m_mapDataPool.find( val );
-
-    if ( it != m_mapDataPool.end() ){      
-        return &(it->second.value);
-    }
-
-    return 0;
-    //     int index = findIndexInVector( val );
-    //     return (&(m_vectorRefEntity[index]->second.value));
-}
-
-SEntity* CDataPoolSimple::findEntityRefInVector( string val )
-{
-    int index = findIndexInVector( val );
-    return (&(m_vectorRefEntity[index]->second));
-}
-
-
-bool CDataPoolEx::getElementValue( string group, string entity, string key, iterElement& e )
-{
-    iterGroups iterMapGroup = m_mapGroups.find( group );
-    if ( iterMapGroup != m_mapGroups.end() )
-    {
-        iterGroup iterMapEntity = iterMapGroup->second.find( entity );
-        if ( iterMapEntity != iterMapGroup->second.end() )
-        {
-            e = iterMapEntity->second.find( key );
-            if ( e != iterMapEntity->second.end() )
-            {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-
-bool CDataPoolEx::getGroup( string name, mapGroup& group )
-{
-    iterGroups iterMapGroups = m_mapGroups.find( name );
-    if ( iterMapGroups != m_mapGroups.end() )
-    {
-        group = (iterMapGroups->second);
-        return true;
-    }
-
-    return false;
-}
-
-mapWorld CDataPoolEx::getWorld()
-{
-    return m_mapWorld;
-}
-
-mapGroups CDataPoolEx::getGroups()
-{
-    return m_mapGroups;
-}
-
-
-void CDataPoolEx::setElementValue( string group, string entity, string key, string val )
-{
-    m_mapGroups[group][entity][key] = val;
-}
-
-void CDataPoolEx::setEntityValue( string group, string entity, mapEntityEx val )
-{
-    m_mapGroups[group][entity] = val;
-}
-
-void CDataPoolEx::setGroupValue( string group, mapGroup val )
-{
-    m_mapGroups[group] = val;
-}
-
-CDataPoolEx::CDataPoolEx()
-{
-    //mapBox.insert( pair<string, string>("x", 1));
-    initGroup( m_mapGroups["sample"] );
-}
-
-bool CDataPoolEx::initEntityAnimation( mapEntityEx& entity )
-{
-    string boxSize = "250", redVal = "255",  greenVal = "255",  blueVal = "255",  alphaVal = "30";
-
-    string speed    = "1.0";
-    string volume   = "1.0";
-    string pan      = "0";
-    string isRepeat = "0";
-    string pointsInArea = "0";
-    string pointThreshold = "2000";
-    string threshold = "2";
-
-    try{
-        entity["boxSize"] = boxSize;
-
-        entity["redVal"]  = redVal;
-        entity["greenVal"]= greenVal;
-        entity["blueVal"] = blueVal;
-        entity["alphaVal"]= alphaVal;
-
-        entity["speed"]   = speed;
-        entity["volume"]  = volume;
-        entity["pan"]     = pan;
-        entity["repeat"]  = isRepeat;
-        entity["pointsInArea"] = pointsInArea;
-        entity["pointThreshold"] = pointThreshold;
-        entity["threshold"]  = threshold;
-    }
-    catch(exception e)
-    {
-        cout<<"throw error:"<<e.what();
-        return false;
-    }
-
-    return true;
-}
-
-bool CDataPoolEx::initEntity( mapEntityEx& entity, string centerX, string centerY,
-    string centerZ, string type, string soundName)
-{
-    try{
-        entity["centerX"] = centerX;
-        entity["centerY"] = centerY;
-        entity["centerZ"] = centerZ;
-        entity["type"]    = type;
-        entity["soundName"] = soundName;
-    }
-    catch( exception e )
-    {
-        cout<<"throw error:"<<e.what();
-        return false;
-    }
-
-    return true;
-}
-
-void CDataPoolEx::initGroup(mapGroup& group )
-{
-    initEntityAnimation( group["a1"] );
-    initEntity( group["a1"], "375", "-250", "1000", "ET_SwapButton","sounds/Melody/GuitarStrummin.wav");
-    initEntityAnimation( group["a2"] );
-    initEntity( group["a2"], "125", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/Piano.wav" );
-    initEntityAnimation( group["a3"] );
-    initEntity( group["a3"], "-125", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/GuitarPick.wav" );
-    initEntityAnimation( group["a4"] );
-    initEntity( group["a4"], "-325", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/Blip_Melody_01.wav" );
-
-    initEntityAnimation( group["b1"] );
-    initEntity( group["b1"], "375", "0", "1000", "ET_EffectsButton","sounds/Effects/Warp_1.wav" );
-    initEntityAnimation( group["b2"] );
-    initEntity( group["b2"], "125", "0", "1000", "ET_MusicSampleButton","sounds/Effects/Uplifter.wav" );
-    initEntityAnimation( group["b3"] );
-    initEntity( group["b3"], "-125", "0", "1000", "ET_MusicSampleButton","sounds/Bass/BassSlap.wav" );
-    initEntityAnimation( group["b4"] );
-    initEntity( group["b4"], "-375", "0", "1000", "ET_MusicSampleButton","sounds/Bass/NastyBass.wav" );
-
-
-    initEntityAnimation( group["c1"] );
-    initEntity( group["c1"], "375", "250", "1000", "ET_EffectsButton","sounds/Effects/Vinyl_Scratch_01.wav" );
-    initEntityAnimation( group["c2"] );
-    initEntity( group["c2"], "125", "250", "1000", "ET_MusicSampleButton","sounds/Effects/RemixCrazyScratch_FX_02.wav" );
-    initEntityAnimation( group["c3"] );
-    initEntity( group["c3"], "-125", "250", "1000", "ET_MusicSampleButton","sounds/Beat/TimbalesMerged_1.wav" );
-    initEntityAnimation( group["c4"] );
-    initEntity( group["c4"], "-375", "250", "1000", "ET_MusicSampleButton","sounds/Beat/Wee_Kick.wav" );
-}
-
-bool CDataPoolSimple::loadFromFile( string filePath )
-{
-    return m_configFile.loadFromFile( filePath.c_str(), m_mapDataPool);
-}
-
-bool CDataPoolSimple::saveToFile( string filePath )
-{
-     return m_configFile.saveToFile( filePath.c_str(), m_mapDataPool);
 }
