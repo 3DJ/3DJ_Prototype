@@ -28,7 +28,7 @@ bool CPluginLoader::loadFromDir()
     path = "win";
 #endif
     ofDirectory dir(path);
-    string str = dir.getAbsolutePath();
+    //string str = dir.getAbsolutePath();
     //only show dll files
     //dir.allowExt("png");
     //populate the directory object
