@@ -53,8 +53,8 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
         m_loopEditor->showCanvases(false);
         m_visualEditor->m_canvas1->setVisible(false);
     }else if(name == "Start Session"){
-        string val = "testThread";
-        CDataPoolSimple::getInstance().createRef("test DataPool", &val);
+        static string val = "testThread"; // for testing the datapool communicating between threads
+        CDataPoolSimple::getInstance().createRef("testDataPool", &val);
         m_ogreThread.startThread(true, true);
         m_exitMenu = true;
         hideAllViews();

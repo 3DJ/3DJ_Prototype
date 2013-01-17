@@ -35,30 +35,32 @@ bool CDataPoolSimple::init()
 
 bool CDataPoolSimple::getEntityByName( string key, SEntity& entity)
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     mapEntity::iterator iterData = m_mapDataPool.find( key );
     if ( iterData != m_mapDataPool.end() )
     {
         entity = iterData->second;
-        return true;
+        bRet = true;
     }
     unlock();
 
-    return false;
+    return bRet;
 }
 
 bool CDataPoolSimple::getValueByName( string key, string& val )
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
     if ( it != m_mapDataPool.end() )
     {
         val = it->second.value;
-        return true;
+        bRet = true;
     }
     unlock();
 
-    return false;
+    return bRet;
 }
 
 bool CDataPoolSimple::getPointerByName( string key, void* &val)
@@ -68,16 +70,17 @@ bool CDataPoolSimple::getPointerByName( string key, void* &val)
 
 bool CDataPoolSimple::getRefByName( string key, void* &val )
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
     if ( it != m_mapDataPool.end() )
     {
         val = it->second.pointer;
-        return true;
+        bRet = true;
     }
     unlock();
 
-    return false;
+    return bRet;
 }
 
 mapEntity CDataPoolSimple::getDataPool()
@@ -92,29 +95,30 @@ vector<mapEntity::iterator> CDataPoolSimple::getVector()
 
 bool CDataPoolSimple::setEntity( string key, SEntity entity)
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
 
     try{
         if ( it == m_mapDataPool.end() ){
-            return false;
         }
         else{
             // this will be easy read. but it's inefficient.
             m_mapDataPool[key] = entity;
+            bRet = true;
         }
     }
     catch(exception e){
         cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
-        return false;
     }
     unlock();
 
-    return true;
+    return bRet;
 }
 
 bool CDataPoolSimple::createEntity( string key, SEntity entity )
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( key );
 
@@ -123,25 +127,22 @@ bool CDataPoolSimple::createEntity( string key, SEntity entity )
             m_mapDataPool.insert( it, make_pair( key, entity));
             // update the vector
             m_vectorRefEntity.push_back(it);
-        }
-        else{
-            // exist this key
-            return false;
+            bRet = true;
         }
     }
     catch(exception e){
         cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
         // exception
-        return false;
     }
     unlock();
 
-    return true;
+    return bRet;
 
 }
 
 bool CDataPoolSimple::createRef( string key, void* val)
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     SEntity entity;
     entity.isSaved = false;
@@ -151,24 +152,22 @@ bool CDataPoolSimple::createRef( string key, void* val)
         if ( it == m_mapDataPool.end() ){
             entity.pointer = val;
             m_mapDataPool.insert( it, make_pair( key, entity));
+            bRet = true;
             // update the vector
             //m_vectorRefEntity.push_back(it);
-        }
-        else{
-            return false;
         }
     }
     catch(exception e){
         cout<<"CDataPoolSimple::setRefValue exception:"<<e.what();
-        return false;
     }
     unlock();
 
-    return true;
+    return bRet;
 }
 
 bool CDataPoolSimple::setValue( string key, string val )
 {
+    bool bRet = false;
     lock(); // add lock for thread safe
     SEntity entity;
     entity.isSaved = true;
@@ -177,48 +176,50 @@ bool CDataPoolSimple::setValue( string key, string val )
     mapEntity::iterator it = m_mapDataPool.find( key );
     try{
         if ( it == m_mapDataPool.end() ){
-            return false;
+
         }
         else{
             // this will be easy read. but it's inefficient.
             m_mapDataPool[key] = entity;
+            bRet = true;
         }
     }
     catch(exception e){
         cout<<"CDataPoolSimple::setValue exception:"<<e.what();
-        return false;
     }
     unlock();
 
-    return true;
+    return bRet;
 }
 
 int CDataPoolSimple::findIndexInVector( string val )
 {
+    int iRet = -1;
     lock(); // add lock for thread safe
     for ( int index = 0; index < m_vectorRefEntity.size(); index ++)
     {
         if ( m_vectorRefEntity[index]->first == val )
         {
-            return index;
+            iRet = index;
         }
     }
     unlock();
 
-    return -1;
+    return iRet;
 }
 
 string* CDataPoolSimple::findValueRef( string val)
 {
+    string* sRet = 0;
     lock(); // add lock for thread safe
     mapEntity::iterator it = m_mapDataPool.find( val );
 
     if ( it != m_mapDataPool.end() ){
-        return &(it->second.value);
+        sRet = &(it->second.value);
     }
     unlock();
 
-    return 0;
+    return sRet;
 }
 
 SEntity* CDataPoolSimple::findEntityRefInVector( string val )

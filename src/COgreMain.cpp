@@ -18,10 +18,8 @@ bool COgreMain::init( CDataPoolSimple* dataPool )
     m_dataPool = dataPool;
 
     void* val;
-    m_dataPool->getRefByName("testThread", val);
-    while(true){
-        std::cout<<"Ogre Thread"<<*(string*)val<<std::endl;
-    }
+    m_dataPool->getRefByName("testDataPool", val);
+    std::cout<<"Ogre Thread"<<((string*)val)->c_str()<<std::endl;
 
     return true;
 }
