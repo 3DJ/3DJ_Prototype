@@ -14,6 +14,7 @@
 #include "CalibrationView.h"
 #include "Interface.h"
 #include "DataPool.h"
+#include "COgreThread.h"
 
 using namespace DataPool;
 using namespace Interface;
@@ -21,11 +22,11 @@ using namespace Interface;
 class CMenuViewController : public IView
 {
 public:
-    
-    
+
+
     CMenuViewController(int red, int blue, int green, int alpha, CDataPoolSimple* dataPool = 0);
     ~CMenuViewController();
-    
+
     void initViews();
     void setupDelegates();
     void menuEvent(ofxUIEventArgs &e);
@@ -36,17 +37,18 @@ public:
     bool draw();
     void saveRadioButtonInfo(string boxID);
     void processOpenFileSelection(ofFileDialogResult openFileResult, string boxID);
-    
+
     CMenuView               *m_menu;
     CLoopEditorView         *m_loopEditor;
     CVisualThemesView       *m_visualEditor;
     CalibrationView         *m_calibrationEditor;
     CDataPoolSimple         *m_datapool;
-    
+
     int m_r, m_g, m_b, m_a;
     bool m_exitMenu;
-    
+
     string originalFileExtension;
+    COgreThread m_ogreThread;
 };
 
 #endif

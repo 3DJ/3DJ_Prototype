@@ -14,14 +14,14 @@
 
 class CKinectData {
 public:
-    
+
     void setup();
 	void update();
     void draw();
     void exit();
 
     bool m_isTracking, m_isCloud, m_isMasking, m_isFiltering;
-    
+
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 

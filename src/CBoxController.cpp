@@ -13,14 +13,14 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
 {
     m_complexor = 0;
     //Set up Kinect
-	m_oniKinect.setup();   
+	m_oniKinect.setup();
 
 	m_background_r = 100;
     m_background_g = 100;
     m_background_b = 100;
     m_gradientColorOutside = ofColor(24);
     m_gradientColorInside = ofColor(64);
-    
+
     //Setup Scale ratio to map Kinect depth image to screen and buttons
     m_WidthScale = 1.0f;
     m_HeightScale = 1.0f;
@@ -76,14 +76,14 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     addBoxButton(m_c4Button);
 
     setInitialVolume(1.0f);
-    
+
     m_pointView     = new CPointView();
     m_easyCam       = new ofEasyCam;
 
     m_equalizerView = new CEQView;
 
     m_isRepeat      = false;
-    
+
     m_snakeFish = new SnakeFish();
     m_particles = new Particles();
 
@@ -111,9 +111,9 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
 }
 
 CBoxController::~CBoxController()
-{    
+{
     m_oniKinect.exit();
-    
+
     for( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
     {
         delete (*eachBox);
@@ -136,7 +136,7 @@ bool CBoxController::update()
 
 void CBoxController::update(double time_since_last_update)
 {
-    
+
     m_oniKinect.update();
     m_equalizerView->soundUpdate();
     m_snakeFish->preRender();
@@ -148,11 +148,11 @@ void CBoxController::update(double time_since_last_update)
 void CBoxController::testHits()
 {
     int w = m_oniKinect.m_openNIDevice.getWidth();
-	int h = m_oniKinect.m_openNIDevice.getHeight();
+    int h = m_oniKinect.m_openNIDevice.getHeight();
     int index = 0;
 	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
     int step = 1;
-    
+
     for (int i = 0; i < numUsers; i++) {
 
     ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
@@ -161,24 +161,24 @@ void CBoxController::testHits()
         vector<ofVec3f> vertices =  userMesh.getVertices();
 
       for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
-          
+
           ofPoint XYZ = ofPoint(vertex->x,vertex->y,vertex->z);
           if (XYZ.z > 0) {
               XYZ.x = (XYZ.x - w/2)*m_scale;
               XYZ.y = (XYZ.y - h/2)*m_scale;
               XYZ.z -= m_playerDepth;
-            
+
               handleCollisions(&XYZ); //check for hits for all buttons
               index++;
               m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
           }
       }
     }
-    
+
 //    int points = 0;
 //    static float frontPoint;
 //    static float origin;
-//    
+//
 //    for (int i = 0; i < numUsers; i++) {
 //
 //        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
@@ -186,7 +186,7 @@ void CBoxController::testHits()
 //        vector<ofVec3f> vertices =  userMesh.getVertices();
 //
 //        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
-//            
+//
 //            if (vertex->z > 0)
 //            {
 //                points++;
@@ -197,7 +197,7 @@ void CBoxController::testHits()
 //                        frontPoint = vertex->x;
 //                        origin = vertex->x;
 //                    }
-//                    
+//
 //                    if ( abs( vertex->x - frontPoint) < 100 )
 //                    {
 //                        frontPoint = vertex->x;
@@ -208,7 +208,7 @@ void CBoxController::testHits()
 //        }
 //    }
 //
-//    
+//
 //    if ( points == 0 )
 //    {
 //        origin = 0;
@@ -218,7 +218,7 @@ void CBoxController::testHits()
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);
     ofPopMatrix();
-    
+
 }
 
 void CBoxController::addBoxButton(CBoxButton * _boxButton)
@@ -253,7 +253,7 @@ void CBoxController::setInitialVolume(float volumeLevel)
 
 void CBoxController::setUpTranslation()
 {
-    
+
 }
 
 float CBoxController::scaleRatioForKinectDepthMap()
@@ -262,7 +262,7 @@ float CBoxController::scaleRatioForKinectDepthMap()
     float h = 480.0f;
     float screenW = float(ofGetScreenWidth());
     float screenH = float(ofGetScreenHeight());
-    
+
     if((w/h) < (screenW/screenH)){
         return screenW/w;
     }else {

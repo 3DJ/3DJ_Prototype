@@ -18,11 +18,13 @@ using namespace std;
 #include "ofxXmlSettings.h"
 #include "ConfigFile.h"
 #include "Common.h"
+#include "ofThread.h"
+
 using namespace Common;
 
 namespace DataPool{
-    
-class CDataPoolSimple{
+// I didn't add the lock on the config file saving
+    class CDataPoolSimple : public ofThread{
 
     public:
         static CDataPoolSimple& getInstance(){
@@ -32,91 +34,57 @@ class CDataPoolSimple{
         bool init();
 
         bool getEntityByName( string key, SEntity& entity);
+        // get a value which is created by "createEntity"
         bool getValueByName( string key, string& val );
-        bool getPointerByName( string key, void* &val );
-        mapEntity getDataPool();        
-        vector<mapEntity::iterator> getVector();
+
+        // get the the reference of the key which is created by "createRef"
+        bool getRefByName( string key, void* &val );
+        // this will be deprecated(using getRefByName instead of). it's the same as getRefByName. just for compatibility.
+        bool getPointerByName( string key, void* &val);
+
+        mapEntity getDataPool();
 
         // return value: false not mean U didn't create the entity. u need to check it by findValue
         bool createEntity( string key, SEntity entity );
+
+        // create a Ref wont be saved to datapool.3dj file. It's only used to pass the data between controller and viewer
+        // isSaved sign will be set as false.
         bool createRef( string key, void* val);
 
         // return value: false not mean U didn't set the value. u need to check it by findValue
         bool setEntity( string key, SEntity entity);
-        bool setAnimateValue( string key, string val );
+
+        // alter the value which is created by "creatEntity"
         bool setValue( string key, string val );
-        // recommend 
+        // recommend
         string* findValueRef( string val);
+
+        // It will be removed later. don't use it.
         SEntity* findEntityRefInVector( string val );
-        // deprecated
-        int findIndexInVector( string val );
 
-        // file operations
-        bool loadFromFile( string filePath );
-        bool saveToFile( string filePath );
+            // deprecated. It will be removed later. don't use it.
+            vector<mapEntity::iterator> getVector();
+            // deprecated. It will be removed later. don't use it.
+            int findIndexInVector( string val );
 
-    private:
-        CDataPoolSimple(){ init(); }
-        CDataPoolSimple(const CDataPoolSimple&);
-        CDataPoolSimple& operator=(const CDataPoolSimple&);
-        //
-        bool initEntities();
-        bool initAnimations();
-        bool initEntity( string key, string centerX, string centerY,
-            string centerZ, string type, string soundName);
-        bool initAnimation( string key );
-
-        CConfigFile m_configFile;
-        vector<mapEntity::iterator> m_vectorRefEntity;
-        mapEntity m_mapDataPool;
-    };
-};
-
-
-namespace DataPoolEx{
-
-    typedef map<string, string> mapEntityEx;
-    typedef map<string, string> mapWorld;    
-    typedef map<string, mapEntityEx> mapGroup;
-    typedef map<string, mapGroup> mapGroups;
-
-    typedef map<string, string>::iterator iterElement;
-    typedef pair<string, string> pairEntity;
-    typedef map<string, mapEntityEx>::iterator iterGroup;
-    typedef map<string, mapGroup>::iterator iterGroups;
-
-
-    class CDataPoolEx{
-
-    public:
-        CDataPoolEx();
-
-        bool getElementValue(  string group, string entity, string key, iterElement& e );
-        bool getGroup( string name, mapGroup& group );
-        mapEntityEx getWorld();
-        mapGroups getGroups();
-        // if the element didn't exist, the set function can create a new element. So u need use the get
-        // function first to check whether it exists or not.
-        // becos I didn't use insert(i use operation []).
-        // if u didn't check it and set the exist item. the item will be overwritten.
-        void setElementValue(  string group, string entity, string key, string val );
-        void setEntityValue(  string group, string entity, mapEntityEx e );
-        void setGroupValue(  string group, mapGroup val );
+            // file operations
+            bool loadFromFile( string filePath );
+            bool saveToFile( string filePath );
 
     private:
-        // the data is set by the function append animation suffix will not be stored in the file.
-        // that means it will reset when u close 3DJ and start over.
-        void initGroup( mapGroup& group );
-        bool initEntityAnimation( mapEntityEx& entity );
-        bool initEntity( mapEntityEx& entity, string centerX, string centerY,
-            string centerZ, string type, string soundName);
+            CDataPoolSimple(){ init(); }
+            CDataPoolSimple(const CDataPoolSimple&);
+            CDataPoolSimple& operator=(const CDataPoolSimple&);
+            //
+            bool initEntities();
+            bool initAnimations();
+            bool initEntity( string key, string centerX, string centerY,
+                             string centerZ, string type, string soundName);
+            bool initAnimation( string key );
 
-        // this map stores the data that will be saved in file.
-        mapGroups m_mapGroups;
-        // this map stores the animation data. not saved to file.
-        mapGroups m_mapGroupsAnimation;
-
-        mapEntityEx m_mapWorld;
+            CConfigFile m_configFile;
+            vector<mapEntity::iterator> m_vectorRefEntity;
+            mapEntity m_mapDataPool;
     };
 };
 
