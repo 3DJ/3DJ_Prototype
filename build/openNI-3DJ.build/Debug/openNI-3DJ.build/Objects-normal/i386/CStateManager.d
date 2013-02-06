@@ -109,10 +109,9 @@ dependencies: \
   ../../../libs/fmodex/include/fmod_memoryinfo.h \
   ../../../libs/fmodex/include/fmod_errors.h \
   ../../../libs/openFrameworks/video/ofVideoGrabber.h \
-  ../../../libs/openFrameworks/video/ofQuickTimeGrabber.h \
-  ../../../libs/openFrameworks/video/ofQtUtils.h \
+  ../../../libs/openFrameworks/video/ofQTKitGrabber.h \
   ../../../libs/openFrameworks/video/ofVideoPlayer.h \
-  ../../../libs/openFrameworks/video/ofQuickTimePlayer.h \
+  ../../../libs/openFrameworks/video/ofQTKitPlayer.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/CMenuViewController.h \
@@ -168,10 +167,22 @@ dependencies: \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/DataPool.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/ConfigFile.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/Common.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/COgreThread.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOS.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnPlatform.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/MacOSX/XnPlatformMacOSX.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/MacOSX/../Linux-x86/XnPlatformLinux-x86.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnMacros.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnStatusCodes.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnStatus.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOSStrings.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOSMemory.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/Linux-x86/XnOSLinux-x86.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/COgreMain.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/BoxButton.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/Entity.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/CWorld.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/CBoxController.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/Entity.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/BoxButton.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/ControlBoxButton.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/KinectData.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNI.h \
@@ -179,16 +190,6 @@ dependencies: \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/src/ofxOpenNIUtils.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOpenNI.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnTypes.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnStatus.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnPlatform.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/MacOSX/XnPlatformMacOSX.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/MacOSX/../Linux-x86/XnPlatformLinux-x86.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOS.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnMacros.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnStatusCodes.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOSStrings.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnOSMemory.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/Linux-x86/XnOSLinux-x86.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnContext.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnQueries.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/../../../addons/ofxOpenNI/include/openni/XnPrdNodeInfoList.h \

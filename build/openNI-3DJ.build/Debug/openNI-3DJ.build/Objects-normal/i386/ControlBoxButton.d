@@ -111,10 +111,9 @@ dependencies: \
   ../../../libs/fmodex/include/fmod_memoryinfo.h \
   ../../../libs/fmodex/include/fmod_errors.h \
   ../../../libs/openFrameworks/video/ofVideoGrabber.h \
-  ../../../libs/openFrameworks/video/ofQuickTimeGrabber.h \
-  ../../../libs/openFrameworks/video/ofQtUtils.h \
+  ../../../libs/openFrameworks/video/ofQTKitGrabber.h \
   ../../../libs/openFrameworks/video/ofVideoPlayer.h \
-  ../../../libs/openFrameworks/video/ofQuickTimePlayer.h \
+  ../../../libs/openFrameworks/video/ofQTKitPlayer.h \
   ../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../libs/openFrameworks/3d/ofEasyCam.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/DataPool.h \
