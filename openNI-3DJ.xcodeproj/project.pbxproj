@@ -38,6 +38,9 @@
 		2268DC511686AADD00C00544 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2268DC4B1686AADD00C00544 /* tinyxmlparser.cpp */; };
 		2268DC521686AADD00C00544 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2268DC4D1686AADD00C00544 /* ofxXmlSettings.cpp */; };
 		2268DC551686ABAA00C00544 /* CBoxView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2268DC531686ABAA00C00544 /* CBoxView.cpp */; };
+		22EC3E3C16C2B04B00AD0D51 /* COgreMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3E3616C2B04B00AD0D51 /* COgreMain.cpp */; };
+		22EC3E3D16C2B04B00AD0D51 /* COgreThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3E3816C2B04B00AD0D51 /* COgreThread.cpp */; };
+		22EC3E3E16C2B04B00AD0D51 /* CPluginLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EC3E3A16C2B04B00AD0D51 /* CPluginLoader.cpp */; };
 		22F160601688AFE20025EA22 /* libnimCodecs.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F160521688AFE20025EA22 /* libnimCodecs.dylib */; };
 		22F160611688AFE20025EA22 /* libnimMockNodes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F160531688AFE20025EA22 /* libnimMockNodes.dylib */; };
 		22F160621688AFE20025EA22 /* libnimRecorder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F160541688AFE20025EA22 /* libnimRecorder.dylib */; };
@@ -202,6 +205,12 @@
 		2268DC4E1686AADD00C00544 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		2268DC531686ABAA00C00544 /* CBoxView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CBoxView.cpp; sourceTree = "<group>"; };
 		2268DC541686ABAA00C00544 /* CBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBoxView.h; sourceTree = "<group>"; };
+		22EC3E3616C2B04B00AD0D51 /* COgreMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = COgreMain.cpp; sourceTree = "<group>"; };
+		22EC3E3716C2B04B00AD0D51 /* COgreMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COgreMain.h; sourceTree = "<group>"; };
+		22EC3E3816C2B04B00AD0D51 /* COgreThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = COgreThread.cpp; sourceTree = "<group>"; };
+		22EC3E3916C2B04B00AD0D51 /* COgreThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COgreThread.h; sourceTree = "<group>"; };
+		22EC3E3A16C2B04B00AD0D51 /* CPluginLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CPluginLoader.cpp; sourceTree = "<group>"; };
+		22EC3E3B16C2B04B00AD0D51 /* CPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPluginLoader.h; sourceTree = "<group>"; };
 		22F160511688AFE20025EA22 /* change_exec_paths.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = change_exec_paths.sh; sourceTree = "<group>"; };
 		22F160521688AFE20025EA22 /* libnimCodecs.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimCodecs.dylib; sourceTree = "<group>"; };
 		22F160531688AFE20025EA22 /* libnimMockNodes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimMockNodes.dylib; sourceTree = "<group>"; };
@@ -433,6 +442,9 @@
 				2268DBD61686AA6B00C00544 /* Interface.h */,
 				2268DBD91686AA6B00C00544 /* Log.cpp */,
 				2268DBDA1686AA6B00C00544 /* Log.h */,
+				22EC3E3A16C2B04B00AD0D51 /* CPluginLoader.cpp */,
+				22EC3E3B16C2B04B00AD0D51 /* CPluginLoader.h */,
+				22EC3E3F16C2B26E00AD0D51 /* OgreStuff */,
 				22B795691686B5F700BB4A0E /* Menu */,
 				22B7956A1686B61600BB4A0E /* Visuals */,
 				22B7956B1686B6A500BB4A0E /* Unused */,
@@ -572,6 +584,17 @@
 				2268DBC21686AA6B00C00544 /* CNavigationUIController.h */,
 			);
 			name = Unused;
+			sourceTree = "<group>";
+		};
+		22EC3E3F16C2B26E00AD0D51 /* OgreStuff */ = {
+			isa = PBXGroup;
+			children = (
+				22EC3E3616C2B04B00AD0D51 /* COgreMain.cpp */,
+				22EC3E3716C2B04B00AD0D51 /* COgreMain.h */,
+				22EC3E3816C2B04B00AD0D51 /* COgreThread.cpp */,
+				22EC3E3916C2B04B00AD0D51 /* COgreThread.h */,
+			);
+			name = OgreStuff;
 			sourceTree = "<group>";
 		};
 		22F160501688AFE20025EA22 /* lib */ = {
@@ -1009,6 +1032,9 @@
 				2268DC551686ABAA00C00544 /* CBoxView.cpp in Sources */,
 				2253528A168F8B7D002483EC /* ofxOpenNI.cpp in Sources */,
 				2253528B168F8B7D002483EC /* ofxOpenNITypes.cpp in Sources */,
+				22EC3E3C16C2B04B00AD0D51 /* COgreMain.cpp in Sources */,
+				22EC3E3D16C2B04B00AD0D51 /* COgreThread.cpp in Sources */,
+				22EC3E3E16C2B04B00AD0D51 /* CPluginLoader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,12 +1069,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1074,12 +1100,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNUSED_VALUE = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CPLUSPLUSFLAGS = (
 					"-D__MACOSX_CORE__",
 					"-lpthread",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -1193,6 +1219,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1306,6 +1333,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

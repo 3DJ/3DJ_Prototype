@@ -15,6 +15,7 @@
 #include "Interface.h"
 #include "DataPool.h"
 #include "COgreThread.h"
+#include "BoxButton.h"
 
 using namespace DataPool;
 using namespace Interface;

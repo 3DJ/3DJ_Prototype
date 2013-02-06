@@ -253,3 +253,8 @@ void CBoxButton::drawBox( float complexor )
     ofDisableSmoothing();
     ofPopMatrix();
 }
+
+void CBoxButton::reloadSound(string soundName)
+{
+    m_soundPlayer.loadSound(soundName);
+}

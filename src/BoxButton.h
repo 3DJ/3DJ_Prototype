@@ -20,7 +20,7 @@ class CBoxButton : public CBoxEntity
 {
 
 public:
-    CBoxButton(float centerX, float centerY, float centerZ, int boxSize, 
+    CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
         float redVal, float greenVal, float blueVal, float alphaVal, string soundName);
     CBoxButton();
     ~CBoxButton();
@@ -37,6 +37,7 @@ public:
     void clear();
     bool collisionTest( ofPoint point)  ;
     bool collisionTest( ofPoint *pPoint);
+    void reloadSound(string soundName);
 
     virtual bool isLoopBox();
 
@@ -52,7 +53,7 @@ private:
 	void setHitMode();
 	void setDefaultMode();
     CDataPoolSimple* m_datapool;
-    
+
 };
 
 #endif

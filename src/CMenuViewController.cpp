@@ -210,17 +210,15 @@ void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileRe
             //====================================================================
             //Load sound files into Datapool XML File
             //====================================================================
-            //Right now, all sound files must be in data/sounds/ directory
-            string fileName = "sounds/" + file.getFileName() + fileExtension;
-            string key = "world_sample_" + boxID + "_soundName";
+            //string fileName = "sounds/" + file.getFileName();
+            transform(boxID.begin(), boxID.end(), boxID.begin(), ::tolower);
+            string key = boxID + "Button";
 
-            //NOT WORKING
-            m_datapool->setValue(key, fileName);
-
-            //Reload soundPlayer in box Here...
-
-            //====================================================================
-
+            //reload sound file.
+            void *val;
+            if ( m_datapool->getRefByName(key, val) ) {
+                ((CBoxButton*)val)->reloadSound( file.getAbsolutePath() );
+            }
 		}
 	}
 }
