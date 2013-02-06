@@ -12,13 +12,13 @@ void CStateManager::setup() {
     setupLights();
     ofSetFrameRate(60);
 
-    m_menuVC = new CMenuViewController( m_red, m_green, m_blue, m_alpha);
+    m_boxController = new CBoxController(&CDataPoolSimple::getInstance());
+    m_boxView = new CBoxView( &CDataPoolSimple::getInstance());
+
+    m_menuVC = new CMenuViewController( m_red, m_green, m_blue, m_alpha, &CDataPoolSimple::getInstance());
     g_currentState = ST_MENU_STATE;
 
     m_world = &CWorld::getInstance(); // world controls all buttons and sound
-
-    m_boxController = new CBoxController(&CDataPoolSimple::getInstance());
-    m_boxView = new CBoxView( &CDataPoolSimple::getInstance());
 }
 
 //--------------------------------------------------------------
