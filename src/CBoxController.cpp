@@ -48,7 +48,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     mapEntity mapSong;
     CSongs* songs = &CSongs::getInstance();
     if ( !songs->getFirst(songName, mapSong)){
-        ofLogVerbose("there is no song in songs folder");
+        ofLogVerbose("there is no song bundle in songs folder");
         return;
     }
         

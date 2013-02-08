@@ -49,7 +49,8 @@ bool CSongs::getFirst(string& songName, mapEntity& mapSong)
     m_cursor = 0;
     string filePath = m_dir.getPath( 0 ) + "\\init.3dj";
     m_configFile.loadFromFile( filePath, mapSong, false );
-    
+    songName = mapSong["soundName"].value;
+
     return true;
 }
 
@@ -63,6 +64,7 @@ bool CSongs::getNext( string& songName, mapEntity& mapSong)
     
     string filePath = m_dir.getPath( m_cursor ) + "\\init.3dj";
     m_configFile.loadFromFile( filePath, mapSong, false );
+    songName = mapSong["soundName"].value;
 
     return true;
 }
@@ -71,6 +73,7 @@ bool CSongs::getCurrent( string& songName, mapEntity& mapSong)
 {    
     string filePath = m_dir.getPath( m_cursor ) + "\\init.3dj";
     m_configFile.loadFromFile( filePath, mapSong, false );
+    songName = mapSong["soundName"].value;
 
     return true;
 }
