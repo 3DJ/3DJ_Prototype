@@ -18,8 +18,11 @@
 #include "SnakeFish.h"
 #include "Particles.h"
 #include "Interface.h"
+#include "CSongs.h"
+#include "Common.h"
 using namespace Interface;
 using namespace std;
+using namespace Common;
 
 //===========================================================
 // Class : CBoxController

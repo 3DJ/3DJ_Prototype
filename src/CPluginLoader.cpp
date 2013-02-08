@@ -29,9 +29,6 @@ bool CPluginLoader::loadFromDir()
 #endif
     ofDirectory dir(path);
     //string str = dir.getAbsolutePath();
-    //only show dll files
-    //dir.allowExt("png");
-    //populate the directory object
     dir.listDir();
 
     //go through and print out all the paths
@@ -39,4 +36,6 @@ bool CPluginLoader::loadFromDir()
         cout << dir.getPath(i) << endl;
         loadPlugin( dir.getPath(i));
     }
+
+    return true;
 }

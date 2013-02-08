@@ -11,19 +11,12 @@
 using namespace Common;
 using namespace DataPool;
 
-bool CDataPoolSimple::init()
+bool CDataPoolSimple::initSounds()
 {
     if ( !loadFromFile("config.3dj") ) {
         return false;
     }
 
-    if ( !saveToFile(( "datapool.3dj"))) {
-        return false;
-    }
-    // this is used to test the load file function.
-    //if ( !initEntities() ){ return false; }
-    // this is used to init the data which isn't save in the file.
-    //if ( !initAnimations()) { return false;}
     for ( mapEntity::iterator it = m_mapDataPool.begin(); it != m_mapDataPool.end(); it++ )
     {
         m_vectorRefEntity.push_back( it );
@@ -165,7 +158,7 @@ bool CDataPoolSimple::createRef( string key, void* val)
     return bRet;
 }
 
-bool CDataPoolSimple::setValue( string key, string val )
+bool CDataPoolSimple::setValue( string key, string val, bool cover )
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -176,7 +169,11 @@ bool CDataPoolSimple::setValue( string key, string val )
     mapEntity::iterator it = m_mapDataPool.find( key );
     try{
         if ( it == m_mapDataPool.end() ){
-
+            if ( cover ){
+                m_mapDataPool[key] = entity;
+                bRet = true;
+            }
+            
         }
         else{
             // this will be easy read. but it's inefficient.
@@ -208,11 +205,11 @@ int CDataPoolSimple::findIndexInVector( string val )
     return iRet;
 }
 
-string* CDataPoolSimple::findValueRef( string val)
+string* CDataPoolSimple::findValueRef( string key)
 {
     string* sRet = 0;
     lock(); // add lock for thread safe
-    mapEntity::iterator it = m_mapDataPool.find( val );
+    mapEntity::iterator it = m_mapDataPool.find( key );
 
     if ( it != m_mapDataPool.end() ){
         sRet = &(it->second.value);

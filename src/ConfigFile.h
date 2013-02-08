@@ -18,8 +18,8 @@ using namespace Common;
 
 class CConfigFile{
 public:
-    bool loadFromFile( string filePath, mapEntity& mapDataPool );
-    bool saveToFile( string filePath, mapEntity& mapDataPool);
+    bool loadFromFile( string filePath, mapEntity& mapData, bool isSaved=true );
+    bool saveToFile( string filePath, mapEntity& mapData );
 
 private:
     ofxXmlSettings m_ofxXmlFile;

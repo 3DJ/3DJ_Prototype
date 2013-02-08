@@ -31,7 +31,7 @@ namespace DataPool{
             static CDataPoolSimple _instance;
             return _instance;
         }
-        bool init();
+        bool initSounds();
 
         bool getEntityByName( string key, SEntity& entity);
         // get a value which is created by "createEntity"
@@ -54,10 +54,10 @@ namespace DataPool{
         // return value: false not mean U didn't set the value. u need to check it by findValue
         bool setEntity( string key, SEntity entity);
 
-        // alter the value which is created by "creatEntity"
-        bool setValue( string key, string val );
+        // alter the value which is created by "creatEntity", if cover is false, the data wont be replaced
+        bool setValue( string key, string val, bool cover = false );
         // recommend
-        string* findValueRef( string val);
+        string* findValueRef( string key);
 
         // It will be removed later. don't use it.
         SEntity* findEntityRefInVector( string val );
@@ -72,7 +72,7 @@ namespace DataPool{
             bool saveToFile( string filePath );
 
     private:
-            CDataPoolSimple(){ init(); }
+            CDataPoolSimple(){ initSounds();}
             CDataPoolSimple(const CDataPoolSimple&);
             CDataPoolSimple& operator=(const CDataPoolSimple&);
             //

@@ -83,12 +83,10 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
         m_calibrationEditor->m_canvas1->setVisible(false);
     }
     else if(name == "Save Core Data"){
-        string saveFileName = "3dj.config_";
+        string saveFileName = "config.3dj";
         CDataPoolSimple::getInstance().saveToFile( saveFileName );
     }
 }
-
-
 
 void CMenuViewController::loopEditorEvent(ofxUIEventArgs &e)
 {
@@ -128,6 +126,7 @@ void CMenuViewController::loopEditorEvent(ofxUIEventArgs &e)
         //Get toggles() ???
         //Loop sample
     }
+    
 }
 
 void CMenuViewController::visualEditorEvent(ofxUIEventArgs &e)
@@ -189,7 +188,7 @@ void CMenuViewController::saveRadioButtonInfo(string boxID) {
 
     }else {
         ofLogVerbose("User hit cancel");
-    }
+    }    
 }
 
 void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileResult, string boxID){
@@ -211,15 +210,23 @@ void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileRe
             //Load sound files into Datapool XML File
             //====================================================================
             //string fileName = "sounds/" + file.getFileName();
-            transform(boxID.begin(), boxID.end(), boxID.begin(), ::tolower);
-            string key = boxID + "Button";
+            string key;
+            key.resize(boxID.size());
+            transform(boxID.begin(), boxID.end(), key.begin(), ::tolower);
+            key = key + "Button";
 
             //reload sound file.
             void *val;
             if ( m_datapool->getRefByName(key, val) ) {
-                ((CBoxButton*)val)->reloadSound( file.getAbsolutePath() );
+                ((CBoxButton*)val)->reloadSound( file.getAbsolutePath());
+                m_datapool->setValue( boxID, file.getAbsolutePath(), true );
+            }else{
+                ofLogVerbose("cannot get the reference of " + boxID);
             }
 		}
 	}
+
+    file.close();
 }
+
 

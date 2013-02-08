@@ -44,35 +44,108 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     m_controlBox_a      = 30;
     float m_z = 0;
 
+    string songName;
+    mapEntity mapSong;
+    CSongs* songs = &CSongs::getInstance();
+    if ( !songs->getFirst(songName, mapSong)){
+        ofLogVerbose("there is no song in songs folder");
+        return;
+    }
+        
     //Row A
-    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BeatsNLeads.wav");
+    string soundPath = mapSong["A1"].value;
+    if ( m_dataPool->findValueRef( "A1"))
+    {
+        m_dataPool->getValueByName( "A1", soundPath);
+    }
+    
+    m_a1Button = new CBoxButton(500, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_a1Button);
-    m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_BassFills.wav");
+
+    soundPath = mapSong["A2"].value;
+    if ( m_dataPool->findValueRef( "A2"))
+    {
+        m_dataPool->getValueByName( "A2", soundPath);
+    }
+    m_a2Button = new CBoxButton(167, -270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_a2Button);
-    m_a3Button = new CBoxButton(-167,-270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Bass_02.wav");
+
+    soundPath = mapSong["A3"].value;
+    if ( m_dataPool->findValueRef( "A3"))
+    {
+        m_dataPool->getValueByName( "A3", soundPath);
+    }
+    m_a3Button = new CBoxButton(-167,-270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_a3Button);
-    m_a4Button = new CBoxButton(-500, -270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, "sounds/SSP/SSP_Bass_01.wav");
+
+    soundPath = mapSong["A4"].value;
+    if ( m_dataPool->findValueRef( "A4"))
+    {
+        m_dataPool->getValueByName( "A4", soundPath);
+    }
+    m_a4Button = new CBoxButton(-500, -270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, soundPath);
     m_a4Button->m_soundPlayer.setVolume(0.60f);
     addBoxButton(m_a4Button);
 
     //Row B
     m_controlButton_1 = new CLoopBoxButton(500, 0, m_boxCenterZ, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"");
     addBoxButton(m_controlButton_1);
-    m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Long.wav");
+
+    soundPath = mapSong["B2"].value;
+    if ( m_dataPool->findValueRef( "B2"))
+    {
+        m_dataPool->getValueByName( "B2", soundPath);
+    }
+    m_b2Button = new CBoxButton(167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_b2Button);
-    m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Hero_Button_Short.wav");
+
+    soundPath = mapSong["B3"].value;
+    if ( m_dataPool->findValueRef( "B3"))
+    {
+        m_dataPool->getValueByName( "B3", soundPath);
+    }
+    m_b3Button = new CBoxButton(-167, 0, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_b3Button);
-    m_b4Button = new CBoxButton(-500,0,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Press_The_Superhero.wav");
+
+    soundPath = mapSong["B4"].value;
+    if ( m_dataPool->findValueRef( "B4"))
+    {
+        m_dataPool->getValueByName( "B4", soundPath);
+    }
+    m_b4Button = new CBoxButton(-500,0,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_b4Button);
 
     //Row C
-    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Drums.wav");
+    soundPath = mapSong["C1"].value;
+    if ( m_dataPool->findValueRef( "C1"))
+    {
+        m_dataPool->getValueByName( "C1", soundPath);
+    }
+    m_c1Button = new CBoxButton(500, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_c1Button);
-    m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Oh.wav");
+
+    soundPath = mapSong["C2"].value;
+    if ( m_dataPool->findValueRef( "C2"))
+    {
+        m_dataPool->getValueByName( "C2", soundPath);
+    }
+    m_c2Button = new CBoxButton(167, 270, m_boxCenterZ, m_boxSize, m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_c2Button);
-    m_c3Button = new CBoxButton(-167, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Leads_N_Pads.wav");
+
+    soundPath = mapSong["C3"].value;
+    if ( m_dataPool->findValueRef( "C3"))
+    {
+        m_dataPool->getValueByName( "C3", soundPath);
+    }
+    m_c3Button = new CBoxButton(-167, 270, m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_c3Button);
-    m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha,"sounds/SSP/SSP_Pad_01.wav");
+
+    soundPath = mapSong["C4"].value;
+    if ( m_dataPool->findValueRef( "C4"))
+    {
+        m_dataPool->getValueByName( "C4", soundPath);
+    }
+    m_c4Button = new CBoxButton(-500, 270,m_boxCenterZ, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath);
     addBoxButton(m_c4Button);
 
     setInitialVolume(1.0f);
