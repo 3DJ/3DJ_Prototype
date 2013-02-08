@@ -419,7 +419,13 @@
 		</Unit>
 		<Unit filename="src\CPluginLoader.h">
 			<Option virtualFolder="src" />
-		</Unit>				
+		</Unit>			
+		<Unit filename="src\CSongs.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
+		<Unit filename="src\CSongs.h">
+			<Option virtualFolder="src" />
+        </Unit>
 		<Unit filename="src\main.cpp">
 			<Option virtualFolder="src\" />
 		</Unit>
