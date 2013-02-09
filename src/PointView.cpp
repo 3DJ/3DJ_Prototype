@@ -37,13 +37,13 @@ void CPointView:: drawParticles()
     for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p+=5){
         ofCircle(p->x, p->y, p->z, 8.0f);
     }
-    
+
     ofDisablePointSprites();
-    
+
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 
-    ofPopMatrix();   
+    ofPopMatrix();
 }
 
 void CPointView::addPoint( const float x, const float y, const float z)
@@ -53,9 +53,9 @@ void CPointView::addPoint( const float x, const float y, const float z)
 
     //Pass the size in as a normal x position
     float size = ofRandom(8,35);
-    
+
     m_sizes.push_back(ofVec3f(size));
-    
+
 }
 
 void CPointView::clearData()
@@ -67,6 +67,6 @@ void CPointView::clearData()
 
 void CPointView::uploadDataToVbo()
 {
-    m_vbo.setVertexData(m_points.begin()._Ptr, 8, GL_STATIC_DRAW);
-    m_vbo.setNormalData(m_sizes.begin()._Ptr,(int)m_sizes.size(), GL_STATIC_DRAW);    
+    m_vbo.setVertexData(m_points.data(), 8, GL_STATIC_DRAW);
+    m_vbo.setNormalData(m_sizes.data(),(int)m_sizes.size(), GL_STATIC_DRAW);
 }
