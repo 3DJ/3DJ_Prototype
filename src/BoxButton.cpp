@@ -10,7 +10,7 @@
 
 float complexor;
 
-CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName)
+CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation)
 {
     m_x = centerX;
     m_y = centerY;
@@ -20,6 +20,8 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_g = greenVal;
     m_b = blueVal;
     m_a = alphaVal;
+
+    m_rotation = rotation;
 
     m_complexor = 0;
     m_isRepeat = false;
@@ -92,18 +94,19 @@ void CBoxButton::render()  //Draw boxes and set color
         m_toBeStop = true;
 
         ofPushMatrix();
-        ofTranslate(m_x, m_y,m_z);
-        ofRotateY(ofGetElapsedTimef()* 20);
 
+        ofRotateY(m_rotation);
+        ofTranslate(m_x, m_y, m_z);
 
-        ofPushMatrix(); //Draw inside Box to indicate its looping
+        //Draw diamond inside Box to indicate its looping
+        ofPushMatrix(); //draw fill
         ofSetColor(0,220,0,200);
         ofFill();
         ofSetSphereResolution(2);
         ofSphere(0,0,0, m_size * 0.25);
         ofPopMatrix();
 
-        ofPushMatrix();
+        ofPushMatrix();  //draw wire frame
         ofSetColor(20,50,20);
         ofEnableSmoothing();
         ofNoFill();
@@ -112,6 +115,7 @@ void CBoxButton::render()  //Draw boxes and set color
         ofPopMatrix();
 
         ofPopMatrix();
+
     }
 
     if ( m_isRepeat && isCurrentlyHit() )
@@ -200,13 +204,11 @@ void CBoxButton::setDefaultMode()
 	ofPushMatrix();
 	ofEnableSmoothing();
 	ofEnableAlphaBlending();
-	//ofEnableBlendMode(OF_BLENDMODE_ADD);
-	ofSetColor(m_r, m_g, m_b, m_a);
-	ofFill();
-	ofBox(m_x, m_y, m_z, m_size);
+    ofRotateY(m_rotation);
+    ofTranslate(m_x, m_y, m_z);
 	ofNoFill();
 	ofSetColor(255,255,255,51);
-	ofBox(m_x, m_y, m_z, m_size);
+	ofBox(0,0,0, m_size);
 	ofDisableAlphaBlending();
 	ofDisableSmoothing();
 	ofPopMatrix();
@@ -219,9 +221,9 @@ void CBoxButton::setHitMode()
 	ofEnableSmoothing();
 	ofEnableAlphaBlending();
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofRotateY(m_rotation);
 	ofTranslate(m_x, m_y, m_z);
 	ofSetColor(255, 255, 255, 51+ (204 * percentIncluded()));
-	//ofSetColor(0, 0, 0);
 	ofFill();
 	ofBox(m_size + swellAnimation());
 	ofNoFill();
@@ -245,10 +247,12 @@ void CBoxButton::drawBox( float complexor )
     //ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetColor(m_r, m_g, m_b, m_a);
     ofFill();
-    ofBox(m_x + complexor, m_y, m_z, m_size);
+    ofRotateY(m_rotation);
+    ofTranslate(m_x, m_y, m_z);
+    ofBox(0, 0, 0, m_size);
     ofNoFill();
     ofSetColor(255,255,255,51);
-    ofBox(m_x + complexor, m_y, m_z, m_size);
+    ofBox(0, 0, 0, m_size);
     ofDisableAlphaBlending();
     ofDisableSmoothing();
     ofPopMatrix();

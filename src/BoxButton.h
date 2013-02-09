@@ -21,7 +21,7 @@ class CBoxButton : public CBoxEntity
 
 public:
     CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
-        float redVal, float greenVal, float blueVal, float alphaVal, string soundName);
+        float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation);
     CBoxButton();
     ~CBoxButton();
 

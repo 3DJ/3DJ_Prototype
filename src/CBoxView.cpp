@@ -64,6 +64,11 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
         m_boxButtons.push_back( m_a4Button );
     }
 
+    if( dataPool->getPointerByName( "b1Button", temporary)) {
+        m_b1Button  = (CBoxButton*) temporary;
+        m_boxButtons.push_back( m_b1Button );
+    }
+
     if( dataPool->getPointerByName( "b2Button", temporary)) {
         m_b2Button  = (CBoxButton*) temporary;
         m_boxButtons.push_back( m_b2Button );
@@ -261,4 +266,3 @@ float CBoxView::scaleRatioForKinectDepthMap()
         return screenH/h;
     }
 }
-

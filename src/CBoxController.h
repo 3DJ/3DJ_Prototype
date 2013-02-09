@@ -37,7 +37,7 @@ public:
     ~CBoxController();
 
     bool update();
-    
+
     void setUpTranslation();
 
     void update(double time_since_last_update);
@@ -54,12 +54,14 @@ public:
 
     //Stuff For Buttons========================================
 
+    CBoxButton *m_controlButton_1; //Loop Toggle Button
+
     CBoxButton *m_a1Button;
     CBoxButton *m_a2Button;
     CBoxButton *m_a3Button;
     CBoxButton *m_a4Button;
 
-    CBoxButton *m_controlButton_1;    
+    CBoxButton *m_b1Button;
     CBoxButton *m_b2Button;
     CBoxButton *m_b3Button;
     CBoxButton *m_b4Button;
@@ -85,11 +87,11 @@ public:
     CEQView *m_equalizerView;
     SnakeFish *m_snakeFish;
     Particles *m_particles;
-    
+
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
     float m_complexor;
-    
+
 };
 
 #endif

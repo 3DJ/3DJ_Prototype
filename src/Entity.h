@@ -67,6 +67,7 @@ public:
     int m_pointsInArea;
     int m_pointThreshold;
     int m_threshold;
+    float m_rotation;
 
 protected:
     virtual bool hitTest(float x, float y, float z) = 0;
@@ -78,7 +79,7 @@ protected:
 
 class CControlButtonsBase : public CEntity{
 public:
-    
+
     virtual void drawCircleStroke() = 0;
     virtual bool collisionTest(ofPoint *point) = 0;
 
@@ -102,7 +103,7 @@ public:
     virtual void postRender() = 0;
     virtual float getEnergy() = 0;
     virtual void setPosition(ofPoint pos) = 0;
-    
+
     float m_maxSpeed;
     float m_birth;
     float m_energy, m_power;
