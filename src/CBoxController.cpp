@@ -25,7 +25,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     m_WidthScale = 1.0f;
     m_HeightScale = 1.0f;
     m_scale = scaleRatioForKinectDepthMap();
-    m_playerDepth = 1000.0f;
+    m_playerDepth = 1200.0f;
 
     //SET UP BUTTONS and add all buttons to world vector============
     //    x, y, z, box size, r, g, b, a, music sample name
@@ -61,7 +61,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
 
     //Loop Button
     m_controlButton_1 = new CLoopBoxButton(0, y1, -z2*0.5, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"",0);
-
+    addBoxButton(m_controlButton_1);
     //Row A
     string soundPath = mapSong["A1"].value;
     if ( m_dataPool->findValueRef( "A1"))
