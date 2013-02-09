@@ -38,13 +38,13 @@ void CPointView:: drawParticles()
     for( vector<ofVec3f>::iterator p = m_points.begin(); i < m_points.size(); p+=5,i+=5){
         ofCircle(p->x, p->y, p->z, 8.0f);
     }
-    
+
     ofDisablePointSprites();
-    
+
     ofDisableBlendMode();
     ofDisableAlphaBlending();
 
-    ofPopMatrix();   
+    ofPopMatrix();
 }
 
 void CPointView::addPoint( const float x, const float y, const float z)
@@ -54,9 +54,9 @@ void CPointView::addPoint( const float x, const float y, const float z)
 
     //Pass the size in as a normal x position
     float size = ofRandom(8,35);
-    
+
     m_sizes.push_back(ofVec3f(size));
-    
+
 }
 
 void CPointView::clearData()
