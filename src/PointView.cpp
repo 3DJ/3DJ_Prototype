@@ -67,7 +67,6 @@ void CPointView::clearData()
 
 void CPointView::uploadDataToVbo()
 {
-    m_vbo.setVertexData(&m_points[0], 8, GL_STATIC_DRAW);
-    m_vbo.setNormalData(&m_sizes[0],(int)m_sizes.size(), GL_STATIC_DRAW);
-    
+    m_vbo.setVertexData(m_points.begin()._Ptr, 8, GL_STATIC_DRAW);
+    m_vbo.setNormalData(m_sizes.begin()._Ptr,(int)m_sizes.size(), GL_STATIC_DRAW);    
 }
