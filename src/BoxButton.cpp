@@ -181,8 +181,9 @@ bool CBoxButton::collisionTest( ofPoint point)
 {
     bool result = false;
 
-    if( ((point.x > m_x - m_size/2) && (point.y > m_y - m_size/2) && (point.z > m_z - m_size/2))
-       &&(point.x < m_x + m_size/2) && (point.y < m_y + m_size/2) && (point.z < m_z + m_size/2)){
+    if(  (point.z > m_z - m_size/2) && (point.z < m_z + m_size/2)
+       &&(point.x > m_x - m_size/2) && (point.x < m_x + m_size/2) 
+       &&(point.y > m_y - m_size/2) && (point.y < m_y + m_size/2)){
           m_pointsInArea++;
           result = true;
     }

@@ -318,8 +318,10 @@ void CBoxController::addBoxButton(CBoxButton * _boxButton)
 void CBoxController::handleCollisions(ofPoint *XYZ)
 {
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
-    {
-        (*eachBox)->collisionTest(XYZ); //test Each Box for hits
+    {//test Each Box for hits        
+        if ((*eachBox)->collisionTest(XYZ)){
+            return;
+        } 
     }
 }
 

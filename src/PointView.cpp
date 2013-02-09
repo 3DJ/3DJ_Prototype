@@ -34,7 +34,8 @@ void CPointView:: drawParticles()
     m_texture.unbind();
     m_shader.end();
 
-    for( vector<ofVec3f>::iterator p = m_points.begin(); p < m_points.end(); p+=5){
+    int i = 5;
+    for( vector<ofVec3f>::iterator p = m_points.begin(); i < m_points.size(); p+=5,i+=5){
         ofCircle(p->x, p->y, p->z, 8.0f);
     }
     
@@ -67,6 +68,6 @@ void CPointView::clearData()
 
 void CPointView::uploadDataToVbo()
 {
-    m_vbo.setVertexData(m_points.begin()._Ptr, 8, GL_STATIC_DRAW);
-    m_vbo.setNormalData(m_sizes.begin()._Ptr,(int)m_sizes.size(), GL_STATIC_DRAW);    
+    m_vbo.setVertexData( m_points.data(), 8, GL_STATIC_DRAW);
+    m_vbo.setNormalData( m_sizes.data(),(int)m_sizes.size(), GL_STATIC_DRAW);    
 }
