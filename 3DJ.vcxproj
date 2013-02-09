@@ -119,6 +119,7 @@
     <ClCompile Include="src\ConfigFile.cpp" />
     <ClCompile Include="src\ControlBoxButton.cpp" />
     <ClCompile Include="src\CPluginLoader.cpp" />
+    <ClCompile Include="src\CSongs.cpp" />
     <ClCompile Include="src\CStateManager.cpp" />
     <ClCompile Include="src\CVisualThemesView.cpp" />
     <ClCompile Include="src\CWorld.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="src\ConfigFile.h" />
     <ClInclude Include="src\ControlBoxButton.h" />
     <ClInclude Include="src\CPluginLoader.h" />
+    <ClInclude Include="src\CSongs.h" />
     <ClInclude Include="src\CStateManager.h" />
     <ClInclude Include="src\CVisualThemesView.h" />
     <ClInclude Include="src\CWindow_Base.h" />

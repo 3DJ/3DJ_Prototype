@@ -103,6 +103,9 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
       <Filter>ofxXml</Filter>
     </ClCompile>
+    <ClCompile Include="src\CSongs.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
       <Filter>ofxXml</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CSongs.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
