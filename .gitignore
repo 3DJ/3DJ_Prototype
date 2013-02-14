@@ -2,7 +2,11 @@ bin/3DJ*
 bin/3DJ_debug
 bin/data/sounds
 bin/openNI-3DJ.app
+bin/*.app
 bin/libs
 bin/data/openni
+bin/openNI-3DJDebug
+build/
 obj
 .DS_Store
+*.swp
