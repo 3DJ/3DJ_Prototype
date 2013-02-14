@@ -1,0 +1,16 @@
+<3-dj link="www.3-dj.com">
+    <_1 key="A1">sounds/SSP/SSP_BeatsNLeads.wav</_1>
+    <_2 key="A2">sounds/SSP/SSP_BassFills.wav</_2>
+    <_3 key="A3">sounds/SSP/SSP_Bass_02.wav</_3>
+    <_4 key="A4">sounds/SSP/SSP_Bass_01.wav</_4>
+    <_5 key="B1"></_5>
+    <_6 key="B2">sounds/SSP/SSP_Hero_Button_Long.wav</_6>
+    <_7 key="B3">sounds/SSP/SSP_Hero_Button_Short.wav</_7>
+    <_8 key="B4">sounds/SSP/SSP_Press_The_Superhero.wav</_8>
+    <_9 key="C1">sounds/SSP/SSP_Oh.wav</_9>
+    <_10 key="C2">sounds/SSP/SSP_Oh.wav</_10>
+    <_11 key="C3">sounds/SSP/SSP_Leads_N_Pads.wav</_11>
+    <_12 key="C4">sounds/SSP/SSP_Pad_01.wav</_12>
+	<_13 key="soundName">starBomb</_13>
+    <number>13</number>
+</3-dj>

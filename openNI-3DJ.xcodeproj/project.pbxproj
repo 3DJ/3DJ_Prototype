@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221698D016CC823800766860 /* CSongs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 221698CE16CC823800766860 /* CSongs.cpp */; };
 		2253528A168F8B7D002483EC /* ofxOpenNI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22535285168F8B7D002483EC /* ofxOpenNI.cpp */; };
 		2253528B168F8B7D002483EC /* ofxOpenNITypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22535287168F8B7D002483EC /* ofxOpenNITypes.cpp */; };
 		2268DBE41686AA6B00C00544 /* BoxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2268DBAC1686AA6B00C00544 /* BoxButton.cpp */; };
@@ -103,6 +104,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		221698CE16CC823800766860 /* CSongs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSongs.cpp; sourceTree = "<group>"; };
+		221698CF16CC823800766860 /* CSongs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSongs.h; sourceTree = "<group>"; };
 		22535285168F8B7D002483EC /* ofxOpenNI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOpenNI.cpp; sourceTree = "<group>"; };
 		22535286168F8B7D002483EC /* ofxOpenNI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenNI.h; sourceTree = "<group>"; };
 		22535287168F8B7D002483EC /* ofxOpenNITypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOpenNITypes.cpp; sourceTree = "<group>"; };
@@ -437,6 +440,8 @@
 				2268DBC81686AA6B00C00544 /* ControlBoxButton.h */,
 				2268DBD01686AA6B00C00544 /* DataPool.cpp */,
 				2268DBD11686AA6B00C00544 /* DataPool.h */,
+				221698CE16CC823800766860 /* CSongs.cpp */,
+				221698CF16CC823800766860 /* CSongs.h */,
 				2268DBD21686AA6B00C00544 /* Entity.h */,
 				2268DBD51686AA6B00C00544 /* Interface.cpp */,
 				2268DBD61686AA6B00C00544 /* Interface.h */,
@@ -1035,6 +1040,7 @@
 				22EC3E3C16C2B04B00AD0D51 /* COgreMain.cpp in Sources */,
 				22EC3E3D16C2B04B00AD0D51 /* COgreThread.cpp in Sources */,
 				22EC3E3E16C2B04B00AD0D51 /* CPluginLoader.cpp in Sources */,
+				221698D016CC823800766860 /* CSongs.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

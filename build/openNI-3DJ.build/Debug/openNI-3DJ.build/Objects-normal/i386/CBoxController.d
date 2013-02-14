@@ -158,4 +158,5 @@ dependencies: \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/PointView.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/EQView.h \
   /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/SnakeFish.h \
-  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/Particles.h
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/Particles.h \
+  /Users/Sam/cpp_projects/of_v0073_osx_release/apps/myApps/3DJ_Prototype/src/CSongs.h

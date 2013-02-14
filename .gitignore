@@ -1,6 +1,7 @@
 bin/3DJ*
 bin/3DJ_debug
 bin/data/sounds
+bin/openNI-3DJ.app
 bin/libs
 bin/data/openni
 obj
