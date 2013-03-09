@@ -8,7 +8,7 @@
 
 #include "CWorld.h"
 
-
+// only this global variable. it will be replaced by datapool member.
 CurrentState g_currentState;
 
 CWorld::CWorld()

@@ -8,8 +8,6 @@
 
 #include "BoxButton.h"
 
-float complexor;
-
 CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation)
 {
     m_x = centerX;
@@ -45,10 +43,12 @@ CBoxButton::~CBoxButton()
 
 void CBoxButton::render()  //Draw boxes and set color
 {
-    if ( complexor != 0 || m_complexor/50 != 0)
+    int handOffset=0;
+    if ( handOffset != 0 || m_complexor/50 != 0)
     {
-        if ( complexor != 0){
-            m_complexor = complexor;
+        if ( handOffset != 0){
+
+            m_complexor = handOffset;
         }
         else{
             if ( m_complexor >= 0 && m_complexor <= 200 )

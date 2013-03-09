@@ -14,8 +14,6 @@
 
 using namespace DataPool;
 
-
-extern float complexor;
 class CBoxButton : public CBoxEntity
 {
 
