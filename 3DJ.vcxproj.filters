@@ -106,6 +106,9 @@
     <ClCompile Include="src\CSongs.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\CHands.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -225,6 +228,9 @@
       <Filter>ofxXml</Filter>
     </ClInclude>
     <ClInclude Include="src\CSongs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CHands.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

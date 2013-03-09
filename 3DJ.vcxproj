@@ -108,6 +108,7 @@
     <ClCompile Include="src\CalibrationView.cpp" />
     <ClCompile Include="src\CBoxController.cpp" />
     <ClCompile Include="src\CBoxView.cpp" />
+    <ClCompile Include="src\CHands.cpp" />
     <ClCompile Include="src\CLoopEditorView.cpp" />
     <ClCompile Include="src\CMenuView.cpp" />
     <ClCompile Include="src\CMenuViewController.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="src\CalibrationView.h" />
     <ClInclude Include="src\CBoxController.h" />
     <ClInclude Include="src\CBoxView.h" />
+    <ClInclude Include="src\CHands.h" />
     <ClInclude Include="src\CLoopEditorView.h" />
     <ClInclude Include="src\CMenuView.h" />
     <ClInclude Include="src\CMenuViewController.h" />
