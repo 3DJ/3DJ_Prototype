@@ -8,8 +8,9 @@
 
 #include "BoxButton.h"
 
-CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation)
+CBoxButton::CBoxButton(string boxName, float centerX, float centerY, float centerZ, int boxSize, float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation)
 {
+    m_boxName = boxName;
     m_x = centerX;
     m_y = centerY;
     m_z = centerZ;
@@ -20,8 +21,7 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_a = alphaVal;
 
     m_rotation = rotation;
-
-    m_slideOffset = 0;
+    
     m_isRepeat = false;
     m_toBeStop = false;
     m_pointsInArea = 0;
@@ -42,7 +42,11 @@ CBoxButton::~CBoxButton()
 
 }
 
-void CBoxButton::render()  //Draw boxes and set color
+void CBoxButton::render()
+{
+    // just for adapting the abstact class
+}
+void CBoxButton::render(int boxOffset)  //Draw boxes and set color
 {
     void *temp=0;
     float slideOffset = 0;
@@ -52,103 +56,71 @@ void CBoxButton::render()  //Draw boxes and set color
         slideOffset = *(float*)temp;
     }       
 
-    if ( slideOffset != 0 || m_slideOffset/50 != 0)
-    {
-        if ( slideOffset != 0){
-
-            m_slideOffset = slideOffset;
-        }
-        else{
-            if ( m_slideOffset >= 0 && m_slideOffset <= 200 )
-            {
-                m_slideOffset = m_slideOffset - 40;
-            }
-            else if( m_slideOffset < 0 && m_slideOffset >= -200 )
-            {
-                m_slideOffset = m_slideOffset + 40;
-            }
-            else if ( m_slideOffset < -200 ){
-                m_slideOffset = m_slideOffset - 80;
-                m_slideOffset = 0;
-            }
-            else if ( m_slideOffset > 200 ){
-                m_slideOffset = m_slideOffset + 80;
-            }
-
-        }
-
-        if ( m_slideOffset > 2000 || m_slideOffset < -2000)
-        {
-            m_slideOffset = 0;
-        }
-
-        {
-
-            drawBox(m_slideOffset);
-            drawBox(m_slideOffset - 2000);
-            drawBox(m_slideOffset + 2000);
-            // shut down the sound.
-            m_soundPlayer.setLoop(false);
-            m_soundPlayer.stop();
-            m_soundPlayer.setPosition(0);
-            m_isRepeat = false;
-        }
-    }
-    else
-    {
-    ofSetLineWidth(2);
-    if ( m_isRepeat && !isCurrentlyHit() )
-    {// make it stop on next hit.
-        m_toBeStop = true;
-
-        ofPushMatrix();
-
-        ofRotateY(m_rotation);
-        ofTranslate(m_x, m_y, m_z);
-
-        //Draw diamond inside Box to indicate its looping
-        ofPushMatrix(); //draw fill
-        ofSetColor(0,220,0,200);
-        ofFill();
-        ofSetSphereResolution(2);
-        ofSphere(0,0,0, m_size * 0.25);
-        ofPopMatrix();
-
-        ofPushMatrix();  //draw wire frame
-        ofSetColor(20,50,20);
-        ofEnableSmoothing();
-        ofNoFill();
-        ofSetLineWidth(1);
-        ofSphere(0,0,0, m_size * 0.25);
-        ofPopMatrix();
-
-        ofPopMatrix();
-    }
-
-    if ( m_isRepeat && isCurrentlyHit() )
-    {// if check this signal, close repeat option.
-        if ( m_toBeStop == true ){
-            m_isRepeat = false;
-            m_toBeStop = false;
-        }
-    }
-
-    if ( isCurrentlyHit() || m_isRepeat) {
-		// set the current hit button to hit mode.
-		setHitMode();
-        // handle the sound
-        if ( !m_soundPlayer.getIsPlaying()){
-            m_soundPlayer.setLoop(true);
-            m_soundPlayer.play();
-        }
-    } else{
-		// set the unhit button as default mode.
-		setDefaultMode();
+    if ( slideOffset != 0 || boxOffset/50 != 0)
+    {  
+        drawBox(boxOffset);
+        drawBox(boxOffset - 2000);
+        drawBox(boxOffset + 2000);
         // shut down the sound.
         m_soundPlayer.setLoop(false);
         m_soundPlayer.stop();
         m_soundPlayer.setPosition(0);
-    }
+        m_isRepeat = false;
+    }else
+    {
+        ofSetLineWidth(2);
+        if ( m_isRepeat && !isCurrentlyHit() )
+        {// make it stop on next hit.
+            m_toBeStop = true;
+
+            ofPushMatrix();
+
+            ofRotateY(m_rotation);
+            ofTranslate(m_x, m_y, m_z);
+
+            //Draw diamond inside Box to indicate its looping
+            ofPushMatrix(); //draw fill
+            ofSetColor(0,220,0,200);
+            ofFill();
+            ofSetSphereResolution(2);
+            ofSphere(0,0,0, m_size * 0.25);
+            ofPopMatrix();
+
+            ofPushMatrix();  //draw wire frame
+            ofSetColor(20,50,20);
+            ofEnableSmoothing();
+            ofNoFill();
+            ofSetLineWidth(1);
+            ofSphere(0,0,0, m_size * 0.25);
+            ofPopMatrix();
+
+            ofPopMatrix();
+        }
+
+        if ( m_isRepeat && isCurrentlyHit() )
+        {// if check this signal, close repeat option.
+            if ( m_toBeStop == true ){
+                m_isRepeat = false;
+                m_toBeStop = false;
+            }
+        }
+
+        if ( isCurrentlyHit() || m_isRepeat) {
+		    // set the current hit button to hit mode.
+		    setHitMode();
+            // handle the sound
+            if ( !m_soundPlayer.getIsPlaying()){
+                m_soundPlayer.setLoop(true);
+                m_soundPlayer.play();
+            }
+        } else{
+		    // set the unhit button as default mode.
+		    setDefaultMode();
+            // shut down the sound.
+            m_soundPlayer.setLoop(false);
+            m_soundPlayer.stop();
+            m_soundPlayer.setPosition(0);
+        }
     }
     clear(); //clear point count
 }

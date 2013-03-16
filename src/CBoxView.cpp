@@ -246,6 +246,45 @@ void CBoxView::setUpTranslation()
 
 void CBoxView::effectBoxbutton()
 {
+    // control the slide gesture.
+    static int boxOffset = 0;
+    void *temp=0;
+    float slideOffset = 0;
+    m_dataPool->getRefByName("slideOffset", temp);
+    
+    if ( temp != 0)
+    {
+        slideOffset = *(float*)temp;
+    }       
+
+    if ( slideOffset != 0){
+        boxOffset = slideOffset;
+    }
+    else{
+        if ( boxOffset >= 0 && boxOffset <= 200 )
+        {
+            boxOffset = boxOffset - 40;
+        }
+        else if( boxOffset < 0 && boxOffset >= -200 )
+        {
+            boxOffset = boxOffset + 40;
+        }
+        else if ( boxOffset < -200 ){
+            boxOffset = boxOffset - 80;
+        }
+        else if ( boxOffset > 200 ){
+            boxOffset = boxOffset + 80;
+        }
+
+    }
+
+    if ( boxOffset > 2000 || boxOffset < -2000)
+    {
+        reloadSounds();
+        boxOffset = 0;
+    }
+    // end of control slide
+
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
     {
         if ( (*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
@@ -258,7 +297,7 @@ void CBoxView::effectBoxbutton()
             m_isRepeat             = false;
         }
 
-        (*eachBox)->render( ); // Draw BoxButtons and Handle Sound.
+        (*eachBox)->render( boxOffset ); // Draw BoxButtons and Handle Sound.
     }
 }
 
@@ -273,5 +312,25 @@ float CBoxView::scaleRatioForKinectDepthMap()
         return screenW/w;
     }else {
         return screenH/h;
+    }
+}
+
+
+void CBoxView::reloadSounds()
+{
+    string songName;
+    mapEntity mapSong;
+    CSongs* songs = &CSongs::getInstance();
+    if ( !songs->getNext(songName, mapSong)){        
+        return;
+    }
+    cout<<"song name"<<songName<<endl;
+
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
+    {
+        cout<<"reload box name: "<<(*eachBox)->m_boxName<<endl;
+        string soundPath = mapSong[(*eachBox)->m_boxName].value;
+        cout<<"reload sound: "<<soundPath<<endl;
+        (*eachBox)->reloadSound(soundPath);
     }
 }

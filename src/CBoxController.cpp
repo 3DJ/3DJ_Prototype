@@ -60,7 +60,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     }
 
     //Loop Button
-    m_controlButton_1 = new CLoopBoxButton(0, y1, -z2*0.5, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"",0);
+    m_controlButton_1 = new CLoopBoxButton("loop", 0, y1, -z2*0.5, m_boxSize*.85,m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a,"",0);
     addBoxButton(m_controlButton_1);
     //Row A
     string soundPath = mapSong["A1"].value;
@@ -69,7 +69,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
         m_dataPool->getValueByName( "A1", soundPath);
     }
 
-    m_a1Button = new CBoxButton(x1, -y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_a1Button = new CBoxButton("A1", x1, -y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_a1Button);
 
     soundPath = mapSong["A2"].value;
@@ -77,7 +77,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "A2", soundPath);
     }
-    m_a2Button = new CBoxButton(x2, -y1, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_a2Button = new CBoxButton("A2", x2, -y1, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_a2Button);
 
     soundPath = mapSong["A3"].value;
@@ -85,7 +85,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "A3", soundPath);
     }
-    m_a3Button = new CBoxButton(-x2,-y1,z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
+    m_a3Button = new CBoxButton("A3", -x2,-y1,z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
     addBoxButton(m_a3Button);
 
     soundPath = mapSong["A4"].value;
@@ -93,7 +93,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "A4", soundPath);
     }
-    m_a4Button = new CBoxButton(-x1, -y1, z1, m_boxSize, m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
+    m_a4Button = new CBoxButton("A4", -x1, -y1, z1, m_boxSize, m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
     m_a4Button->m_soundPlayer.setVolume(0.60f);
     addBoxButton(m_a4Button);
 
@@ -103,7 +103,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "B1", soundPath);
     }
-    m_b1Button = new CBoxButton(x1, 0, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_b1Button = new CBoxButton("B1", x1, 0, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_b1Button);
 
     soundPath = mapSong["B2"].value;
@@ -111,7 +111,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "B2", soundPath);
     }
-    m_b2Button = new CBoxButton(x2, 0, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_b2Button = new CBoxButton("B2", x2, 0, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_b2Button);
 
     soundPath = mapSong["B3"].value;
@@ -119,7 +119,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "B3", soundPath);
     }
-    m_b3Button = new CBoxButton(-x2, 0, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
+    m_b3Button = new CBoxButton("B3", -x2, 0, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
     addBoxButton(m_b3Button);
 
     soundPath = mapSong["B4"].value;
@@ -127,7 +127,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "B4", soundPath);
     }
-    m_b4Button = new CBoxButton(-x1,0, z1, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath, -rotation);
+    m_b4Button = new CBoxButton("B4", -x1,0, z1, m_boxSize,m_red,m_green,m_blue,m_alpha, soundPath, -rotation);
     addBoxButton(m_b4Button);
 
     //Row C
@@ -136,7 +136,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "C1", soundPath);
     }
-    m_c1Button = new CBoxButton(x1, y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_c1Button = new CBoxButton("C1", x1, y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_c1Button);
 
     soundPath = mapSong["C2"].value;
@@ -144,7 +144,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "C2", soundPath);
     }
-    m_c2Button = new CBoxButton(x2, y1, z2, m_boxSize, m_red,m_green,m_blue,m_alpha,soundPath, rotation);
+    m_c2Button = new CBoxButton("C2", x2, y1, z2, m_boxSize, m_red,m_green,m_blue,m_alpha,soundPath, rotation);
     addBoxButton(m_c2Button);
 
     soundPath = mapSong["C3"].value;
@@ -152,7 +152,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "C3", soundPath);
     }
-    m_c3Button = new CBoxButton(-x2, y1, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
+    m_c3Button = new CBoxButton("C3", -x2, y1, z2, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
     addBoxButton(m_c3Button);
 
     soundPath = mapSong["C4"].value;
@@ -160,7 +160,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     {
         m_dataPool->getValueByName( "C4", soundPath);
     }
-    m_c4Button = new CBoxButton(-x1, y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
+    m_c4Button = new CBoxButton("C4", -x1, y1, z1, m_boxSize,m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
     addBoxButton(m_c4Button);
 
     setInitialVolume(1.0f);
@@ -320,4 +320,3 @@ float CBoxController::scaleRatioForKinectDepthMap()
         return screenH/h;
     }
 }
-

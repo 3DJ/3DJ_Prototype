@@ -46,7 +46,7 @@ public:
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume (float  volumeLevel) ;
     void testHits();
-    float scaleRatioForKinectDepthMap();
+    float scaleRatioForKinectDepthMap();    
 
     //stuff for OpenNI=========================================
     CKinectData m_oniKinect;

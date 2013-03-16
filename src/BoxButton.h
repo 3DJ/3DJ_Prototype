@@ -18,12 +18,14 @@ class CBoxButton : public CBoxEntity
 {
 
 public:
-    CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
+    CBoxButton(string boxName, float centerX, float centerY, float centerZ, int boxSize,
         float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation);
     CBoxButton();
     ~CBoxButton();
 
     void render();
+
+    void render(int m_slideOffset);
 
     void drawBox( float complexor );
 
@@ -42,7 +44,7 @@ public:
     ofSoundPlayer m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;
-    int m_slideOffset;
+    string m_boxName;
 protected:
     bool hitTest(float x, float y, float z);
 

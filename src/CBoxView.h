@@ -19,6 +19,7 @@
 #include "Particles.h"
 #include "Interface.h"
 #include "CHands.h"
+#include "CSongs.h"
 
 using namespace Interface;
 using namespace std;
@@ -48,6 +49,7 @@ public:
     void setInitialVolume (float  volumeLevel) ;
     void drawDepthPoints();
     float scaleRatioForKinectDepthMap();
+    void reloadSounds();
 
     //stuff for OpenNI=========================================
     CKinectData* m_oniKinect;
