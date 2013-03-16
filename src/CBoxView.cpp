@@ -324,7 +324,7 @@ void CBoxView::reloadSounds()
     if ( !songs->getNext(songName, mapSong)){        
         return;
     }
-    cout<<"song name"<<songName<<endl;
+    cout<<"song name:"<<songName<<endl;
 
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
     {
