@@ -42,7 +42,7 @@ public:
     ofSoundPlayer m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;
-    int m_complexor;
+    int m_slideOffset;
 protected:
     bool hitTest(float x, float y, float z);
 

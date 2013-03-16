@@ -8,8 +8,9 @@
 
 #include "KinectData.h"
 
-void CKinectData::setup()
+void CKinectData::setup(CDataPoolSimple* datapool)
 {
+    datapool->createRef( "ofxOpenNIDevice", &m_openNIDevice);
     m_isTracking	= false;
 	m_isFiltering	= false;
 	m_isCloud		= true;

@@ -135,49 +135,58 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
     float m_z = 0;
 
     setInitialVolume(1.0f);
+    m_hands = new CHands(&CDataPoolSimple::getInstance());
+    m_hands->triggerSlide();
 
     m_isRepeat      = false;
 }
 
 CBoxView::~CBoxView()
 {
+    if ( m_hands )
+    {
+        delete m_hands;
+    }
 }
 
 bool CBoxView::draw()
-{
-    render();
+{    
+    ofBackgroundGradient(m_gradientColorInside,m_gradientColorOutside);
+    m_easyCam->begin();
+    ofPushMatrix();    
+    ofScale(-1, 1);
+    ofRotateX(180);
+
+    // todo your render here.
+    render();           // draw basic music equipments    
+    m_hands->draw();    // draw hands tracking
+    // end of render
+
+    ofPopMatrix();
+    m_easyCam->end();
 
     return true;
 }
 
 void CBoxView::render()
-{
-    ofBackgroundGradient(m_gradientColorInside,m_gradientColorOutside);
-    m_easyCam->begin();
+{           
     //setUpTranslation();             //Set up translation for all drawing
 
-    ofPushMatrix();
-    ofScale(-1, 1);
-    ofRotateX(180);
     effectBoxbutton();              // render boxbutton and handle the sound.
-    if(m_oniKinect->m_isTracking){ drawDepthPoints();}   // Do both here so we only look up the m_oniKinect->data once...
-
-    ofPopMatrix();
+    if(m_oniKinect->m_isTracking){ drawDepthPoints();}   // Do both here so we only look up the m_oniKinect->data once...    
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
     ofTranslate(0, -1.5*ofGetHeight(), -5000);
     ofPopMatrix();
 
     //m_snakeFish->render();      //Draw Creature
-    //m_snakeFish->postRender();
+    //m_snakeFish->postRender();    
 
-    m_easyCam->end();
-
-    ofPushMatrix();
-    ofTranslate(ofGetWindowWidth()/2, + ofGetWindowHeight());
+    //ofPushMatrix();
+    //ofTranslate(ofGetWindowWidth()/2, + ofGetWindowHeight());
     //m_particles->render();
 
-    ofPopMatrix();
+    //ofPopMatrix();
 
 //    string msg = "Scale : " + ofToString(m_scale,2);
 //    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);

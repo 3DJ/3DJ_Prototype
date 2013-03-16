@@ -13,7 +13,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
 {
     m_complexor = 0;
     //Set up Kinect
-    m_oniKinect.setup();
+    m_oniKinect.setup(dataPool);
 
     m_background_r = 100;
     m_background_g = 100;
@@ -263,46 +263,6 @@ void CBoxController::testHits()
           }
       }
     }
-
-//    int points = 0;
-//    static float frontPoint;
-//    static float origin;
-//
-//    for (int i = 0; i < numUsers; i++) {
-//
-//        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
-//        ofMesh userMesh = user.getPointCloud();
-//        vector<ofVec3f> vertices =  userMesh.getVertices();
-//
-//        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
-//
-//            if (vertex->z > 0)
-//            {
-//                points++;
-//                int distance = abs(origin - vertex->x);
-//                if ( points > 7 && distance > 80){
-//                    if ( origin == 0)
-//                    {
-//                        frontPoint = vertex->x;
-//                        origin = vertex->x;
-//                    }
-//
-//                    if ( abs( vertex->x - frontPoint) < 100 )
-//                    {
-//                        frontPoint = vertex->x;
-//                        complexor = ( vertex->x - origin );
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    if ( points == 0 )
-//    {
-//        origin = 0;
-//        complexor = 0;
-//    }
 
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);

@@ -18,6 +18,7 @@
 #include "SnakeFish.h"
 #include "Particles.h"
 #include "Interface.h"
+#include "CHands.h"
 
 using namespace Interface;
 using namespace std;
@@ -91,7 +92,7 @@ public:
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
     float m_complexor;
-
+    CHands *m_hands;
 };
 
 #endif

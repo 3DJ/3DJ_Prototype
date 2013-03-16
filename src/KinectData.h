@@ -11,11 +11,13 @@
 
 #include <iostream>
 #include "ofxOpenNI.h"
+#include "DataPool.h"
+using namespace DataPool;
 
 class CKinectData {
 public:
 
-    void setup();
+    void setup(CDataPoolSimple* datapool);
 	void update();
     void draw();
     void exit();

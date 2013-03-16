@@ -13,11 +13,21 @@ CurrentState g_currentState;
 
 CWorld::CWorld()
 {   
+    m_controller = 0;
+    m_view = 0;
 }
 
 CWorld::~CWorld()
 {    
+   if ( m_controller )
+   {
+       delete m_controller;
+   }
    
+   if ( m_view )
+   {
+       delete m_view;
+   }
 }
 
 bool CWorld::init(IController* controller, IView* view )
@@ -27,7 +37,7 @@ bool CWorld::init(IController* controller, IView* view )
     return true;
 }
 
-void CWorld::render()
+void CWorld::draw()
 {
     if ( m_view != 0)
     {

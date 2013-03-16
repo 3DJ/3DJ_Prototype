@@ -9,9 +9,12 @@
 #ifndef Kinect_3DJ_CWorld_h
 #define Kinect_3DJ_CWorld_h
 #include <iostream>
+#include "CHands.h"
+#include "DataPool.h"
 #include "Interface.h"
 using namespace Interface;
 using namespace std;
+using namespace DataPool;
 
 //===========================================================
 // Class : CWorld
@@ -40,7 +43,7 @@ public:
 
     bool init( IController* controller = 0, IView* view = 0);
 
-    void render();   
+    void draw();   
 
     void update(double time_since_last_update);
     

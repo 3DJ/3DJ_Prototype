@@ -21,7 +21,7 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
 
     m_rotation = rotation;
 
-    m_complexor = 0;
+    m_slideOffset = 0;
     m_isRepeat = false;
     m_toBeStop = false;
     m_pointsInArea = 0;
@@ -29,6 +29,7 @@ CBoxButton::CBoxButton(float centerX, float centerY, float centerZ, int boxSize,
     m_threshold = 10;
     m_type = ET_MusicSampleButton;
     m_soundPlayer.loadSound(soundName);
+    m_datapool = &CDataPoolSimple::getInstance();
 }
 
 CBoxButton::CBoxButton()
@@ -43,47 +44,54 @@ CBoxButton::~CBoxButton()
 
 void CBoxButton::render()  //Draw boxes and set color
 {
-    int handOffset=0;
-    if ( handOffset != 0 || m_complexor/50 != 0)
+    void *temp=0;
+    float slideOffset = 0;
+    m_datapool->getRefByName("slideOffset", temp);
+    if ( temp != 0)
     {
-        if ( handOffset != 0){
+        slideOffset = *(float*)temp;
+    }       
 
-            m_complexor = handOffset;
+    if ( slideOffset != 0 || m_slideOffset/50 != 0)
+    {
+        if ( slideOffset != 0){
+
+            m_slideOffset = slideOffset;
         }
         else{
-            if ( m_complexor >= 0 && m_complexor <= 200 )
+            if ( m_slideOffset >= 0 && m_slideOffset <= 200 )
             {
-                m_complexor = m_complexor - 40;
+                m_slideOffset = m_slideOffset - 40;
             }
-            else if( m_complexor < 0 && m_complexor >= -200 )
+            else if( m_slideOffset < 0 && m_slideOffset >= -200 )
             {
-                m_complexor = m_complexor + 40;
+                m_slideOffset = m_slideOffset + 40;
             }
-            else if ( m_complexor < -200 ){
-                m_complexor = m_complexor - 80;
-                g_currentState = ST_MENU_STATE;
-                m_complexor = 0;
+            else if ( m_slideOffset < -200 ){
+                m_slideOffset = m_slideOffset - 80;
+                m_slideOffset = 0;
             }
-            else if ( m_complexor > 200 ){
-                m_complexor = m_complexor + 80;
+            else if ( m_slideOffset > 200 ){
+                m_slideOffset = m_slideOffset + 80;
             }
 
         }
 
-        if ( m_complexor > 2000 || m_complexor < -2000)
+        if ( m_slideOffset > 2000 || m_slideOffset < -2000)
         {
-            m_complexor = 0;
+            m_slideOffset = 0;
         }
 
         {
 
-            drawBox(m_complexor);
-            drawBox(m_complexor - 2000);
-            drawBox(m_complexor + 2000);
+            drawBox(m_slideOffset);
+            drawBox(m_slideOffset - 2000);
+            drawBox(m_slideOffset + 2000);
             // shut down the sound.
             m_soundPlayer.setLoop(false);
             m_soundPlayer.stop();
             m_soundPlayer.setPosition(0);
+            m_isRepeat = false;
         }
     }
     else
@@ -115,7 +123,6 @@ void CBoxButton::render()  //Draw boxes and set color
         ofPopMatrix();
 
         ofPopMatrix();
-
     }
 
     if ( m_isRepeat && isCurrentlyHit() )
@@ -206,10 +213,10 @@ void CBoxButton::setDefaultMode()
 	ofEnableSmoothing();
 	ofEnableAlphaBlending();
     ofRotateY(m_rotation);
-    ofTranslate(m_x, m_y, m_z);
+    //ofTranslate(m_x, m_y, m_z);
 	ofNoFill();
 	ofSetColor(255,255,255,51);
-	ofBox(0,0,0, m_size);
+	ofBox(m_x, m_y, m_z, m_size);
 	ofDisableAlphaBlending();
 	ofDisableSmoothing();
 	ofPopMatrix();
@@ -240,20 +247,16 @@ bool CBoxButton::isLoopBox()
     return false;
 }
 
-void CBoxButton::drawBox( float complexor )
+void CBoxButton::drawBox( float offset )
 {
     ofPushMatrix();
     ofEnableSmoothing();
     ofEnableAlphaBlending();
-    //ofEnableBlendMode(OF_BLENDMODE_ADD);
-    ofSetColor(m_r, m_g, m_b, m_a);
-    ofFill();
     ofRotateY(m_rotation);
-    ofTranslate(m_x, m_y, m_z);
-    ofBox(0, 0, 0, m_size);
+    //ofTranslate(m_x, m_y, m_z);
     ofNoFill();
     ofSetColor(255,255,255,51);
-    ofBox(0, 0, 0, m_size);
+    ofBox(m_x+offset, m_y, m_z, m_size);
     ofDisableAlphaBlending();
     ofDisableSmoothing();
     ofPopMatrix();
