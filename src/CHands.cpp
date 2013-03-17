@@ -32,7 +32,7 @@ CHands::CHands( CDataPoolSimple* datapool)
 
 CHands::~CHands()
 {
-    
+
 }
 
 void CHands::drawCirclesOnPoint(ofPoint &p, float radius)
@@ -42,7 +42,7 @@ void CHands::drawCirclesOnPoint(ofPoint &p, float radius)
     ofSetLineWidth(5.f);
 
     ofCircle(p.x, p.y, p.z, radius);
-    
+
     ofPopMatrix();
 }
 
@@ -55,11 +55,11 @@ void CHands::getHands()
         for (int i = 0; i < numUsers; i++) {
             ofxOpenNIUser & user = m_openNIDevice->getTrackedUser(i);
             if (user.isTracking()) {
-                
+
                 //Get Left and right hand posisitons
                 ofPoint rhp = m_openNIDevice->getTrackedUser(i).getJoint(JOINT_RIGHT_HAND).getWorldPosition();
                 ofPoint lhp = m_openNIDevice->getTrackedUser(i).getJoint(JOINT_LEFT_HAND).getWorldPosition();;
-               
+
                 // this coordinator translating is for adapting to box view.
                 rhp.y *= -2;  //flip in y direction
                 lhp.y *= -2;  //flip in y direction    
@@ -73,9 +73,9 @@ void CHands::getHands()
                     &&lhp.x < m_slideTriggerPoint.x + m_slideRadius
                     &&lhp.x > m_slideTriggerPoint.x - m_slideRadius)
                 {
-                    cout<<"trigger left"<<endl; 
-                    cout<<lastClock<<endl;
-                    cout<<ofGetElapsedTimef()<<endl;
+                    //cout<<"trigger left"<<endl; 
+                    //cout<<lastClock<<endl;
+                    //cout<<ofGetElapsedTimef()<<endl;
                     if ( ofGetElapsedTimef() - lastClock > 2)
                     {
                         m_isTriggerBox = !m_isTriggerBox;
@@ -90,7 +90,7 @@ void CHands::getHands()
                     &&rhp.x < m_slideTriggerPoint.x + m_slideRadius
                     &&rhp.x > m_slideTriggerPoint.x - m_slideRadius)
                 {
-                    cout<<"trigger right"<<endl;
+                    //cout<<"trigger right"<<endl;
                     m_slideUser = &user;
                     m_slideHand = JOINT_RIGHT_HAND;
                     m_slideStart = true;
@@ -115,7 +115,7 @@ void CHands::draw()
         m_datapool->createRef("isTriggerBox", &m_isTriggerBox);
         drawStartSinal( m_slideTriggerPoint, m_slideRadius);
     }
-    
+
     if ( m_slide ){
         if ( m_slideStart && m_slideUser->isTracking() )
         {

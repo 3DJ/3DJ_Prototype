@@ -266,7 +266,7 @@ void CBoxController::testHits()
                         handleCollisions(&XYZ); //check for hits for all buttons                
                     }                                       
                 }
-                                
+
                 m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
             }
         }
