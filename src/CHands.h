@@ -23,13 +23,17 @@ public:
     ~CHands();
     void draw();
 
+    void drawStartSinal( ofPoint p, float radius );
+
+
     void drawHands();
 
     void triggerSlide();
+    bool isTriggerHits();
 
 private:
     void getHands();
-    void  drawCirclesOnHand(ofPoint &p, float radiu);
+    void  drawCirclesOnPoint(ofPoint &p, float radiu);
     CDataPoolSimple* m_datapool;
 
     ofxOpenNI*           m_openNIDevice;
@@ -42,6 +46,10 @@ private:
     Joint m_slideHand;   // true stands for right hand, false stands for left hand.
     bool m_slideStart;
     float m_slideOffset;
+
+    bool m_isTriggerBox;
+    ofPoint m_triggerPoint;
+    float m_triggerRadius;
 };
 
 #endif

@@ -238,30 +238,38 @@ void CBoxController::testHits()
 {
     int w = m_oniKinect.m_openNIDevice.getWidth();
     int h = m_oniKinect.m_openNIDevice.getHeight();
-    int index = 0;
-	int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
+    int numUsers = m_oniKinect.m_openNIDevice.getNumTrackedUsers();
     int step = 1;
 
     for (int i = 0; i < numUsers; i++) {
 
-    ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
+        ofxOpenNIUser & user = m_oniKinect.m_openNIDevice.getTrackedUser(i);
 
         ofMesh userMesh = user.getPointCloud();
         vector<ofVec3f> vertices =  userMesh.getVertices();
+        for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
 
-      for (vector<ofVec3f>::iterator vertex = vertices.begin(); vertex < vertices.end(); vertex+=step) {
+            ofPoint XYZ = ofPoint(vertex->x,vertex->y,vertex->z);
+            if (XYZ.z > 0) {
+                XYZ.x = (XYZ.x - w/2)*m_scale;
+                XYZ.y = (XYZ.y - h/2)*m_scale;
+                XYZ.z -= m_playerDepth;
 
-          ofPoint XYZ = ofPoint(vertex->x,vertex->y,vertex->z);
-          if (XYZ.z > 0) {
-              XYZ.x = (XYZ.x - w/2)*m_scale;
-              XYZ.y = (XYZ.y - h/2)*m_scale;
-              XYZ.z -= m_playerDepth;
-
-              handleCollisions(&XYZ); //check for hits for all buttons
-              index++;
-              m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
-          }
-      }
+                void *temp = 0;
+                bool isTriggerBox;
+                m_dataPool->getRefByName("isTriggerBox", temp);
+                if ( temp != 0 )
+                {
+                    isTriggerBox = *(bool *)temp;
+                    if ( isTriggerBox )
+                    {
+                        handleCollisions(&XYZ); //check for hits for all buttons                
+                    }                                       
+                }
+                                
+                m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+            }
+        }
     }
 
     ofPushMatrix();

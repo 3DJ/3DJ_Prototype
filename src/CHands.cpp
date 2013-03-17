@@ -22,6 +22,12 @@ CHands::CHands( CDataPoolSimple* datapool)
     m_slideRadius = 200;    
     m_slideHand = JOINT_RIGHT_HAND;
     m_slideStart = false;
+
+    m_isTriggerBox = false;
+    m_triggerPoint.x = 0;
+    m_triggerPoint.y = 250;
+    m_triggerPoint.z = 0;
+    m_triggerRadius = 50;
 }
 
 CHands::~CHands()
@@ -29,7 +35,7 @@ CHands::~CHands()
     
 }
 
-void CHands::drawCirclesOnHand(ofPoint &p, float radius)
+void CHands::drawCirclesOnPoint(ofPoint &p, float radius)
 {// draw cirle on hand
     ofPushMatrix();
     ofNoFill();
@@ -42,6 +48,7 @@ void CHands::drawCirclesOnHand(ofPoint &p, float radius)
 
 void CHands::getHands()
 {
+    static float lastClock = 0;
     int numUsers = m_openNIDevice->getNumTrackedUsers();
     if (numUsers) {
         m_mapHands.clear();
@@ -66,10 +73,15 @@ void CHands::getHands()
                     &&lhp.x < m_slideTriggerPoint.x + m_slideRadius
                     &&lhp.x > m_slideTriggerPoint.x - m_slideRadius)
                 {
-                    cout<<"trigger left"<<endl;
-                    m_slideUser = &user;
-                    m_slideHand = JOINT_LEFT_HAND;
-                    m_slideStart = true;
+                    cout<<"trigger left"<<endl; 
+                    cout<<lastClock<<endl;
+                    cout<<ofGetElapsedTimef()<<endl;
+                    if ( ofGetElapsedTimef() - lastClock > 2)
+                    {
+                        m_isTriggerBox = !m_isTriggerBox;
+                        lastClock = ofGetElapsedTimef();
+                    }                    
+                    m_slideStart = false;                    
                 }
                 if ( rhp.z < m_slideTriggerPoint.z + m_slideRadius
                     &&rhp.z > m_slideTriggerPoint.z - m_slideRadius
@@ -82,6 +94,7 @@ void CHands::getHands()
                     m_slideUser = &user;
                     m_slideHand = JOINT_RIGHT_HAND;
                     m_slideStart = true;
+                    m_isTriggerBox = false;
                 }
 
                 // save hands point to map.
@@ -95,7 +108,14 @@ void CHands::getHands()
 }
 
 void CHands::draw()
-{
+{    
+    getHands();
+    if ( m_isTriggerBox )
+    {      
+        m_datapool->createRef("isTriggerBox", &m_isTriggerBox);
+        drawStartSinal( m_slideTriggerPoint, m_slideRadius);
+    }
+    
     if ( m_slide ){
         if ( m_slideStart && m_slideUser->isTracking() )
         {
@@ -110,12 +130,11 @@ void CHands::draw()
                 m_slideOffset = 0;
             }else{
                 m_slideOffset = hp.x - m_slideTriggerPoint.x;
-                drawCirclesOnHand(hp, m_slideRadius);            
+                drawCirclesOnPoint(hp, m_slideRadius);            
             }
             m_datapool->createRef("slideOffset", &m_slideOffset);            
-        }else{
-            getHands();
-            drawCirclesOnHand(m_slideTriggerPoint, m_slideRadius);
+        }else{            
+            drawCirclesOnPoint(m_slideTriggerPoint, m_slideRadius);
         }            
     }    
     //drawHands();
@@ -133,7 +152,23 @@ void CHands::drawHands()
     {
         //cout<< "left hand x:" << iter->second.lhp.x << "left hand y:" << iter->second.lhp.y << "left hand z:" << iter->second.lhp.z <<endl;
         //cout<< "left hand x:" << iter->second.rhp.x << "left hand y:" << iter->second.rhp.y << "left hand z:" << iter->second.rhp.z <<endl;
-        drawCirclesOnHand( iter->second.lhp, 200);
-        drawCirclesOnHand( iter->second.rhp, 100);
+        drawCirclesOnPoint( iter->second.lhp, 200);
+        drawCirclesOnPoint( iter->second.rhp, 100);
     }
+}
+
+bool CHands::isTriggerHits()
+{    
+    return false;
+}
+
+void CHands::drawStartSinal( ofPoint p, float radius )
+{
+    ofPushMatrix();
+    ofFill();
+    ofSetLineWidth(5.f);
+
+    ofCircle(p.x, p.y, p.z, radius);
+
+    ofPopMatrix();
 }
