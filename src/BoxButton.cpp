@@ -21,7 +21,7 @@ CBoxButton::CBoxButton(string boxName, float centerX, float centerY, float cente
     m_a = alphaVal;
 
     m_rotation = rotation;
-    
+
     m_isRepeat = false;
     m_toBeStop = false;
     m_pointsInArea = 0;
@@ -44,7 +44,7 @@ CBoxButton::~CBoxButton()
     {
         delete m_soundPlayer;
     }
-    
+
 }
 
 void CBoxButton::render()
@@ -90,16 +90,16 @@ void CBoxButton::render(int boxOffset)  //Draw boxes and set color
         }
 
         if ( isCurrentlyHit() || m_isRepeat) {
-		    // set the current hit button to hit mode.
-		    setHitMode();
+            // set the current hit button to hit mode.
+            setHitMode();
             // handle the sound
             if ( !m_soundPlayer->getIsPlaying()){
                 m_soundPlayer->setLoop(true);
                 m_soundPlayer->play();
             }
         } else{
-		    // set the unhit button as default mode.
-		    setDefaultMode();
+            // set the unhit button as default mode.
+            setDefaultMode();
             // shut down the sound.
             m_soundPlayer->setLoop(false);
             m_soundPlayer->stop();
@@ -145,10 +145,10 @@ bool CBoxButton::collisionTest( ofPoint point)
     bool result = false;
 
     if(  (point.z > m_z - m_size/2) && (point.z < m_z + m_size/2)
-       &&(point.x > m_x - m_size/2) && (point.x < m_x + m_size/2) 
-       &&(point.y > m_y - m_size/2) && (point.y < m_y + m_size/2)){
-          m_pointsInArea++;
-          result = true;
+        &&(point.x > m_x - m_size/2) && (point.x < m_x + m_size/2) 
+        &&(point.y > m_y - m_size/2) && (point.y < m_y + m_size/2)){
+            m_pointsInArea++;
+            result = true;
     }
     return result;
 }
@@ -165,37 +165,37 @@ bool CBoxButton::hitTest(float x, float y, float z)
 
 void CBoxButton::setDefaultMode()
 {
-	ofPushMatrix();
-	ofEnableSmoothing();
-	ofEnableAlphaBlending();
+    ofPushMatrix();
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
     ofRotateY(m_rotation);
     //ofTranslate(m_x, m_y, m_z);
-	ofNoFill();
-	ofSetColor(255,255,255,51);
-	ofBox(m_x, m_y, m_z, m_size);
-	ofDisableAlphaBlending();
-	ofDisableSmoothing();
-	ofPopMatrix();
+    ofNoFill();
+    ofSetColor(255,255,255,51);
+    ofBox(m_x, m_y, m_z, m_size);
+    ofDisableAlphaBlending();
+    ofDisableSmoothing();
+    ofPopMatrix();
 
 }
 
 void CBoxButton::setHitMode()
 {
-	ofPushMatrix();
-	ofEnableSmoothing();
-	ofEnableAlphaBlending();
-	ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofPushMatrix();
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofRotateY(m_rotation);
-	ofTranslate(m_x, m_y, m_z);
-	ofSetColor(255, 255, 255, 51+ (204 * percentIncluded()));
-	ofFill();
-	ofBox(m_size + swellAnimation());
-	ofNoFill();
-	ofSetColor(255,51);
-	ofBox(m_size + swellAnimation());
-	ofDisableAlphaBlending();
-	ofDisableSmoothing();
-	ofPopMatrix();
+    ofTranslate(m_x, m_y, m_z);
+    ofSetColor(255, 255, 255, 51+ (204 * percentIncluded()));
+    ofFill();
+    ofBox(m_size + swellAnimation());
+    ofNoFill();
+    ofSetColor(255,51);
+    ofBox(m_size + swellAnimation());
+    ofDisableAlphaBlending();
+    ofDisableSmoothing();
+    ofPopMatrix();
 }
 
 bool CBoxButton::isLoopBox()
@@ -220,8 +220,12 @@ void CBoxButton::drawBox( float offset )
 
 void CBoxButton::reloadSound(string soundName)
 {
-    // this is for making openAL work on linux.
+    // this is for making openAL work on linux. But it causes weakly memory leak.
+#ifdef TARGET_LINUX
+    // don't delete soundplayer, that cause steroe error. I think it's a bug of of_0073. to be fixed later.
+#else
     delete m_soundPlayer;
+#endif
     m_soundPlayer = new ofSoundPlayer;
     // end of that, this section should be changed after the openAL fix that bug
     m_soundPlayer->loadSound(soundName);
