@@ -94,7 +94,7 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
         m_dataPool->getValueByName( "A4", soundPath);
     }
     m_a4Button = new CBoxButton("A4", -x1, -y1, z1, m_boxSize, m_red,m_green,m_blue,m_alpha,soundPath, -rotation);
-    m_a4Button->m_soundPlayer.setVolume(0.60f);
+    m_a4Button->m_soundPlayer->setVolume(0.60f);
     addBoxButton(m_a4Button);
 
     //Row B
@@ -305,7 +305,7 @@ void CBoxController::setInitialVolume(float volumeLevel)
 {
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
     {
-        (*eachBox)->m_soundPlayer.setVolume(volumeLevel);
+        (*eachBox)->m_soundPlayer->setVolume(volumeLevel);
     }
 
 }

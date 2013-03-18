@@ -27,8 +27,9 @@ CBoxButton::CBoxButton(string boxName, float centerX, float centerY, float cente
     m_pointsInArea = 0;
     m_pointThreshold = 2000;
     m_threshold = 10;
-    m_type = ET_MusicSampleButton;
-    m_soundPlayer.loadSound(soundName);
+    m_type = ET_MusicSampleButton;    
+    m_soundPlayer = new ofSoundPlayer;
+    m_soundPlayer->loadSound(soundName);
     m_datapool = &CDataPoolSimple::getInstance();
 }
 
@@ -39,7 +40,11 @@ CBoxButton::CBoxButton()
 
 CBoxButton::~CBoxButton()
 {
-
+    if ( m_soundPlayer )
+    {
+        delete m_soundPlayer;
+    }
+    
 }
 
 void CBoxButton::render()
@@ -62,9 +67,9 @@ void CBoxButton::render(int boxOffset)  //Draw boxes and set color
         drawBox(boxOffset - 2000);
         drawBox(boxOffset + 2000);
         // shut down the sound.
-        m_soundPlayer.setLoop(false);
-        m_soundPlayer.stop();
-        m_soundPlayer.setPosition(0);
+        m_soundPlayer->setLoop(false);
+        m_soundPlayer->stop();
+        m_soundPlayer->setPosition(0);
         m_isRepeat = false;
     }else
     {
@@ -109,17 +114,17 @@ void CBoxButton::render(int boxOffset)  //Draw boxes and set color
 		    // set the current hit button to hit mode.
 		    setHitMode();
             // handle the sound
-            if ( !m_soundPlayer.getIsPlaying()){
-                m_soundPlayer.setLoop(true);
-                m_soundPlayer.play();
+            if ( !m_soundPlayer->getIsPlaying()){
+                m_soundPlayer->setLoop(true);
+                m_soundPlayer->play();
             }
         } else{
 		    // set the unhit button as default mode.
 		    setDefaultMode();
             // shut down the sound.
-            m_soundPlayer.setLoop(false);
-            m_soundPlayer.stop();
-            m_soundPlayer.setPosition(0);
+            m_soundPlayer->setLoop(false);
+            m_soundPlayer->stop();
+            m_soundPlayer->setPosition(0);
         }
     }
     clear(); //clear point count
@@ -236,5 +241,9 @@ void CBoxButton::drawBox( float offset )
 
 void CBoxButton::reloadSound(string soundName)
 {
-    m_soundPlayer.loadSound(soundName);
+    // this is for making openAL work on linux.
+    delete m_soundPlayer;
+    m_soundPlayer = new ofSoundPlayer;
+    // end of that, this section should be changed after the openAL fix that bug
+    m_soundPlayer->loadSound(soundName);
 }

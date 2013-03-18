@@ -41,7 +41,7 @@ public:
 
     virtual bool isLoopBox();
 
-    ofSoundPlayer m_soundPlayer;
+    ofSoundPlayer *m_soundPlayer;
     bool m_isRepeat;
     bool m_toBeStop;
     string m_boxName;

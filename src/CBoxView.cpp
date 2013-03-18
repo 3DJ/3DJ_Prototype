@@ -234,7 +234,7 @@ void CBoxView::setInitialVolume(float volumeLevel)
 {
     for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
     {
-        (*eachBox)->m_soundPlayer.setVolume(volumeLevel);
+        (*eachBox)->m_soundPlayer->setVolume(volumeLevel);
     }
 
 }
