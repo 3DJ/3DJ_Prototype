@@ -255,19 +255,8 @@ void CBoxController::testHits()
                 XYZ.y = (XYZ.y - h/2)*m_scale;
                 XYZ.z -= m_playerDepth;
 
-                void *temp = 0;
-                bool isTriggerBox;
-                m_dataPool->getRefByName("isTriggerBox", temp);
-                if ( temp != 0 )
-                {
-                    isTriggerBox = *(bool *)temp;
-                    if ( isTriggerBox )
-                    {
-                        handleCollisions(&XYZ); //check for hits for all buttons                
-                    }                                       
-                }
-
-                m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);
+                checkBoxHits(XYZ);      // check the box hits
+                m_pointView->addPoint(XYZ.x, XYZ.y, XYZ.z);// draw the avatar by cloud points
             }
         }
     }
@@ -275,7 +264,6 @@ void CBoxController::testHits()
     ofPushMatrix();
     ofTranslate(-w/2, -h/2, m_playerDepth);
     ofPopMatrix();
-
 }
 
 void CBoxController::addBoxButton(CBoxButton * _boxButton)
@@ -326,5 +314,20 @@ float CBoxController::scaleRatioForKinectDepthMap()
         return screenW/w;
     }else {
         return screenH/h;
+    }
+}
+
+void CBoxController::checkBoxHits( ofPoint XYZ )
+{
+    void *temp = 0;
+    bool isBoxStartedUp;
+    m_dataPool->getRefByName("isBoxStartedUp", temp);
+    if ( temp != 0 )
+    {
+        isBoxStartedUp = *(bool *)temp;
+        if ( isBoxStartedUp )
+        {
+            handleCollisions(&XYZ); //check for hits for all buttons                
+        }                                       
     }
 }

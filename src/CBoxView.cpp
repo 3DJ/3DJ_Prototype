@@ -11,41 +11,42 @@
 
 CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
 {
+    // get the objects from datapool for initializing the CBoxView
     void* temporary;
     if( dataPool->getPointerByName( "oniKinect", temporary)) {
-            m_oniKinect = (CKinectData*) temporary;
-        }else{
-            std::cout<<"didn't get oniKinect from datapool"<<std::endl;
-        }
+        m_oniKinect = (CKinectData*) temporary;
+    }else{
+        std::cout<<"didn't get oniKinect from datapool"<<std::endl;
+    }
 
     if( dataPool->getPointerByName( "pointView", temporary)) {
-            m_pointView = (CPointView *) temporary;
-        }else{
-            std::cout<<"didn't get pointView from datapool"<<std::endl;
-        }
+        m_pointView = (CPointView *) temporary;
+    }else{
+        std::cout<<"didn't get pointView from datapool"<<std::endl;
+    }
 
     if( dataPool->getPointerByName( "easyCam", temporary)) {
-            m_easyCam = (ofEasyCam *) temporary;
-         }else{
-            std::cout<<"didn't get easyCam from datapool"<<std::endl;
-         }
+        m_easyCam = (ofEasyCam *) temporary;
+    }else{
+        std::cout<<"didn't get easyCam from datapool"<<std::endl;
+    }
     if( dataPool->getPointerByName( "equalizerView", temporary)) {
-            m_equalizerView = (CEQView *) temporary;
-        }else{
-            std::cout<<"didn't get equalizerView from datapool"<<std::endl;
-        }
+        m_equalizerView = (CEQView *) temporary;
+    }else{
+        std::cout<<"didn't get equalizerView from datapool"<<std::endl;
+    }
 
     if( dataPool->getPointerByName( "snakeFish", temporary)) {
-            m_snakeFish = (SnakeFish *) temporary;
-        }else{
-            std::cout<<"didn't get snakeFish from datapool"<<std::endl;
-        }
+        m_snakeFish = (SnakeFish *) temporary;
+    }else{
+        std::cout<<"didn't get snakeFish from datapool"<<std::endl;
+    }
 
     if( dataPool->getPointerByName( "particles", temporary)) {
-            m_particles = (Particles *) temporary;
-        }else{
-            std::cout<<"didn't get particles from datapool"<<std::endl;
-        }
+        m_particles = (Particles *) temporary;
+    }else{
+        std::cout<<"didn't get particles from datapool"<<std::endl;
+    }
 
     if( dataPool->getPointerByName( "a1Button", temporary)) {
         m_a1Button = (CBoxButton*) temporary;
@@ -105,7 +106,7 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
 
     m_complexor = 0;
 
-	m_background_r = 100;
+    m_background_r = 100;
     m_background_g = 100;
     m_background_b = 100;
     m_gradientColorOutside = ofColor(24);
@@ -136,8 +137,8 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
 
     setInitialVolume(1.0f);
     m_hands = new CHands(&CDataPoolSimple::getInstance());
-    m_hands->triggerSlide();
-
+    m_hands->triggerSlide();    // start tracking slide
+    m_hands->triggerBoxSwitch();// start box start/shutdown switch.
     m_isRepeat      = false;
 }
 
@@ -188,15 +189,15 @@ void CBoxView::render()
 
     //ofPopMatrix();
 
-//    string msg = "Scale : " + ofToString(m_scale,2);
-//    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
+    //    string msg = "Scale : " + ofToString(m_scale,2);
+    //    ofDrawBitmapString(msg, ofGetWindowWidth()/2, ofGetWindowHeight()/2);
 
 }
 
 void CBoxView::drawDepthPoints()
 {
     int w = m_oniKinect->m_openNIDevice.getWidth();
-	int h = m_oniKinect->m_openNIDevice.getHeight();
+    int h = m_oniKinect->m_openNIDevice.getHeight();
 
     m_pointView->uploadDataToVbo();
     m_pointView->drawParticles();
@@ -251,25 +252,26 @@ void CBoxView::effectBoxbutton()
     void *temp=0;
     float slideOffset = 0;
     m_dataPool->getRefByName("slideOffset", temp);
-    
+
     if ( temp != 0)
     {
         slideOffset = *(float*)temp;
     }       
 
     if ( slideOffset != 0){
+        // the boxOffset is used for sliding animation. it indicates the box screen offset, I sequently change it to make it look like a sliding.
         boxOffset = slideOffset;
     }
     else{
-        if ( boxOffset >= 0 && boxOffset <= 200 )
-        {
+        if ( boxOffset >= 0 && boxOffset <= 200 ){
+            // if it's not bigger than 200, I slide the box back to original
             boxOffset = boxOffset - 40;
         }
-        else if( boxOffset < 0 && boxOffset >= -200 )
-        {
+        else if( boxOffset < 0 && boxOffset >= -200 ){
             boxOffset = boxOffset + 40;
         }
         else if ( boxOffset < -200 ){
+            //it it's bigger than 200, I slide the box to next group.
             boxOffset = boxOffset - 80;
         }
         else if ( boxOffset > 200 ){
@@ -278,8 +280,8 @@ void CBoxView::effectBoxbutton()
 
     }
 
-    if ( boxOffset > 2000 || boxOffset < -2000)
-    {
+    if ( boxOffset > 2000 || boxOffset < -2000){
+        // when the sliding is over, reload next group sounds
         reloadSounds();
         boxOffset = 0;
     }

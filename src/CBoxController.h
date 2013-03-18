@@ -46,6 +46,9 @@ public:
     void handleCollisions(ofPoint * XYZ);
     void setInitialVolume (float  volumeLevel) ;
     void testHits();
+
+    void checkBoxHits( ofPoint XYZ );
+
     float scaleRatioForKinectDepthMap();    
 
     //stuff for OpenNI=========================================

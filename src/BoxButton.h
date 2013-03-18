@@ -27,6 +27,9 @@ public:
 
     void render(int m_slideOffset);
 
+    void drawRepeatingBox();
+
+
     void drawBox( float complexor );
 
     void update(double time_since_last_update);

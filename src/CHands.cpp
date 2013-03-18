@@ -15,6 +15,8 @@ CHands::CHands( CDataPoolSimple* datapool)
     void *temp;
     m_datapool->getRefByName("ofxOpenNIDevice", temp);
     m_openNIDevice = (ofxOpenNI*)temp;
+
+    // set the sliding variable
     m_slide = false;    
     m_slideTriggerPoint.x = 0;
     m_slideTriggerPoint.y = -250;
@@ -22,12 +24,11 @@ CHands::CHands( CDataPoolSimple* datapool)
     m_slideRadius = 200;    
     m_slideHand = JOINT_RIGHT_HAND;
     m_slideStart = false;
+    m_slideThreshold = 1400; // this means: if z>1400, slide is over. 
 
-    m_isTriggerBox = false;
-    m_triggerPoint.x = 0;
-    m_triggerPoint.y = 250;
-    m_triggerPoint.z = 0;
-    m_triggerRadius = 50;
+    // set the start up switch variable.
+    m_isBoxStartedUp = false; 
+    m_isTriggerBoxSwitch = false;
 }
 
 CHands::~CHands()
@@ -78,7 +79,7 @@ void CHands::getHands()
                     //cout<<ofGetElapsedTimef()<<endl;
                     if ( ofGetElapsedTimef() - lastClock > 2)
                     {
-                        m_isTriggerBox = !m_isTriggerBox;
+                        m_isBoxStartedUp = !m_isBoxStartedUp;
                         lastClock = ofGetElapsedTimef();
                     }                    
                     m_slideStart = false;                    
@@ -94,7 +95,7 @@ void CHands::getHands()
                     m_slideUser = &user;
                     m_slideHand = JOINT_RIGHT_HAND;
                     m_slideStart = true;
-                    m_isTriggerBox = false;
+                    m_isBoxStartedUp = false;
                 }
 
                 // save hands point to map.
@@ -108,12 +109,14 @@ void CHands::getHands()
 }
 
 void CHands::draw()
-{    
+{
+    // checking current hands position.
     getHands();
-    if ( m_isTriggerBox )
+
+    if ( m_isBoxStartedUp )
     {      
-        m_datapool->createRef("isTriggerBox", &m_isTriggerBox);
-        drawStartSinal( m_slideTriggerPoint, m_slideRadius);
+        m_datapool->createRef("isBoxStartedUp", &m_isBoxStartedUp);
+        drawStartSignal( m_slideTriggerPoint, m_slideRadius);
     }
 
     if ( m_slide ){
@@ -123,8 +126,8 @@ void CHands::draw()
             // this coordinator translating is for adapting to box view.
             hp.y *= -2;  //flip in y direction
             hp.x *= 2;
-            if ( hp.z > 1400 )
-            {
+            if ( hp.z > m_slideThreshold )
+            {// if z > 
                 m_slideStart = false;
                 m_slideUser = 0;
                 m_slideOffset = 0;
@@ -157,13 +160,8 @@ void CHands::drawHands()
     }
 }
 
-bool CHands::isTriggerHits()
-{    
-    return false;
-}
-
-void CHands::drawStartSinal( ofPoint p, float radius )
-{
+void CHands::drawStartSignal( ofPoint p, float radius )
+{// draw a filled circle to indicates the box is started up
     ofPushMatrix();
     ofFill();
     ofSetLineWidth(5.f);
@@ -171,4 +169,9 @@ void CHands::drawStartSinal( ofPoint p, float radius )
     ofCircle(p.x, p.y, p.z, radius);
 
     ofPopMatrix();
+}
+
+void CHands::triggerBoxSwitch()
+{
+    m_isTriggerBoxSwitch = true;
 }

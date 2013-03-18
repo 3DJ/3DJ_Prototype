@@ -57,12 +57,12 @@ void CBoxButton::render(int boxOffset)  //Draw boxes and set color
     float slideOffset = 0;
     m_datapool->getRefByName("slideOffset", temp);
     if ( temp != 0)
-    {
+    {// if not set slideOffset in datapool, we dont need to track it
         slideOffset = *(float*)temp;
     }       
 
     if ( slideOffset != 0 || boxOffset/50 != 0)
-    {  
+    {// draw three group boxes to make it look like a sliding over animation :)
         drawBox(boxOffset);
         drawBox(boxOffset - 2000);
         drawBox(boxOffset + 2000);
@@ -74,32 +74,11 @@ void CBoxButton::render(int boxOffset)  //Draw boxes and set color
     }else
     {
         ofSetLineWidth(2);
-        if ( m_isRepeat && !isCurrentlyHit() )
-        {// make it stop on next hit.
+        if ( m_isRepeat && !isCurrentlyHit() ){
+            // make it stop on next hit.
             m_toBeStop = true;
 
-            ofPushMatrix();
-
-            ofRotateY(m_rotation);
-            ofTranslate(m_x, m_y, m_z);
-
-            //Draw diamond inside Box to indicate its looping
-            ofPushMatrix(); //draw fill
-            ofSetColor(0,220,0,200);
-            ofFill();
-            ofSetSphereResolution(2);
-            ofSphere(0,0,0, m_size * 0.25);
-            ofPopMatrix();
-
-            ofPushMatrix();  //draw wire frame
-            ofSetColor(20,50,20);
-            ofEnableSmoothing();
-            ofNoFill();
-            ofSetLineWidth(1);
-            ofSphere(0,0,0, m_size * 0.25);
-            ofPopMatrix();
-
-            ofPopMatrix();
+            drawRepeatingBox();
         }
 
         if ( m_isRepeat && isCurrentlyHit() )
@@ -246,4 +225,30 @@ void CBoxButton::reloadSound(string soundName)
     m_soundPlayer = new ofSoundPlayer;
     // end of that, this section should be changed after the openAL fix that bug
     m_soundPlayer->loadSound(soundName);
+}
+
+void CBoxButton::drawRepeatingBox()
+{
+    ofPushMatrix();
+
+    ofRotateY(m_rotation);
+    ofTranslate(m_x, m_y, m_z);
+
+    //Draw diamond inside Box to indicate its looping
+    ofPushMatrix(); //draw fill
+    ofSetColor(0,220,0,200);
+    ofFill();
+    ofSetSphereResolution(2);
+    ofSphere(0,0,0, m_size * 0.25);
+    ofPopMatrix();
+
+    ofPushMatrix();  //draw wire frame
+    ofSetColor(20,50,20);
+    ofEnableSmoothing();
+    ofNoFill();
+    ofSetLineWidth(1);
+    ofSphere(0,0,0, m_size * 0.25);
+    ofPopMatrix();
+
+    ofPopMatrix();
 }

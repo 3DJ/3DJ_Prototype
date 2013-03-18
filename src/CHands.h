@@ -21,35 +21,42 @@ class CHands{
 public:
     CHands(CDataPoolSimple* datapool);
     ~CHands();
-    void draw();
-
-    void drawStartSinal( ofPoint p, float radius );
-
-
-    void drawHands();
-
+    // this is for public use
+    void draw();  
+    // call this to trigger sliding gesture.
     void triggerSlide();
-    bool isTriggerHits();
+    // call this to trigger the box start up/shut down switch.
+    void triggerBoxSwitch();
 
 private:
+    // draw a filled circle to indicates the box is started up
+    void drawStartSignal( ofPoint p, float radius );
+
+    // this is for draw all hands on screen.
+    void drawHands();    
+
+    // get all hands position. 
     void getHands();
     void  drawCirclesOnPoint(ofPoint &p, float radiu);
+
     CDataPoolSimple* m_datapool;
 
     ofxOpenNI*           m_openNIDevice;
     map<int, handsPoint>   m_mapHands;
     
+    // this group member is for slide gesture
     bool m_slide;
-    ofPoint m_slideTriggerPoint;
+    ofPoint m_slideTriggerPoint;    // I draw a circle at m_slideTriggerPoint to let you know where to start slide.
     float m_slideRadius;
     ofxOpenNIUser *m_slideUser;
-    Joint m_slideHand;   // true stands for right hand, false stands for left hand.
+    Joint m_slideHand;          // current tracking slide hand.
     bool m_slideStart;
     float m_slideOffset;
+    int m_slideThreshold; // this means: if hand.z>1400, sliding is over. that indicates the end of once sliding.
 
-    bool m_isTriggerBox;
-    ofPoint m_triggerPoint;
-    float m_triggerRadius;
+    // this group member is for start box sounds
+    bool m_isBoxStartedUp;
+    bool m_isTriggerBoxSwitch;
 };
 
 #endif
