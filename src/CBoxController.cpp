@@ -9,11 +9,10 @@
 #include <iostream>
 #include "CBoxController.h"
 
-CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPool)
-{
-    m_complexor = 0;
+CBoxController::CBoxController()
+{  
     //Set up Kinect
-    m_oniKinect.setup(dataPool);
+    m_oniKinect.setup();
 
     m_background_r = 100;
     m_background_g = 100;
@@ -175,28 +174,30 @@ CBoxController::CBoxController( CDataPoolSimple* dataPool ):IController( dataPoo
     m_snakeFish = new SnakeFish();
     m_particles = new Particles();
 
-    dataPool->createRef( "oniKinect", (void*)&m_oniKinect );
-    dataPool->createRef( "pointView", (void*)m_pointView);
-    dataPool->createRef( "easyCam", (void*)m_easyCam);
-    dataPool->createRef( "equalizerView", (void*)m_equalizerView );
-    dataPool->createRef( "snakeFish", (void*)m_snakeFish);
-    dataPool->createRef( "particles", (void*)m_particles);
+    m_dataPool->createRef( "oniKinect", (void*)&m_oniKinect );
+    m_dataPool->createRef( "pointView", (void*)m_pointView);
+    m_dataPool->createRef( "easyCam", (void*)m_easyCam);
+    m_dataPool->createRef( "equalizerView", (void*)m_equalizerView );
+    m_dataPool->createRef( "snakeFish", (void*)m_snakeFish);
+    m_dataPool->createRef( "particles", (void*)m_particles);
 
-    dataPool->createRef( "a1Button", (void*)m_a1Button);
-    dataPool->createRef( "a2Button", (void*)m_a2Button);
-    dataPool->createRef( "a3Button", (void*)m_a3Button);
-    dataPool->createRef( "a4Button", (void*)m_a4Button);
-
-    dataPool->createRef( "b1Button", (void*)m_b1Button);
-    dataPool->createRef( "b2Button", (void*)m_b2Button);
-    dataPool->createRef( "b3Button", (void*)m_b3Button);
-    dataPool->createRef( "b4Button", (void*)m_b4Button);
-    dataPool->createRef( "controlButton_1", (void*)m_controlButton_1);
-
-    dataPool->createRef( "c1Button", (void*)m_c1Button);
-    dataPool->createRef( "c2Button", (void*)m_c2Button);
-    dataPool->createRef( "c3Button", (void*)m_c3Button);
-    dataPool->createRef( "c4Button", (void*)m_c4Button);
+    //
+    m_dataPool->createRef("boxButtons", (void*)&m_boxButtons);
+//     m_dataPool->createRef( "a1Button", (void*)m_a1Button);
+//     m_dataPool->createRef( "a2Button", (void*)m_a2Button);
+//     m_dataPool->createRef( "a3Button", (void*)m_a3Button);
+//     m_dataPool->createRef( "a4Button", (void*)m_a4Button);
+// 
+//     m_dataPool->createRef( "b1Button", (void*)m_b1Button);
+//     m_dataPool->createRef( "b2Button", (void*)m_b2Button);
+//     m_dataPool->createRef( "b3Button", (void*)m_b3Button);
+//     m_dataPool->createRef( "b4Button", (void*)m_b4Button);
+//     m_dataPool->createRef( "controlButton_1", (void*)m_controlButton_1);
+// 
+//     m_dataPool->createRef( "c1Button", (void*)m_c1Button);
+//     m_dataPool->createRef( "c2Button", (void*)m_c2Button);
+//     m_dataPool->createRef( "c3Button", (void*)m_c3Button);
+//     m_dataPool->createRef( "c4Button", (void*)m_c4Button);
 }
 
 CBoxController::~CBoxController()
@@ -295,11 +296,6 @@ void CBoxController::setInitialVolume(float volumeLevel)
     {
         (*eachBox)->m_soundPlayer->setVolume(volumeLevel);
     }
-
-}
-
-void CBoxController::setUpTranslation()
-{
 
 }
 

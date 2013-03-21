@@ -8,15 +8,15 @@
 #include "CMenuViewController.h"
 #include "CWorld.h"
 
-CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha , CDataPoolSimple* dataPool):IView( dataPool )
+CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha )
 {
+    m_datapool = &CDataPoolSimple::getInstance();
     m_r = red;
     m_g = green;
     m_b = blue;
     m_a = alpha;
     m_exitMenu = false;
 
-    m_datapool = dataPool;
     initViews();
     setupDelegates(); //adds ofAddListener for each ofxUICanvas in views
     hideAllViews(); //hide all views at start
@@ -217,11 +217,18 @@ void CMenuViewController::processOpenFileSelection(ofFileDialogResult openFileRe
 
             //reload sound file.
             void *val;
-            if ( m_datapool->getRefByName(key, val) ) {
-                ((CBoxButton*)val)->reloadSound( file.getAbsolutePath());
-                m_datapool->setValue( boxID, file.getAbsolutePath(), true );
+            if ( m_datapool->getRefByName("boxButtons", val) ) {
+                vector<CBoxButton*> *vecBoxes = (vector<CBoxButton*> *)val;
+                for ( vector<CBoxButton*>::iterator iter = vecBoxes->begin(); iter!=vecBoxes->end(); iter ++){
+                    if ( (*iter)->getBoxName() == boxID ){
+                        cout<<"reload sound:"<<file.getAbsolutePath();
+                        (*iter)->reloadSound(file.getAbsolutePath());
+                        m_datapool->setValue( boxID, file.getAbsolutePath(), true );
+                        break;
+                    }
+                }                                
             }else{
-                ofLogVerbose("cannot get the reference of " + boxID);
+                ofLogVerbose("cannot get the reference of box vector");
             }
 		}
 	}

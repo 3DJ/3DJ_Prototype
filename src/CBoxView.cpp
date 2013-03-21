@@ -9,102 +9,106 @@
 #include <iostream>
 #include "CBoxView.h"
 
-CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
+CBoxView::CBoxView()
 {
     // get the objects from datapool for initializing the CBoxView
     void* temporary;
-    if( dataPool->getPointerByName( "oniKinect", temporary)) {
+    if( m_dataPool->getPointerByName( "oniKinect", temporary)) {
         m_oniKinect = (CKinectData*) temporary;
     }else{
         std::cout<<"didn't get oniKinect from datapool"<<std::endl;
     }
 
-    if( dataPool->getPointerByName( "pointView", temporary)) {
+    if( m_dataPool->getPointerByName( "pointView", temporary)) {
         m_pointView = (CPointView *) temporary;
     }else{
         std::cout<<"didn't get pointView from datapool"<<std::endl;
     }
 
-    if( dataPool->getPointerByName( "easyCam", temporary)) {
+    if( m_dataPool->getPointerByName( "easyCam", temporary)) {
         m_easyCam = (ofEasyCam *) temporary;
     }else{
         std::cout<<"didn't get easyCam from datapool"<<std::endl;
     }
-    if( dataPool->getPointerByName( "equalizerView", temporary)) {
+    if( m_dataPool->getPointerByName( "equalizerView", temporary)) {
         m_equalizerView = (CEQView *) temporary;
     }else{
         std::cout<<"didn't get equalizerView from datapool"<<std::endl;
     }
 
-    if( dataPool->getPointerByName( "snakeFish", temporary)) {
+    if( m_dataPool->getPointerByName( "snakeFish", temporary)) {
         m_snakeFish = (SnakeFish *) temporary;
     }else{
         std::cout<<"didn't get snakeFish from datapool"<<std::endl;
     }
 
-    if( dataPool->getPointerByName( "particles", temporary)) {
+    if( m_dataPool->getPointerByName( "particles", temporary)) {
         m_particles = (Particles *) temporary;
     }else{
         std::cout<<"didn't get particles from datapool"<<std::endl;
     }
 
-    if( dataPool->getPointerByName( "a1Button", temporary)) {
-        m_a1Button = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_a1Button );
+    if( m_dataPool->getPointerByName( "boxButtons", temporary)) {
+        m_boxButtons = (vector<CBoxButton *> *) temporary;
+    }else{
+        std::cout<<"didn't get particles from datapool"<<std::endl;
     }
-    if( dataPool->getPointerByName( "a2Button", temporary)) {
-        m_a2Button = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_a2Button );
-    }
-    if( dataPool->getPointerByName( "a3Button", temporary)) {
-        m_a3Button = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_a3Button );
-    }
-    if( dataPool->getPointerByName( "a4Button", temporary)) {
-        m_a4Button = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_a4Button );
-    }
-
-    if( dataPool->getPointerByName( "b1Button", temporary)) {
-        m_b1Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_b1Button );
-    }
-
-    if( dataPool->getPointerByName( "b2Button", temporary)) {
-        m_b2Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_b2Button );
-    }
-    if( dataPool->getPointerByName( "b3Button", temporary)) {
-        m_b3Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_b3Button );
-    }
-    if( dataPool->getPointerByName( "b4Button", temporary)) {
-        m_b4Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_b4Button );
-    }
-    if( dataPool->getPointerByName( "controlButton_1", temporary)) {
-        m_controlButton_1 = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_controlButton_1 );
-    }
-
-    if( dataPool->getPointerByName( "c1Button", temporary)) {
-        m_c1Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_c1Button );
-    }
-    if( dataPool->getPointerByName( "c2Button", temporary)) {
-        m_c2Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_c2Button );
-    }
-    if( dataPool->getPointerByName( "c3Button", temporary)) {
-        m_c3Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_c3Button );
-    }
-    if( dataPool->getPointerByName( "c4Button", temporary)) {
-        m_c4Button  = (CBoxButton*) temporary;
-        m_boxButtons.push_back( m_c4Button );
-    }
-
-    m_complexor = 0;
+    // 
+//     if( m_dataPool->getPointerByName( "a1Button", temporary)) {
+//         m_a1Button = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_a1Button );
+//     }
+//     if( m_dataPool->getPointerByName( "a2Button", temporary)) {
+//         m_a2Button = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_a2Button );
+//     }
+//     if( m_dataPool->getPointerByName( "a3Button", temporary)) {
+//         m_a3Button = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_a3Button );
+//     }
+//     if( m_dataPool->getPointerByName( "a4Button", temporary)) {
+//         m_a4Button = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_a4Button );
+//     }
+// 
+//     if( m_dataPool->getPointerByName( "b1Button", temporary)) {
+//         m_b1Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_b1Button );
+//     }
+// 
+//     if( m_dataPool->getPointerByName( "b2Button", temporary)) {
+//         m_b2Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_b2Button );
+//     }
+//     if( m_dataPool->getPointerByName( "b3Button", temporary)) {
+//         m_b3Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_b3Button );
+//     }
+//     if( m_dataPool->getPointerByName( "b4Button", temporary)) {
+//         m_b4Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_b4Button );
+//     }
+//     if( m_dataPool->getPointerByName( "controlButton_1", temporary)) {
+//         m_controlButton_1 = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_controlButton_1 );
+//     }
+// 
+//     if( m_dataPool->getPointerByName( "c1Button", temporary)) {
+//         m_c1Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_c1Button );
+//     }
+//     if( m_dataPool->getPointerByName( "c2Button", temporary)) {
+//         m_c2Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_c2Button );
+//     }
+//     if( m_dataPool->getPointerByName( "c3Button", temporary)) {
+//         m_c3Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_c3Button );
+//     }
+//     if( m_dataPool->getPointerByName( "c4Button", temporary)) {
+//         m_c4Button  = (CBoxButton*) temporary;
+//         m_boxButtons->push_back( m_c4Button );
+//     }    
 
     m_background_r = 100;
     m_background_g = 100;
@@ -118,25 +122,7 @@ CBoxView::CBoxView(CDataPoolSimple* dataPool): IView(dataPool)
     m_scale = scaleRatioForKinectDepthMap();
     m_playerDepth = 1000.0f;
 
-    //SET UP BUTTONS and add all buttons to world vector============
-    //    x, y, z, box size, r, g, b, a, music sample name
-    //==============================================================
-    m_red               = 255;
-    m_green             = 255;
-    m_blue              = 255;
-    m_alpha             = 30;
-    m_boxSize           = 225;
-    m_boxCenterX        = 200;
-    m_boxCenterY        = 200;
-    m_boxCenterZ        = 0;
-    m_controlBox_r      = 220; //control box buttons
-    m_controlBox_g      = 50;
-    m_controlBox_b      = 50;
-    m_controlBox_a      = 30;
-    float m_z = 0;
-
-    setInitialVolume(1.0f);
-    m_hands = new CHands(&CDataPoolSimple::getInstance());
+    m_hands = new CHands;
     m_hands->triggerSlide();    // start tracking slide
     m_hands->triggerBoxSwitch();// start box start/shutdown switch.
     m_isRepeat      = false;
@@ -173,7 +159,7 @@ void CBoxView::render()
 {           
     //setUpTranslation();             //Set up translation for all drawing
 
-    effectBoxbutton();              // render boxbutton and handle the sound.
+    renderBoxes();              // render boxbutton and handle the sound.
     if(m_oniKinect->m_isTracking){ drawDepthPoints();}   // Do both here so we only look up the m_oniKinect->data once...    
 
     ofPushMatrix();                 // ofPushMatrix before ofTranslate.
@@ -212,40 +198,10 @@ void CBoxView::drawDepthPoints()
 
 void CBoxView::addBoxButton(CBoxButton * _boxButton)
 {
-    m_boxButtons.push_back(_boxButton);
+    m_boxButtons->push_back(_boxButton);
 }
 
-void CBoxView::handleCollisions(ofPoint *XYZ)
-{
-    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
-    {
-        (*eachBox)->collisionTest(XYZ); //test Each Box for hits
-    }
-}
-
-void CBoxView::clearButtons()
-{
-    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
-    {
-        (*eachBox)->clear();
-    }
-}
-
-void CBoxView::setInitialVolume(float volumeLevel)
-{
-    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
-    {
-        (*eachBox)->m_soundPlayer->setVolume(volumeLevel);
-    }
-
-}
-
-void CBoxView::setUpTranslation()
-{
-
-}
-
-void CBoxView::effectBoxbutton()
+void CBoxView::renderBoxes()
 {
     // control the slide gesture.
     static int boxOffset = 0;
@@ -287,7 +243,7 @@ void CBoxView::effectBoxbutton()
     }
     // end of control slide
 
-    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++)
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons->begin(); eachBox != m_boxButtons->end(); eachBox++)
     {
         if ( (*eachBox)->isLoopBox() && (*eachBox)->isCurrentlyHit() )
         {// when the current hit boxButton is loop control box, open repeat switch of world.
@@ -303,6 +259,25 @@ void CBoxView::effectBoxbutton()
     }
 }
 
+void CBoxView::reloadSounds()
+{
+    string songName;
+    mapEntity mapSong;
+    CSongs* songs = &CSongs::getInstance();
+    if ( !songs->getNext(songName, mapSong)){        
+        return;
+    }
+    cout<<"song name:"<<songName<<endl;
+
+    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons->begin(); eachBox != m_boxButtons->end(); eachBox++ )
+    {
+        cout<<"reload box name: "<<(*eachBox)->m_boxName<<endl;
+        string soundPath = mapSong[(*eachBox)->m_boxName].value;
+        cout<<"reload sound: "<<soundPath<<endl;
+        (*eachBox)->reloadSound(soundPath);
+    }
+}
+
 float CBoxView::scaleRatioForKinectDepthMap()
 {
     float w = 640.0f;
@@ -314,25 +289,5 @@ float CBoxView::scaleRatioForKinectDepthMap()
         return screenW/w;
     }else {
         return screenH/h;
-    }
-}
-
-
-void CBoxView::reloadSounds()
-{
-    string songName;
-    mapEntity mapSong;
-    CSongs* songs = &CSongs::getInstance();
-    if ( !songs->getNext(songName, mapSong)){        
-        return;
-    }
-    cout<<"song name:"<<songName<<endl;
-
-    for ( vector<CBoxButton *>::iterator eachBox = m_boxButtons.begin(); eachBox != m_boxButtons.end(); eachBox++ )
-    {
-        cout<<"reload box name: "<<(*eachBox)->m_boxName<<endl;
-        string soundPath = mapSong[(*eachBox)->m_boxName].value;
-        cout<<"reload sound: "<<soundPath<<endl;
-        (*eachBox)->reloadSound(soundPath);
     }
 }

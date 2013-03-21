@@ -10,8 +10,7 @@
 #include "CWindow_Base.h"
 
 class CLoopEditorView : public CWindow_Base
-{
-    
+{    
 public:
         
     CLoopEditorView();

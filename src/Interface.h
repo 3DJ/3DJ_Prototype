@@ -10,9 +10,10 @@ namespace Interface{
     typedef bool (*func)( vector<string> params );
 
     class IController{
+        // inherit from this class to implement your controller.
     public:
-        IController( CDataPoolSimple* dataPool = 0 ){
-            m_dataPool = dataPool;
+        IController( ){
+            m_dataPool = &CDataPoolSimple::getInstance();
         }
         virtual bool update() = 0;
                 
@@ -20,9 +21,10 @@ namespace Interface{
     };
 
     class IView{
+        // inherit from this class to implement your view.
     public:
-        IView( CDataPoolSimple* dataPool  = 0 ){
-            m_dataPool = dataPool;
+        IView( ){
+            m_dataPool = &CDataPoolSimple::getInstance();
         }
         virtual bool draw() = 0;
 

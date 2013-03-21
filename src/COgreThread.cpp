@@ -23,5 +23,5 @@ COgreThread::~COgreThread()
 
 void COgreThread::threadedFunction()
 {
-    m_ogreMain->init(&CDataPoolSimple::getInstance());
+    m_ogreMain->init();
 }

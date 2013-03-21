@@ -19,7 +19,7 @@ typedef struct{
 
 class CHands{
 public:
-    CHands(CDataPoolSimple* datapool);
+    CHands();
     ~CHands();
     // this is for public use
     void draw();  

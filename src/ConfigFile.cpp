@@ -14,7 +14,7 @@ bool CConfigFile::loadFromFile( string filePath, mapEntity& mapData, bool isSave
         cout<<"Load file from " << filePath << " success" <<endl;
     }
     else{
-        cout<<"Load file from " << filePath << " failed" <<endl;
+        cout<<"Load file from " << filePath << " failed... Is your xml valid" <<endl;
         return false;
     }
     

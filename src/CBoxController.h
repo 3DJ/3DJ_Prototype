@@ -29,31 +29,30 @@ using namespace Common;
 // The box controller
 //===========================================================
 class CBoxController: public IController
-{
-
+{// controller. it's used to control box style. you can add your own control by inherit IControl
 public:
 
-    CBoxController(CDataPoolSimple* dataPool);
-    ~CBoxController();
-
-    bool update();
-
-    void setUpTranslation();
-
+    CBoxController();
+    ~CBoxController();    
+    // update controller status, it's the only entry by the up-level.
     void update(double time_since_last_update);
-    void addBoxButton(CBoxButton * _boxButton);
+    
+private:
     void clearButtons();
-    void handleCollisions(ofPoint * XYZ);
     void setInitialVolume (float  volumeLevel) ;
-    void testHits();
+    // test the box collision and draw the avatar.
+    void testHits();    
 
+    float scaleRatioForKinectDepthMap();   
     void checkBoxHits( ofPoint XYZ );
-
-    float scaleRatioForKinectDepthMap();    
+    // check whether box is collided by body.
+    void handleCollisions(ofPoint * XYZ);
+    // add box object to vector.
+    void addBoxButton(CBoxButton * _boxButton);
+    bool update();
 
     //stuff for OpenNI=========================================
     CKinectData m_oniKinect;
-
 
     //Stuff For Buttons========================================
 
@@ -93,8 +92,6 @@ public:
 
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
-    float m_complexor;
-
 };
 
 #endif

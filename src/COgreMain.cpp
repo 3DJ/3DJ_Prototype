@@ -10,13 +10,11 @@
 
 COgreMain::COgreMain( )
 {
-
+    m_dataPool = &CDataPoolSimple::getInstance();
 }
 
-bool COgreMain::init( CDataPoolSimple* dataPool )
+bool COgreMain::init()
 {
-    m_dataPool = dataPool;
-
     void* val;
     m_dataPool->getRefByName("testDataPool", val);
     std::cout<<"Ogre Thread"<<((string*)val)->c_str()<<std::endl;

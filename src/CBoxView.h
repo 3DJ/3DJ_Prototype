@@ -29,34 +29,29 @@ using namespace std;
 // The box viewer
 //===========================================================
 class CBoxView:public IView
-{
+{// draw the box on the screen and handle sounds of box.
 public:
 
-    CBoxView( CDataPoolSimple* dataPool);
+    CBoxView();
     ~CBoxView();
 
     bool draw();
+
+private:
+    // render the box and body on the screen.
     void render();
+    // handle the box sounds and draw boxes on the screen
+    void renderBoxes();
 
-    void effectBoxbutton();
-
-    void setUpTranslation();
-
-    void update(double time_since_last_update);
     void addBoxButton(CBoxButton * _boxButton);
-    void clearButtons();
-    void handleCollisions(ofPoint * XYZ);
-    void setInitialVolume (float  volumeLevel) ;
     void drawDepthPoints();
-    float scaleRatioForKinectDepthMap();
     void reloadSounds();
+    float scaleRatioForKinectDepthMap();
 
     //stuff for OpenNI=========================================
     CKinectData* m_oniKinect;
-
-
+    
     //Stuff For Buttons========================================
-
     CBoxButton *m_controlButton_1;
 
     CBoxButton *m_a1Button;
@@ -75,15 +70,10 @@ public:
     CBoxButton *m_c4Button;
 
     bool m_isRepeat;
-    double m_totalTime;
-    float m_scale;
-    int m_angle;
-    int m_red,m_green, m_blue, m_alpha;
-    int m_controlBox_r,m_controlBox_g,m_controlBox_b,m_controlBox_a;
-    int m_background_r, m_background_g, m_background_b;
-    int m_boxSize, m_boxCenterX, m_boxCenterY, m_boxCenterZ;
-    vector<CBoxButton *> m_boxButtons;
+    vector<CBoxButton *> *m_boxButtons;
     ofColor m_gradientColorOutside, m_gradientColorInside;
+    int m_background_r, m_background_g, m_background_b;
+    float m_scale;
 
     CPointView * m_pointView;
     ofEasyCam * m_easyCam;
@@ -93,7 +83,6 @@ public:
 
     float m_WidthScale, m_HeightScale;
     float m_playerDepth;
-    float m_complexor;
     CHands *m_hands;
 };
 

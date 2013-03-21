@@ -12,10 +12,11 @@ void CStateManager::setup() {
     setupLights();
     ofSetFrameRate(60);
 
-    m_boxController = new CBoxController(&CDataPoolSimple::getInstance());
-    m_boxView = new CBoxView( &CDataPoolSimple::getInstance());
+    // you must firstly initialize controller, becoz view references the controller member by datapool
+    m_boxController = new CBoxController;
+    m_boxView = new CBoxView();
 
-    m_menuVC = new CMenuViewController( m_red, m_green, m_blue, m_alpha, &CDataPoolSimple::getInstance());
+    m_menuVC = new CMenuViewController( m_red, m_green, m_blue, m_alpha);
     g_currentState = ST_MENU_STATE;
 
     m_world = &CWorld::getInstance(); // world controls all buttons and sound

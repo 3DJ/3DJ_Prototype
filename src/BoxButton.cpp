@@ -222,11 +222,9 @@ void CBoxButton::reloadSound(string soundName)
 {
     // this is for making openAL work on linux. But it causes weakly memory leak.
 #ifdef TARGET_LINUX
-    // don't delete soundplayer, that cause steroe error. I think it's a bug of of_0073. to be fixed later.
-#else
-    delete m_soundPlayer;
-#endif
     m_soundPlayer = new ofSoundPlayer;
+    // don't delete soundplayer, that cause steroe error. I think it's a bug of of_0073. to be fixed later.    
+#endif    
     // end of that, this section should be changed after the openAL fix that bug
     m_soundPlayer->loadSound(soundName);
 }
@@ -255,4 +253,9 @@ void CBoxButton::drawRepeatingBox()
     ofPopMatrix();
 
     ofPopMatrix();
+}
+
+string CBoxButton::getBoxName()
+{
+    return m_boxName;
 }

@@ -17,7 +17,7 @@ class COgreMain
 {
     public:
         COgreMain();
-        bool init( CDataPoolSimple* dataPool);
+        bool init();
     private:
         CDataPoolSimple* m_dataPool;
 

@@ -17,7 +17,8 @@ using namespace DataPool;
 class CKinectData {
 public:
 
-    void setup(CDataPoolSimple* datapool);
+    CKinectData();
+    void setup();
 	void update();
     void draw();
     void exit();
@@ -27,6 +28,7 @@ public:
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 
+    CDataPoolSimple *m_dataPool;
     ofxOpenNI           m_openNIDevice;
 };
 

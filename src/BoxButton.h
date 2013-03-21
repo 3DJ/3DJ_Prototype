@@ -15,48 +15,49 @@
 using namespace DataPool;
 
 class CBoxButton : public CBoxEntity
-{
-
+{// box class, include the box drawing, box render, box slide animation
 public:
     CBoxButton(string boxName, float centerX, float centerY, float centerZ, int boxSize,
         float redVal, float greenVal, float blueVal, float alphaVal, string soundName, float rotation);
     CBoxButton();
     ~CBoxButton();
 
-    void render();
-
+    // render the boxes on screen.
     void render(int m_slideOffset);
-
-    void drawRepeatingBox();
-
-
-    void drawBox( float complexor );
-
-    void update(double time_since_last_update);
-    float swellAnimation();
-    float percentIncluded();
-    bool isCurrentlyHit();
-    bool isHit();
-    void clear();
-    bool collisionTest( ofPoint point)  ;
-    bool collisionTest( ofPoint *pPoint);
+    // reload the another sound file.
     void reloadSound(string soundName);
-
+    // check whether the box is a loop box
     virtual bool isLoopBox();
 
+    string getBoxName();
+
+    bool isCurrentlyHit();
+    bool collisionTest( ofPoint *pPoint);
     ofSoundPlayer *m_soundPlayer;
-    bool m_isRepeat;
-    bool m_toBeStop;
-    string m_boxName;
+    void clear();
+
+    bool m_isRepeat;    
+    string m_boxName;       // box name which used to recognize by up-level.
 protected:
     bool hitTest(float x, float y, float z);
 
 private:
+    // this is only for implementing abstract method.
+    void render();
+    void drawRepeatingBox();
+    void drawBox( float complexor );
+    void update(double time_since_last_update);
+    float swellAnimation();
+    float percentIncluded();   
 
-	void setHitMode();
-	void setDefaultMode();
-    CDataPoolSimple* m_datapool;
+    bool isHit();
 
+    bool collisionTest( ofPoint point);    
+    void setHitMode();
+    void setDefaultMode();
+    CDataPoolSimple* m_datapool;       
+
+    bool m_toBeStop;
 };
 
 #endif

@@ -25,7 +25,7 @@ class CMenuViewController : public IView
 public:
 
 
-    CMenuViewController(int red, int blue, int green, int alpha, CDataPoolSimple* dataPool = 0);
+    CMenuViewController(int red, int blue, int green, int alpha);
     ~CMenuViewController();
 
     void initViews();

@@ -8,9 +8,9 @@
 
 #include "CHands.h"
 
-CHands::CHands( CDataPoolSimple* datapool)
+CHands::CHands( )
 {
-    m_datapool = datapool;
+    m_datapool = &CDataPoolSimple::getInstance();
     // get the openNI device from CKinectData object, that means kinect object must be created before this operation.
     void *temp;
     m_datapool->getRefByName("ofxOpenNIDevice", temp);
