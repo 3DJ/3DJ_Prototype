@@ -137,7 +137,7 @@ void CHands::draw()
     if ( m_isBoxStartedUp ){      
         m_datapool->createRef("isBoxStartedUp", &m_isBoxStartedUp);
         drawStartSignal( m_slideTriggerPoint, m_slideRadius);
-    }else{
+    }else if( !m_slideStart){
         drawCirclesOnPoint(m_slideTriggerPoint, m_slideRadius);
     }
 
