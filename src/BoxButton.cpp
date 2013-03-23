@@ -221,6 +221,7 @@ void CBoxButton::drawBox( float offset )
 void CBoxButton::reloadSound(string soundName)
 {
     // this is for making openAL work on linux. But it causes weakly memory leak.
+
 #ifdef TARGET_LINUX
     m_soundPlayer = new ofSoundPlayer;
     // don't delete soundplayer, that cause steroe error. I think it's a bug of of_0073. to be fixed later.    
