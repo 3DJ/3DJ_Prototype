@@ -39,7 +39,7 @@ CHands::~CHands()
 void CHands::drawCirclesOnPoint(ofPoint &p, float radius)
 {// draw cirle on hand
     ofPushMatrix();
-    ofNoFill();
+    ofFill();
     ofSetLineWidth(5.f);
 
     ofCircle(p.x, p.y, p.z, radius);
@@ -113,15 +113,8 @@ void CHands::draw()
     // checking current hands position.
     getHands();
 
-    if ( m_isBoxStartedUp )
-    {      
-        m_datapool->createRef("isBoxStartedUp", &m_isBoxStartedUp);
-        drawStartSignal( m_slideTriggerPoint, m_slideRadius);
-    }
-
     if ( m_slide ){
-        if ( m_slideStart && m_slideUser->isTracking() )
-        {
+        if ( m_slideStart && m_slideUser->isTracking() ){
             ofPoint hp = m_slideUser->getJoint(m_slideHand).getWorldPosition();
             // this coordinator translating is for adapting to box view.
             hp.y *= -2;  //flip in y direction
@@ -137,9 +130,17 @@ void CHands::draw()
             }
             m_datapool->createRef("slideOffset", &m_slideOffset);            
         }else{            
-            drawCirclesOnPoint(m_slideTriggerPoint, m_slideRadius);
+            //drawCirclesOnPoint(m_slideTriggerPoint, m_slideRadius);
         }            
     }    
+
+    if ( m_isBoxStartedUp ){      
+        m_datapool->createRef("isBoxStartedUp", &m_isBoxStartedUp);
+        drawStartSignal( m_slideTriggerPoint, m_slideRadius);
+    }else{
+        drawCirclesOnPoint(m_slideTriggerPoint, m_slideRadius);
+    }
+
     //drawHands();
 }
 
@@ -163,7 +164,7 @@ void CHands::drawHands()
 void CHands::drawStartSignal( ofPoint p, float radius )
 {// draw a filled circle to indicates the box is started up
     ofPushMatrix();
-    ofFill();
+    ofNoFill();
     ofSetLineWidth(5.f);
 
     ofCircle(p.x, p.y, p.z, radius);
