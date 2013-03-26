@@ -411,6 +411,12 @@
 		<Unit filename="src\COgreMain.cpp">
 			<Option virtualFolder="src" />
 		</Unit>
+        <Unit filename="src\CHands.h">
+			<Option virtualFolder="src" />
+		</Unit>	
+		<Unit filename="src\CHands.cpp">
+			<Option virtualFolder="src" />
+		</Unit>
 		<Unit filename="src\COgreThread.h">
 			<Option virtualFolder="src" />
 		</Unit>		
