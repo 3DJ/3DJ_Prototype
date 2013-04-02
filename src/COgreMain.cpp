@@ -10,7 +10,7 @@
 
 COgreMain::COgreMain( )
 {
-    m_dataPool = &CDataPoolSimple::getInstance();
+    m_dataPool = &CDataPool::getInstance();
 }
 
 bool COgreMain::init()

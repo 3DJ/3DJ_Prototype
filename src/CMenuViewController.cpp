@@ -10,7 +10,7 @@
 
 CMenuViewController::CMenuViewController(int red, int green, int blue, int alpha )
 {
-    m_datapool = &CDataPoolSimple::getInstance();
+    m_datapool = &CDataPool::getInstance();
     m_r = red;
     m_g = green;
     m_b = blue;
@@ -54,7 +54,7 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
         m_visualEditor->m_canvas1->setVisible(false);
     }else if(name == "Start Session"){
         static string val = "testThread"; // for testing the datapool communicating between threads
-        CDataPoolSimple::getInstance().createRef("testDataPool", &val);
+        CDataPool::getInstance().createRef("testDataPool", &val);
         m_ogreThread.startThread(true, true);
         m_exitMenu = true;
         hideAllViews();
@@ -84,7 +84,7 @@ void CMenuViewController::menuEvent(ofxUIEventArgs &e)
     }
     else if(name == "Save Core Data"){
         string saveFileName = "config.3dj";
-        CDataPoolSimple::getInstance().saveToFile( saveFileName );
+        CDataPool::getInstance().saveToFile( saveFileName );
     }
 }
 

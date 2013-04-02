@@ -23,12 +23,12 @@ using namespace std;
 using namespace Common;
 
 namespace DataPool{
-// I didn't add the lock on the config file saving
-    class CDataPoolSimple : public ofThread{
+    // I didn't add the lock on the config file saving
+    class CDataPool : public ofThread{
 
     public:
-        static CDataPoolSimple& getInstance(){
-            static CDataPoolSimple _instance;
+        static CDataPool& getInstance(){
+            static CDataPool _instance;
             return _instance;
         }
         bool initSounds();
@@ -62,29 +62,23 @@ namespace DataPool{
         // It will be removed later. don't use it.
         SEntity* findEntityRefInVector( string val );
 
-            // deprecated. It will be removed later. don't use it.
-            vector<mapEntity::iterator> getVector();
-            // deprecated. It will be removed later. don't use it.
-            int findIndexInVector( string val );
+        // deprecated. It will be removed later. don't use it.
+        vector<mapEntity::iterator> getVector();
+        // deprecated. It will be removed later. don't use it.
+        int findIndexInVector( string val );
 
-            // file operations
-            bool loadFromFile( string filePath );
-            bool saveToFile( string filePath );
+        // file operations
+        bool loadFromFile( string filePath );
+        bool saveToFile( string filePath );
 
     private:
-            CDataPoolSimple(){ initSounds();}
-            CDataPoolSimple(const CDataPoolSimple&);
-            CDataPoolSimple& operator=(const CDataPoolSimple&);
-            //
-            bool initEntities();
-            bool initAnimations();
-            bool initEntity( string key, string centerX, string centerY,
-                             string centerZ, string type, string soundName);
-            bool initAnimation( string key );
+        CDataPool(){ initSounds();}
+        CDataPool(const CDataPool&);
+        CDataPool& operator=(const CDataPool&);
 
-            CConfigFile m_configFile;
-            vector<mapEntity::iterator> m_vectorRefEntity;
-            mapEntity m_mapDataPool;
+        CConfigFile m_configFile;
+        vector<mapEntity::iterator> m_vectorRefEntity;
+        mapEntity m_mapDataPool;
     };
 };
 

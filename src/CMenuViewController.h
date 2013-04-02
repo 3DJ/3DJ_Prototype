@@ -43,7 +43,7 @@ public:
     CLoopEditorView         *m_loopEditor;
     CVisualThemesView       *m_visualEditor;
     CalibrationView         *m_calibrationEditor;
-    CDataPoolSimple         *m_datapool;
+    CDataPool         *m_datapool;
 
     int m_r, m_g, m_b, m_a;
     bool m_exitMenu;

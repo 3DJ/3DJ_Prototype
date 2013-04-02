@@ -10,7 +10,7 @@
 
 CHands::CHands( )
 {
-    m_datapool = &CDataPoolSimple::getInstance();
+    m_datapool = &CDataPool::getInstance();
     // get the openNI device from CKinectData object, that means kinect object must be created before this operation.
     void *temp;
     m_datapool->getRefByName("ofxOpenNIDevice", temp);
@@ -29,6 +29,7 @@ CHands::CHands( )
     // set the start up switch variable.
     m_isBoxStartedUp = false; 
     m_isTriggerBoxSwitch = false;
+    m_isTracking = false;
 }
 
 CHands::~CHands()
@@ -110,6 +111,10 @@ void CHands::getHands()
 
 void CHands::draw()
 {
+    if ( !m_isTracking){
+        return;     // jump this by calling trackHands.
+    }
+    
     // checking current hands position.
     getHands();
 
@@ -175,4 +180,9 @@ void CHands::drawStartSignal( ofPoint p, float radius )
 void CHands::triggerBoxSwitch()
 {
     m_isTriggerBoxSwitch = true;
+}
+
+void CHands::trackHands()
+{
+    m_isTracking = true;
 }

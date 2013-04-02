@@ -28,7 +28,7 @@ public:
     float				m_filterFactor;
     int                 m_numberOfUsersToTrack;
 
-    CDataPoolSimple *m_dataPool;
+    CDataPool *m_dataPool;
     ofxOpenNI           m_openNIDevice;
 };
 

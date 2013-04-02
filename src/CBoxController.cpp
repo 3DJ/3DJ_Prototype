@@ -315,6 +315,8 @@ float CBoxController::scaleRatioForKinectDepthMap()
 
 void CBoxController::checkBoxHits( ofPoint XYZ )
 {
+    handleCollisions(&XYZ); //check for hits for all buttons               
+    /* the code below is for startup gesture.
     void *temp = 0;
     bool isBoxStartedUp;
     m_dataPool->getRefByName("isBoxStartedUp", temp);
@@ -326,4 +328,5 @@ void CBoxController::checkBoxHits( ofPoint XYZ )
             handleCollisions(&XYZ); //check for hits for all buttons                
         }                                       
     }
+    */
 }

@@ -123,8 +123,9 @@ CBoxView::CBoxView()
     m_playerDepth = 1000.0f;
 
     m_hands = new CHands;
-    m_hands->triggerSlide();    // start tracking slide
-    m_hands->triggerBoxSwitch();// start box start/shutdown switch.
+    //m_hands->trackHands();
+    //m_hands->triggerSlide();    // start tracking slide
+    //m_hands->triggerBoxSwitch();// start box start/shutdown switch.
     m_isRepeat      = false;
 }
 

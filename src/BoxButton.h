@@ -55,7 +55,7 @@ private:
     bool collisionTest( ofPoint point);    
     void setHitMode();
     void setDefaultMode();
-    CDataPoolSimple* m_datapool;       
+    CDataPool* m_datapool;       
 
     bool m_toBeStop;
 };

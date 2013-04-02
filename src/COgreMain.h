@@ -19,7 +19,7 @@ class COgreMain
         COgreMain();
         bool init();
     private:
-        CDataPoolSimple* m_dataPool;
+        CDataPool* m_dataPool;
 
 };
 

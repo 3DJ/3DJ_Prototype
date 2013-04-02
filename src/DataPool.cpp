@@ -11,7 +11,7 @@
 using namespace Common;
 using namespace DataPool;
 
-bool CDataPoolSimple::initSounds()
+bool CDataPool::initSounds()
 {
     if ( !loadFromFile("config.3dj") ) {
         return false;
@@ -26,7 +26,7 @@ bool CDataPoolSimple::initSounds()
     return true;
 }
 
-bool CDataPoolSimple::getEntityByName( string key, SEntity& entity)
+bool CDataPool::getEntityByName( string key, SEntity& entity)
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -41,7 +41,7 @@ bool CDataPoolSimple::getEntityByName( string key, SEntity& entity)
     return bRet;
 }
 
-bool CDataPoolSimple::getValueByName( string key, string& val )
+bool CDataPool::getValueByName( string key, string& val )
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -56,12 +56,12 @@ bool CDataPoolSimple::getValueByName( string key, string& val )
     return bRet;
 }
 
-bool CDataPoolSimple::getPointerByName( string key, void* &val)
+bool CDataPool::getPointerByName( string key, void* &val)
 {
     return getRefByName( key, val);
 }
 
-bool CDataPoolSimple::getRefByName( string key, void* &val )
+bool CDataPool::getRefByName( string key, void* &val )
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -76,17 +76,17 @@ bool CDataPoolSimple::getRefByName( string key, void* &val )
     return bRet;
 }
 
-mapEntity CDataPoolSimple::getDataPool()
+mapEntity CDataPool::getDataPool()
 {
     return m_mapDataPool;
 }
 
-vector<mapEntity::iterator> CDataPoolSimple::getVector()
+vector<mapEntity::iterator> CDataPool::getVector()
 {
     return m_vectorRefEntity;
 }
 
-bool CDataPoolSimple::setEntity( string key, SEntity entity)
+bool CDataPool::setEntity( string key, SEntity entity)
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -102,14 +102,14 @@ bool CDataPoolSimple::setEntity( string key, SEntity entity)
         }
     }
     catch(exception e){
-        cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
+        cout<<"CDataPool::setEntity exception:"<<e.what();
     }
     unlock();
 
     return bRet;
 }
 
-bool CDataPoolSimple::createEntity( string key, SEntity entity )
+bool CDataPool::createEntity( string key, SEntity entity )
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -124,7 +124,7 @@ bool CDataPoolSimple::createEntity( string key, SEntity entity )
         }
     }
     catch(exception e){
-        cout<<"CDataPoolSimple::setEntity exception:"<<e.what();
+        cout<<"CDataPool::setEntity exception:"<<e.what();
         // exception
     }
     unlock();
@@ -133,7 +133,7 @@ bool CDataPoolSimple::createEntity( string key, SEntity entity )
 
 }
 
-bool CDataPoolSimple::createRef( string key, void* val)
+bool CDataPool::createRef( string key, void* val)
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -151,14 +151,14 @@ bool CDataPoolSimple::createRef( string key, void* val)
         }
     }
     catch(exception e){
-        cout<<"CDataPoolSimple::setRefValue exception:"<<e.what();
+        cout<<"CDataPool::setRefValue exception:"<<e.what();
     }
     unlock();
 
     return bRet;
 }
 
-bool CDataPoolSimple::setValue( string key, string val, bool cover )
+bool CDataPool::setValue( string key, string val, bool cover )
 {
     bool bRet = false;
     lock(); // add lock for thread safe
@@ -173,7 +173,7 @@ bool CDataPoolSimple::setValue( string key, string val, bool cover )
                 m_mapDataPool[key] = entity;
                 bRet = true;
             }
-            
+
         }
         else{
             // this will be easy read. but it's inefficient.
@@ -182,14 +182,14 @@ bool CDataPoolSimple::setValue( string key, string val, bool cover )
         }
     }
     catch(exception e){
-        cout<<"CDataPoolSimple::setValue exception:"<<e.what();
+        cout<<"CDataPool::setValue exception:"<<e.what();
     }
     unlock();
 
     return bRet;
 }
 
-int CDataPoolSimple::findIndexInVector( string val )
+int CDataPool::findIndexInVector( string val )
 {
     int iRet = -1;
     lock(); // add lock for thread safe
@@ -205,7 +205,7 @@ int CDataPoolSimple::findIndexInVector( string val )
     return iRet;
 }
 
-string* CDataPoolSimple::findValueRef( string key)
+string* CDataPool::findValueRef( string key)
 {
     string* sRet = 0;
     lock(); // add lock for thread safe
@@ -219,7 +219,7 @@ string* CDataPoolSimple::findValueRef( string key)
     return sRet;
 }
 
-SEntity* CDataPoolSimple::findEntityRefInVector( string val )
+SEntity* CDataPool::findEntityRefInVector( string val )
 {
     lock(); // add lock for thread safe
     int index = findIndexInVector( val );
@@ -228,131 +228,12 @@ SEntity* CDataPoolSimple::findEntityRefInVector( string val )
     return (&(m_vectorRefEntity[index]->second));
 }
 
-bool CDataPoolSimple::loadFromFile( string filePath )
+bool CDataPool::loadFromFile( string filePath )
 {
     return m_configFile.loadFromFile( filePath.c_str(), m_mapDataPool);
 }
 
-bool CDataPoolSimple::saveToFile( string filePath )
+bool CDataPool::saveToFile( string filePath )
 {
     return m_configFile.saveToFile( filePath.c_str(), m_mapDataPool);
-}
-
-bool CDataPoolSimple::initEntity( string key, string centerX, string centerY,
-                                  string centerZ, string type, string soundName)
-{
-    SEntity entity;
-    entity.isSaved = true;
-
-    try{
-        entity.value = centerX;
-        m_mapDataPool[key + "_centerX"] = entity;
-        entity.value = centerY;
-        m_mapDataPool[key + "_centerY"] = entity;
-        entity.value = centerZ;
-        m_mapDataPool[key + "_centerZ"] = entity;
-        entity.value = type;
-        m_mapDataPool[key + "_type"]    = entity;
-        entity.value = soundName;
-        m_mapDataPool[key + "_soundName"] = entity;
-    }
-    catch( exception e )
-    {
-        cout<<"throw error:"<<e.what();
-        return false;
-    }
-
-    return true;
-}
-
-
-bool CDataPoolSimple::initAnimation( string key )
-{
-    SEntity entity;
-    entity.isSaved = false;
-
-    string boxSize = "250", redVal = "255",  greenVal = "255",  blueVal = "255",  alphaVal = "30";
-    string speed    = "1.0";
-    string volume   = "1.0";
-    string pan      = "0";
-    string isRepeat = "0";
-    string pointsInArea = "0";
-    string pointThreshold = "2000";
-    string threshold = "2";
-
-    try{
-        entity.value = boxSize;
-        m_mapDataPool[key + "_boxSize"] = entity;
-        entity.value = redVal;
-        m_mapDataPool[key + "_redVal"]  = entity;
-        entity.value = greenVal;
-        m_mapDataPool[key + "_greenVal"]= entity;
-        entity.value = blueVal;
-        m_mapDataPool[key + "_blueVal"] = entity;
-        entity.value = alphaVal;
-        m_mapDataPool[key + "_alphaVal"]= entity;
-
-        entity.value = speed;
-        m_mapDataPool[key + "_speed"]   = entity;
-        entity.value = volume;
-        m_mapDataPool[key + "_volume"]  = entity;
-        entity.value = pan;
-        m_mapDataPool[key + "_pan"]     = entity;
-        entity.value = isRepeat;
-        m_mapDataPool[key + "_repeat"]  = entity;
-        entity.value = pointsInArea;
-        m_mapDataPool[key + "_pointsInArea"] = entity;
-        entity.value = pointThreshold;
-        m_mapDataPool[key + "_pointThreshold"] = entity;
-        entity.value = threshold;
-        m_mapDataPool[key + "_threshold"]  = entity;
-    }
-    catch(exception e)
-    {
-        cout<<"throw error:"<<e.what();
-        return false;
-    }
-
-    return true;
-}
-
-
-bool CDataPoolSimple::initEntities()
-{
-    if( !initEntity( "world_sample_a1", "375", "-250", "1000", "ET_SwapButton","sounds/Melody/GuitarStrummin.wav")){return false;}
-    if( !initEntity( "world_sample_a2", "125", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/Piano.wav" )){return false;}
-    if( !initEntity( "world_sample_a3", "-125", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/GuitarPick.wav" )){return false;}
-    if( !initEntity( "world_sample_a4", "-375", "-250", "1000", "ET_MusicSampleButton","sounds/Melody/Blip_Melody_01.wav" )){return false;}
-
-    if( !initEntity( "world_sample_b1", "375", "0", "1000", "ET_EffectsButton","sounds/Effects/Warp_1.wav" )){return false;}
-    if( !initEntity( "world_sample_b2", "125", "0", "1000", "ET_MusicSampleButton","sounds/Effects/Uplifter.wav" )){return false;}
-    if( !initEntity( "world_sample_b3", "-125", "0", "1000", "ET_MusicSampleButton","sounds/Bass/BassSlap.wav" )){return false;}
-    if( !initEntity( "world_sample_b4", "-375", "0", "1000", "ET_MusicSampleButton","sounds/Bass/NastyBass.wav" )){return false;}
-
-    if( !initEntity( "world_sample_c1", "375", "250", "1000", "ET_EffectsButton","sounds/Effects/Vinyl_Scratch_01.wav" )){return false;}
-    if( !initEntity( "world_sample_c2", "125", "250", "1000", "ET_MusicSampleButton","sounds/Effects/RemixCrazyScratch_FX_02.wav" )){return false;}
-    if( !initEntity( "world_sample_c3", "-125", "250", "1000", "ET_MusicSampleButton","sounds/Beat/TimbalesMerged_1.wav" )){return false;}
-    if( !initEntity( "world_sample_c4", "-375", "250", "1000", "ET_MusicSampleButton","sounds/Beat/Wee_Kick.wav" )){return false;}
-
-    return true;
-}
-
-bool CDataPoolSimple::initAnimations()
-{
-    if( !initAnimation( "world_sample_a1" ) ){return false;}
-    if( !initAnimation( "world_sample_a2" ) ){return false;}
-    if( !initAnimation( "world_sample_a3" ) ){return false;}
-    if( !initAnimation( "world_sample_a4" ) ){return false;}
-
-    if( !initAnimation( "world_sample_b1" ) ){return false;}
-    if( !initAnimation( "world_sample_b2" ) ){return false;}
-    if( !initAnimation( "world_sample_b3" ) ){return false;}
-    if( !initAnimation( "world_sample_b4" ) ){return false;}
-
-    if( !initAnimation( "world_sample_c1" ) ){return false;}
-    if( !initAnimation( "world_sample_c2" ) ){return false;}
-    if( !initAnimation( "world_sample_c3" ) ){return false;}
-    if( !initAnimation( "world_sample_c4" ) ){return false;}
-
-    return true;
 }

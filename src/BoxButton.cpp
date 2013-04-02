@@ -30,7 +30,7 @@ CBoxButton::CBoxButton(string boxName, float centerX, float centerY, float cente
     m_type = ET_MusicSampleButton;    
     m_soundPlayer = new ofSoundPlayer;
     m_soundPlayer->loadSound(soundName);
-    m_datapool = &CDataPoolSimple::getInstance();
+    m_datapool = &CDataPool::getInstance();
 }
 
 CBoxButton::CBoxButton()

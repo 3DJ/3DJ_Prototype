@@ -27,7 +27,8 @@ public:
     void triggerSlide();
     // call this to trigger the box start up/shut down switch.
     void triggerBoxSwitch();
-
+    // call this to track hands gesture, you need to call this before all gestures about hands.
+    void trackHands();
 private:
     // draw a filled circle to indicates the box is started up
     void drawStartSignal( ofPoint p, float radius );
@@ -39,7 +40,7 @@ private:
     void getHands();
     void  drawCirclesOnPoint(ofPoint &p, float radiu);
 
-    CDataPoolSimple* m_datapool;
+    CDataPool* m_datapool;
 
     ofxOpenNI*           m_openNIDevice;
     map<int, handsPoint>   m_mapHands;
@@ -57,6 +58,7 @@ private:
     // this group member is for start box sounds
     bool m_isBoxStartedUp;
     bool m_isTriggerBoxSwitch;
+    bool m_isTracking;
 };
 
 #endif

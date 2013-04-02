@@ -10,7 +10,7 @@
 
 CKinectData::CKinectData()
 {
-    m_dataPool = &CDataPoolSimple::getInstance();
+    m_dataPool = &CDataPool::getInstance();
 }
 
 void CKinectData::setup()
