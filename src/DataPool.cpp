@@ -124,7 +124,7 @@ bool CDataPool::createEntity( string key, SEntity entity )
         }
     }
     catch(exception e){
-        cout<<"CDataPool::setEntity exception:"<<e.what();
+        cout<<"CDataPool::createEntity exception:"<<e.what();
         // exception
     }
     unlock();
@@ -151,7 +151,7 @@ bool CDataPool::createRef( string key, void* val)
         }
     }
     catch(exception e){
-        cout<<"CDataPool::setRefValue exception:"<<e.what();
+        cout<<"CDataPool::createRef exception:"<<e.what();
     }
     unlock();
 
