@@ -17,7 +17,7 @@ Clone this repository into `openFrameworks/apps/devApps`. Get the [sound files](
 
 <b>Another two ways to use 3DJ:</b>
 1. using zigfu. just download binary. nothing more.
-2. just installing Kinect drivers, OpenNI and NITE and downlaod the binary from www.3-dj.com
+2. just installing OpenNI driver and download the binary from www.3-dj.com
 
 <b>Contact</b>
 If you have any questions, email us at team@3-dj.com
