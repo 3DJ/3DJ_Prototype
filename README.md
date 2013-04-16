@@ -15,9 +15,9 @@ Clone this repository into `openFrameworks/apps/devApps`. Get the [sound files](
 
 * ofxUI
 
-<b>Another two ways to use 3DJ:</b>
-1. using zigfu. just download binary. nothing more.
-2. just installing OpenNI driver and download the binary from www.3-dj.com
+<b>Another way to use 3DJ:</b>
+Installing zigfu driver and download binary from www.3-dj.com(or email us for getting 3DJ binary), run 3DJ then. nothing more.
+But zigfu driver only includes windows and mac version. If you are using linux, you can find linux integrated driver from here(https://code.google.com/p/simple-openni/downloads/list?can=2&q=Type%3DInstaller+OpSys%3DLinux+&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount) 
 
 <b>Contact</b>
 If you have any questions, email us at team@3-dj.com
